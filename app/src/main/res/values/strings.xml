@@ -7,4 +7,6 @@
     <string name="text_password">Password</string>
     <string name="text_fullname">Full Name</string>
     <string name="text_confirm_password">Confirm Password</string>
+    <string name="text_welcome">Welcome</string>
+    <string name="text_viewall">View All</string>
 </resources>
