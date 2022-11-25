@@ -94,7 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_input_field"
-                android:inputType="textPassword"/>
+                android:inputType="textEmailAddress"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -185,11 +185,11 @@
 
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_signup"
-            app:layout_constraintEnd_toStartOf="@id/link_forgotpass"
+            app:layout_constraintEnd_toStartOf="@id/link_haveaccount"
             />
 
         <TextView
-            android:id="@+id/link_forgotpass"
+            android:id="@+id/link_haveaccount"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:text="Sign In"

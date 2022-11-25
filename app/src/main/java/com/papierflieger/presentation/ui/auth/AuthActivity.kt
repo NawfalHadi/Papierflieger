@@ -18,6 +18,7 @@ class AuthActivity : AppCompatActivity() {
         setContentView(R.layout.activity_auth)
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.auth_navContainer)
             as NavHostFragment
 
