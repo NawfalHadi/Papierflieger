@@ -12,5 +12,7 @@
     <color name="main_blue">#249FDA</color>
     <color name="dark_blue">#0060C2</color>
     <color name="text_blue">#1B252B</color>
+    <color name="gray">#535353</color>
+    <color name="background_blue">#C2D9F1</color>
     <color name="background_white">#F4F4F4</color>
 </resources>
