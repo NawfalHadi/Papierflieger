@@ -4,10 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/background_button.xml" value="0.234" />
+        <entry key="app/src/main/res/drawable-v24/background_input_field_active.xml" value="0.288" />
         <entry key="app/src/main/res/drawable/background_input_field.xml" value="0.234" />
+        <entry key="app/src/main/res/drawable/ic_back_arrow.xml" value="0.288" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.35260416666666666" />
+        <entry key="app/src/main/res/layout/fragment_register.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/fragment_welcome.xml" value="0.35260416666666666" />
       </map>
     </option>
