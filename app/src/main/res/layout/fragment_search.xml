@@ -76,6 +76,7 @@
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
+                    android:id="@+id/tv_from"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bali-Denpasar (DPS)"
@@ -109,6 +110,7 @@
                     app:layout_constraintTop_toBottomOf="@id/guideline_one"/>
 
                 <TextView
+                    android:id="@+id/tv_destination"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Surabaya (SUB)"
@@ -121,6 +123,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/ic_land"/>
 
                 <ImageButton
+                    android:id="@+id/btn_switch_flight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@color/background_blue"
