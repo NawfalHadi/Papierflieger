@@ -14,6 +14,9 @@
         android:theme="@style/Theme.Papierflieger"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.ui.home.HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.auth.AuthActivity"
             android:exported="false" />
         <activity

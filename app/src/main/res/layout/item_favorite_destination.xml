@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="SmallSp, ContentDescription"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="-8dp"
+    app:cardCornerRadius="12dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/item_iv_destination_image"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:src="@drawable/dummy_destination_image"
+            android:scaleType="centerCrop"
+
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/item_tv_destination_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Destination Place"
+            android:textSize="12sp"
+            android:textColor="@color/text_blue"
+            android:textStyle="bold"
+
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="4dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_iv_destination_image"/>
+
+        <TextView
+            android:id="@+id/item_tv_destination_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="City, Country"
+            android:textSize="10sp"
+            android:textColor="@color/text_blue"
+
+            android:layout_marginTop="3dp"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_destination_name"
+            app:layout_constraintStart_toStartOf="@id/item_tv_destination_name"
+            />
+
+        <TextView
+            android:id="@+id/item_tv_destination_information"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="One Way"
+            android:textSize="10sp"
+            android:textColor="@color/gray"
+
+            android:layout_marginTop="3dp"
+            app:layout_constraintStart_toStartOf="@id/item_tv_destination_name"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_destination_location"/>
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IDR 700.000"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_blue"
+
+            android:layout_marginTop="12dp"
+            android:paddingBottom="8dp"
+            app:layout_constraintStart_toStartOf="@id/item_tv_destination_location"
+            app:layout_constraintTop_toBottomOf="@id/item_tv_destination_information"/>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
