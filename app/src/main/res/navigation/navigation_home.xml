@@ -19,4 +19,9 @@
         android:name="com.papierflieger.presentation.ui.home.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.papierflieger.presentation.ui.home.history.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history" />
 </navigation>

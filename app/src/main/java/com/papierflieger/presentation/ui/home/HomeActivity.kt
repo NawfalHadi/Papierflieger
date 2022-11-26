@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.papierflieger.R
@@ -30,6 +32,7 @@ class HomeActivity : AppCompatActivity() {
                 as NavHostFragment
 
         navController = navHostFragment.navController
+        binding.bottomNavigation.setupWithNavController(navController)
 
     }
 
@@ -41,5 +44,7 @@ class HomeActivity : AppCompatActivity() {
             .setTopLeftCorner(CornerFamily.ROUNDED, radius)
             .setTopRightCorner(CornerFamily.ROUNDED, radius)
             .build()
+
+
     }
 }
