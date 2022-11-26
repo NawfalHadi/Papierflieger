@@ -9,4 +9,5 @@
     <string name="text_confirm_password">Confirm Password</string>
     <string name="text_welcome">Welcome</string>
     <string name="text_viewall">View All</string>
+    <string name="text_roundtrip">Round trip?</string>
 </resources>
