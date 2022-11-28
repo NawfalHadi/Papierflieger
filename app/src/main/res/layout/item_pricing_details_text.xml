@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginBottom="3dp">
+
+    <TextView
+        android:id="@+id/tv_pricingdetail_information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_blue"
+        android:text="Adult (1x)"
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/tv_pricingdetail_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="IDR 390.000"
+        android:textColor="@color/text_blue"
+        android:textSize="12sp"
+        android:textAlignment="textEnd"/>
+
+</LinearLayout>

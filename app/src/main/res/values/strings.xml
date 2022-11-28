@@ -10,4 +10,9 @@
     <string name="text_welcome">Welcome</string>
     <string name="text_viewall">View All</string>
     <string name="text_roundtrip">Round trip?</string>
+    <string name="text_ordernumber">Order Number 675381732</string>
+    <string name="text_purchase_time">Purchase Time</string>
+    <string name="text_payment_method">Payment Method</string>
+    <string name="text_pricing_detail">Pricing Detail</string>
+    <string name="text_payment">Payment</string>
 </resources>

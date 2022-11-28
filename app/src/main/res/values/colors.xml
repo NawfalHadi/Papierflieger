@@ -22,4 +22,5 @@
     <color name="background_red">#FFF0F1</color>
     <color name="text_yellow">#CC8100</color>
     <color name="background_yellow">#FFF5C7</color>
+    <color name="transparant_color">#00000000</color>
 </resources>
