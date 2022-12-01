@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background_white"
+    tools:ignore="ContentDescription"
     tools:context=".presentation.ui.home.history.HistoryFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -27,16 +28,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="200dp"
+            android:background="@drawable/ic_not_found"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_history" />
+
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_transaction_not_found"
-            android:textSize="18sp"
             android:textColor="@color/gray"
-            android:layout_marginTop="64dp"
-            app:layout_constraintTop_toBottomOf="@id/text_history"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_historytransaction"
