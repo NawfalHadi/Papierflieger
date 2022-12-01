@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:ignore="MenuTitle">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom"
+        android:title="@string/text_home" />
 
     <item
         android:id="@+id/historyFragment"
-        android:icon="@drawable/ic_history"
-        app:showAsAction="always" />
+        android:icon="@drawable/ic_receipt"
+        app:showAsAction="ifRoom"
+        android:title="@string/text_transaction" />
 
     <item
         android:icon="@drawable/ic_card"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:title="@string/text_payment" />
 
     <item
         android:icon="@drawable/ic_setting"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:title="@string/text_setting" />
 
 </menu>
