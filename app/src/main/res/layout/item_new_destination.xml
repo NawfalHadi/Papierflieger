@@ -75,9 +75,10 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_star"
             android:layout_marginEnd="4dp"
+            app:tint="@color/text_yellow"
             app:layout_constraintTop_toTopOf="@id/item_tv_destination_rate"
             app:layout_constraintBottom_toBottomOf="@id/item_tv_destination_rate"
-            app:layout_constraintEnd_toStartOf="@id/item_tv_destination_rate"/>
+            app:layout_constraintEnd_toStartOf="@id/item_tv_destination_rate" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
