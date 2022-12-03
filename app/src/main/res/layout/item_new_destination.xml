@@ -3,11 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.Custom.CardView"
     tools:ignore="ContentDescription, smallSp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="12dp"
-    app:cardCornerRadius="12dp">
+    android:layout_marginHorizontal="24dp"
+    android:layout_marginVertical="4dp" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -39,9 +40,7 @@
             android:layout_height="wrap_content"
             android:text="Destination Name"
             android:textSize="18sp"
-            android:textColor="@color/text_blue"
             android:textStyle="bold"
-
             android:layout_marginStart="18dp"
             app:layout_constraintBottom_toTopOf="@id/item_tv_destination_location"
             app:layout_constraintTop_toTopOf="@id/cardview_image"
@@ -66,8 +65,6 @@
             android:text="4.5"
             android:textSize="14sp"
             android:textStyle="bold"
-            android:textColor="@color/text_blue"
-
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/item_tv_destination_name"
@@ -77,11 +74,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_star"
-
             android:layout_marginEnd="4dp"
+            app:tint="@color/text_yellow"
             app:layout_constraintTop_toTopOf="@id/item_tv_destination_rate"
             app:layout_constraintBottom_toBottomOf="@id/item_tv_destination_rate"
-            app:layout_constraintEnd_toStartOf="@id/item_tv_destination_rate"/>
+            app:layout_constraintEnd_toStartOf="@id/item_tv_destination_rate" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
