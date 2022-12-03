@@ -227,6 +227,19 @@
                     app:layout_constraintEnd_toEndOf="@+id/tv_paymentmethod"
                     app:layout_constraintTop_toTopOf="@+id/tv_pricingdetail" />
 
+                <TextView
+                    android:id="@+id/tv_payment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-IDR 780.000"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_green"
+
+                    android:layout_marginEnd="24dp"
+                    app:layout_constraintTop_toTopOf="@id/text_payment"
+                    app:layout_constraintBottom_toBottomOf="@id/text_payment"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
