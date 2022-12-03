@@ -5,32 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_white"
+    tools:ignore="ContentDescription, SmallSp"
     tools:context=".presentation.ui.home.history.DetailHistoryFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp">
 
         <View
             android:id="@+id/view_header"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
             android:background="?attr/colorPrimary"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/tv_ordernumber"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/btn_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:background="@color/transparant_color"
             android:src="@drawable/ic_back_arrow"
-
             android:layout_marginStart="24dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginVertical="16dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tint="@color/white" />
@@ -39,10 +38,9 @@
             android:id="@+id/tv_fromlocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Balikpapan (BPP)"
+            android:text="@string/text_departure"
             android:textColor="@color/white"
             android:textSize="12sp"
-
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@id/btn_back"
             app:layout_constraintTop_toTopOf="@id/btn_back" />
@@ -51,13 +49,13 @@
             android:id="@+id/tv_destinationlocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Jakarta (JKT)"
+            android:layout_marginStart="2dp"
+            android:text="@string/text_arrival"
             android:textColor="@color/white"
             android:textSize="12sp"
-
-            android:layout_marginStart="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_fromlocation"
             app:layout_constraintStart_toEndOf="@id/ic_change_arrow"
-            app:layout_constraintTop_toTopOf="@id/btn_back" />
+            app:layout_constraintTop_toTopOf="@+id/tv_fromlocation" />
 
         <TextView
             android:id="@+id/tv_ordernumber"
@@ -66,32 +64,41 @@
             android:text="@string/text_ordernumber"
             android:textColor="@color/white"
             android:textSize="8sp"
-
-            android:paddingBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_back"
             app:layout_constraintStart_toStartOf="@id/tv_fromlocation"
-            app:layout_constraintTop_toBottomOf="@id/tv_fromlocation"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_fromlocation" />
 
         <ImageView
             android:id="@+id/ic_change_arrow"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:src="@drawable/ic_change_arrow"
             app:tint="@color/white"
-
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="2dp"
             app:layout_constraintStart_toEndOf="@id/tv_fromlocation"
             app:layout_constraintTop_toTopOf="@id/tv_fromlocation"
             app:layout_constraintBottom_toBottomOf="@id/tv_fromlocation"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.google.android.material.imageview.ShapeableImageView
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:src="@drawable/ic_check"
             android:background="@color/background_green"
             app:tint="@color/text_green"
+            android:elevation="3dp"
+            app:layout_constraintTop_toTopOf="@id/cardview_one"
+            app:layout_constraintBottom_toTopOf="@id/cardview_one"
+            app:layout_constraintStart_toStartOf="@id/cardview_one"
+            app:layout_constraintEnd_toEndOf="@id/cardview_one"/>
 
+        <com.google.android.material.imageview.ShapeableImageView
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:padding="2dp"
+            android:background="@color/text_green"
             android:elevation="2dp"
-            android:padding="4dp"
             app:layout_constraintTop_toTopOf="@id/cardview_one"
             app:layout_constraintBottom_toTopOf="@id/cardview_one"
             app:layout_constraintStart_toStartOf="@id/cardview_one"
@@ -99,27 +106,26 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardview_one"
+            style="@style/Widget.Custom.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="24dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginHorizontal="24dp"
             app:layout_constraintTop_toBottomOf="@id/view_header">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="10dp">
+                android:layout_marginBottom="16dp">
 
                 <TextView
                     android:id="@+id/text_transactionsucces"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Transaction Successful"
-                    android:textSize="12sp"
+                    android:text="@string/text_transaction_success"
+                    android:textSize="14sp"
                     android:textStyle="bold"
-                    android:textColor="@color/text_blue"
-
-                    android:paddingTop="28dp"
-                    android:paddingBottom="14dp"
+                    android:layout_marginTop="28dp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"/>
@@ -129,8 +135,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/text_purchase_time"
+                    android:layout_marginTop="8dp"
                     android:textSize="12sp"
-
                     android:layout_marginStart="24dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/text_transactionsucces"/>
@@ -141,8 +147,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/text_payment_method"
                     android:textSize="12sp"
-
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
                     app:layout_constraintTop_toBottomOf="@id/text_purchasetime"
                     app:layout_constraintStart_toStartOf="@id/text_purchasetime"/>
 
@@ -152,8 +157,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/text_pricing_detail"
                     android:textSize="12sp"
-
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="2dp"
                     app:layout_constraintTop_toBottomOf="@id/text_paymentmethod"
                     app:layout_constraintStart_toStartOf="@id/text_paymentmethod"/>
 
@@ -172,7 +176,6 @@
                     android:layout_height="wrap_content"
                     tools:itemCount="3"
                     tools:listitem="@layout/item_pricing_details_text"
-
                     android:layout_marginTop="8dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp"
@@ -180,23 +183,11 @@
                     app:layout_constraintTop_toBottomOf="@id/guideline_one"/>
 
                 <TextView
-                    android:id="@+id/text_payment"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_payment"
-                    android:textColor="@color/text_blue"
-
-                    android:textSize="12sp"
-                    app:layout_constraintTop_toBottomOf="@id/rv_pricingdetail"
-                    app:layout_constraintStart_toStartOf="@id/text_pricingdetail"/>
-
-                <TextView
                     android:id="@+id/tv_purchasetime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sat, 19 Nov 2022"
+                    android:text="@string/text_date"
                     android:textSize="12sp"
-
                     android:layout_marginEnd="24dp"
                     app:layout_constraintTop_toTopOf="@id/text_purchasetime"
                     app:layout_constraintBottom_toBottomOf="@id/text_purchasetime"
@@ -206,23 +197,20 @@
                     android:id="@+id/tv_paymentmethod"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bank Transfer"
+                    android:text="@string/text_payment_method"
                     android:textSize="12sp"
-
-                    android:layout_marginEnd="24dp"
-                    app:layout_constraintTop_toTopOf="@id/text_paymentmethod"
                     app:layout_constraintBottom_toBottomOf="@id/text_paymentmethod"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintEnd_toEndOf="@+id/tv_purchasetime"
+                    app:layout_constraintTop_toTopOf="@id/text_paymentmethod" />
 
                 <TextView
                     android:id="@+id/tv_pricingdetail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bank Transfer"
+                    android:text="@string/text_price"
                     android:textSize="12sp"
-                    android:textColor="@color/text_blue"
-
                     android:layout_marginEnd="8dp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@id/ic_keyboard_arrow"
                     app:layout_constraintTop_toTopOf="@id/text_pricingdetail"
                     app:layout_constraintBottom_toBottomOf="@id/text_pricingdetail"
@@ -230,17 +218,14 @@
 
                 <ImageButton
                     android:id="@+id/ic_keyboard_arrow"
-                    android:layout_width="8dp"
-                    android:layout_height="8dp"
-                    android:src="@drawable/ic_keyboard_arrow"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:background="@color/transparant_color"
-                    app:tint="?attr/colorPrimary"
-
-                    android:rotation="180"
-                    android:layout_marginEnd="24dp"
-                    app:layout_constraintTop_toTopOf="@id/text_pricingdetail"
-                    app:layout_constraintBottom_toBottomOf="@id/text_pricingdetail"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    android:src="@drawable/ic_keyboard_arrow"
+                    app:tint="@color/dark_blue"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_pricingdetail"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_paymentmethod"
+                    app:layout_constraintTop_toTopOf="@+id/tv_pricingdetail" />
 
                 <TextView
                     android:id="@+id/tv_payment"
@@ -263,9 +248,7 @@
             android:id="@+id/text_detailtransaction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Detail Transaction"
-            android:textColor="@color/text_blue"
-
+            android:text="@string/text_detail_transaction"
             android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@id/cardview_one"
             app:layout_constraintStart_toStartOf="@id/cardview_one"/>
@@ -274,13 +257,12 @@
             android:id="@+id/rv_list_detailtransaction"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/item_pricing_detail_transaction"
-            tools:itemCount="2"
-
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_detailtransaction"
-            app:layout_constraintStart_toStartOf="@id/cardview_one"
-            app:layout_constraintEnd_toEndOf="@id/cardview_one"/>
+            tools:itemCount="2"
+            tools:listitem="@layout/item_pricing_detail_transaction" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
