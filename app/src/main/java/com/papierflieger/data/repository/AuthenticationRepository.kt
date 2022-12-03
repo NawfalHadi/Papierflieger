@@ -15,10 +15,7 @@ class BasicAuthRepoImpl(
     private val basicAuthDataSource: AuthenticationDataSource
 ) : AuthenticationRepository{
     override suspend fun register(
-        username: String,
-        fullname: String,
-        email: String,
-        password: String
+        username: String, fullname: String, email: String, password: String
     ) : Resource<RegisterResponse> {
         return try {
             val responsed = basicAuthDataSource.register(username, fullname, email, password)
