@@ -12,9 +12,10 @@ interface ApiService {
      * Authentication API
      * ***/
 
+
     @FormUrlEncoded
     @POST("api/auth/register")
-    fun register(
+    suspend fun register(
         @Field("username") username: String,
         @Field("fullName") fullName: String,
         @Field("email") email: String,
@@ -23,7 +24,7 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("api/auth/register")
-    fun login(
+    suspend fun login(
         @Field("username") username: String,
         @Field("password") password: String
     )

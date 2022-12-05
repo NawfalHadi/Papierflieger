@@ -1,5 +1,6 @@
 package com.papierflieger.presentation.bussiness
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -34,6 +35,7 @@ class AuthViewModel @Inject constructor(
                 email = email,
                 password = password
             )
+
             viewModelScope.launch(Dispatchers.Main){
                 _registerResponsed.postValue(responsed)
             }

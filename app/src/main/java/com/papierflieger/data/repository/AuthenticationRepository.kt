@@ -1,7 +1,7 @@
 package com.papierflieger.data.repository
 
-import com.papierflieger.data.datasource.AuthenticationDataSource
 import com.papierflieger.data.network.response.RegisterResponse
+import com.papierflieger.data.network.service.ApiService
 import com.papierflieger.wrapper.Resource
 
 interface AuthenticationRepository {
@@ -12,19 +12,19 @@ interface AuthenticationRepository {
 }
 
 class BasicAuthRepoImpl(
-    private val basicAuthDataSource: AuthenticationDataSource
+    private val apiService: ApiService
 ) : AuthenticationRepository{
     override suspend fun register(
         username: String, fullname: String, email: String, password: String
     ) : Resource<RegisterResponse> {
         return try {
-            val responsed = basicAuthDataSource.register(username, fullname, email, password)
-            if(responsed.status.isNullOrEmpty()){
-                Resource.Success(responsed)
-            }else {
-                Resource.Success(responsed)
+            val response = apiService.register(username, fullname, email, password)
+            if (response.status.isNullOrEmpty()) {
+                Resource.Success(response)
+            } else {
+                Resource.Success(response)
             }
-        } catch (e: Exception) {
+        } catch (e : Exception) {
             Resource.Error(e)
         }
     }
