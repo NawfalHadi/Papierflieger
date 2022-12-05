@@ -24,6 +24,10 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="Widget.Custom.Button.Mini" parent="Widget.Custom.Button">
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="Widget.Custom.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxCornerRadiusTopStart">12dp</item>
         <item name="boxCornerRadiusTopEnd">12dp</item>
@@ -31,6 +35,17 @@
         <item name="boxCornerRadiusBottomEnd">12dp</item>
         <item name="boxBackgroundColor">@color/white</item>
         <item name="boxStrokeColor">@color/dark_blue</item>
+        <item name="endIconTint">@color/dark_blue</item>
+    </style>
+
+    <style name="Widget.Custom.TextInputLayout.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxStrokeColor">@color/dark_blue</item>
+        <item name="endIconTint">#757575</item>
     </style>
 
     <style name="Widget.Custom.CardView" parent="Widget.MaterialComponents.CardView">

@@ -46,5 +46,25 @@
     <string name="text_history_transaction">History Transaction</string>
     <string name="text_transaction_not_found">Transaction not Found</string>
     <string name="text_destination">Destination Place</string>
+    <string name="text_profile">Profile</string>
+    <string name="text_account">Account and Security</string>
+    <string name="text_account_information">Account Information</string>
+    <string name="text_signin_with">Sign in with Google</string>
+    <string name="text_password_security">Password and Security</string>
+    <string name="text_preference">Preference</string>
+    <string name="text_country">Country</string>
+    <string name="text_currency">Currency</string>
+    <string name="text_language">Language</string>
+    <string name="text_application">Application</string>
+    <string name="text_personal">Personal Information</string>
+    <string name="text_change">Change</string>
+    <string name="text_title">Title</string>
+    <string name="text_address">Address</string>
+    <string name="text_date_birth">Date of Birth</string>
+    <string name="text_nationality">Nationality</string>
+    <string name="text_save">Save</string>
+    <string name="text_regency">Regency</string>
+    <string name="text_province">Province</string>
+    <string name="text_phone_number">+62 85987166353</string>
 
 </resources>
