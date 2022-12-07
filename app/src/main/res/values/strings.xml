@@ -66,5 +66,26 @@
     <string name="text_regency">Regency</string>
     <string name="text_province">Province</string>
     <string name="text_phone_number">+62 85987166353</string>
-
+    <string name="text_category_seat">Economy</string>
+    <string name="text_time">00:00</string>
+    <string name="text_person">/person</string>
+    <string name="text_duration">0m</string>
+    <string name="text_flight_stop">Direct</string>
+    <string name="text_lowest_price">Guaranteed Lowest Price</string>
+    <string name="text_discount">Include Discount</string>
+    <string name="text_customer_data">Customer Data</string>
+    <string name="text_passenger_data">Passenger Data</string>
+    <string name="text_tap_detail">Tap to view product details</string>
+    <string name="text_traveler_detail">Traveler Detail</string>
+    <string name="text_continue_login">Login to continue the transaction</string>
+    <string name="text_fill_customer_data">Fill the customer data</string>
+    <string name="text_required">*</string>
+    <string name="text_flight_facilities">Flight Facilities</string>
+    <string name="text_luggage">Luggage</string>
+    <string name="text_continue_pay">Continue to Pay</string>
+    <string name="text_identity">Identity Card Number</string>
+    <string name="text_warning_identity">Make sure the passenger\'s name is exactly as written on the government-issued ID. Avoid any mistakes, as airlines do not allow name corrections after booking.</string>
+    <string name="text_passport">Passport Number</string>
+    <string name="text_issuing_country">Issuing Country</string>
+    <string name="text_expiration_date">Expiration Date</string>
 </resources>

@@ -53,6 +53,32 @@
         <item name="cardBackgroundColor">@color/white</item>
     </style>
 
+    <style name="Widget.Custom.CardView.Background" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/background_gray</item>
+        <item name="cardCornerRadius">12dp</item>
+        <item name="contentPaddingRight">8dp</item>
+        <item name="contentPaddingLeft">8dp</item>
+        <item name="contentPaddingTop">2dp</item>
+        <item name="contentPaddingBottom">2dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="Widget.Custom.CardView.Outline" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/background_gray</item>
+        <item name="cardCornerRadius">12dp</item>
+        <item name="contentPaddingRight">8dp</item>
+        <item name="contentPaddingLeft">8dp</item>
+        <item name="contentPaddingTop">4dp</item>
+        <item name="contentPaddingBottom">4dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="Widget.Custom.CardView.Change" parent="Widget.Custom.CardView.Transaction.Success">
+        <item name="cardBackgroundColor">@color/background_blue</item>
+    </style>
+
     <style name="Widget.Custom.CardView.Transaction.Success" parent="Widget.MaterialComponents.CardView">
         <item name="cardBackgroundColor">@color/background_green</item>
         <item name="cardCornerRadius">12dp</item>
@@ -61,6 +87,16 @@
         <item name="contentPaddingTop">4dp</item>
         <item name="contentPaddingBottom">4dp</item>
         <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="Widget.Custom.CardView.Transaction.Danger" parent="Widget.Custom.CardView.Transaction.Success">
+        <item name="cardBackgroundColor">@color/background_red</item>
+    </style>
+
+    <style name="Widget.Custom.CardView.Transaction.Warning" parent="Widget.Custom.CardView.Transaction.Success">
+        <item name="cardBackgroundColor">@color/background_yellow</item>
+        <item name="contentPaddingTop">8dp</item>
+        <item name="contentPaddingBottom">8dp</item>
     </style>
 
     <style name="Widget.Custom.ImageButton" parent="Widget.AppCompat.ImageButton">
