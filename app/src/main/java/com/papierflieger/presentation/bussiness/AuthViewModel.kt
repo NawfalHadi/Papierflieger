@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.papierflieger.data.network.response.RegisterResponse
 import com.papierflieger.data.repository.AuthenticationRepository
+import com.papierflieger.wrapper.Event
 import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -20,6 +21,9 @@ class AuthViewModel @Inject constructor(
 
     private val _registerResponsed = MutableLiveData<Resource<RegisterResponse>>()
     val registerResponsed : LiveData<Resource<RegisterResponse>> = _registerResponsed
+
+    private val _snackbarMsg = MutableLiveData<Event<String>>()
+    val snackbarMsg: LiveData<Event<String>> = _snackbarMsg
 
     fun registerEmailPassword(
         username: String,
@@ -35,11 +39,15 @@ class AuthViewModel @Inject constructor(
                 email = email,
                 password = password
             )
-
             viewModelScope.launch(Dispatchers.Main){
+                _snackbarMsg.value = Event(responsed.payload?.message.toString())
                 _registerResponsed.postValue(responsed)
             }
         }
+    }
+
+    fun snackbarTrigger(){
+        _snackbarMsg.value = snackbarMsg.value
     }
 
     // fun registerGmail(){}

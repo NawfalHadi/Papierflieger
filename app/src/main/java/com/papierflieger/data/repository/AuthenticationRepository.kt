@@ -1,5 +1,7 @@
 package com.papierflieger.data.repository
 
+import android.util.Log
+import com.google.gson.GsonBuilder
 import com.papierflieger.data.network.response.RegisterResponse
 import com.papierflieger.data.network.service.ApiService
 import com.papierflieger.wrapper.Resource
@@ -19,13 +21,14 @@ class BasicAuthRepoImpl(
     ) : Resource<RegisterResponse> {
         return try {
             val response = apiService.register(username, fullname, email, password)
-            if (response.status.isNullOrEmpty()) {
+            if (!response.newUser?.avatar.isNullOrEmpty()) {
                 Resource.Success(response)
             } else {
-                Resource.Success(response)
+                Resource.Empty()
             }
-        } catch (e : Exception) {
-            Resource.Error(e)
+        } catch (t : Throwable) {
+            Log.e("400 Message", t.message.toString())
+            Resource.Error(t)
         }
     }
 
