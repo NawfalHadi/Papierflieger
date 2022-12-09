@@ -34,7 +34,7 @@
     <string name="text_signup">Sign Up</string>
     <string name="text_banner_signup">Join us and get\nyour next journey</string>
     <string name="text_search">Search</string>
-    <string name="text_passenger">1 Passenger</string>
+    <string name="text_passenger">Passenger</string>
     <string name="text_date">Mon, 21 Nov 2022</string>
     <string name="text_arrival">Arrival</string>
     <string name="text_departure">Departure</string>
@@ -88,4 +88,10 @@
     <string name="text_passport">Passport Number</string>
     <string name="text_issuing_country">Issuing Country</string>
     <string name="text_expiration_date">Expiration Date</string>
+    <string name="text_ticket">E-Flight Tickets</string>
+    <string name="text_pnr">Airline Booking Code (PNR)</string>
+    <string name="text_ticket_code">Code</string>
+    <string name="text_name">Name Passenger</string>
+    <string name="text_number">1.</string>
+    <string name="text_other_ticket">Other Tickets</string>
 </resources>

@@ -31,8 +31,8 @@
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/activity_home.xml" value="0.22" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/activity_splash_screen.xml" value="0.2" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/fragment_account_information.xml" value="0.33" />
-        <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/fragment_boarding_pass.xml" value="0.23157894736842105" />
-        <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/fragment_detail_history.xml" value="0.2" />
+        <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/fragment_boarding_pass.xml" value="0.22" />
+        <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/fragment_detail_history.xml" value="0.29311433986102337" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/fragment_history.xml" value="0.22" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/fragment_home.xml" value="0.25" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/fragment_list_flight.xml" value="0.22" />
@@ -44,20 +44,22 @@
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/fragment_profile_user.xml" value="0.22" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/fragment_register.xml" value="0.2" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/fragment_search.xml" value="0.25" />
-        <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/fragment_transaction_flight.xml" value="0.18" />
+        <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/fragment_transaction_flight.xml" value="0.22" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/fragment_traveler_detail.xml" value="0.2" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/fragment_traveler_detail_international.xml" value="0.23092105263157894" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/fragment_welcome.xml" value="0.22" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_favorite_destination.xml" value="0.16" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_flight_passanger_choose.xml" value="0.33" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_flight_passenger_choose.xml" value="1.25" />
-        <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_list_flight.xml" value="0.22" />
+        <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_list_flight.xml" value="0.36506687647521635" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_new_destination.xml" value="0.33" />
+        <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_passanger_ticket.xml" value="0.23092105263157894" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_pricing_detail_transaction.xml" value="0.2245692051139522" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_pricing_details_text.xml" value="0.25" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_profile_account.xml" value="0.33" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_profile_account_information.xml" value="0.23092105263157894" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_profile_preference.xml" value="0.25" />
+        <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_ticket_passanger.xml" value="0.33" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_transaction_history.xml" value="0.33" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_traveler_detail.xml" value="0.40384615384615385" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/menu/menu_home.xml" value="0.23157894736842105" />
