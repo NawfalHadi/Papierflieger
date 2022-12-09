@@ -94,4 +94,16 @@
     <string name="text_name">Name Passenger</string>
     <string name="text_number">1.</string>
     <string name="text_other_ticket">Other Tickets</string>
+    <string name="text_payment_confirmation">Payment Confirmation</string>
+    <string name="text_flight_detail">Flight Details</string>
+    <string name="text_total_price">Total Price</string>
+    <string name="text_bank_name">Bank</string>
+    <string name="text_name_payment">Name</string>
+    <string name="text_number_account">Number Account</string>
+    <string name="text_amount_money">Amount of Money</string>
+    <string name="text_pay">Pay</string>
+    <string name="text_payment_status">Payment Status</string>
+    <string name="text_payment_success">Payment Successful</string>
+    <string name="text_find">Find hundreds of other Paperflies\nflights now!</string>
+    <string name="text_ticket_detail">Ticket Details</string>
 </resources>
