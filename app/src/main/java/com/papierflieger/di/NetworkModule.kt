@@ -1,8 +1,6 @@
 package com.papierflieger.di
 
 import com.papierflieger.BuildConfig
-import com.papierflieger.data.datasource.AuthenticationDataSource
-import com.papierflieger.data.datasource.BasicAuthDatasourceImpl
 import com.papierflieger.data.network.service.ApiService
 import com.papierflieger.data.repository.AuthenticationRepository
 import com.papierflieger.data.repository.BasicAuthRepoImpl
@@ -45,17 +43,11 @@ object NetworkModule {
             .create(ApiService::class.java)
     }
 
-    // Providing Data Source
-
-    @Provides
-    fun provideBasicAuthDataSource(apiService: ApiService) : AuthenticationDataSource {
-        return BasicAuthDatasourceImpl(apiService)
-    }
-
     // Providing Repository
 
     @Provides
-    fun provideBasicAuthRepo(basicAuthDataSource: AuthenticationDataSource): AuthenticationRepository {
-        return BasicAuthRepoImpl(basicAuthDataSource)
+    @Singleton
+    fun provideBasicAuthRepo(apiService: ApiService): AuthenticationRepository {
+        return BasicAuthRepoImpl(apiService)
     }
 }

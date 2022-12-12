@@ -7,8 +7,14 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.papierflieger.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AuthActivity : AppCompatActivity() {
+
+    companion object {
+        const val MESSAGE_KEY = "message_key"
+    }
 
     private lateinit var navController: NavController
 

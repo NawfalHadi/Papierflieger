@@ -68,6 +68,8 @@
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_traveler_detail.xml" value="0.40384615384615385" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/menu/menu_home.xml" value="0.23157894736842105" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.196" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2391304347826087" />
+        <entry key="app/src/main/res/layout/fragment_register.xml" value="0.2391304347826087" />
       </map>
     </option>
   </component>

@@ -6,19 +6,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.papierflieger.R
 import com.papierflieger.databinding.FragmentLoginBinding
+import com.papierflieger.presentation.bussiness.AuthViewModel
 import com.papierflieger.presentation.ui.home.HomeActivity
+import com.papierflieger.wrapper.Resource
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private lateinit var binding : FragmentLoginBinding
+    private val authViewModel: AuthViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -35,16 +42,71 @@ class LoginFragment : Fragment() {
         }
 
         allNavigation()
+        allMessages()
+    }
+
+    private fun allMessages() {
+        snackbarMessage()
+
+        val msg = arguments?.getString(AuthActivity.MESSAGE_KEY) ?: ""
+        if (msg.isNotEmpty()){
+            activity?.window?.decorView?.rootView?.let { rootView ->
+                    Snackbar.make(
+                        rootView,
+                        msg,
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+        }
+
+        authViewModel.loginResponsed.observe(viewLifecycleOwner){
+            when(it){
+                is Resource.Success -> {
+                    authViewModel.loginSuccuess(
+                        it.payload?.token.toString(),
+                        binding.etEmail.text.toString()
+                    )
+                    // Set Token Login
+                    startActivity(Intent(activity, HomeActivity::class.java))
+                    activity?.finish()
+                }
+            }
+        }
+    }
+
+    private fun snackbarMessage() {
+        authViewModel.snackbarMsg.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { msg ->
+                activity?.window?.decorView?.rootView?.let { rootView ->
+                    Snackbar.make(
+                        rootView,
+                        msg,
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
     }
 
     private fun allNavigation() {
-        binding.linkSignup.setOnClickListener{
-            findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
-        }
+        with(binding) {
+            linkSignup.setOnClickListener{
+                findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
+            }
 
-        binding.btnSignin.setOnClickListener {
-            startActivity(Intent(activity, HomeActivity::class.java))
-            activity?.finish()
+            btnSignin.setOnClickListener {
+                startActivity(Intent(activity, HomeActivity::class.java))
+                activity?.finish()
+            }
+
+            // Login
+
+            btnSignin.setOnClickListener{
+                authViewModel.loginEmailPassword(
+                    email = etEmail.text.toString(),
+                    password = etPassword.text.toString()
+                )
+            }
         }
     }
 

@@ -37,17 +37,12 @@ class DetailHistoryFragment : Fragment() {
                 // guideline, rv, payment hide
                 guidelineOne.visibility = View.GONE
                 rvPricingdetail.visibility = View.GONE
-//                textPayment.visibility = View.GONE
-//                tvPayment.visibility = View.GONE
-
             } else {
                 // Show Detail
                 icKeyboardArrow.rotation = 180f
                 // guideline, rv, payment show
                 guidelineOne.visibility = View.VISIBLE
                 rvPricingdetail.visibility = View.VISIBLE
-//                textPayment.visibility = View.VISIBLE
-//                tvPayment.visibility = View.VISIBLE
             }
         }
     }
