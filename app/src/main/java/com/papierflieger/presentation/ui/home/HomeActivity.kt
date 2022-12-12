@@ -26,7 +26,7 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        editBottomNavigationView()
+//        editBottomNavigationView()
 
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
@@ -38,15 +38,15 @@ class HomeActivity : AppCompatActivity() {
 
     }
 
-    private fun editBottomNavigationView() {
-        val radius = resources.getDimension(R.dimen.radius_small)
-        val bottomNavBg = binding.bottomNavigation.background as MaterialShapeDrawable
-
-        bottomNavBg.shapeAppearanceModel = bottomNavBg.shapeAppearanceModel.toBuilder()
-            .setTopLeftCorner(CornerFamily.ROUNDED, radius)
-            .setTopRightCorner(CornerFamily.ROUNDED, radius)
-            .build()
-
-
-    }
+//    private fun editBottomNavigationView() {
+//        val radius = resources.getDimension(R.dimen.radius_small)
+//        val bottomNavBg = binding.bottomNavigation.background as MaterialShapeDrawable
+//
+//        bottomNavBg.shapeAppearanceModel = bottomNavBg.shapeAppearanceModel.toBuilder()
+//            .setTopLeftCorner(CornerFamily.ROUNDED, radius)
+//            .setTopRightCorner(CornerFamily.ROUNDED, radius)
+//            .build()
+//
+//
+//    }
 }

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/Widget.Custom.CardView"
+    android:layout_width="240dp"
+    android:layout_height="wrap_content"
+    tools:ignore="ContentDescription, SmallSp"
+    android:layout_marginStart="24dp"
+    android:layout_marginEnd="-16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/ic_departure"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_takeoff"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/dark_blue" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_date"
+            android:textSize="10sp"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_departure"
+            app:layout_constraintStart_toEndOf="@+id/ic_departure"
+            app:layout_constraintTop_toTopOf="@+id/ic_departure" />
+
+        <ImageView
+            android:id="@+id/ic_logo"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_logo"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ic_departure"
+            app:tint="@color/main_blue" />
+
+        <TextView
+            android:id="@+id/tv_departure_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_time"
+            android:textSize="14sp"
+            android:layout_marginStart="4dp"
+            app:layout_constraintStart_toEndOf="@+id/ic_logo"
+            app:layout_constraintTop_toTopOf="@+id/ic_logo" />
+
+        <ImageView
+            android:id="@+id/iv_circle_dot_1"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:elevation="2dp"
+            android:src="@drawable/ic_outline_circle"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/cv_departure"
+            app:layout_constraintStart_toEndOf="@+id/tv_departure_time"
+            app:layout_constraintTop_toTopOf="@+id/tv_departure_time"
+            app:tint="@color/background_gray" />
+
+        <View
+            android:id="@+id/guideline_one"
+            android:layout_width="42dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="-1dp"
+            android:background="@color/background_gray"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_circle_dot_1"
+            app:layout_constraintStart_toEndOf="@+id/iv_circle_dot_1"
+            app:layout_constraintTop_toTopOf="@+id/iv_circle_dot_1" />
+
+        <ImageView
+            android:id="@+id/iv_circle_dot_2"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_marginStart="-1dp"
+            android:elevation="3dp"
+            android:src="@drawable/ic_circle"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_circle_dot_1"
+            app:layout_constraintStart_toEndOf="@+id/guideline_one"
+            app:layout_constraintTop_toTopOf="@+id/iv_circle_dot_1"
+            app:tint="@color/background_gray" />
+
+        <TextView
+            android:id="@+id/tv_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_duration"
+            android:textSize="8sp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_one"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_one"
+            app:layout_constraintStart_toStartOf="@+id/guideline_one" />
+
+        <TextView
+            android:id="@+id/tv_flight_stop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/text_flight_stop"
+            android:textSize="8sp"
+            app:layout_constraintTop_toBottomOf="@+id/guideline_one"
+            app:layout_constraintEnd_toEndOf="@+id/guideline_one"
+            app:layout_constraintStart_toStartOf="@+id/guideline_one" />
+
+        <TextView
+            android:id="@+id/tv_arrival_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_time"
+            android:textSize="14sp"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_departure_time"
+            app:layout_constraintStart_toEndOf="@+id/iv_circle_dot_2"
+            app:layout_constraintTop_toTopOf="@+id/tv_departure_time" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_departure"
+            style="@style/Widget.Custom.CardView.Background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_departure_time"
+            app:layout_constraintStart_toStartOf="@+id/tv_departure_time"
+            app:layout_constraintTop_toBottomOf="@+id/tv_departure_time">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SUB"
+                android:textColor="@color/text_blue"
+                android:textSize="10sp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_arrival"
+            style="@style/Widget.Custom.CardView.Background"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            app:layout_constraintEnd_toEndOf="@+id/tv_arrival_time"
+            app:layout_constraintStart_toStartOf="@+id/tv_arrival_time"
+            app:layout_constraintTop_toBottomOf="@+id/tv_arrival_time">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DPS"
+                android:textColor="@color/text_blue"
+                android:textSize="10sp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_luggage"
+            style="@style/Widget.Custom.CardView.Outline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ic_logo">
+
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:src="@drawable/ic_luggage"
+                app:tint="@color/gray" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_meal_combo"
+            style="@style/Widget.Custom.CardView.Outline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ic_logo">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:src="@drawable/ic_luggage"
+                    app:tint="@color/gray" />
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginStart="2dp"
+                    android:padding="1dp"
+                    android:src="@drawable/ic_restaurant"
+                    app:tint="@color/gray" />
+
+            </LinearLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -24,6 +24,22 @@
         <item name="android:textSize">18sp</item>
     </style>
 
+    <style name="Widget.Custom.Button.Mini" parent="Widget.Custom.Button">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Widget.Custom.Button.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="cornerRadius">12dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="backgroundTint">@color/background_white</item>
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="strokeColor">@color/dark_blue</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <style name="Widget.Custom.TextInputLayout.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="boxCornerRadiusTopStart">12dp</item>
         <item name="boxCornerRadiusTopEnd">12dp</item>
@@ -31,11 +47,58 @@
         <item name="boxCornerRadiusBottomEnd">12dp</item>
         <item name="boxBackgroundColor">@color/white</item>
         <item name="boxStrokeColor">@color/dark_blue</item>
+        <item name="endIconTint">@color/dark_blue</item>
+    </style>
+
+    <style name="Widget.Custom.TextInputLayout.ExposedDropdownMenu" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxStrokeColor">@color/dark_blue</item>
+        <item name="endIconTint">#757575</item>
     </style>
 
     <style name="Widget.Custom.CardView" parent="Widget.MaterialComponents.CardView">
         <item name="cardCornerRadius">12dp</item>
         <item name="cardBackgroundColor">@color/white</item>
+    </style>
+
+    <style name="Widget.Custom.CardView.Background" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/background_gray</item>
+        <item name="cardCornerRadius">12dp</item>
+        <item name="contentPaddingRight">8dp</item>
+        <item name="contentPaddingLeft">8dp</item>
+        <item name="contentPaddingTop">2dp</item>
+        <item name="contentPaddingBottom">2dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="Widget.Custom.CardView.Outline" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/background_gray</item>
+        <item name="cardCornerRadius">12dp</item>
+        <item name="contentPaddingRight">8dp</item>
+        <item name="contentPaddingLeft">8dp</item>
+        <item name="contentPaddingTop">4dp</item>
+        <item name="contentPaddingBottom">4dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="Widget.Custom.CardView.Pay" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/dark_blue</item>
+        <item name="cardCornerRadius">6dp</item>
+        <item name="contentPaddingRight">32dp</item>
+        <item name="contentPaddingLeft">32dp</item>
+        <item name="contentPaddingTop">6dp</item>
+        <item name="contentPaddingBottom">6dp</item>
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="Widget.Custom.CardView.Change" parent="Widget.Custom.CardView.Transaction.Success">
+        <item name="cardBackgroundColor">@color/background_blue</item>
     </style>
 
     <style name="Widget.Custom.CardView.Transaction.Success" parent="Widget.MaterialComponents.CardView">
@@ -46,6 +109,16 @@
         <item name="contentPaddingTop">4dp</item>
         <item name="contentPaddingBottom">4dp</item>
         <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="Widget.Custom.CardView.Transaction.Danger" parent="Widget.Custom.CardView.Transaction.Success">
+        <item name="cardBackgroundColor">@color/background_red</item>
+    </style>
+
+    <style name="Widget.Custom.CardView.Transaction.Warning" parent="Widget.Custom.CardView.Transaction.Success">
+        <item name="cardBackgroundColor">@color/background_yellow</item>
+        <item name="contentPaddingTop">8dp</item>
+        <item name="contentPaddingBottom">8dp</item>
     </style>
 
     <style name="Widget.Custom.ImageButton" parent="Widget.AppCompat.ImageButton">

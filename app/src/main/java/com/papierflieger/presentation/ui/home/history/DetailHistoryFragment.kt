@@ -37,7 +37,6 @@ class DetailHistoryFragment : Fragment() {
                 // guideline, rv, payment hide
                 guidelineOne.visibility = View.GONE
                 rvPricingdetail.visibility = View.GONE
-
             } else {
                 // Show Detail
                 icKeyboardArrow.rotation = 180f

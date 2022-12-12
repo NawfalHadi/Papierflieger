@@ -16,6 +16,7 @@
     <color name="border_white">#DDDDDD</color>
     <color name="background_blue">#C2D9F1</color>
     <color name="background_white">#F4F4F4</color>
+    <color name="background_gray">#E5E5E5</color>
     <color name="text_green">#007D3A</color>
     <color name="background_green">#D7FAE0</color>
     <color name="text_red">#FF2667</color>
