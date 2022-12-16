@@ -1,10 +1,11 @@
 package com.papierflieger.data.network.service
-
+import com.papierflieger.data.network.response.DestinationsResponse
 import com.papierflieger.data.network.response.LoginResponse
 import com.papierflieger.data.network.response.RegisterResponse
 import retrofit2.Call
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 interface ApiService {
@@ -12,7 +13,6 @@ interface ApiService {
     /***
      * Authentication API
      * ***/
-
 
     @FormUrlEncoded
     @POST("api/auth/register")
@@ -30,6 +30,12 @@ interface ApiService {
         @Field("password") password: String
     ) : LoginResponse
 
+    /***
+     * Destionation
+     */
+
+    @GET("api/destinations")
+    fun destionations() : Call<DestinationsResponse>
 
 
 

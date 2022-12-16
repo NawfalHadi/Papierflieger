@@ -19,7 +19,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField("String", "BASE_URL", '"https://web-production-e882.up.railway.app/"')
+        buildConfigField("String", "BASE_URL", '"https://papierflieger-api.up.railway.app/"')
     }
 
     buildTypes {
@@ -76,6 +76,9 @@ dependencies {
     //lifecycle
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.1"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1"
+
+    //coil image loader
+    implementation 'io.coil-kt:coil:2.2.2'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
