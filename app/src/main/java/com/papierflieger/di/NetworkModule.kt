@@ -45,9 +45,5 @@ object NetworkModule {
 
     // Providing Repository
 
-    @Provides
-    @Singleton
-    fun provideBasicAuthRepo(apiService: ApiService): AuthenticationRepository {
-        return BasicAuthRepoImpl(apiService)
-    }
+
 }
