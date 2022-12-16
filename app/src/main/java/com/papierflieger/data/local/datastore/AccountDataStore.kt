@@ -28,7 +28,7 @@ class AccountDataStore(private val ctx: Context) {
 
     fun getToken() : Flow<String> {
         return ctx.accountDataStore.data.map {
-            it[token] ?: "token_not_found"
+            it[token] ?: ""
         }
     }
 
