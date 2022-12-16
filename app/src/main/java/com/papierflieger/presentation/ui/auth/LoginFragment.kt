@@ -64,7 +64,9 @@ class LoginFragment : Fragment() {
                 is Resource.Success -> {
                     authViewModel.loginSuccuess(
                         it.payload?.token.toString(),
-                        binding.etEmail.text.toString()
+                        binding.etEmail.text.toString(),
+                        it.payload?.username.toString(),
+                        it.payload?.avatar.toString()
                     )
                     // Set Token Login
                     startActivity(Intent(activity, HomeActivity::class.java))

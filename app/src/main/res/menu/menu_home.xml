@@ -20,6 +20,7 @@
         android:title="@string/text_payment" />
 
     <item
+        android:id="@+id/profileUserFragment"
         android:icon="@drawable/ic_setting"
         app:showAsAction="always"
         android:title="@string/text_setting" />

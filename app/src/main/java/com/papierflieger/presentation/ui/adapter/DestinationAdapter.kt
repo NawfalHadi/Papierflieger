@@ -1,5 +1,6 @@
 package com.papierflieger.presentation.ui.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -45,7 +46,7 @@ class DestinationAdapter : RecyclerView.Adapter<DestinationAdapter.DestionationV
 
         fun bindingItem(item: Destination?) {
             with(binding){
-                itemIvDestinationImage.load(item?.image) {
+                itemIvDestinationImage.load(item?.image?.get(0)) {
                     placeholder(R.color.gray)
                 }
 

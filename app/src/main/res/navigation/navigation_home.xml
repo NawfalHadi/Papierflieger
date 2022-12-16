@@ -24,4 +24,8 @@
         android:name="com.papierflieger.presentation.ui.home.history.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/profileUserFragment"
+        android:name="com.papierflieger.presentation.ui.home.profiles.ProfileUserFragment"
+        android:label="ProfileUserFragment" />
 </navigation>

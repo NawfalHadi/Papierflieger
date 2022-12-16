@@ -2,20 +2,20 @@ package com.papierflieger.presentation.ui.home
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import coil.load
 import com.papierflieger.R
 import com.papierflieger.databinding.FragmentHomeBinding
 import com.papierflieger.presentation.bussiness.AuthViewModel
 import com.papierflieger.presentation.bussiness.DestinationViewModel
 import com.papierflieger.presentation.ui.adapter.DestinationAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.log
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -64,6 +64,13 @@ class HomeFragment : Fragment() {
     private fun bindingSession() {
         authViewModel.getNames().observe(viewLifecycleOwner){
             binding.tvFullname.text = it
+        }
+
+        authViewModel.getAvatar().observe(viewLifecycleOwner){
+            Log.e("Image Url", it)
+            binding.ivAvatar.load(it){
+                placeholder(R.drawable.ic_person_circle)
+            }
         }
     }
 

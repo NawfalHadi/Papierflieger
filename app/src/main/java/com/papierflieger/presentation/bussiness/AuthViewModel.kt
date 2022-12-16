@@ -80,6 +80,10 @@ class AuthViewModel @Inject constructor(
         return accountDS.getNames().asLiveData()
     }
 
+    fun getAvatar() : LiveData<String> {
+        return accountDS.getAvatar().asLiveData()
+    }
+
     fun snackbarTrigger(){
         _snackbarMsg.value = snackbarMsg.value
     }

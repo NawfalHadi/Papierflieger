@@ -31,6 +31,12 @@ class AccountDataStore(private val ctx: Context) {
         }
     }
 
+    fun getAvatar(): Flow<String> {
+        return ctx.accountDataStore.data.map {
+            it[image] ?: ""
+        }
+    }
+
     companion object {
         private const val DATASTORE_NAME = "account_preference"
 
@@ -38,8 +44,6 @@ class AccountDataStore(private val ctx: Context) {
         private val email = stringPreferencesKey("email_key")
         private val image = stringPreferencesKey("image_key")
         private val token = stringPreferencesKey("token_key")
-
-        private val isSynced = booleanPreferencesKey("isSynced_key")
 
         private val Context.accountDataStore by preferencesDataStore(
             name = DATASTORE_NAME
