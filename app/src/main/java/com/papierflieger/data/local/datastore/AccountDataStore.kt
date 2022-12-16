@@ -10,25 +10,24 @@ import kotlinx.coroutines.flow.map
 
 class AccountDataStore(private val ctx: Context) {
 
-    suspend fun loginSuccess(_token: String, _email: String){
+    suspend fun loginSuccess(_token: String, _email: String, _names: String, _image: String){
         ctx.accountDataStore.edit {
             it[token] = _token
             it[email] = _email
-        }
-    }
-
-    suspend fun syncProfile(_names: String, _image:String) {
-        ctx.accountDataStore.edit {
             it[names] = _names
             it[image] = _image
-
-            it[isSynced] = true
         }
     }
 
     fun getToken() : Flow<String> {
         return ctx.accountDataStore.data.map {
             it[token] ?: ""
+        }
+    }
+
+    fun getNames() : Flow<String> {
+        return ctx.accountDataStore.data.map {
+            it[names] ?: ""
         }
     }
 

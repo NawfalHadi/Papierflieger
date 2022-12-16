@@ -7,5 +7,9 @@ data class LoginResponse(
     @SerializedName("token")
     val token: String?,
     @SerializedName("message")
-    val message: String?
+    val message: String?,
+    @SerializedName("username")
+    val username: String?,
+    @SerializedName("avatar")
+    val avatar: String?
 )

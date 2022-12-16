@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun bindingSession() {
-        authViewModel.getToken().observe(viewLifecycleOwner){
+        authViewModel.getNames().observe(viewLifecycleOwner){
             binding.tvFullname.text = it
         }
     }
