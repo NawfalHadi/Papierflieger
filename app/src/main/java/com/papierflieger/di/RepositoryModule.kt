@@ -4,6 +4,7 @@ import com.papierflieger.data.network.service.ApiService
 import com.papierflieger.data.repository.AuthenticationRepository
 import com.papierflieger.data.repository.BasicAuthRepoImpl
 import com.papierflieger.data.repository.DestinationRepository
+import com.papierflieger.data.repository.SessionRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,5 +29,13 @@ object RepositoryModule {
         apiService: ApiService
     ): AuthenticationRepository {
         return BasicAuthRepoImpl(apiService)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSessionRepo(
+        apiService: ApiService
+    ) : SessionRepository {
+        return SessionRepository(apiService)
     }
 }

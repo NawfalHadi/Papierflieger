@@ -29,11 +29,13 @@ interface ApiService {
     ) : LoginResponse
 
     /***
-     * Authroization API
+     * API Authorization Needed
      * ***/
 
     @GET("api/auth/profile/")
-    fun userProfile() : Call<UserResponse>
+    fun userProfile(
+        @Header("Authorization") token: String
+    ) : Call<UserResponse>
 
 
     /***
