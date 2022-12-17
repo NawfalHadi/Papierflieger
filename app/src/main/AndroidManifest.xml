@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.papierflieger">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".App"
@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Papierflieger"
         tools:targetApi="31">
+        <activity
+            android:name=".presentation.ui.home.profiles.settings.SettingPage"
+            android:exported="false" />
         <activity
             android:name=".presentation.ui.home.HomeActivity"
             android:exported="false" />

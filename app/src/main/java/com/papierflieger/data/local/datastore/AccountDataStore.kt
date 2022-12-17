@@ -21,6 +21,15 @@ class AccountDataStore(private val ctx: Context) {
         }
     }
 
+    suspend fun logout() {
+        ctx.accountDataStore.edit {
+            it[token] = ""
+            it[email] = ""
+            it[names] = ""
+            it[image] = ""
+        }
+    }
+
     fun getToken() : Flow<String> {
         return ctx.accountDataStore.data.map {
             it[token] ?: ""
