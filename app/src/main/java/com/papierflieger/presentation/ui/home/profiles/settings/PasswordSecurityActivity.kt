@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.papierflieger.R
 
-class SettingPage : AppCompatActivity() {
+class PasswordSecurityActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_setting_page)
+        setContentView(R.layout.activity_password_security)
     }
 }

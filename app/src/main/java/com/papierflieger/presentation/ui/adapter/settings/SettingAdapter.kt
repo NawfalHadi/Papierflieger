@@ -48,18 +48,8 @@ class SettingAdapter : RecyclerView.Adapter<SettingAdapter.SettingViewHolder>() 
                 tvAccount.text = item.title
                 ivAccount.setImageResource(item.icon!!)
 
-                if (item.action == 0){
-                    btnAction.setOnClickListener { onMenuActionCallback.menuClicked(0) }
-                    cardAction.setOnClickListener { onMenuActionCallback.menuClicked(0) }
-                } else {
-                    btnAction.setOnClickListener {
-                        itemView.findNavController().navigate(R.id.action_profileUserFragment_to_settingPage)
-                        itemView.findNavController().navigate(item.action)
-                    }
-                    cardAction.setOnClickListener {
-                        itemView.findNavController().navigate(item.action)
-                    }
-                }
+                btnAction.setOnClickListener { onMenuActionCallback.menuClicked(item.action) }
+                cardAction.setOnClickListener { onMenuActionCallback.menuClicked(item.action) }
             }
         }
     }

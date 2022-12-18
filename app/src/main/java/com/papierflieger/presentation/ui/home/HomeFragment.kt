@@ -65,16 +65,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun bindingSession() {
-        authViewModel.getToken().observe(viewLifecycleOwner){ token ->
-            sessionViewModel.getProfileUser(token).observe(viewLifecycleOwner){
-                when(it) {
-                    is Resource.Success -> Log.e("User Information", it.payload.toString())
-                    is Resource.Empty -> Log.e("User Information", "Empty")
-                    is Resource.Error -> Log.e("User Information", it.message.toString())
-                }
-            }
-        }
-
         authViewModel.getNames().observe(viewLifecycleOwner){
             binding.tvFullname.text = it
         }

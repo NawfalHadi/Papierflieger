@@ -27,8 +27,8 @@ class ProfileUserFragment : Fragment() {
     private val sessionViewModel : SessionViewModel by viewModels()
 
     private val accountAndSecurity : ArrayList<SettingModel> = arrayListOf(
-        SettingModel(R.drawable.ic_person, "Account Information", "", R.id.action_profileUserFragment2_to_accountInformationFragment),
-        SettingModel(R.drawable.ic_verified,"Password and Security", "", R.id.action_profileUserFragment2_to_securityFragment)
+        SettingModel(R.drawable.ic_person, "Account Information", "", R.id.action_profileUserFragment_to_accountInformationActivity),
+        SettingModel(R.drawable.ic_verified,"Password and Security", "", R.id.action_profileUserFragment_to_passwordSecurityActivity)
     )
 
 //    private val preference : ArrayList<SettingModel> = arrayListOf(
@@ -56,7 +56,6 @@ class ProfileUserFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         bindingSession()
-
     }
 
     private fun bindingSession() {
@@ -109,9 +108,10 @@ class ProfileUserFragment : Fragment() {
                     sessionViewModel.logout()
                     findNavController().navigate(R.id.action_profileUserFragment_to_authActivity)
                     activity?.finish()
+                } else {
+                    findNavController().navigate(id!!)
                 }
             }
-
         })
     }
 

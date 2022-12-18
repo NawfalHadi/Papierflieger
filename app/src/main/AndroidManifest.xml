@@ -17,7 +17,10 @@
         android:theme="@style/Theme.Papierflieger"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.ui.home.profiles.settings.SettingPage"
+            android:name=".presentation.ui.home.profiles.settings.PasswordSecurityActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ui.home.profiles.settings.AccountInformationActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.home.HomeActivity"

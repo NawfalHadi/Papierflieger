@@ -2,6 +2,7 @@ package com.papierflieger.presentation.bussiness
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.papierflieger.data.local.datastore.AccountDataStore
 import com.papierflieger.data.network.response.Profile
@@ -20,6 +21,12 @@ class SessionViewModel @Inject constructor(
 
     fun getProfileUser(token : String) : LiveData<Resource<Profile>>{
         return sessionRepo.getProfileUser(token)
+    }
+
+    // Data Store
+
+    fun getToken() : LiveData<String> {
+        return accountDS.getToken().asLiveData()
     }
 
     fun logout(){

@@ -27,22 +27,31 @@
     <fragment
         android:id="@+id/profileUserFragment"
         android:name="com.papierflieger.presentation.ui.home.profiles.ProfileUserFragment"
-        android:label="ProfileUserFragment" >
-        <action
-            android:id="@+id/action_profileUserFragment_to_settingPage"
-            app:destination="@id/settingPage" />
+        android:label="ProfileUserFragment"
+        tools:layout="@layout/fragment_profile_user">
         <action
             android:id="@+id/action_profileUserFragment_to_authActivity"
             app:destination="@id/authActivity" />
+        <action
+            android:id="@+id/action_profileUserFragment_to_accountInformationActivity"
+            app:destination="@id/accountInformationActivity" />
+        <action
+            android:id="@+id/action_profileUserFragment_to_passwordSecurityActivity"
+            app:destination="@id/passwordSecurityActivity" />
     </fragment>
-    <activity
-        android:id="@+id/settingPage"
-        android:name="com.papierflieger.presentation.ui.home.profiles.settings.SettingPage"
-        android:label="activity_setting_page"
-        tools:layout="@layout/activity_setting_page" />
     <activity
         android:id="@+id/authActivity"
         android:name="com.papierflieger.presentation.ui.auth.AuthActivity"
         android:label="activity_auth"
         tools:layout="@layout/activity_auth" />
+    <activity
+        android:id="@+id/accountInformationActivity"
+        android:name="com.papierflieger.presentation.ui.home.profiles.settings.AccountInformationActivity"
+        android:label="activity_account_information"
+        tools:layout="@layout/activity_account_information" />
+    <activity
+        android:id="@+id/passwordSecurityActivity"
+        android:name="com.papierflieger.presentation.ui.home.profiles.settings.PasswordSecurityActivity"
+        android:label="activity_password_security"
+        tools:layout="@layout/activity_password_security" />
 </navigation>

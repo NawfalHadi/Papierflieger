@@ -1,8 +1,5 @@
 package com.papierflieger.data.network.service
-import com.papierflieger.data.network.response.DestinationsResponse
-import com.papierflieger.data.network.response.LoginResponse
-import com.papierflieger.data.network.response.RegisterResponse
-import com.papierflieger.data.network.response.UserResponse
+import com.papierflieger.data.network.response.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -29,7 +26,7 @@ interface ApiService {
     ) : LoginResponse
 
     /***
-     * API Authorization Needed
+     * API Authorization Token Needed
      * ***/
 
     @GET("api/auth/profile/")
@@ -37,6 +34,24 @@ interface ApiService {
         @Header("Authorization") token: String
     ) : Call<UserResponse>
 
+    @FormUrlEncoded
+    @PUT("api/auth/update-profile/")
+    fun updatePersonalProfile(
+        @Header("Authorization") token: String,
+        @Field("title") title: String,
+        @Field("fullName") fullName: String,
+        @Field("birthdate") birthdate: String,
+        @Field("nationality") nationality: String
+    ) : Call<UpdateUserResponse>
+
+    @FormUrlEncoded
+    @PUT("api/auth/update-profile/")
+    fun updateAddressProfile(
+        @Header("Authorization") token: String,
+        @Field("country") country: String,
+        @Field("province") province: String,
+        @Field("regency") regency: String,
+    ) : Call<UpdateUserResponse>
 
     /***
      * Destionation

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_account_information"
+    app:startDestination="@id/accountInformationFragment2">
+
+    <fragment
+        android:id="@+id/addressInformationFragment"
+        android:name="com.papierflieger.presentation.ui.home.profiles.settings.accounts.AddressInformationFragment"
+        android:label="AddressInformationFragment"
+        tools:layout="@layout/fragment_personal_address" />
+    <fragment
+        android:id="@+id/personalInformationFragment"
+        android:name="com.papierflieger.presentation.ui.home.profiles.settings.accounts.PersonalInformationFragment"
+        android:label="PersonalInformationFragment"
+        tools:layout="@layout/fragment_personal_information" />
+    <fragment
+        android:id="@+id/accountInformationFragment2"
+        android:name="com.papierflieger.presentation.ui.home.profiles.settings.AccountInformationFragment"
+        android:label="AccountInformationFragment"
+        tools:layout="@layout/fragment_account_information">
+        <action
+            android:id="@+id/action_accountInformationFragment2_to_personalInformationFragment"
+            app:destination="@id/personalInformationFragment" />
+        <action
+            android:id="@+id/action_accountInformationFragment2_to_addressInformationFragment"
+            app:destination="@id/addressInformationFragment" />
+    </fragment>
+</navigation>
