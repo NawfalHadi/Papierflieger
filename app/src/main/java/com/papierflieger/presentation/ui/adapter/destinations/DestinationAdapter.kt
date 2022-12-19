@@ -1,6 +1,5 @@
-package com.papierflieger.presentation.ui.adapter
+package com.papierflieger.presentation.ui.adapter.destinations
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer

@@ -12,12 +12,6 @@ class DestinationViewModel @Inject constructor(
     private val destinationRepository : DestinationRepository
 ) : ViewModel(){
 
-//    private val
-
-//    init {
-//
-//    }
-//
     fun getDestination() : LiveData<DestinationsResponse> {
         return destinationRepository.getDestination()
     }

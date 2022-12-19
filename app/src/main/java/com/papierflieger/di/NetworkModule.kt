@@ -19,13 +19,12 @@ import javax.inject.Singleton
 object NetworkModule {
 
     @Provides
-    fun logging() : HttpLoggingInterceptor
-    {
-        val loggingInterceptor = if(BuildConfig.DEBUG) {
-            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY) }
-        else { HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE) }
-
-        return loggingInterceptor
+    fun logging() : HttpLoggingInterceptor {
+        return if(BuildConfig.DEBUG) {
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+        } else {
+            HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
+        }
     }
 
     @Provides

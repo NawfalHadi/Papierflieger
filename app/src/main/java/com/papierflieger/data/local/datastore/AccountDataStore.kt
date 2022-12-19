@@ -10,12 +10,23 @@ import kotlinx.coroutines.flow.map
 
 class AccountDataStore(private val ctx: Context) {
 
+    // After Login
+
     suspend fun loginSuccess(_token: String, _email: String, _names: String, _image: String){
         ctx.accountDataStore.edit {
             it[token] = _token
             it[email] = _email
             it[names] = _names
             it[image] = _image
+        }
+    }
+
+    suspend fun logout() {
+        ctx.accountDataStore.edit {
+            it[token] = ""
+            it[email] = ""
+            it[names] = ""
+            it[image] = ""
         }
     }
 
