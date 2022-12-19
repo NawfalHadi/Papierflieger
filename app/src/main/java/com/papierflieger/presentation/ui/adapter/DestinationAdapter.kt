@@ -1,7 +1,7 @@
 package com.papierflieger.presentation.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -35,7 +35,7 @@ class DestinationAdapter : RecyclerView.Adapter<DestinationAdapter.DestionationV
 
     override fun onBindViewHolder(holder: DestionationViewHolder, position: Int) {
         val item = differ.currentList[position]
-        holder.bindingItem(item)
+        holder.bindingItem(item, position)
     }
 
     override fun getItemCount(): Int = differ.currentList.size
@@ -44,8 +44,9 @@ class DestinationAdapter : RecyclerView.Adapter<DestinationAdapter.DestionationV
         private val binding : ItemFavoriteDestinationBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bindingItem(item: Destination?) {
+        fun bindingItem(item: Destination?, position: Int) {
             with(binding){
+                if (position >= 1) vGap1.visibility = View.GONE
                 itemIvDestinationImage.load(item?.image?.get(0)) {
                     placeholder(R.color.gray)
                 }

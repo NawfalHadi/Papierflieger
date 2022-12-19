@@ -159,26 +159,32 @@
                 android:layout_height="wrap_content"
                 android:padding="8dp">
 
-                <ImageView
-                    android:id="@+id/ic_date_go"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_departure_date"
-                    app:tint="@color/gray"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <TextView
+                <LinearLayout
+                    android:id="@+id/ll_date_departure"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_date"
-                    android:textSize="16sp"
-                    android:layout_marginHorizontal="8dp"
-                    app:layout_constraintEnd_toStartOf="@id/text_roundtrip"
-                    app:layout_constraintStart_toEndOf="@id/ic_date_go"
-                    app:layout_constraintTop_toTopOf="@id/ic_date_go"
-                    app:layout_constraintBottom_toBottomOf="@id/ic_date_go"/>
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toStartOf="@+id/text_roundtrip"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_departure_date"
+                        app:tint="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/tv_date_departure"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:text="@string/text_date"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
 
                 <View
                     android:id="@+id/guideline_two"
@@ -187,31 +193,36 @@
                     android:background="@color/gray"
                     android:layout_marginTop="8dp"
                     android:layout_marginHorizontal="8dp"
-                    app:layout_constraintTop_toBottomOf="@id/ic_date_go"
-                    app:layout_constraintStart_toStartOf="@id/ic_date_go"/>
+                    app:layout_constraintTop_toBottomOf="@id/ll_date_departure"
+                    app:layout_constraintStart_toStartOf="@id/ll_date_departure"/>
 
-                <ImageView
-                    android:id="@+id/ic_date_back"
-                    android:layout_width="40dp"
+                <LinearLayout
+                    android:id="@+id/ll_date_return"
+                    android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_marginTop="8dp"
-                    android:padding="10dp"
-                    android:src="@drawable/ic_return_date"
-                    app:tint="@color/gray"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/guideline_two" />
-
-                <TextView
-                    android:id="@+id/tv_return_date"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="8dp"
-                    android:text="@string/text_date"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@id/ic_date_back"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toStartOf="@+id/text_roundtrip"
-                    app:layout_constraintStart_toEndOf="@id/ic_date_back"
-                    app:layout_constraintTop_toTopOf="@id/ic_date_back" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/guideline_two">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_return_date"
+                        app:tint="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/tv_date_return"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:text="@string/text_date"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/text_roundtrip"
@@ -232,8 +243,8 @@
                     app:trackTint="@color/background_blue"
                     android:checked="true"
                     android:layout_marginEnd="8dp"
-                    app:layout_constraintTop_toTopOf="@id/ic_date_go"
-                    app:layout_constraintBottom_toBottomOf="@id/ic_date_go"
+                    app:layout_constraintTop_toTopOf="@id/ll_date_departure"
+                    app:layout_constraintBottom_toBottomOf="@id/ll_date_departure"
                     app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

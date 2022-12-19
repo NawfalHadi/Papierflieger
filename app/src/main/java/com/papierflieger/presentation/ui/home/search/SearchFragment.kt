@@ -1,13 +1,17 @@
 package com.papierflieger.presentation.ui.home.search
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.util.Pair
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.papierflieger.R
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointForward
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.papierflieger.databinding.FragmentSearchBinding
+import com.papierflieger.wrapper.toDate
 
 class SearchFragment : Fragment() {
 
@@ -16,7 +20,7 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -26,10 +30,52 @@ class SearchFragment : Fragment() {
         allNavigation()
         roundTripCheck()
         switchFlightButton()
+        changeValue()
+        clickListener()
+    }
 
+    private fun changeValue() {
+        val dateToday = MaterialDatePicker.todayInUtcMilliseconds().toDate()
+        binding.tvDateDeparture.text = dateToday
+        binding.tvDateReturn.text = dateToday
+
+        dateRangePicker.addOnPositiveButtonClickListener { datePicked ->
+            binding.tvDateDeparture.text = datePicked.first.toDate()
+            binding.tvDateReturn.text = datePicked.second.toDate()
+        }
+
+        datePicker.addOnPositiveButtonClickListener { datePicked ->
+            binding.tvDateDeparture.text = datePicked.toDate()
+            binding.tvDateReturn.text = datePicked.toDate()
+        }
+    }
+
+    private fun clickListener() {
         binding.switchRoundtrip.setOnClickListener {
             roundTripCheck()
         }
+
+        binding.llDateDeparture.setOnClickListener {
+            if (!binding.switchRoundtrip.isChecked) {
+                datePicker.show(
+                    childFragmentManager,
+                    "date_picker"
+                )
+            } else {
+                dateRangePicker.show(
+                    childFragmentManager,
+                    "date_range_picker"
+                )
+            }
+        }
+
+        binding.llDateReturn.setOnClickListener {
+            dateRangePicker.show(
+                childFragmentManager,
+                "date_range_picker"
+            )
+        }
+
     }
 
     private fun switchFlightButton() {
@@ -48,14 +94,12 @@ class SearchFragment : Fragment() {
         if (!binding.switchRoundtrip.isChecked) {
             with(binding){
                 guidelineTwo.visibility = View.GONE
-                icDateBack.visibility = View.GONE
-                tvReturnDate.visibility = View.GONE
+                llDateReturn.visibility = View.GONE
             }
         } else {
             with(binding){
                 guidelineTwo.visibility = View.VISIBLE
-                icDateBack.visibility = View.VISIBLE
-                tvReturnDate.visibility = View.VISIBLE
+                llDateReturn.visibility = View.VISIBLE
             }
         }
     }
@@ -66,4 +110,32 @@ class SearchFragment : Fragment() {
         }
     }
 
+    private val datePicker =
+        MaterialDatePicker.Builder.datePicker()
+            .setTitleText("One Way")
+            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+            .setCalendarConstraints(
+                CalendarConstraints.Builder()
+                    .setStart(MaterialDatePicker.thisMonthInUtcMilliseconds())
+                    .setValidator(DateValidatorPointForward.now())
+                    .build()
+            )
+            .build()
+
+    private val dateRangePicker =
+        MaterialDatePicker.Builder.dateRangePicker()
+            .setTitleText("Round Trip")
+            .setSelection(
+                Pair(
+                    MaterialDatePicker.todayInUtcMilliseconds(),
+                    MaterialDatePicker.todayInUtcMilliseconds()
+                )
+            )
+            .setCalendarConstraints(
+                CalendarConstraints.Builder()
+                    .setStart(MaterialDatePicker.thisMonthInUtcMilliseconds())
+                    .setValidator(DateValidatorPointForward.now())
+                    .build()
+            )
+            .build()
 }
