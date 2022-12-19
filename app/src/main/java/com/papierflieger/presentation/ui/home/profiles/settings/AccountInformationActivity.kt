@@ -26,4 +26,9 @@ class AccountInformationActivity : AppCompatActivity() {
 
         navController = navHostFragment.navController
     }
+
+    companion object {
+        const val ADDRESS_INFORMATION = "address_information"
+        const val PERSONAL_INFORMATION = "personal_information"
+    }
 }

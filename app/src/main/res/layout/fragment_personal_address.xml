@@ -61,6 +61,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_country">
 
         <AutoCompleteTextView
+            android:id="@+id/et_country"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
@@ -89,6 +90,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_province">
 
         <AutoCompleteTextView
+            android:id="@+id/et_province"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
@@ -117,6 +119,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_regency">
 
         <AutoCompleteTextView
+            android:id="@+id/et_regency"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
@@ -124,7 +127,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btn_signup"
+        android:id="@+id/btn_save"
         style="@style/Widget.Custom.Button.Mini"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

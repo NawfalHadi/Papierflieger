@@ -18,11 +18,6 @@ class AccountInformationAdapter : RecyclerView.Adapter<AccountInformationAdapter
         notifyDataSetChanged()
     }
 
-    fun clearItem(){
-        this.list.clear()
-        notifyDataSetChanged()
-    }
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.papierflieger.R
 import com.papierflieger.data.local.model.TitleValueModel
 import com.papierflieger.data.network.response.Profile
 import com.papierflieger.databinding.FragmentAccountInformationBinding
@@ -56,13 +58,25 @@ class AccountInformationFragment : Fragment() {
     }
 
     private fun setAccountInformation(user: Profile) {
-        personalInformation.addAll(arrayListOf(
-            TitleValueModel("Title", user.title),
-            TitleValueModel("Full Name", user.fullName),
-            TitleValueModel("Username", user.username),
-            TitleValueModel("Date Of Birth", user.birthdate),
-            TitleValueModel("Nationality", user.nationality)
-        ))
+        binding.textPersonalChange.setOnClickListener {
+            val mBundle = Bundle()
+            mBundle.putParcelable(AccountInformationActivity.PERSONAL_INFORMATION, user)
+            findNavController().navigate(R.id.action_accountInformationFragment_to_personalInformationFragment, mBundle)
+        }
+
+        binding.textAddressChange.setOnClickListener {
+            val mBundle = Bundle()
+            mBundle.putParcelable(AccountInformationActivity.ADDRESS_INFORMATION, user)
+            findNavController().navigate(R.id.action_accountInformationFragment_to_addressInformationFragment, mBundle)
+        }
+
+//        personalInformation.addAll(arrayListOf(
+//            TitleValueModel("Title", user.title),
+//            TitleValueModel("Full Name", user.fullName),
+//            TitleValueModel("Username", user.username),
+//            TitleValueModel("Date Of Birth", user.birthdate),
+//            TitleValueModel("Nationality", user.nationality)
+//        ))
 
         addressInformation.add(TitleValueModel("Country", user.country))
         addressInformation.add(TitleValueModel("Province", user.province))

@@ -21,10 +21,10 @@
         android:label="AccountInformationFragment"
         tools:layout="@layout/fragment_account_information">
         <action
-            android:id="@+id/action_accountInformationFragment2_to_personalInformationFragment"
+            android:id="@+id/action_accountInformationFragment_to_personalInformationFragment"
             app:destination="@id/personalInformationFragment" />
         <action
-            android:id="@+id/action_accountInformationFragment2_to_addressInformationFragment"
+            android:id="@+id/action_accountInformationFragment_to_addressInformationFragment"
             app:destination="@id/addressInformationFragment" />
     </fragment>
 </navigation>

@@ -39,6 +39,7 @@ interface ApiService {
     fun updatePersonalProfile(
         @Header("Authorization") token: String,
         @Field("title") title: String,
+        @Field("username") username: String,
         @Field("fullName") fullName: String,
         @Field("birthdate") birthdate: String,
         @Field("nationality") nationality: String

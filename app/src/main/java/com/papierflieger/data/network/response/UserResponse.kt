@@ -1,13 +1,16 @@
 package com.papierflieger.data.network.response
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class UserResponse(
     @SerializedName("profile")
     val profile: Profile?
 )
 
+@Parcelize
 data class Profile(
     @SerializedName("avatar")
     val avatar: String?,
@@ -43,4 +46,4 @@ data class Profile(
     val username: String?,
     @SerializedName("verified")
     val verified: Boolean?
-)
+) : Parcelable
