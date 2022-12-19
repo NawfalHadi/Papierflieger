@@ -1,4 +1,4 @@
-package com.papierflieger.presentation.ui.adapter
+package com.papierflieger.presentation.ui.adapter.destinations
 
 import android.view.LayoutInflater
 import android.view.View

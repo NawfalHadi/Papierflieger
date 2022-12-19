@@ -14,7 +14,9 @@ import com.papierflieger.R
 import com.papierflieger.databinding.FragmentHomeBinding
 import com.papierflieger.presentation.bussiness.AuthViewModel
 import com.papierflieger.presentation.bussiness.DestinationViewModel
-import com.papierflieger.presentation.ui.adapter.DestinationAdapter
+import com.papierflieger.presentation.bussiness.SessionViewModel
+import com.papierflieger.presentation.ui.adapter.destinations.DestinationAdapter
+import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +24,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
     private val authViewModel: AuthViewModel by viewModels()
+    private val sessionViewModel : SessionViewModel by viewModels()
     private val destinationViewModel : DestinationViewModel by viewModels()
 
     private val favDestinationAdapter : DestinationAdapter by lazy { DestinationAdapter() }
@@ -67,7 +70,6 @@ class HomeFragment : Fragment() {
         }
 
         authViewModel.getAvatar().observe(viewLifecycleOwner){
-            Log.e("Image Url", it)
             binding.ivAvatar.load(it){
                 placeholder(R.drawable.ic_person_circle)
             }

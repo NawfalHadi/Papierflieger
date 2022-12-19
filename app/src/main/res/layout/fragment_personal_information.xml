@@ -61,6 +61,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_title">
 
         <AutoCompleteTextView
+            android:id="@+id/et_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none" />
@@ -147,6 +148,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_date_birth">
 
         <AutoCompleteTextView
+            android:id="@+id/et_birthdate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="date" />
@@ -175,14 +177,15 @@
         app:layout_constraintTop_toBottomOf="@id/tv_nationality">
 
         <AutoCompleteTextView
+            android:id="@+id/et_nationality"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="none" />
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btn_signup"
+        android:id="@+id/btn_save"
         style="@style/Widget.Custom.Button.Mini"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
