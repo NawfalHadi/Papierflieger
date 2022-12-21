@@ -9,6 +9,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.papierflieger.R
 import com.papierflieger.presentation.bussiness.AuthViewModel
+import com.papierflieger.presentation.ui.admin.AdminActivity
 import com.papierflieger.presentation.ui.auth.AuthActivity
 import com.papierflieger.presentation.ui.home.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,8 +30,16 @@ class SplashScreenActivity : AppCompatActivity() {
                     startActivity(Intent(this, AuthActivity::class.java))
                     finish()
                 } else {
-                    startActivity(Intent(this, HomeActivity::class.java))
-                    finish()
+                    authViewModel.getRole().observe(this) { role ->
+                        if (role == "Customer") {
+                            startActivity(Intent(this, HomeActivity::class.java))
+                        } else {
+                            startActivity(Intent(this, AdminActivity::class.java))
+                        }
+                        finish()
+                    }
+//                    startActivity(Intent(this, HomeActivity::class.java))
+//                    finish()
                 }
             }
         }, LOADING_TIME)

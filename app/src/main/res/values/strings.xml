@@ -151,4 +151,6 @@
     <string name="text_cancel">Cancel</string>
     <string name="text_total_price_for">Total Price for</string>
     <string name="text_flight_preview">Flight Preview</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

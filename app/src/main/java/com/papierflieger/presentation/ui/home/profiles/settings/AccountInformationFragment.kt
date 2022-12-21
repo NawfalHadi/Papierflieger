@@ -52,6 +52,7 @@ class AccountInformationFragment : Fragment() {
                     }
                     is Resource.Empty -> Log.e("User Information", "Empty")
                     is Resource.Error -> Log.e("User Information", it.message.toString())
+                    is Resource.Loading -> {}
                 }
             }
         }

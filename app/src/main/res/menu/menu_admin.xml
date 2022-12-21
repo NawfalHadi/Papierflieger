@@ -1,40 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group
         android:checkableBehavior="single">
 
         <item
-            android:id="@+id/admin_dashboard"
+            android:id="@+id/adminDashboardFragment"
             android:icon="@drawable/ic_home"
+            app:showAsAction="ifRoom"
             android:title="@string/text_dashboard"/>
         <item
-            android:id="@+id/admin_ticket"
+            android:id="@+id/adminTicketFragment"
             android:icon="@drawable/ic_ticket"
+            app:showAsAction="ifRoom"
             android:title="@string/text_ticket"/>
         <item
-            android:id="@+id/admin_flight"
+            android:id="@+id/adminAirplaneFragment"
             android:icon="@drawable/ic_airplane"
+            app:showAsAction="ifRoom"
             android:title="@string/text_airplane"/>
         <item
-            android:id="@+id/admin_airport"
+            android:id="@+id/adminAirportFragment"
             android:icon="@drawable/ic_airport"
+            app:showAsAction="ifRoom"
             android:title="@string/text_airport"/>
         <item
-            android:id="@+id/admin_payment"
+            android:id="@+id/adminPaymentFragment"
             android:icon="@drawable/ic_payment"
+            app:showAsAction="ifRoom"
             android:title="@string/text_payment"/>
         <item
-            android:id="@+id/admin_destination"
+            android:id="@+id/adminDestinationFragment"
             android:icon="@drawable/ic_destination"
+            app:showAsAction="ifRoom"
             android:title="@string/text_destination"/>
         <item
-            android:id="@+id/admin_profile"
             android:icon="@drawable/ic_person"
+            app:showAsAction="ifRoom"
             android:title="@string/text_profile"/>
         <item
-            android:id="@+id/admin_logout"
             android:icon="@drawable/ic_logout"
+            app:showAsAction="ifRoom"
             android:title="@string/text_logout"/>
     </group>
 

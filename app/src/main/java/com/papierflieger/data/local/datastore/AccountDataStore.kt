@@ -12,12 +12,13 @@ class AccountDataStore(private val ctx: Context) {
 
     // After Login
 
-    suspend fun loginSuccess(_token: String, _email: String, _names: String, _image: String){
+    suspend fun loginSuccess(_token: String, _email: String, _names: String, _image: String, _role: String){
         ctx.accountDataStore.edit {
             it[token] = _token
             it[email] = _email
             it[names] = _names
             it[image] = _image
+            it[role] = _role
         }
     }
 
@@ -27,6 +28,7 @@ class AccountDataStore(private val ctx: Context) {
             it[email] = ""
             it[names] = ""
             it[image] = ""
+            it[role] = ""
         }
     }
 
@@ -48,6 +50,18 @@ class AccountDataStore(private val ctx: Context) {
         }
     }
 
+    fun getEmail(): Flow<String> {
+        return ctx.accountDataStore.data.map {
+            it[email] ?: ""
+        }
+    }
+
+    fun getRole(): Flow<String> {
+        return ctx.accountDataStore.data.map {
+            it[role] ?: ""
+        }
+    }
+
     companion object {
         private const val DATASTORE_NAME = "account_preference"
 
@@ -55,6 +69,7 @@ class AccountDataStore(private val ctx: Context) {
         private val email = stringPreferencesKey("email_key")
         private val image = stringPreferencesKey("image_key")
         private val token = stringPreferencesKey("token_key")
+        private val role = stringPreferencesKey("role_key")
 
         private val Context.accountDataStore by preferencesDataStore(
             name = DATASTORE_NAME

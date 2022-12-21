@@ -61,6 +61,9 @@ class RegisterFragment : Fragment() {
                      mBundle.putString(AuthActivity.MESSAGE_KEY, it.message)
                      findNavController().navigate(R.id.action_registerFragment_to_loginFragment, mBundle)
                  }
+                is Resource.Empty -> {}
+                is Resource.Error -> {}
+                is Resource.Loading -> {}
             }
         }
 

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:ignore="ContentDescription"
-    android:background="@color/background_white" >
+    android:background="@color/background_white"
+    tools:context=".presentation.ui.admin.dashboard.AdminDashboardFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_profile"

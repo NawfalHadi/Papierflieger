@@ -13,7 +13,21 @@
         <item name="android:statusBarColor">@color/main_blue</item>
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/text_blue</item>
-        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="Theme.Papierflieger.ActionBar" parent="Theme.MaterialComponents.DayNight">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/main_blue</item>
+        <item name="colorPrimaryVariant">@color/dark_blue</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/main_blue</item>
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/text_blue</item>
     </style>
 
     <style name="Widget.Custom.Button" parent="Widget.MaterialComponents.Button">
@@ -149,8 +163,7 @@
         <item name="android:background">@color/sidebar_blue</item>
         <item name="android:fitsSystemWindows">true</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="headerLayout">@layout/item_header_navigation_drawer</item>
-        <item name="menu">@menu/menu_admin</item>
+        <item name="android:layout_gravity">start</item>
     </style>
 
     <style name="Widget.Custom.SearchView" parent="Widget.AppCompat.SearchView">
