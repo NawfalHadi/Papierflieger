@@ -33,7 +33,7 @@
             style="@style/Widget.Custom.SearchView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:queryHint="@string/text_airplane" />
+            app:queryHint="@string/text_airport" />
 
     </androidx.cardview.widget.CardView>
 
