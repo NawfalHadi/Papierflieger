@@ -144,4 +144,7 @@
     <string name="text_destination_picture">Destination Picture</string>
     <string name="text_add_picture">Add Picture</string>
     <string name="text_next">Next</string>
+    <string name="text_about">About</string>
+    <string name="text_photos">Photos</string>
+    <string name="text_book_now">Book Now</string>
 </resources>
