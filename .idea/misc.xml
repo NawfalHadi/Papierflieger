@@ -32,6 +32,7 @@
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/activity_home.xml" value="0.22" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/activity_password_security.xml" value="0.16052631578947368" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/activity_splash_screen.xml" value="0.2" />
+        <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/bottom_sheet_airport_search.xml" value="0.176" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/bottom_sheet_passenger_choose.xml" value="0.2" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/bottom_sheet_ticket_preview.xml" value="0.152" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/fragement_add_ticket_flight.xml" value="0.176" />
@@ -68,6 +69,7 @@
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_admin_destination.xml" value="0.264" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_admin_payment.xml" value="0.2" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_admin_ticket.xml" value="0.264" />
+        <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_airport_search.xml" value="0.264" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_favorite_destination.xml" value="0.4" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_flight_passenger_choose.xml" value="0.264" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/layout/item_header_navigation_drawer.xml" value="0.16052631578947368" />
