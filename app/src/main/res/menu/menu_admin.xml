@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/admin_dashboard"
+            android:icon="@drawable/ic_home"
+            android:title="@string/text_dashboard"/>
+        <item
+            android:id="@+id/admin_ticket"
+            android:icon="@drawable/ic_ticket"
+            android:title="@string/text_ticket"/>
+        <item
+            android:id="@+id/admin_flight"
+            android:icon="@drawable/ic_airplane"
+            android:title="@string/text_airplane"/>
+        <item
+            android:id="@+id/admin_airport"
+            android:icon="@drawable/ic_airport"
+            android:title="@string/text_airport"/>
+        <item
+            android:id="@+id/admin_payment"
+            android:icon="@drawable/ic_payment"
+            android:title="@string/text_payment"/>
+        <item
+            android:id="@+id/admin_destination"
+            android:icon="@drawable/ic_destination"
+            android:title="@string/text_destination"/>
+        <item
+            android:id="@+id/admin_profile"
+            android:icon="@drawable/ic_person"
+            android:title="@string/text_profile"/>
+        <item
+            android:id="@+id/admin_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/text_logout"/>
+    </group>
+
+</menu>
