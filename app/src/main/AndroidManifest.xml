@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Papierflieger"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.ui.home.search.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.home.profiles.settings.PasswordSecurityActivity"
             android:exported="false" />
         <activity

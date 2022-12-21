@@ -12,7 +12,9 @@ import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.papierflieger.databinding.FragmentSearchBinding
 import com.papierflieger.wrapper.toDate
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private lateinit var binding : FragmentSearchBinding
