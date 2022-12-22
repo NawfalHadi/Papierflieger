@@ -11,8 +11,10 @@
     <!-- Color Pallete -->
     <color name="main_blue">#249FDA</color>
     <color name="dark_blue">#0060C2</color>
+    <color name="sidebar_blue">#538AB1</color>
     <color name="text_blue">#1B252B</color>
     <color name="gray">#535353</color>
+    <color name="gray_icon">#757575</color>
     <color name="border_white">#DDDDDD</color>
     <color name="background_blue">#C2D9F1</color>
     <color name="background_white">#F4F4F4</color>

@@ -6,12 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.papierflieger.R
 import com.papierflieger.databinding.FragmentLoginBinding
 import com.papierflieger.presentation.bussiness.AuthViewModel
+import com.papierflieger.presentation.ui.admin.AdminActivity
 import com.papierflieger.presentation.ui.home.HomeActivity
 import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -66,12 +68,22 @@ class LoginFragment : Fragment() {
                         it.payload?.token.toString(),
                         binding.etEmail.text.toString(),
                         it.payload?.username.toString(),
-                        it.payload?.avatar.toString()
+                        it.payload?.avatar.toString(),
+                        it.payload?.role.toString()
                     )
                     // Set Token Login
-                    startActivity(Intent(activity, HomeActivity::class.java))
+                    if (it.payload?.role.toString() == "Customer") {
+                        startActivity(Intent(activity, HomeActivity::class.java))
+                    } else {
+                        startActivity(Intent(activity, AdminActivity::class.java))
+                    }
                     activity?.finish()
                 }
+                is Resource.Empty -> {}
+                is Resource.Error -> {
+                    Toast.makeText(this.context, it.message, Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Loading -> {}
             }
         }
     }

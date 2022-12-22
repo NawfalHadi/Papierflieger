@@ -66,9 +66,9 @@ class AuthViewModel @Inject constructor(
     }
 
     // Data Store
-    fun loginSuccuess(token: String, email: String, names: String, image: String){
+    fun loginSuccuess(token: String, email: String, names: String, image: String, role: String){
         viewModelScope.launch(Dispatchers.IO){
-            accountDS.loginSuccess(token, email, names, image)
+            accountDS.loginSuccess(token, email, names, image, role)
         }
     }
 
@@ -82,6 +82,14 @@ class AuthViewModel @Inject constructor(
 
     fun getAvatar() : LiveData<String> {
         return accountDS.getAvatar().asLiveData()
+    }
+
+    fun getEmail() : LiveData<String> {
+        return accountDS.getEmail().asLiveData()
+    }
+
+    fun getRole() : LiveData<String> {
+        return accountDS.getRole().asLiveData()
     }
 
     fun snackbarTrigger(){
