@@ -71,13 +71,13 @@ class AccountInformationFragment : Fragment() {
             findNavController().navigate(R.id.action_accountInformationFragment_to_addressInformationFragment, mBundle)
         }
 
-//        personalInformation.addAll(arrayListOf(
-//            TitleValueModel("Title", user.title),
-//            TitleValueModel("Full Name", user.fullName),
-//            TitleValueModel("Username", user.username),
-//            TitleValueModel("Date Of Birth", user.birthdate),
-//            TitleValueModel("Nationality", user.nationality)
-//        ))
+        personalInformation.addAll(arrayListOf(
+            TitleValueModel("Title", user.title),
+            TitleValueModel("Full Name", user.fullName),
+            TitleValueModel("Username", user.username),
+            TitleValueModel("Date Of Birth", user.birthdate),
+            TitleValueModel("Nationality", user.nationality)
+        ))
 
         addressInformation.add(TitleValueModel("Country", user.country))
         addressInformation.add(TitleValueModel("Province", user.province))

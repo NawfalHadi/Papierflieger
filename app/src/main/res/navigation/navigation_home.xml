@@ -11,14 +11,9 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
+            android:id="@+id/action_homeFragment_to_searchActivity"
+            app:destination="@id/searchActivity" />
     </fragment>
-    <fragment
-        android:id="@+id/searchFragment"
-        android:name="com.papierflieger.presentation.ui.home.search.SearchFragment"
-        android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.papierflieger.presentation.ui.home.history.HistoryFragment"
@@ -54,4 +49,9 @@
         android:name="com.papierflieger.presentation.ui.home.profiles.settings.PasswordSecurityActivity"
         android:label="activity_password_security"
         tools:layout="@layout/activity_password_security" />
+    <activity
+        android:id="@+id/searchActivity"
+        android:name="com.papierflieger.presentation.ui.home.search.SearchActivity"
+        android:label="activity_search"
+        tools:layout="@layout/activity_search" />
 </navigation>

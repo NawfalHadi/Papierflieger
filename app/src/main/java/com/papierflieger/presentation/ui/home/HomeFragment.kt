@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
         bindingSession()
         showsData()
         binding.btnSearch.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_searchFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_searchActivity)
         }
     }
 
