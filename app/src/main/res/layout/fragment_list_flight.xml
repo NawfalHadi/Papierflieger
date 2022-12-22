@@ -120,7 +120,7 @@
         app:layout_constraintTop_toTopOf="@+id/tv_order_number" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_account_security"
+        android:id="@+id/rv_ticket"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

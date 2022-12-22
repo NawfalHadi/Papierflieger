@@ -55,7 +55,7 @@
         <entry key="app/src/main/res/layout/fragment_history.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/fragment_list_flight.xml" value="0.17147922998986828" />
-        <entry key="app/src/main/res/layout/fragment_list_flight_return.xml" value="0.67" />
+        <entry key="app/src/main/res/layout/fragment_list_flight_return.xml" value="0.4218533886583679" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2391304347826087" />
         <entry key="app/src/main/res/layout/fragment_password_security.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_payment.xml" value="0.17147922998986828" />
@@ -70,7 +70,7 @@
         <entry key="app/src/main/res/layout/fragment_traveler_detail_international.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_welcome.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/item_favorite_destination.xml" value="0.35260416666666666" />
-        <entry key="app/src/main/res/layout/item_flight_passenger_choose.xml" value="0.35260416666666666" />
+        <entry key="app/src/main/res/layout/item_flight_passenger_choose.xml" value="0.5" />
         <entry key="app/src/main/res/layout/item_list_flight.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/item_new_destination.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/item_pricing_detail_transaction.xml" value="0.35260416666666666" />

@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.papierflieger.R
 import com.papierflieger.databinding.FragmentSearchBinding
 import com.papierflieger.wrapper.toDate
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,6 +30,7 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         allNavigation()
         roundTripCheck()
         switchFlightButton()
@@ -109,6 +111,10 @@ class SearchFragment : Fragment() {
     private fun allNavigation() {
         binding.btnBack.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        binding.btnSearch.setOnClickListener {
+            findNavController().navigate(R.id.action_searchFragment_to_listFlightFragment)
         }
     }
 

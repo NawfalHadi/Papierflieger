@@ -26,4 +26,9 @@ class SearchActivity : AppCompatActivity() {
 
         navController = navHostFragment.navController
     }
+
+    companion object {
+        const val RETURN_TICKETS_KEY = "RETURN_TICKET_KEY"
+        const val DEPARTURE_TICKET_KEY = "DEPARTURE_TICKET_KEY"
+    }
 }
