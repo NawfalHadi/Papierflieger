@@ -6,6 +6,7 @@ import com.papierflieger.data.network.response.auth.LoginResponse
 import com.papierflieger.data.network.response.auth.RegisterResponse
 import com.papierflieger.data.network.response.destination.DestinationResponse
 import com.papierflieger.data.network.response.destination.DestinationsResponse
+import com.papierflieger.data.network.response.ticket.DataTicket
 import com.papierflieger.data.network.response.ticket.ListTicketResponse
 import com.papierflieger.data.network.response.ticket.SearchTicketResponse
 import com.papierflieger.data.network.response.user.UpdateUserResponse
