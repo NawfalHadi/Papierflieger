@@ -1,5 +1,7 @@
 package com.papierflieger.di
 
+import com.papierflieger.data.local.room.dao.AirportDao
+import com.papierflieger.data.network.response.airport.Airport
 import com.papierflieger.data.network.service.ApiAdminService
 import com.papierflieger.data.network.service.ApiService
 import com.papierflieger.data.repository.*
@@ -59,5 +61,16 @@ object RepositoryModule {
         apiService: ApiService
     ) : TicketRepository {
         return TicketRepository(apiService)
+    }
+
+    @Provides
+    @Singleton
+    fun providesAirportRepo(
+        apiService: ApiService,
+        daoAirport: AirportDao
+    ) : AirportRepository {
+        return AirportRepository(
+            apiService, daoAirport
+        )
     }
 }

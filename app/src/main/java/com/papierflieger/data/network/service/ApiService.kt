@@ -1,5 +1,6 @@
 package com.papierflieger.data.network.service
 import com.papierflieger.data.network.response.*
+import com.papierflieger.data.network.response.airport.AirportsResponse
 import com.papierflieger.data.network.response.ticket.ListTicketResponse
 import com.papierflieger.data.network.response.ticket.SearchTicketResponse
 import retrofit2.Call
@@ -79,5 +80,12 @@ interface ApiService {
     fun destinationById(
         @Path("idDestination") idDestination: Int
     ) : Call<DestinationResponse>
+
+    /***
+     * Airports API
+     */
+
+    @GET("api/airports")
+    fun getAirports() : Call<AirportsResponse>
 
 }
