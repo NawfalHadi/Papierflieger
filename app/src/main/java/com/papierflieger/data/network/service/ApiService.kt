@@ -1,5 +1,7 @@
 package com.papierflieger.data.network.service
 import com.papierflieger.data.network.response.*
+import com.papierflieger.data.network.response.ticket.ListTicketResponse
+import com.papierflieger.data.network.response.ticket.SearchTicketResponse
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -60,6 +62,18 @@ interface ApiService {
 
     @GET("api/destinations")
     fun destinations() : Call<DestinationsResponse>
+
+    /***
+     * Ticket API
+     */
+
+    @GET("api/search-tickets")
+    fun searchTickets(
+        @Query("flightFrom") from: Int,
+        @Query("flightTo") to: Int,
+        @Query("departureDate") departureDate : String,
+        @Query("returnDate") returnDate : String?,
+    ) : Call<SearchTicketResponse>
 
     @GET("api/destinations/{idDestination}")
     fun destinationById(

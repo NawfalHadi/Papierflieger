@@ -22,6 +22,9 @@
             android:theme="@style/Theme.Papierflieger.ActionBar"
             android:exported="false" />
         <activity
+            android:name=".presentation.ui.home.search.SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.home.profiles.settings.PasswordSecurityActivity"
             android:exported="false" />
         <activity

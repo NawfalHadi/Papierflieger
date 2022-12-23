@@ -52,4 +52,12 @@ object RepositoryModule {
     ) : UserRepository {
         return UserRepository(apiService)
     }
+
+    @Provides
+    @Singleton
+    fun providesTicketRepo(
+        apiService: ApiService
+    ) : TicketRepository {
+        return TicketRepository(apiService)
+    }
 }
