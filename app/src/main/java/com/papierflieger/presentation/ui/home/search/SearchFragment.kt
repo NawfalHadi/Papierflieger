@@ -6,12 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.papierflieger.R
 import com.papierflieger.databinding.FragmentSearchBinding
+import com.papierflieger.presentation.bussiness.AirportsViewModel
 import com.papierflieger.wrapper.toDate
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private lateinit var binding : FragmentSearchBinding
+    private val airportViewManager : AirportsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

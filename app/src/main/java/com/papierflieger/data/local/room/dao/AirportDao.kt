@@ -10,10 +10,10 @@ import com.papierflieger.data.network.response.airport.Airport
 @Dao
 interface AirportDao {
     @Insert
-    fun addAirport(airport: Airport)
+    suspend fun addAirport(airport: AirportEntity)
 
     @Delete
-    fun removeAirport(airport: Airport)
+    fun removeAirport(airport: AirportEntity)
 
     @Query("SELECT * FROM airportentity ORDER BY airportId ASC LIMIT 1")
     fun selectAirport(id : Int): AirportEntity

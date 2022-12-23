@@ -3,6 +3,8 @@ package com.papierflieger.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.papierflieger.data.local.room.dao.AirportDao
+import com.papierflieger.data.local.room.entity.AirportEntity
+import com.papierflieger.data.network.response.airport.Airport
 import com.papierflieger.data.network.response.airport.AirportsResponse
 import com.papierflieger.data.network.service.ApiService
 import com.papierflieger.wrapper.Resource
@@ -34,11 +36,18 @@ class AirportRepository(
                         airportResponse.postValue(Resource.Error(t))
 
                     }
-
                 }
             )
         }
         return airportResponse
+    }
+
+    suspend fun offlineAirportData(airport: AirportEntity){
+        daoAirport.addAirport(airport)
+    }
+
+    fun selectAirport(id: Int){
+        daoAirport.selectAirport(id)
     }
 
 

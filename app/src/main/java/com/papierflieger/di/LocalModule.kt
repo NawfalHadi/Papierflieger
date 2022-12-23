@@ -16,6 +16,8 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object LocalModule {
 
+    // Data Strore
+
     @Provides
     @Singleton
     fun provideAccountDataStoreM(
@@ -27,6 +29,14 @@ object LocalModule {
     @Provides
     @Singleton
     fun provideSettingsDataStore(
+        @ApplicationContext ctx: Context
+    ) : SettingDataStore {
+        return SettingDataStore(ctx)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDatasyncDataStore(
         @ApplicationContext ctx: Context
     ) : SettingDataStore {
         return SettingDataStore(ctx)

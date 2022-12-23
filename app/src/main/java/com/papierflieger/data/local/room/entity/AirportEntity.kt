@@ -15,4 +15,10 @@ data class AirportEntity(
 
     @ColumnInfo(name = "name")
     val name : String,
+
+    @ColumnInfo(name = "city")
+    val city : String,
+
+    @ColumnInfo(name = "cityCode")
+    val cityCode : String,
 ) : Parcelable
