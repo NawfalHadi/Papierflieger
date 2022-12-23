@@ -1,10 +1,9 @@
 package com.papierflieger.presentation.bussiness
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.papierflieger.data.local.datastore.AccountDataStore
-import com.papierflieger.data.network.response.LoginResponse
-import com.papierflieger.data.network.response.RegisterResponse
+import com.papierflieger.data.network.response.auth.LoginResponse
+import com.papierflieger.data.network.response.auth.RegisterResponse
 import com.papierflieger.data.repository.AuthenticationRepository
 import com.papierflieger.wrapper.Event
 import com.papierflieger.wrapper.Resource

@@ -1,9 +1,8 @@
 package com.papierflieger.data.repository
 
 import android.util.Log
-import com.google.gson.GsonBuilder
-import com.papierflieger.data.network.response.LoginResponse
-import com.papierflieger.data.network.response.RegisterResponse
+import com.papierflieger.data.network.response.auth.LoginResponse
+import com.papierflieger.data.network.response.auth.RegisterResponse
 import com.papierflieger.data.network.service.ApiService
 import com.papierflieger.wrapper.Resource
 

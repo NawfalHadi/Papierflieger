@@ -2,8 +2,8 @@ package com.papierflieger.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.papierflieger.data.network.response.Profile
-import com.papierflieger.data.network.response.UserResponse
+import com.papierflieger.data.network.response.user.Profile
+import com.papierflieger.data.network.response.user.UserResponse
 import com.papierflieger.data.network.service.ApiService
 import com.papierflieger.wrapper.Resource
 import retrofit2.Call

@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.papierflieger.data.local.datastore.AccountDataStore
-import com.papierflieger.data.network.response.Profile
+import com.papierflieger.data.network.response.user.Profile
 import com.papierflieger.data.repository.SessionRepository
 import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,8 +1,15 @@
 package com.papierflieger.data.network.service
 import com.papierflieger.data.network.response.*
+import com.papierflieger.data.network.response.airport.AirportResponse
 import com.papierflieger.data.network.response.airport.AirportsResponse
+import com.papierflieger.data.network.response.auth.LoginResponse
+import com.papierflieger.data.network.response.auth.RegisterResponse
+import com.papierflieger.data.network.response.destination.DestinationResponse
+import com.papierflieger.data.network.response.destination.DestinationsResponse
 import com.papierflieger.data.network.response.ticket.ListTicketResponse
 import com.papierflieger.data.network.response.ticket.SearchTicketResponse
+import com.papierflieger.data.network.response.user.UpdateUserResponse
+import com.papierflieger.data.network.response.user.UserResponse
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -64,6 +71,11 @@ interface ApiService {
     @GET("api/destinations")
     fun destinations() : Call<DestinationsResponse>
 
+    @GET("api/destinations/{idDestination}")
+    fun destinationById(
+        @Path("idDestination") idDestination: Int
+    ) : Call<DestinationResponse>
+
     /***
      * Ticket API
      */
@@ -76,10 +88,13 @@ interface ApiService {
         @Query("returnDate") returnDate : String?,
     ) : Call<SearchTicketResponse>
 
-    @GET("api/destinations/{idDestination}")
-    fun destinationById(
-        @Path("idDestination") idDestination: Int
-    ) : Call<DestinationResponse>
+    @GET("api/tickets/")
+    fun getTickets() : Call<ListTicketResponse>
+
+    @GET("api/tickets/{idTicket}")
+    fun getTicketById(
+        @Path("idTicket") idTicket: Int
+    ) : Call<DataTicket>
 
     /***
      * Airports API
@@ -87,5 +102,10 @@ interface ApiService {
 
     @GET("api/airports")
     fun getAirports() : Call<AirportsResponse>
+
+    @GET("api/airports/{idAirport}")
+    fun getAirportById(
+        @Path("idAirport") idAirport: Int
+    ) : Call<AirportResponse>
 
 }

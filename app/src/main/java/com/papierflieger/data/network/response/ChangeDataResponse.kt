@@ -1,9 +1,9 @@
-package com.papierflieger.data.network.response.destination
+package com.papierflieger.data.network.response
 
 
 import com.google.gson.annotations.SerializedName
 
-data class UpdateDestinationResponse(
+data class ChangeDataResponse(
     @SerializedName("message")
     val message: String
 )

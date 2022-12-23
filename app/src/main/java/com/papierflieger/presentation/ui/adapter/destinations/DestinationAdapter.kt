@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.papierflieger.R
-import com.papierflieger.data.network.response.Destination
+import com.papierflieger.data.network.response.destination.Destination
 import com.papierflieger.databinding.ItemFavoriteDestinationBinding
 
 class DestinationAdapter : RecyclerView.Adapter<DestinationAdapter.DestionationViewHolder>() {
