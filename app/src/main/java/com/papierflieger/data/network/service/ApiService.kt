@@ -55,13 +55,15 @@ interface ApiService {
     ) : Call<UpdateUserResponse>
 
     /***
-     * Destionation
+     * Destination
      */
 
     @GET("api/destinations")
-    fun destionations() : Call<DestinationsResponse>
+    fun destinations() : Call<DestinationsResponse>
 
-
-
+    @GET("api/destinations/{idDestination}")
+    fun destinationById(
+        @Path("idDestination") idDestination: Int
+    ) : Call<DestinationResponse>
 
 }

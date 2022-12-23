@@ -40,11 +40,12 @@ class AdminActivity : AppCompatActivity() {
 
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-            val navHostFragment = supportFragmentManager.findFragmentById(R.id.admin_dashboard_nav_container)
+            val navHostFragment = supportFragmentManager
+                .findFragmentById(R.id.admin_dashboard_nav_container)
                     as NavHostFragment
 
             navController = navHostFragment.navController
-            binding.navMenuAdmin.setupWithNavController(navController)
+            navMenuAdmin.setupWithNavController(navController)
         }
 
     }

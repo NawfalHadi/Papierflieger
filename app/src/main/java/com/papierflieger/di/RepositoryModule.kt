@@ -1,5 +1,6 @@
 package com.papierflieger.di
 
+import com.papierflieger.data.network.service.ApiAdminService
 import com.papierflieger.data.network.service.ApiService
 import com.papierflieger.data.repository.*
 import dagger.Module
@@ -11,6 +12,14 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RepositoryModule {
+
+    @Provides
+    @Singleton
+    fun provideAdminRepository(
+        apiAdminService: ApiAdminService
+    ) : AdminRepository {
+        return AdminRepository(apiAdminService)
+    }
 
     @Provides
     @Singleton

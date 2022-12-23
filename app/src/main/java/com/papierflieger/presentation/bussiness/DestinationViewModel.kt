@@ -2,8 +2,9 @@ package com.papierflieger.presentation.bussiness
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.papierflieger.data.network.response.DestinationsResponse
+import com.papierflieger.data.network.response.*
 import com.papierflieger.data.repository.DestinationRepository
+import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -14,6 +15,10 @@ class DestinationViewModel @Inject constructor(
 
     fun getDestination() : LiveData<DestinationsResponse> {
         return destinationRepository.getDestination()
+    }
+
+    fun getDestinationById(id: Int) : LiveData<DestinationResponse> {
+        return destinationRepository.getDestinationById(id)
     }
 
 }

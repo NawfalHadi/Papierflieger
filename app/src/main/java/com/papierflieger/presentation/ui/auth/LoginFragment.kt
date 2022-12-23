@@ -81,7 +81,7 @@ class LoginFragment : Fragment() {
                 }
                 is Resource.Empty -> {}
                 is Resource.Error -> {
-                    Toast.makeText(this.context, it.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this.context, it.message.toString(), Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Loading -> {}
             }

@@ -17,6 +17,9 @@
         android:name="com.papierflieger.presentation.ui.admin.ticket.AdminTicketFragment"
         android:label="fragment_admin_ticket"
         tools:layout="@layout/fragment_admin_ticket" >
+        <action
+            android:id="@+id/action_adminTicketFragment_to_addTicketDetailFragment"
+            app:destination="@id/addTicketDetailFragment" />
     </fragment>
 
     <fragment
@@ -24,6 +27,9 @@
         android:name="com.papierflieger.presentation.ui.admin.airport.AdminAirportFragment"
         android:label="fragment_admin_airport"
         tools:layout="@layout/fragment_admin_airport" >
+        <action
+            android:id="@+id/action_adminAirportFragment_to_addAirportFragment"
+            app:destination="@id/addAirportFragment" />
     </fragment>
 
     <fragment
@@ -31,6 +37,9 @@
         android:label="fragment_admin_airplane"
         android:name="com.papierflieger.presentation.ui.admin.airplane.AdminAirplaneFragment"
         tools:layout="@layout/fragment_admin_airplane" >
+        <action
+            android:id="@+id/action_adminAirplaneFragment_to_addAirplaneFragment"
+            app:destination="@id/addAirplaneFragment" />
     </fragment>
 
     <fragment
@@ -38,6 +47,9 @@
         android:name="com.papierflieger.presentation.ui.admin.payment.AdminPaymentFragment"
         android:label="fragment_admin_payment"
         tools:layout="@layout/fragment_admin_payment" >
+        <action
+            android:id="@+id/action_adminPaymentFragment_to_addPaymentFragment"
+            app:destination="@id/addPaymentFragment" />
     </fragment>
 
     <fragment
@@ -45,6 +57,66 @@
         android:name="com.papierflieger.presentation.ui.admin.destination.AdminDestinationFragment"
         android:label="fragment_admin_destination"
         tools:layout="@layout/fragment_admin_destination" >
+        <action
+            android:id="@+id/action_adminDestinationFragment_to_addDestinationFragment"
+            app:destination="@id/addDestinationFragment" />
     </fragment>
 
+    <fragment
+        android:id="@+id/adminProfileFragment"
+        android:name="com.papierflieger.presentation.ui.admin.profile.AdminProfileFragment"
+        android:label="fragment_admin_profile"
+        tools:layout="@layout/fragment_admin_profile" >
+        <action
+            android:id="@+id/action_adminProfileFragment_to_authActivity"
+            app:destination="@id/authActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/authActivity"
+        android:name="com.papierflieger.presentation.ui.auth.AuthActivity"
+        android:label="activity_auth"
+        tools:layout="@layout/activity_auth" />
+    <fragment
+        android:id="@+id/addAirplaneFragment"
+        android:name="com.papierflieger.presentation.ui.admin.airplane.AddAirplaneFragment"
+        android:label="fragment_add_airplane"
+        tools:layout="@layout/fragment_add_airplane"/>
+    <fragment
+        android:id="@+id/addAirportFragment"
+        android:name="com.papierflieger.presentation.ui.admin.airport.AddAirportFragment"
+        android:label="fragment_add_airport"
+        tools:layout="@layout/fragment_add_airport"/>
+    <fragment
+        android:id="@+id/addTicketDetailFragment"
+        android:name="com.papierflieger.presentation.ui.admin.ticket.AddTicketDetailFragment"
+        android:label="fragment_add_ticket_detail"
+        tools:layout="@layout/fragment_add_ticket_detail">
+        <action
+            android:id="@+id/action_addTicketDetailFragment_to_addTicketFlightFragment"
+            app:destination="@id/addTicketFlightFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTicketFlightFragment"
+        android:name="com.papierflieger.presentation.ui.admin.ticket.AddTicketFlightFragment"
+        android:label="fragment_add_ticket_flight"
+        tools:layout="@layout/fragment_add_ticket_flight">
+        <action
+            android:id="@+id/action_addTicketFlightFragment_to_addTicketTransitFragment"
+            app:destination="@id/addTicketTransitFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTicketTransitFragment"
+        android:name="com.papierflieger.presentation.ui.admin.ticket.AddTicketTransitFragment"
+        android:label="fragment_add_ticket_transit"
+        tools:layout="@layout/fragment_add_ticket_transit"/>
+    <fragment
+        android:id="@+id/addDestinationFragment"
+        android:name="com.papierflieger.presentation.ui.admin.destination.AddDestinationFragment"
+        android:label="fragment_add_destination"
+        tools:layout="@layout/fragment_add_destination"/>
+    <fragment
+        android:id="@+id/addPaymentFragment"
+        android:name="com.papierflieger.presentation.ui.admin.payment.AddPaymentFragment"
+        android:label="fragment_add_payment"
+        tools:layout="@layout/fragment_add_payment"/>
 </navigation>

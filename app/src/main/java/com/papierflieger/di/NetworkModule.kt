@@ -1,6 +1,7 @@
 package com.papierflieger.di
 
 import com.papierflieger.BuildConfig
+import com.papierflieger.data.network.service.ApiAdminService
 import com.papierflieger.data.network.service.ApiService
 import com.papierflieger.data.repository.AuthenticationRepository
 import com.papierflieger.data.repository.BasicAuthRepoImpl
@@ -40,6 +41,16 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideApiAdminService () : ApiAdminService {
+        return Retrofit.Builder()
+            .baseUrl(BuildConfig.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ApiAdminService::class.java)
     }
 
     // Providing Repository

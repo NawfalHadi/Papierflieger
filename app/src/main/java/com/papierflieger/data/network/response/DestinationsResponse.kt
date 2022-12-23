@@ -43,3 +43,8 @@ data class Airport(
     @SerializedName("updatedAt")
     val updatedAt: String?
 )
+
+data class DestinationResponse(
+    @SerializedName("destination")
+    val destination: Destination
+)

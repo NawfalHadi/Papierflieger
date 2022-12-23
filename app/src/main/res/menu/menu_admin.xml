@@ -36,13 +36,10 @@
             app:showAsAction="ifRoom"
             android:title="@string/text_destination"/>
         <item
+            android:id="@+id/adminProfileFragment"
             android:icon="@drawable/ic_person"
             app:showAsAction="ifRoom"
             android:title="@string/text_profile"/>
-        <item
-            android:icon="@drawable/ic_logout"
-            app:showAsAction="ifRoom"
-            android:title="@string/text_logout"/>
     </group>
 
 </menu>
