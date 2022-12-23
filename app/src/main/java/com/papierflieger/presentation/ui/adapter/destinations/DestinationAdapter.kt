@@ -47,8 +47,11 @@ class DestinationAdapter : RecyclerView.Adapter<DestinationAdapter.DestionationV
         fun bindingItem(item: Destination?, position: Int) {
             with(binding){
                 if (position >= 1) vGap1.visibility = View.GONE
-                itemIvDestinationImage.load(item?.image?.get(0)) {
-                    placeholder(R.color.gray)
+
+                if (item?.image?.isNotEmpty() == true) {
+                    itemIvDestinationImage.load(item.image[0]) {
+                        placeholder(R.color.gray)
+                    }
                 }
 
                 itemTvDestinationName.text = item?.name

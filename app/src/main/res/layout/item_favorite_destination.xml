@@ -36,7 +36,7 @@
                 android:layout_width="150dp"
                 android:layout_height="100dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/dummy_destination_image"
+                android:src="@color/background_gray"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
