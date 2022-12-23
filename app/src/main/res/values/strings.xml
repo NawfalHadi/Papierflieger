@@ -153,4 +153,6 @@
     <string name="text_flight_preview">Flight Preview</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="text_delete">Delete</string>
+    <string name="text_sure_delete">Are you sure you want to delete this?</string>
 </resources>

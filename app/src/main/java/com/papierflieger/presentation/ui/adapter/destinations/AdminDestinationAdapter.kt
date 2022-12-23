@@ -72,15 +72,16 @@ class AdminDestinationAdapter : RecyclerView.Adapter<AdminDestinationAdapter.Des
                 tvDescriptionValue.text = item.description
 
                 if (item.id != null) {
-                    btnEdit.setOnClickListener { onAdminDestinationItem.itemClicked(item.id) }
-                    btnDelete.setOnClickListener { onAdminDestinationItem.itemClicked(item.id) }
+                    btnEdit.setOnClickListener { onAdminDestinationItem.itemEditClicked(item.id) }
+                    btnDelete.setOnClickListener { onAdminDestinationItem.itemDeleteClicked(item.id) }
                 }
             }
         }
     }
 
     interface OnAdminDestinationItem {
-        fun itemClicked(id : Int)
+        fun itemEditClicked(id : Int)
+        fun itemDeleteClicked(id : Int)
     }
 
 }

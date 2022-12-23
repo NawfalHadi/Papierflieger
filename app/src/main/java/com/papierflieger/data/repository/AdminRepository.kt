@@ -3,23 +3,27 @@ package com.papierflieger.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.papierflieger.data.network.response.CreateDestinationResponse
-import com.papierflieger.data.network.response.DestinationResponse
-import com.papierflieger.data.network.response.DestinationsResponse
-import com.papierflieger.data.network.response.UpdateDestinationResponse
+import com.papierflieger.data.network.response.destination.DeleteDestinationResponse
+import com.papierflieger.data.network.response.destination.UpdateDestinationResponse
 import com.papierflieger.data.network.service.ApiAdminService
-import com.papierflieger.data.network.service.ApiService
 import com.papierflieger.wrapper.Resource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.Header
 
 class AdminRepository(
     private val apiAdminService: ApiAdminService
 ) {
     private var updateDestinationResponse : MutableLiveData<Resource<UpdateDestinationResponse>> = MutableLiveData()
     private var createDestinationResponse : MutableLiveData<CreateDestinationResponse> = MutableLiveData()
+    private var deleteDestinationResponse : MutableLiveData<DeleteDestinationResponse> = MutableLiveData()
+
+
+
+
+    /***
+     * Destination
+     */
 
     fun createDestination(
         token: String,
@@ -73,4 +77,29 @@ class AdminRepository(
 
         return updateDestinationResponse
     }
+
+    fun deleteDestination(idDestination: Int, token: String) : LiveData<DeleteDestinationResponse> {
+        apiAdminService.deleteAdminDestination(idDestination, token).enqueue(
+            object : Callback<DeleteDestinationResponse>{
+                override fun onResponse(
+                    call: Call<DeleteDestinationResponse>,
+                    response: Response<DeleteDestinationResponse>
+                ) {
+                    if (response.isSuccessful){
+                        deleteDestinationResponse.postValue(response.body())
+                    }
+                }
+
+                override fun onFailure(call: Call<DeleteDestinationResponse>, t: Throwable) {
+
+                }
+
+            }
+        )
+        return deleteDestinationResponse
+    }
+
+    /***
+     * Airport
+     */
 }
