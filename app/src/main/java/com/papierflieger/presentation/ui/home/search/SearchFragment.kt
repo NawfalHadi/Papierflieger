@@ -14,6 +14,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import com.papierflieger.R
 import com.papierflieger.databinding.FragmentSearchBinding
 import com.papierflieger.presentation.bussiness.AirportsViewModel
+import com.papierflieger.presentation.bussiness.DatasyncViewModel
 import com.papierflieger.wrapper.toDate
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,7 +22,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class SearchFragment : Fragment() {
 
     private lateinit var binding : FragmentSearchBinding
-    private val airportViewManager : AirportsViewModel by viewModels()
+
+    private val airportViewModel : AirportsViewModel by viewModels()
+    private val datasyncViewModel : DatasyncViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,11 +37,17 @@ class SearchFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        syncingDataToRoom()
+
         allNavigation()
         roundTripCheck()
         switchFlightButton()
         changeValue()
         clickListener()
+    }
+
+    private fun syncingDataToRoom() {
+        TODO("Not yet implemented")
     }
 
     private fun changeValue() {
