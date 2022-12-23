@@ -3,8 +3,9 @@ package com.papierflieger.presentation.bussiness
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.papierflieger.data.network.response.*
+import com.papierflieger.data.network.response.destination.DeleteDestinationResponse
+import com.papierflieger.data.network.response.destination.UpdateDestinationResponse
 import com.papierflieger.data.repository.AdminRepository
-import com.papierflieger.data.repository.DestinationRepository
 import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -39,6 +40,13 @@ class AdminViewModel @Inject constructor(
         return adminRepository.updateDestination(
             idDestination, token, name, images, location, description, airportId
         )
+    }
+
+    fun deleteDestination(
+        idDestination: Int,
+        token: String
+    ) : LiveData<DeleteDestinationResponse> {
+        return adminRepository.deleteDestination(idDestination, token)
     }
 
 }
