@@ -1,6 +1,7 @@
 package com.papierflieger.presentation.ui.home.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import com.papierflieger.R
 import com.papierflieger.databinding.FragmentSearchBinding
 import com.papierflieger.presentation.bussiness.AirportsViewModel
 import com.papierflieger.presentation.bussiness.DatasyncViewModel
+import com.papierflieger.wrapper.Resource
 import com.papierflieger.wrapper.toDate
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -47,7 +49,19 @@ class SearchFragment : Fragment() {
     }
 
     private fun syncingDataToRoom() {
-        TODO("Not yet implemented")
+        datasyncViewModel.isAirportSync().observe(viewLifecycleOwner){
+            airportViewModel.syncAirportsData(it).observe(viewLifecycleOwner){ airports ->
+                when(airports){
+                    is Resource.Success -> {
+                        val airport = airports.payload?.airports
+                        for (i in airport!!){
+                            Log.e("Airport", i?.airportName.toString())
+                        }
+//                        datasyncViewModel.airportSynced()
+                    }
+                }
+            }
+        }
     }
 
     private fun changeValue() {
