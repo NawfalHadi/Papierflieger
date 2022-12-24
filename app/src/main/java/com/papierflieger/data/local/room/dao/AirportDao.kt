@@ -15,7 +15,10 @@ interface AirportDao {
     @Delete
     fun removeAirport(airport: AirportEntity)
 
-    @Query("SELECT * FROM airportentity ORDER BY airportId ASC LIMIT 1")
+    @Query("SELECT * FROM airportentity WHERE airportId = :id LIMIT 1")
     fun selectAirport(id : Int): AirportEntity
+
+    @Query("SELECT * FROM airportentity ORDER BY airportId ASC")
+    fun showsAirport() : List<AirportEntity>
 
 }

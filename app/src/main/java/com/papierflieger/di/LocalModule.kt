@@ -2,6 +2,7 @@ package com.papierflieger.di
 
 import android.content.Context
 import com.papierflieger.data.local.datastore.AccountDataStore
+import com.papierflieger.data.local.datastore.DatasyncDataStore
 import com.papierflieger.data.local.datastore.SettingDataStore
 import com.papierflieger.data.local.room.AppDatabase
 import com.papierflieger.data.local.room.dao.AirportDao
@@ -38,24 +39,26 @@ object LocalModule {
     @Singleton
     fun provideDatasyncDataStore(
         @ApplicationContext ctx: Context
-    ) : SettingDataStore {
-        return SettingDataStore(ctx)
+    ) : DatasyncDataStore {
+        return DatasyncDataStore(ctx)
     }
 
-    // ROOM Injection
-//
-//    @Provides
-//    fun provideAppDatabase (
-//        @ApplicationContext ctx: Context
-//    ) : AppDatabase {
-//        return AppDatabase.getInstance(ctx)
-//    }
-//
-//    @Provides
-//    fun provideAirportDao(
-//        appDatabase: AppDatabase
-//    ) : AirportDao {
-//        return appDatabase.airportDao()
-//    }
+//     ROOM Injection
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase (
+        @ApplicationContext ctx: Context
+    ) : AppDatabase {
+        return AppDatabase.getInstance(ctx)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAirportDao(
+        appDatabase: AppDatabase
+    ) : AirportDao {
+        return appDatabase.airportDao()
+    }
 
 }
