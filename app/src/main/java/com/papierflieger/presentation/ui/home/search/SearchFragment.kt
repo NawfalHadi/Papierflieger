@@ -13,6 +13,7 @@ import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.papierflieger.R
+import com.papierflieger.data.local.room.entity.AirportEntity
 import com.papierflieger.databinding.FragmentSearchBinding
 import com.papierflieger.presentation.bussiness.AirportsViewModel
 import com.papierflieger.presentation.bussiness.DatasyncViewModel
@@ -50,14 +51,20 @@ class SearchFragment : Fragment() {
 
     private fun syncingDataToRoom() {
         datasyncViewModel.isAirportSync().observe(viewLifecycleOwner){
-            airportViewModel.syncAirportsData(it).observe(viewLifecycleOwner){ airports ->
+            airportViewModel.syncAirportsData(!it).observe(viewLifecycleOwner){ airports ->
                 when(airports){
                     is Resource.Success -> {
                         val airport = airports.payload?.airports
                         for (i in airport!!){
                             Log.e("Airport", i?.airportName.toString())
+                            airportViewModel.addAirports(AirportEntity(
+                                airportId = i?.id!!,
+                                name = i.airportName!!,
+                                city = i.city!!,
+                                cityCode = i.cityCode!!
+                            ))
                         }
-//                        datasyncViewModel.airportSynced()
+                        datasyncViewModel.airportSynced()
                     }
                 }
             }

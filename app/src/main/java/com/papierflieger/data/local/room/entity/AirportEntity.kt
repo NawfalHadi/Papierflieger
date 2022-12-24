@@ -10,7 +10,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class AirportEntity(
     @PrimaryKey
-    @ColumnInfo(name = "airportId")
     val airportId : Int,
 
     @ColumnInfo(name = "name")

@@ -15,7 +15,7 @@ import retrofit2.Response
 
 class AirportRepository(
     private val apiService: ApiService,
-    private val daoAirport: AirportDao
+    private val daoAirport: AirportDao,
 ){
     private var airportsResponse : MutableLiveData<Resource<AirportsResponse>> = MutableLiveData()
     private var airportResponse : MutableLiveData<Resource<AirportResponse>> = MutableLiveData()
@@ -32,6 +32,7 @@ class AirportRepository(
                     ) {
                         if (response.isSuccessful){
                             airportsResponse.postValue(Resource.Success(response.body()!!))
+
                         }
                     }
                     override fun onFailure(call: Call<AirportsResponse>, t: Throwable) {
