@@ -10,3 +10,11 @@ fun Long.toDate(): String {
     )
     return format.format(Date(this))
 }
+
+fun Long.toRequestDate(): String {
+    val format = SimpleDateFormat(
+        "yyyy-MM-dd",
+        Locale.getDefault()
+    )
+    return format.format(Date(this))
+}

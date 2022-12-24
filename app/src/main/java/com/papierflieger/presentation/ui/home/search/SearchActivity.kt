@@ -30,5 +30,11 @@ class SearchActivity : AppCompatActivity() {
     companion object {
         const val RETURN_TICKETS_KEY = "RETURN_TICKET_KEY"
         const val DEPARTURE_TICKET_KEY = "DEPARTURE_TICKET_KEY"
+
+        const val AIRPORT_FROM_KEY = "AIRPORT_FROM_KEY"
+        const val AIRPORT_TO_KEY = "AIRPORT_TO_KEY"
+
+        const val DATE_DEPARTURE_KEY = "DATE_DEPARTURE_KEY"
+        const val DATE_RETURN_KEY = "DATE_RETURN_KEY"
     }
 }

@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.papierflieger.R
+import com.papierflieger.data.local.room.entity.AirportEntity
 import com.papierflieger.data.network.response.ticket.SearchTicketResponse
 import com.papierflieger.data.network.response.ticket.TiketBerangkat
 import com.papierflieger.databinding.FragmentListFlightBinding
@@ -29,6 +30,12 @@ class ListFlightFragment : Fragment() {
     private lateinit var responsed : SearchTicketResponse
     private lateinit var departureChoose : TiketBerangkat
 
+    // Data that will be used for hitting API
+
+    private lateinit var airportFrom : AirportEntity
+    private lateinit var airportTo : AirportEntity
+    private lateinit var dateDeparture : String
+    private var dateReturn : String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,11 +49,25 @@ class ListFlightFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        dataInit()
         searchTicket()
     }
 
+    private fun dataInit() {
+        airportFrom = arguments?.getParcelable(SearchActivity.AIRPORT_FROM_KEY)!!
+        airportTo = arguments?.getParcelable(SearchActivity.AIRPORT_TO_KEY)!!
+        dateDeparture = arguments?.getString(SearchActivity.DATE_DEPARTURE_KEY).toString()
+        dateReturn = arguments?.getString(SearchActivity.DATE_RETURN_KEY).toString()
+
+    }
+
     private fun searchTicket() {
-        ticketViewModel.getSearchTicket(from, to, date, date).observe(viewLifecycleOwner){
+        ticketViewModel.getSearchTicket(
+            airportFrom.airportId,
+            airportTo.airportId,
+            dateDeparture,
+            dateReturn
+        ).observe(viewLifecycleOwner){
             when(it){
                 is Resource.Loading -> TODO()
                 is Resource.Empty -> TODO()
@@ -89,12 +110,5 @@ class ListFlightFragment : Fragment() {
                 })
             }
         }
-    }
-
-    companion object {
-        // temporary, delete afterward
-        const val from = 40
-        const val to = 12
-        const val date = "2023-01-01"
     }
 }

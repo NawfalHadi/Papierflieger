@@ -18,7 +18,7 @@ interface AirportDao {
     @Query("SELECT * FROM airportentity WHERE airportId = :id LIMIT 1")
     fun selectAirport(id : Int): AirportEntity
 
-    @Query("SELECT * FROM airportentity ORDER BY airportId ASC")
+    @Query("SELECT * FROM airportentity ORDER BY name ASC")
     fun showsAirport() : List<AirportEntity>
 
 }
