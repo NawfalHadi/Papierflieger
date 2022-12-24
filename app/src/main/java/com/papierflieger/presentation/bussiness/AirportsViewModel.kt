@@ -1,6 +1,7 @@
 package com.papierflieger.presentation.bussiness
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.papierflieger.data.local.room.entity.AirportEntity
@@ -18,6 +19,8 @@ class AirportsViewModel @Inject constructor(
     private val airportRepository: AirportRepository
 ) : ViewModel() {
 
+    val listOfflineAirports = MutableLiveData<Resource<List<AirportEntity>>>()
+
     fun syncAirportsData(status: Boolean) : LiveData<Resource<AirportsResponse>>{
         return airportRepository.syncAirportData(status)
     }
@@ -28,9 +31,20 @@ class AirportsViewModel @Inject constructor(
         }
     }
 
-    fun getAirport(id: Int){
+    fun getSavedAirports() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val airports = airportRepository.getOfflineAirports()
+            viewModelScope.launch(Dispatchers.Main) {
+                listOfflineAirports.postValue(airports)
+            }
+        }
+    }
+
+    fun selectAirport(id: Int){
         airportRepository.selectAirport(id)
     }
+
+    // Admin
 
     fun getAirports() : LiveData<Resource<AirportsResponse>>{
         return airportRepository.getAirports()

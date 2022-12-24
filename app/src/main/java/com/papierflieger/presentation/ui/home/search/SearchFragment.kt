@@ -1,5 +1,6 @@
 package com.papierflieger.presentation.ui.home.search
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import com.papierflieger.data.local.room.entity.AirportEntity
 import com.papierflieger.databinding.FragmentSearchBinding
 import com.papierflieger.presentation.bussiness.AirportsViewModel
 import com.papierflieger.presentation.bussiness.DatasyncViewModel
+import com.papierflieger.presentation.ui.home.search.bottomsheet.SearchAirportBottomSheet
 import com.papierflieger.wrapper.Resource
 import com.papierflieger.wrapper.toDate
 import dagger.hilt.android.AndroidEntryPoint
@@ -88,6 +90,32 @@ class SearchFragment : Fragment() {
     }
 
     private fun clickListener() {
+        binding.tvFrom.setOnClickListener {
+            val currentDialog = parentFragmentManager.findFragmentByTag(SearchAirportBottomSheet::class.java.simpleName)
+            if (currentDialog == null) {
+                SearchAirportBottomSheet(object : SearchAirportBottomSheet.OnAirportClickListner {
+                    @SuppressLint("SetTextI18n")
+                    override fun itemChoosed(airport: AirportEntity) {
+                        val city = airport.city.split(",")
+                        binding.tvFrom.text = "${city[0]} (${airport.cityCode})"
+                    }
+                }).show(parentFragmentManager, SearchAirportBottomSheet::class.java.simpleName)
+            }
+        }
+
+        binding.tvDestination.setOnClickListener {
+            val currentDialog = parentFragmentManager.findFragmentByTag(SearchAirportBottomSheet::class.java.simpleName)
+            if (currentDialog == null) {
+                SearchAirportBottomSheet(object : SearchAirportBottomSheet.OnAirportClickListner {
+                    @SuppressLint("SetTextI18n")
+                    override fun itemChoosed(airport: AirportEntity) {
+                        val city = airport.city.split(",")
+                        binding.tvDestination.text = "${city[0]} (${airport.cityCode})"
+                    }
+                }).show(parentFragmentManager, SearchAirportBottomSheet::class.java.simpleName)
+            }
+        }
+
         binding.switchRoundtrip.setOnClickListener {
             roundTripCheck()
         }

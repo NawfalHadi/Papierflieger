@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingHorizontal="24dp"
@@ -23,9 +24,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="4dp"
+        android:maxLines="1"
         android:text="@string/text_airport_name"
         android:textSize="14sp"
-        android:maxLines="1"
         app:layout_constraintEnd_toStartOf="@+id/materialCardView"
         app:layout_constraintStart_toEndOf="@+id/iv_airport"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,9 +35,9 @@
         android:id="@+id/tv_city"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:maxLines="1"
         android:text="@string/text_city"
         android:textSize="12sp"
-        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="@+id/tv_airport_name"
         app:layout_constraintStart_toStartOf="@+id/tv_airport_name"
         app:layout_constraintTop_toBottomOf="@+id/tv_airport_name" />
@@ -50,6 +51,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:id="@+id/tv_city_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_city_code"
