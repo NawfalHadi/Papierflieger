@@ -46,7 +46,7 @@ class ListFlightFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentListFlightBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -98,6 +98,7 @@ class ListFlightFragment : Fragment() {
                 ticketAdapter.itemAction(object : DepartureAdapter.OnTicketActionCallback{
                     override fun ticketClicked(ticket : TiketBerangkat?) {
                         departureChoose = ticket!!
+                        ticketsPreview.clear()
                         ticketsPreview.add(ticket.toDataTicket())
 
                         if (responsed.tiketPulang.isNullOrEmpty()){

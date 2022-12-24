@@ -71,6 +71,7 @@ class AccountInformationFragment : Fragment() {
             findNavController().navigate(R.id.action_accountInformationFragment_to_addressInformationFragment, mBundle)
         }
 
+        personalInformation.clear()
         personalInformation.addAll(arrayListOf(
             TitleValueModel("Title", user.title),
             TitleValueModel("Full Name", user.fullName),
@@ -79,6 +80,7 @@ class AccountInformationFragment : Fragment() {
             TitleValueModel("Nationality", user.nationality)
         ))
 
+        addressInformation.clear()
         addressInformation.add(TitleValueModel("Country", user.country))
         addressInformation.add(TitleValueModel("Province", user.province))
         addressInformation.add(TitleValueModel("Regency", user.regency))
