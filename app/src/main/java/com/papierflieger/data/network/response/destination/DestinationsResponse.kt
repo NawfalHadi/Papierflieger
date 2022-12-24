@@ -1,7 +1,8 @@
-package com.papierflieger.data.network.response
+package com.papierflieger.data.network.response.destination
 
 
 import com.google.gson.annotations.SerializedName
+import com.papierflieger.data.network.response.airport.Airport
 
 data class DestinationsResponse(
     @SerializedName("destinations")
@@ -25,21 +26,6 @@ data class Destination(
     val location: String?,
     @SerializedName("name")
     val name: String?,
-    @SerializedName("updatedAt")
-    val updatedAt: String?
-)
-
-data class Airport(
-    @SerializedName("airportName")
-    val airportName: String?,
-    @SerializedName("city")
-    val city: String?,
-    @SerializedName("cityCode")
-    val cityCode: String?,
-    @SerializedName("createdAt")
-    val createdAt: String?,
-    @SerializedName("id")
-    val id: Int?,
     @SerializedName("updatedAt")
     val updatedAt: String?
 )

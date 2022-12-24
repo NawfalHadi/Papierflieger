@@ -2,7 +2,7 @@ package com.papierflieger.presentation.bussiness
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.papierflieger.data.network.response.UpdateUserResponse
+import com.papierflieger.data.network.response.user.UpdateUserResponse
 import com.papierflieger.data.repository.UserRepository
 import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel

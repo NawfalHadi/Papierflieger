@@ -2,8 +2,8 @@ package com.papierflieger.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.papierflieger.data.network.response.DestinationResponse
-import com.papierflieger.data.network.response.DestinationsResponse
+import com.papierflieger.data.network.response.destination.DestinationResponse
+import com.papierflieger.data.network.response.destination.DestinationsResponse
 import com.papierflieger.data.network.service.ApiService
 import retrofit2.Call
 import retrofit2.Callback

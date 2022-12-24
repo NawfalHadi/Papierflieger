@@ -9,3 +9,23 @@ data class AirportsResponse(
     @SerializedName("message")
     val message: String?
 )
+
+data class Airport(
+    @SerializedName("airportName")
+    val airportName: String?,
+    @SerializedName("city")
+    val city: String?,
+    @SerializedName("cityCode")
+    val cityCode: String?,
+    @SerializedName("createdAt")
+    val createdAt: String?,
+    @SerializedName("id")
+    val id: Int?,
+    @SerializedName("updatedAt")
+    val updatedAt: String?
+)
+
+data class AirportResponse(
+    @SerializedName("airport")
+    val airport: Airport
+)

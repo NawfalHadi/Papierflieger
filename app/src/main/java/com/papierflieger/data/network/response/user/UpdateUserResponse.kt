@@ -1,4 +1,4 @@
-package com.papierflieger.data.network.response
+package com.papierflieger.data.network.response.user
 
 
 import com.google.gson.annotations.SerializedName

@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.papierflieger.data.network.response.Profile
-import com.papierflieger.data.network.response.UpdateUserResponse
+import com.papierflieger.data.network.response.user.Profile
+import com.papierflieger.data.network.response.user.UpdateUserResponse
 import com.papierflieger.databinding.FragmentPersonalInformationBinding
 import com.papierflieger.presentation.bussiness.SessionViewModel
 import com.papierflieger.presentation.bussiness.UserViewModel

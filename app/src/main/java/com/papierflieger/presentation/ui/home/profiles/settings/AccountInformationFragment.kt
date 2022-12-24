@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.papierflieger.R
 import com.papierflieger.data.local.model.TitleValueModel
-import com.papierflieger.data.network.response.Profile
+import com.papierflieger.data.network.response.user.Profile
 import com.papierflieger.databinding.FragmentAccountInformationBinding
 import com.papierflieger.presentation.bussiness.SessionViewModel
 import com.papierflieger.presentation.ui.adapter.settings.AccountInformationAdapter

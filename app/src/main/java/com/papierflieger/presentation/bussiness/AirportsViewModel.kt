@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.papierflieger.data.local.room.entity.AirportEntity
+import com.papierflieger.data.network.response.airport.AirportResponse
 import com.papierflieger.data.network.response.airport.AirportsResponse
 import com.papierflieger.data.repository.AirportRepository
 import com.papierflieger.wrapper.Resource
@@ -30,4 +31,14 @@ class AirportsViewModel @Inject constructor(
     fun getAirport(id: Int){
         airportRepository.selectAirport(id)
     }
+
+    fun getAirports() : LiveData<Resource<AirportsResponse>>{
+        return airportRepository.getAirports()
+    }
+
+    fun getAirportById(idAirport: Int) : LiveData<Resource<AirportResponse>>{
+        return airportRepository.getAirportById(idAirport)
+    }
+
+
 }

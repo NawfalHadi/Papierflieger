@@ -43,19 +43,19 @@ object LocalModule {
     }
 
     // ROOM Injection
-
-    @Provides
-    fun provideAppDatabase (
-        @ApplicationContext ctx: Context
-    ) : AppDatabase {
-        return AppDatabase.getInstance(ctx)
-    }
-
-    @Provides
-    fun provideAirportDao(
-        appDatabase: AppDatabase
-    ) : AirportDao {
-        return appDatabase.airportDao()
-    }
+//
+//    @Provides
+//    fun provideAppDatabase (
+//        @ApplicationContext ctx: Context
+//    ) : AppDatabase {
+//        return AppDatabase.getInstance(ctx)
+//    }
+//
+//    @Provides
+//    fun provideAirportDao(
+//        appDatabase: AppDatabase
+//    ) : AirportDao {
+//        return appDatabase.airportDao()
+//    }
 
 }
