@@ -11,13 +11,16 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.papierflieger.R
 import com.papierflieger.data.local.room.entity.AirportEntity
+import com.papierflieger.data.network.response.ticket.DataTicket
 import com.papierflieger.data.network.response.ticket.SearchTicketResponse
 import com.papierflieger.data.network.response.ticket.TiketBerangkat
 import com.papierflieger.databinding.FragmentListFlightBinding
 import com.papierflieger.presentation.bussiness.TicketViewModel
 import com.papierflieger.presentation.ui.adapter.tickets.DepartureAdapter
 import com.papierflieger.presentation.ui.home.search.SearchActivity
+import com.papierflieger.presentation.ui.home.search.bottomsheet.TicketPreviewBottomSheet
 import com.papierflieger.wrapper.Resource
+import com.papierflieger.wrapper.toDataTicket
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,6 +33,8 @@ class ListFlightFragment : Fragment() {
     private lateinit var responsed : SearchTicketResponse
     private lateinit var departureChoose : TiketBerangkat
 
+    private val ticketsPreview : ArrayList<DataTicket> = arrayListOf()
+
     // Data that will be used for hitting API
 
     private lateinit var airportFrom : AirportEntity
@@ -41,7 +46,7 @@ class ListFlightFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentListFlightBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -93,12 +98,15 @@ class ListFlightFragment : Fragment() {
                 ticketAdapter.itemAction(object : DepartureAdapter.OnTicketActionCallback{
                     override fun ticketClicked(ticket : TiketBerangkat?) {
                         departureChoose = ticket!!
+                        ticketsPreview.add(ticket.toDataTicket())
 
                         if (responsed.tiketPulang.isNullOrEmpty()){
-                            //Buat ticket list buat nantinya ditampilkan dalam
-                            // bottom sheet dialog
-
-                            //showsBottomDialog(ticket)
+                            val currentDialog = parentFragmentManager.findFragmentByTag(TicketPreviewBottomSheet::class.java.simpleName)
+                            if (currentDialog == null){
+                                TicketPreviewBottomSheet(ticketsPreview).show(
+                                    parentFragmentManager, TicketPreviewBottomSheet::class.java.simpleName
+                                )
+                            }
                         } else {
                             val mBundle = Bundle()
                             mBundle.putParcelable(SearchActivity.DEPARTURE_TICKET_KEY, departureChoose)
