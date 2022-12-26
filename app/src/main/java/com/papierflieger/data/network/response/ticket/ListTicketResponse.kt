@@ -1,15 +1,18 @@
 package com.papierflieger.data.network.response.ticket
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.papierflieger.data.network.response.airplane.DataAirplane
 import com.papierflieger.data.network.response.airport.Airport
+import kotlinx.parcelize.Parcelize
 
 data class ListTicketResponse(
     @SerializedName("dataTicket")
     val dataTicket: List<DataTicket?>?
 )
 
+@Parcelize
 data class DataTicket(
     @SerializedName("Airplane")
     val airplane: DataAirplane?,
@@ -57,7 +60,8 @@ data class DataTicket(
     val transitPoint: Int?,
     @SerializedName("updatedAt")
     val updatedAt: String?
-)
+) : Parcelable
+
 
 data class TicketResponse(
     @SerializedName("ticket")

@@ -43,7 +43,7 @@ class ArrivalAdapter : RecyclerView.Adapter<ArrivalAdapter.ArrivalViewHolder>() 
 
     override fun getItemCount(): Int = differ.currentList.size
 
-    class ArrivalViewHolder(
+    inner class ArrivalViewHolder(
         private var binding : ItemListFlightBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -53,9 +53,10 @@ class ArrivalAdapter : RecyclerView.Adapter<ArrivalAdapter.ArrivalViewHolder>() 
                 tvArrivalTime.text = ticket?.arrivalTime
                 tvDuration.text = ticket?.flightDuration
 
+                tvPrice.text = ticket?.price.toString()
 
                 cardTicket.setOnClickListener {
-
+                    onArrivalTicketActionCallback.ticketClicked(ticket!!)
                 }
             }
         }

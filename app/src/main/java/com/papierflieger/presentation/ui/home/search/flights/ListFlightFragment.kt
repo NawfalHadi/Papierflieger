@@ -10,13 +10,17 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.papierflieger.R
+import com.papierflieger.data.local.room.entity.AirportEntity
+import com.papierflieger.data.network.response.ticket.DataTicket
 import com.papierflieger.data.network.response.ticket.SearchTicketResponse
 import com.papierflieger.data.network.response.ticket.TiketBerangkat
 import com.papierflieger.databinding.FragmentListFlightBinding
 import com.papierflieger.presentation.bussiness.TicketViewModel
 import com.papierflieger.presentation.ui.adapter.tickets.DepartureAdapter
 import com.papierflieger.presentation.ui.home.search.SearchActivity
+import com.papierflieger.presentation.ui.home.search.bottomsheet.TicketPreviewBottomSheet
 import com.papierflieger.wrapper.Resource
+import com.papierflieger.wrapper.toDataTicket
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +33,14 @@ class ListFlightFragment : Fragment() {
     private lateinit var responsed : SearchTicketResponse
     private lateinit var departureChoose : TiketBerangkat
 
+    private val ticketsPreview : ArrayList<DataTicket> = arrayListOf()
+
+    // Data that will be used for hitting API
+
+    private lateinit var airportFrom : AirportEntity
+    private lateinit var airportTo : AirportEntity
+    private lateinit var dateDeparture : String
+    private var dateReturn : String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,11 +54,25 @@ class ListFlightFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        dataInit()
         searchTicket()
     }
 
+    private fun dataInit() {
+        airportFrom = arguments?.getParcelable(SearchActivity.AIRPORT_FROM_KEY)!!
+        airportTo = arguments?.getParcelable(SearchActivity.AIRPORT_TO_KEY)!!
+        dateDeparture = arguments?.getString(SearchActivity.DATE_DEPARTURE_KEY).toString()
+        dateReturn = arguments?.getString(SearchActivity.DATE_RETURN_KEY).toString()
+
+    }
+
     private fun searchTicket() {
-        ticketViewModel.getSearchTicket(from, to, date, date).observe(viewLifecycleOwner){
+        ticketViewModel.getSearchTicket(
+            airportFrom.airportId,
+            airportTo.airportId,
+            dateDeparture,
+            dateReturn
+        ).observe(viewLifecycleOwner){
             when(it){
                 is Resource.Loading -> TODO()
                 is Resource.Empty -> TODO()
@@ -72,14 +98,19 @@ class ListFlightFragment : Fragment() {
                 ticketAdapter.itemAction(object : DepartureAdapter.OnTicketActionCallback{
                     override fun ticketClicked(ticket : TiketBerangkat?) {
                         departureChoose = ticket!!
+                        ticketsPreview.clear()
+                        ticketsPreview.add(ticket.toDataTicket())
 
                         if (responsed.tiketPulang.isNullOrEmpty()){
-                            //Buat ticket list buat nantinya ditampilkan dalam
-                            // bottom sheet dialog
-
-                            //showsBottomDialog(ticket)
+                            val currentDialog = parentFragmentManager.findFragmentByTag(TicketPreviewBottomSheet::class.java.simpleName)
+                            if (currentDialog == null){
+                                TicketPreviewBottomSheet(ticketsPreview).show(
+                                    parentFragmentManager, TicketPreviewBottomSheet::class.java.simpleName
+                                )
+                            }
                         } else {
                             val mBundle = Bundle()
+                            mBundle.putParcelableArrayList(SearchActivity.TICKETS_KEY, ticketsPreview)
                             mBundle.putParcelable(SearchActivity.DEPARTURE_TICKET_KEY, departureChoose)
                             mBundle.putParcelable(SearchActivity.RETURN_TICKETS_KEY, responsed)
                             findNavController().navigate(R.id.action_listFlightFragment_to_listReturnFragment, mBundle)
@@ -89,12 +120,5 @@ class ListFlightFragment : Fragment() {
                 })
             }
         }
-    }
-
-    companion object {
-        // temporary, delete afterward
-        const val from = 40
-        const val to = 12
-        const val date = "2023-01-01"
     }
 }

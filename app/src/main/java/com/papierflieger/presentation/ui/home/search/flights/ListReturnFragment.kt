@@ -7,12 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.papierflieger.data.network.response.ticket.DataTicket
 import com.papierflieger.data.network.response.ticket.SearchTicketResponse
 import com.papierflieger.data.network.response.ticket.TiketBerangkat
 import com.papierflieger.data.network.response.ticket.TiketPulang
 import com.papierflieger.databinding.FragmentListFlightReturnBinding
 import com.papierflieger.presentation.ui.adapter.tickets.ArrivalAdapter
 import com.papierflieger.presentation.ui.home.search.SearchActivity
+import com.papierflieger.presentation.ui.home.search.bottomsheet.TicketPreviewBottomSheet
+import com.papierflieger.wrapper.toDataTicket
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,12 +25,15 @@ class ListReturnFragment : Fragment() {
     private val ticketAdapter : ArrivalAdapter by lazy { ArrivalAdapter() }
 
     private lateinit var departureChoosed : TiketBerangkat
+    private var listTicket : ArrayList<DataTicket> = arrayListOf()
+
+    private var ticketsPreview : ArrayList<DataTicket> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentListFlightReturnBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -36,9 +42,11 @@ class ListReturnFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val responsed = arguments?.getParcelable<SearchTicketResponse>(SearchActivity.RETURN_TICKETS_KEY)
-        Log.e("Responsed", responsed?.tiketPulang.toString())
-        departureChoosed = arguments?.getParcelable(SearchActivity.DEPARTURE_TICKET_KEY)!!
 
+        departureChoosed = arguments?.getParcelable(SearchActivity.DEPARTURE_TICKET_KEY)!!
+        listTicket = arguments?.getParcelableArrayList(SearchActivity.TICKETS_KEY)!!
+
+        Log.e("Departure : ", departureChoosed.toString())
         bindingDepartureData(departureChoosed)
         showsRecycler(responsed?.tiketPulang)
     }
@@ -63,5 +71,21 @@ class ListReturnFragment : Fragment() {
             )
             adapter = ticketAdapter
         }
+
+        ticketAdapter.itemAction(object : ArrivalAdapter.OnArrivalTicketActionCallback{
+            override fun ticketClicked(ticket: TiketPulang?) {
+                ticketsPreview.clear()
+                ticketsPreview.addAll(listTicket)
+                ticketsPreview.add(ticket?.toDataTicket()!!)
+
+                val currentDialog = parentFragmentManager.findFragmentByTag(TicketPreviewBottomSheet::class.java.simpleName)
+                if (currentDialog == null){
+                    TicketPreviewBottomSheet(ticketsPreview).show(
+                        parentFragmentManager, TicketPreviewBottomSheet::class.java.simpleName
+                    )
+                }
+            }
+
+        })
     }
 }

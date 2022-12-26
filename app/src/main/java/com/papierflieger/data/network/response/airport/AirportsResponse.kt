@@ -1,7 +1,9 @@
 package com.papierflieger.data.network.response.airport
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class AirportsResponse(
     @SerializedName("airports")
@@ -10,6 +12,7 @@ data class AirportsResponse(
     val message: String?
 )
 
+@Parcelize
 data class Airport(
     @SerializedName("airportName")
     val airportName: String?,
@@ -23,7 +26,7 @@ data class Airport(
     val id: Int?,
     @SerializedName("updatedAt")
     val updatedAt: String?
-)
+) : Parcelable
 
 data class AirportResponse(
     @SerializedName("airport")

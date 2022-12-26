@@ -1,5 +1,6 @@
 package com.papierflieger.presentation.ui.home.search
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,8 +18,10 @@ import com.papierflieger.data.local.room.entity.AirportEntity
 import com.papierflieger.databinding.FragmentSearchBinding
 import com.papierflieger.presentation.bussiness.AirportsViewModel
 import com.papierflieger.presentation.bussiness.DatasyncViewModel
+import com.papierflieger.presentation.ui.home.search.bottomsheet.SearchAirportBottomSheet
 import com.papierflieger.wrapper.Resource
 import com.papierflieger.wrapper.toDate
+import com.papierflieger.wrapper.toRequestDate
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,6 +31,13 @@ class SearchFragment : Fragment() {
 
     private val airportViewModel : AirportsViewModel by viewModels()
     private val datasyncViewModel : DatasyncViewModel by viewModels()
+
+    // Data that i would bring to ticket list
+    private var airportFrom : AirportEntity? = null
+    private var airportTo : AirportEntity? = null
+
+    private lateinit var dateDeparture : String
+    private var dateReturn : String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -79,15 +89,48 @@ class SearchFragment : Fragment() {
         dateRangePicker.addOnPositiveButtonClickListener { datePicked ->
             binding.tvDateDeparture.text = datePicked.first.toDate()
             binding.tvDateReturn.text = datePicked.second.toDate()
+
+            dateDeparture = datePicked.first.toRequestDate()
+            dateReturn = datePicked.second.toRequestDate()
         }
 
         datePicker.addOnPositiveButtonClickListener { datePicked ->
             binding.tvDateDeparture.text = datePicked.toDate()
             binding.tvDateReturn.text = datePicked.toDate()
+
+            dateDeparture = datePicked.toRequestDate()
         }
     }
 
     private fun clickListener() {
+        binding.tvFrom.setOnClickListener {
+            val currentDialog = parentFragmentManager.findFragmentByTag(SearchAirportBottomSheet::class.java.simpleName)
+            if (currentDialog == null) {
+                SearchAirportBottomSheet(object : SearchAirportBottomSheet.OnAirportClickListner {
+                    @SuppressLint("SetTextI18n")
+                    override fun itemChoosed(airport: AirportEntity) {
+                        airportFrom = airport
+                        val city = airport.city.split(",")
+                        binding.tvFrom.text = "${city[0]} (${airport.cityCode})"
+                    }
+                }).show(parentFragmentManager, SearchAirportBottomSheet::class.java.simpleName)
+            }
+        }
+
+        binding.tvDestination.setOnClickListener {
+            val currentDialog = parentFragmentManager.findFragmentByTag(SearchAirportBottomSheet::class.java.simpleName)
+            if (currentDialog == null) {
+                SearchAirportBottomSheet(object : SearchAirportBottomSheet.OnAirportClickListner {
+                    @SuppressLint("SetTextI18n")
+                    override fun itemChoosed(airport: AirportEntity) {
+                        airportTo = airport
+                        val city = airport.city.split(",")
+                        binding.tvDestination.text = "${city[0]} (${airport.cityCode})"
+                    }
+                }).show(parentFragmentManager, SearchAirportBottomSheet::class.java.simpleName)
+            }
+        }
+
         binding.switchRoundtrip.setOnClickListener {
             roundTripCheck()
         }
@@ -116,13 +159,19 @@ class SearchFragment : Fragment() {
     }
 
     private fun switchFlightButton() {
+        val from = airportFrom
+        val to = airportTo
+
         with(binding){
             btnSwitchFlight.setOnClickListener {
                 val destination  = tvDestination.text.toString()
-                val from = tvFrom.text.toString()
+                val departure = tvFrom.text.toString()
+
+                airportFrom = to
+                airportTo = from
 
                 tvFrom.text = destination
-                tvDestination.text = from
+                tvDestination.text = departure
             }
         }
     }
@@ -147,7 +196,12 @@ class SearchFragment : Fragment() {
         }
 
         binding.btnSearch.setOnClickListener {
-            findNavController().navigate(R.id.action_searchFragment_to_listFlightFragment)
+            val mBundle = Bundle()
+            mBundle.putParcelable(SearchActivity.AIRPORT_FROM_KEY, airportFrom)
+            mBundle.putParcelable(SearchActivity.AIRPORT_TO_KEY, airportTo)
+            mBundle.putString(SearchActivity.DATE_DEPARTURE_KEY, dateDeparture)
+            mBundle.putString(SearchActivity.DATE_RETURN_KEY, dateReturn)
+            findNavController().navigate(R.id.action_searchFragment_to_listFlightFragment, mBundle)
         }
     }
 

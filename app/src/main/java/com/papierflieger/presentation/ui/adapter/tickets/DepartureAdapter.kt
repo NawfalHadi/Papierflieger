@@ -53,6 +53,8 @@ class DepartureAdapter : RecyclerView.Adapter<DepartureAdapter.DepartureViewHold
                 tvArrivalTime.text = ticket?.arrivalTime
                 tvDuration.text = ticket?.flightDuration
 
+                tvPrice.text = ticket?.price.toString()
+
                 cardTicket.setOnClickListener {
                     onTicketActionCallback.ticketClicked(ticket!!)
                 }

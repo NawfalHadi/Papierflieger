@@ -11,6 +11,9 @@ import android.widget.TextView
 import com.papierflieger.data.network.response.airplane.DataAirplane
 import com.papierflieger.data.network.response.airport.Airport
 import java.text.DecimalFormat
+import com.papierflieger.data.network.response.ticket.DataTicket
+import com.papierflieger.data.network.response.ticket.TiketBerangkat
+import com.papierflieger.data.network.response.ticket.TiketPulang
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -91,4 +94,68 @@ fun convertTimeToHour(hour: Int, minute: Int): String {
             "$hour jam $minute menit"
         }
     }
+}
+
+fun Long.toRequestDate(): String {
+    val format = SimpleDateFormat(
+        "yyyy-MM-dd",
+        Locale.getDefault()
+    )
+    return format.format(Date(this))
+}
+
+fun TiketBerangkat.toDataTicket(): DataTicket {
+    return DataTicket(
+        airplaneId = this.airplaneId,
+        arrivalDate = this.arrivalDate,
+        arrivalTime = this.arrivalTime,
+        arrivalTimeAtTransit = this.arrivalTimeAtTransit,
+        createdAt = this.createdAt,
+        departureDate = this.departureDate,
+        departureTime = this.departureTime,
+        departureTimeFromTransit = this.departureTimeFromTransit,
+        flightDuration = this.flightDuration,
+        flightFrom = this.flightFrom,
+        flightTo = this.flightTo,
+        id = this.id,
+        price = this.price,
+        ticketNumber = this.ticketNumber,
+        ticketType = this.ticketType,
+        totalTransit = this.totalTransit,
+        transitDuration = this.transitDuration,
+        transitPoint = this.transitPoint,
+        updatedAt = this.updatedAt,
+        from = null,
+        airplane = null,
+        to = null,
+        transit = null
+    )
+}
+
+fun TiketPulang.toDataTicket(): DataTicket {
+    return DataTicket(
+        airplaneId = this.airplaneId,
+        arrivalDate = this.arrivalDate,
+        arrivalTime = this.arrivalTime,
+        arrivalTimeAtTransit = this.arrivalTimeAtTransit,
+        createdAt = this.createdAt,
+        departureDate = this.departureDate,
+        departureTime = this.departureTime,
+        departureTimeFromTransit = this.departureTimeFromTransit,
+        flightDuration = this.flightDuration,
+        flightFrom = this.flightFrom,
+        flightTo = this.flightTo,
+        id = this.id,
+        price = this.price,
+        ticketNumber = this.ticketNumber,
+        ticketType = this.ticketType,
+        totalTransit = this.totalTransit,
+        transitDuration = this.transitDuration,
+        transitPoint = this.transitPoint,
+        updatedAt = this.updatedAt,
+        from = null,
+        airplane = null,
+        to = null,
+        transit = null
+    )
 }

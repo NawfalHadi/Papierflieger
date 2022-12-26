@@ -32,7 +32,6 @@ class AirportRepository(
                     ) {
                         if (response.isSuccessful){
                             airportsResponse.postValue(Resource.Success(response.body()!!))
-
                         }
                     }
                     override fun onFailure(call: Call<AirportsResponse>, t: Throwable) {
@@ -44,6 +43,8 @@ class AirportRepository(
         }
         return airportsResponse
     }
+
+    // By API
 
     fun getAirports() : LiveData<Resource<AirportsResponse>> {
         apiService.getAirports().enqueue(
@@ -86,6 +87,14 @@ class AirportRepository(
         )
         return airportResponse
     }
+
+    // By ROOM
+
+    fun getOfflineAirports() : Resource<List<AirportEntity>>{
+        return Resource.Success(daoAirport.showsAirport())
+    }
+
+    // To ROOM
 
     suspend fun offlineAirportData(airport: AirportEntity){
         daoAirport.addAirport(airport)
