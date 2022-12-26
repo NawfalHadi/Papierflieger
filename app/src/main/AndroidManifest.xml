@@ -19,10 +19,7 @@
         android:theme="@style/Theme.Papierflieger"
         tools:targetApi="31">
         <activity
-            android:name=".PassengerActivity"
-            android:exported="false" />
-        <activity
-            android:name=".PassangerActivity"
+            android:name=".presentation.ui.home.passenger.PassengerActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.ui.admin.AdminActivity"
