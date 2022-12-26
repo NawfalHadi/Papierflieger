@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.papierflieger" >
+    package="com.papierflieger">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -16,11 +16,17 @@
         android:roundIcon="@drawable/logo_blue"
         android:supportsRtl="true"
         android:theme="@style/Theme.Papierflieger"
-        tools:targetApi="31" >
+        tools:targetApi="31">
+        <activity
+            android:name=".PassengerActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PassangerActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.ui.admin.AdminActivity"
-            android:theme="@style/Theme.Papierflieger.ActionBar"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Papierflieger.ActionBar" />
         <activity
             android:name=".presentation.ui.home.search.SearchActivity"
             android:exported="false" />
@@ -38,7 +44,7 @@
             android:exported="false" />
         <activity
             android:name=".presentation.ui.SplashScreenActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

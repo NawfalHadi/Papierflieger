@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_passenger"
+    app:startDestination="@id/passengerFragment">
+
+    <fragment
+        android:id="@+id/passengerFragment"
+        android:name="com.papierflieger.presentation.ui.home.passenger.PassengerFragment"
+        android:label="PassengerFragment"
+        tools:layout="@layout/fragment_transaction_flight">
+        <action
+            android:id="@+id/action_passengerFragment_to_nationalFormFragment"
+            app:destination="@id/nationalFormFragment" />
+        <action
+            android:id="@+id/action_passengerFragment_to_internationFormFragment"
+            app:destination="@id/internationFormFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nationalFormFragment"
+        android:name="com.papierflieger.presentation.ui.home.passenger.national.NationalFormFragment"
+        android:label="NationalFormFragment"
+        tools:layout="@layout/fragment_traveler_detail"/>
+    <fragment
+        android:id="@+id/internationFormFragment"
+        android:name="com.papierflieger.presentation.ui.home.passenger.international.InternationFormFragment"
+        android:label="InternationFormFragment"
+        tools:layout="@layout/fragment_traveler_detail_international"/>
+</navigation>

@@ -3,7 +3,7 @@ package com.papierflieger.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.papierflieger.data.network.response.ChangeDataResponse
-import com.papierflieger.data.network.response.CreateDestinationResponse
+import com.papierflieger.data.network.response.destination.CreateDestinationResponse
 import com.papierflieger.data.network.response.airplane.CreateAirplaneResponse
 import com.papierflieger.data.network.response.airport.CreateAirportResponse
 import com.papierflieger.data.network.response.ticket.CreateTicketResponse
@@ -12,8 +12,6 @@ import com.papierflieger.wrapper.Resource
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.http.Field
-import retrofit2.http.Header
 
 class AdminRepository(
     private val apiAdminService: ApiAdminService
