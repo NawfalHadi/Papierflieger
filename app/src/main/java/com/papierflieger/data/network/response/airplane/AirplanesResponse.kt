@@ -19,7 +19,7 @@ data class DataAirplane(
     @SerializedName("airplaneName")
     val airplaneName: String,
     @SerializedName("class")
-    val classX: String,
+    val category: String,
     @SerializedName("createdAt")
     val createdAt: String,
     @SerializedName("id")

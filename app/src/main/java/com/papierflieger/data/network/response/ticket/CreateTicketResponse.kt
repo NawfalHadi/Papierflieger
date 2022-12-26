@@ -18,7 +18,7 @@ data class NewTicket(
     @SerializedName("arrivalTime")
     val arrivalTime: String,
     @SerializedName("arrivalTimeAtTransit")
-    val arrivalTimeAtTransit: String,
+    val arrivalTimeAtTransit: String?,
     @SerializedName("createdAt")
     val createdAt: String,
     @SerializedName("departureDate")
@@ -26,7 +26,7 @@ data class NewTicket(
     @SerializedName("departureTime")
     val departureTime: String,
     @SerializedName("departureTimeFromTransit")
-    val departureTimeFromTransit: String,
+    val departureTimeFromTransit: String?,
     @SerializedName("flightDuration")
     val flightDuration: String,
     @SerializedName("flightFrom")
@@ -42,11 +42,11 @@ data class NewTicket(
     @SerializedName("ticketType")
     val ticketType: String,
     @SerializedName("totalTransit")
-    val totalTransit: Int,
+    val totalTransit: Int?,
     @SerializedName("transitDuration")
-    val transitDuration: String,
+    val transitDuration: String?,
     @SerializedName("transitPoint")
-    val transitPoint: Int,
+    val transitPoint: Int?,
     @SerializedName("updatedAt")
     val updatedAt: String
 )

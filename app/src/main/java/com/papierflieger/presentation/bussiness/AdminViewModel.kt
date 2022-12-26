@@ -38,7 +38,7 @@ class AdminViewModel @Inject constructor(
         idDestination: Int,
         token: String,
         name: String,
-        images: List<String>,
+        images: String,
         location: String,
         description: String,
         airportId: Int
@@ -119,7 +119,7 @@ class AdminViewModel @Inject constructor(
      * Ticket
      */
 
-    fun createTicket(
+    fun createTicketTransit(
         token: String,
         ticketNumber: Int,
         departureDate: String,
@@ -138,7 +138,7 @@ class AdminViewModel @Inject constructor(
         arrivalTimeAtTransit: String,
         departureTimeFromTransit: String,
     ): LiveData<Resource<CreateTicketResponse>> {
-        return adminRepository.createTicket(
+        return adminRepository.createTicketTransit(
             token,
             ticketNumber,
             departureDate,
@@ -159,7 +159,37 @@ class AdminViewModel @Inject constructor(
         )
     }
 
-    fun updateTicket(
+    fun createTicketDirect(
+        token: String,
+        ticketNumber: Int,
+        departureDate: String,
+        departureTime: String,
+        arrivalDate: String,
+        arrivalTime: String,
+        flightFrom: Int,
+        flightTo: Int,
+        airplaneId: Int,
+        price: Int,
+        ticketType: String,
+        flightDuration: String
+    ): LiveData<Resource<CreateTicketResponse>> {
+        return adminRepository.createTicketDirect(
+            token,
+            ticketNumber,
+            departureDate,
+            departureTime,
+            arrivalDate,
+            arrivalTime,
+            flightFrom,
+            flightTo,
+            airplaneId,
+            price,
+            ticketType,
+            flightDuration
+        )
+    }
+
+    fun updateTicketTransit(
         idTicket: Int,
         token: String,
         ticketNumber: Int,
@@ -179,7 +209,7 @@ class AdminViewModel @Inject constructor(
         arrivalTimeAtTransit: String,
         departureTimeFromTransit: String,
     ): LiveData<Resource<ChangeDataResponse>> {
-        return adminRepository.updateTicket(
+        return adminRepository.updateTicketTransit(
             idTicket,
             token,
             ticketNumber,
@@ -198,6 +228,38 @@ class AdminViewModel @Inject constructor(
             flightDuration,
             arrivalTimeAtTransit,
             departureTimeFromTransit
+        )
+    }
+
+    fun updateTicketDirect(
+        idTicket: Int,
+        token: String,
+        ticketNumber: Int,
+        departureDate: String,
+        departureTime: String,
+        arrivalDate: String,
+        arrivalTime: String,
+        flightFrom: Int,
+        flightTo: Int,
+        airplaneId: Int,
+        price: Int,
+        ticketType: String,
+        flightDuration: String,
+    ): LiveData<Resource<ChangeDataResponse>> {
+        return adminRepository.updateTicketDirect(
+            idTicket,
+            token,
+            ticketNumber,
+            departureDate,
+            departureTime,
+            arrivalDate,
+            arrivalTime,
+            flightFrom,
+            flightTo,
+            airplaneId,
+            price,
+            ticketType,
+            flightDuration
         )
     }
 

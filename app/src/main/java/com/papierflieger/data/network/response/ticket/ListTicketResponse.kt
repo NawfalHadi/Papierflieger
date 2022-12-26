@@ -61,3 +61,9 @@ data class DataTicket(
     @SerializedName("updatedAt")
     val updatedAt: String?
 ) : Parcelable
+
+
+data class TicketResponse(
+    @SerializedName("ticket")
+    val ticket: DataTicket
+)

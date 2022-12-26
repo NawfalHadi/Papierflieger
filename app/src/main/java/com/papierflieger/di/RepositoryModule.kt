@@ -73,4 +73,14 @@ object RepositoryModule {
             apiService, daoAirport
         )
     }
+
+    @Provides
+    @Singleton
+    fun providesAirplaneRepo(
+        apiService: ApiService
+    ) : AirplaneRepository {
+        return AirplaneRepository(
+            apiService
+        )
+    }
 }

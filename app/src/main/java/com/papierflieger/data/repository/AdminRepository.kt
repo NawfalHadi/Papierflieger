@@ -82,7 +82,7 @@ class AdminRepository(
         idDestination: Int,
         token: String,
         name: String,
-        images: List<String>,
+        images: String,
         location: String,
         description: String,
         airportId: Int
@@ -267,7 +267,7 @@ class AdminRepository(
      * Ticket
      */
 
-    fun createTicket(
+    fun createTicketTransit(
         token: String,
         ticketNumber: Int,
         departureDate: String,
@@ -286,7 +286,7 @@ class AdminRepository(
         arrivalTimeAtTransit: String,
         departureTimeFromTransit: String,
     ) : LiveData<Resource<CreateTicketResponse>> {
-        apiAdminService.createAdminTicket(
+        apiAdminService.createAdminTicketTransit(
             token,
             ticketNumber,
             departureDate,
@@ -320,7 +320,50 @@ class AdminRepository(
         return createTicketResponse
     }
 
-    fun updateTicket(
+    fun createTicketDirect(
+        token: String,
+        ticketNumber: Int,
+        departureDate: String,
+        departureTime: String,
+        arrivalDate: String,
+        arrivalTime: String,
+        flightFrom: Int,
+        flightTo: Int,
+        airplaneId: Int,
+        price: Int,
+        ticketType: String,
+        flightDuration: String
+    ) : LiveData<Resource<CreateTicketResponse>> {
+        apiAdminService.createAdminTicketDirect(
+            token,
+            ticketNumber,
+            departureDate,
+            departureTime,
+            arrivalDate,
+            arrivalTime,
+            flightFrom,
+            flightTo,
+            airplaneId,
+            price,
+            ticketType,
+            flightDuration
+        ).enqueue(
+            object : Callback<CreateTicketResponse>{
+                override fun onResponse(
+                    call: Call<CreateTicketResponse>,
+                    response: Response<CreateTicketResponse>
+                ) {
+                    createTicketResponse.postValue(Resource.Success(response.body()!!))
+                }
+                override fun onFailure(call: Call<CreateTicketResponse>, t: Throwable) {
+                    createTicketResponse.postValue(Resource.Error(t))
+                }
+            }
+        )
+        return createTicketResponse
+    }
+
+    fun updateTicketTransit(
         idTicket: Int,
         token: String,
         ticketNumber: Int,
@@ -340,7 +383,7 @@ class AdminRepository(
         arrivalTimeAtTransit: String,
         departureTimeFromTransit: String,
     ) : LiveData<Resource<ChangeDataResponse>> {
-        apiAdminService.updateAdminTicket(
+        apiAdminService.updateAdminTicketTransit(
             idTicket,
             token,
             ticketNumber,
@@ -359,6 +402,51 @@ class AdminRepository(
             flightDuration,
             arrivalTimeAtTransit,
             departureTimeFromTransit
+        ).enqueue(
+            object : Callback<ChangeDataResponse>{
+                override fun onResponse(
+                    call: Call<ChangeDataResponse>,
+                    response: Response<ChangeDataResponse>
+                ) {
+                    updateTicketResponse.postValue(Resource.Success(response.body()!!))
+                }
+                override fun onFailure(call: Call<ChangeDataResponse>, t: Throwable) {
+                    updateTicketResponse.postValue(Resource.Error(t))
+                }
+            }
+        )
+        return updateTicketResponse
+    }
+
+    fun updateTicketDirect(
+        idTicket: Int,
+        token: String,
+        ticketNumber: Int,
+        departureDate: String,
+        departureTime: String,
+        arrivalDate: String,
+        arrivalTime: String,
+        flightFrom: Int,
+        flightTo: Int,
+        airplaneId: Int,
+        price: Int,
+        ticketType: String,
+        flightDuration: String,
+    ) : LiveData<Resource<ChangeDataResponse>> {
+        apiAdminService.updateAdminTicketDirect(
+            idTicket,
+            token,
+            ticketNumber,
+            departureDate,
+            departureTime,
+            arrivalDate,
+            arrivalTime,
+            flightFrom,
+            flightTo,
+            airplaneId,
+            price,
+            ticketType,
+            flightDuration
         ).enqueue(
             object : Callback<ChangeDataResponse>{
                 override fun onResponse(
