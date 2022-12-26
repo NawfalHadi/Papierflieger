@@ -11,7 +11,7 @@ import com.papierflieger.databinding.BottomSheetTicketPreviewBinding
 import com.papierflieger.presentation.ui.adapter.tickets.TicketsAdapter
 
 class TicketPreviewBottomSheet(
-    private val tickets : List<DataTicket>
+    private val tickets : ArrayList<DataTicket>
 ) : BottomSheetDialogFragment() {
 
     private lateinit var binding : BottomSheetTicketPreviewBinding

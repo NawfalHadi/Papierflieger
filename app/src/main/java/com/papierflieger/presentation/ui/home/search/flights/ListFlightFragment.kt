@@ -110,6 +110,7 @@ class ListFlightFragment : Fragment() {
                             }
                         } else {
                             val mBundle = Bundle()
+                            mBundle.putParcelableArrayList(SearchActivity.TICKETS_KEY, ticketsPreview)
                             mBundle.putParcelable(SearchActivity.DEPARTURE_TICKET_KEY, departureChoose)
                             mBundle.putParcelable(SearchActivity.RETURN_TICKETS_KEY, responsed)
                             findNavController().navigate(R.id.action_listFlightFragment_to_listReturnFragment, mBundle)
