@@ -4,10 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.papierflieger.R
 import com.papierflieger.data.network.response.airport.Airport
 import com.papierflieger.databinding.FragmentAddAirportBinding
 import com.papierflieger.presentation.bussiness.AdminViewModel
@@ -29,6 +30,7 @@ class AddAirportFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         binding = FragmentAddAirportBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -38,7 +40,6 @@ class AddAirportFragment : Fragment() {
         allNavigation()
         getEditData()
         clickListener()
-        observeData()
     }
 
     private fun clickListener() {
@@ -52,7 +53,7 @@ class AddAirportFragment : Fragment() {
     private fun saveData() {
         binding.apply {
             val airportName = etAirportName.text.toString().trim()
-            val city = acCity.text.toString().trim()
+            val city = etCity.text.toString().trim()
             val cityCode = etCityCode.text.toString().trim()
 
             if (validationInput(airportName, city, cityCode)) {
@@ -62,6 +63,7 @@ class AddAirportFragment : Fragment() {
                     } else {
                         adminViewModel.createAirport(token, airportName, city, cityCode )
                     }
+                    findNavController().navigate(R.id.adminDashboardFragment)
                 }
             }
         }
@@ -97,13 +99,6 @@ class AddAirportFragment : Fragment() {
         return isFormValid
     }
 
-    private fun observeData() {
-        binding.apply {
-            val options = arrayOf("Option 1", "Option 2", "Option 3")
-            acCity.setAdapter(ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, options))
-        }
-    }
-
     private fun getEditData() {
         idAirport = arguments?.getInt("id")
         if (idAirport != null) {
@@ -116,7 +111,7 @@ class AddAirportFragment : Fragment() {
     private fun setEditData(airport: Airport) {
         binding.apply {
             etAirportName.setText(airport.airportName)
-            acCity.setText(airport.city)
+            etCity.setText(airport.city)
             etCityCode.setText(airport.cityCode)
         }
     }

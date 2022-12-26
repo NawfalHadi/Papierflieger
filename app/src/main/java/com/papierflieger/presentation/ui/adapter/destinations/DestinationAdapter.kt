@@ -46,11 +46,12 @@ class DestinationAdapter : RecyclerView.Adapter<DestinationAdapter.DestionationV
 
         fun bindingItem(item: Destination?, position: Int) {
             with(binding){
-                if (position >= 1) vGap1.visibility = View.GONE
+                if (position < 1) vGap1.visibility = View.INVISIBLE
+                else vGap1.visibility = View.GONE
 
                 if (item?.image?.isNotEmpty() == true) {
                     itemIvDestinationImage.load(item.image[0]) {
-                        placeholder(R.color.gray)
+                        placeholder(R.color.background_gray)
                     }
                 }
 

@@ -31,7 +31,7 @@ interface ApiAdminService {
         @Path("idDestination") idDestination: Int,
         @Header("Authorization") token: String,
         @Field("name") name: String,
-        @Field("images") images: List<String?>?,
+        @Field("images") images: String,
         @Field("location") location: String,
         @Field("description") description: String,
         @Field("airportId") airportId: Int,
@@ -107,7 +107,7 @@ interface ApiAdminService {
 
     @FormUrlEncoded
     @POST("api/tickets")
-    fun createAdminTicket(
+    fun createAdminTicketTransit(
         @Header("Authorization") token: String,
         @Field("ticketNumber") ticketNumber: Int,
         @Field("departureDate") departureDate: String,
@@ -128,8 +128,25 @@ interface ApiAdminService {
     ) : Call<CreateTicketResponse>
 
     @FormUrlEncoded
+    @POST("api/tickets")
+    fun createAdminTicketDirect(
+        @Header("Authorization") token: String,
+        @Field("ticketNumber") ticketNumber: Int,
+        @Field("departureDate") departureDate: String,
+        @Field("departureTime") departureTime: String,
+        @Field("arrivalDate") arrivalDate: String,
+        @Field("arrivalTime") arrivalTime: String,
+        @Field("flightFrom") flightFrom: Int,
+        @Field("flightTo") flightTo: Int,
+        @Field("airplaneId") airplaneId: Int,
+        @Field("price") price: Int,
+        @Field("ticketType") ticketType: String,
+        @Field("flightDuration") flightDuration: String,
+    ) : Call<CreateTicketResponse>
+
+    @FormUrlEncoded
     @POST("api/tickets/{idTicket}")
-    fun updateAdminTicket(
+    fun updateAdminTicketTransit(
         @Path("idTicket") idTicket: Int,
         @Header("Authorization") token: String,
         @Field("ticketNumber") ticketNumber: Int,
@@ -148,6 +165,24 @@ interface ApiAdminService {
         @Field("flightDuration") flightDuration: String,
         @Field("arrivalTimeAtTransit") arrivalTimeAtTransit: String,
         @Field("departureTimeFromTransit") departureTimeFromTransit: String,
+    ) : Call<ChangeDataResponse>
+
+    @FormUrlEncoded
+    @POST("api/tickets/{idTicket}")
+    fun updateAdminTicketDirect(
+        @Path("idTicket") idTicket: Int,
+        @Header("Authorization") token: String,
+        @Field("ticketNumber") ticketNumber: Int,
+        @Field("departureDate") departureDate: String,
+        @Field("departureTime") departureTime: String,
+        @Field("arrivalDate") arrivalDate: String,
+        @Field("arrivalTime") arrivalTime: String,
+        @Field("flightFrom") flightFrom: Int,
+        @Field("flightTo") flightTo: Int,
+        @Field("airplaneId") airplaneId: Int,
+        @Field("price") price: Int,
+        @Field("ticketType") ticketType: String,
+        @Field("flightDuration") flightDuration: String,
     ) : Call<ChangeDataResponse>
 
     @DELETE("api/tickets/{idTickets}")

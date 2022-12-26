@@ -1,6 +1,7 @@
 package com.papierflieger.presentation.ui.adapter.destinations
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -50,10 +51,11 @@ class AdminDestinationPictureAdapter : RecyclerView.Adapter<AdminDestinationPict
 
         fun bindingView(item: Any?, position: Int) {
             with(binding){
-                if (position >= 1) vGap.visibility = View.GONE
+                if (position < 1) vGap.visibility = View.INVISIBLE
+                else vGap.visibility = View.GONE
 
                 ivImage.load(item) {
-                    placeholder(R.color.gray)
+                    placeholder(R.color.background_gray)
                 }
             }
         }

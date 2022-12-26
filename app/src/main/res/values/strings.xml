@@ -155,4 +155,9 @@
     <string name="close">Close</string>
     <string name="text_delete">Delete</string>
     <string name="text_sure_delete">Are you sure you want to delete this?</string>
+    <string name="text_transit">Transit?</string>
+    <string name="text_idr">IDR</string>
+    <string name="text_flight_type">Flight Type</string>
+    <string name="text_flight_duration">Flight Duration</string>
+    <string name="text_transit_duration">Transit Duration</string>
 </resources>

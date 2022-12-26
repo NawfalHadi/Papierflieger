@@ -2,9 +2,9 @@ package com.papierflieger.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.papierflieger.data.network.response.ticket.DataTicket
 import com.papierflieger.data.network.response.ticket.ListTicketResponse
 import com.papierflieger.data.network.response.ticket.SearchTicketResponse
+import com.papierflieger.data.network.response.ticket.TicketResponse
 import com.papierflieger.data.network.service.ApiService
 import com.papierflieger.wrapper.Resource
 import retrofit2.Call
@@ -17,7 +17,7 @@ class TicketRepository(
 
     private var searchTicketResponse : MutableLiveData<Resource<SearchTicketResponse>> = MutableLiveData()
     private var ticketsResponse : MutableLiveData<Resource<ListTicketResponse>> = MutableLiveData()
-    private var ticketResponse : MutableLiveData<Resource<DataTicket>> = MutableLiveData()
+    private var ticketResponse : MutableLiveData<Resource<TicketResponse>> = MutableLiveData()
 
     fun searchTicket(
         idFrom: Int, idTo: Int, departure: String, arrival: String? = null
@@ -63,17 +63,17 @@ class TicketRepository(
         return ticketsResponse
     }
 
-    fun getTicketById(idTicket: Int) : LiveData<Resource<DataTicket>> {
-        apiService.getTicketById(idTicket).enqueue(object : Callback<DataTicket>{
+    fun getTicketById(idTicket: Int) : LiveData<Resource<TicketResponse>> {
+        apiService.getTicketById(idTicket).enqueue(object : Callback<TicketResponse>{
             override fun onResponse(
-                call: Call<DataTicket>,
-                response: Response<DataTicket>
+                call: Call<TicketResponse>,
+                response: Response<TicketResponse>
             ) {
                 if(response.isSuccessful){
                     ticketResponse.postValue(Resource.Success(response.body()!!))
                 }
             }
-            override fun onFailure(call: Call<DataTicket>, t: Throwable) {
+            override fun onFailure(call: Call<TicketResponse>, t: Throwable) {
                 ticketResponse.postValue(Resource.Error(t))
             }
         })

@@ -51,7 +51,8 @@ class AdminDestinationAdapter : RecyclerView.Adapter<AdminDestinationAdapter.Des
 
         fun bindingItem(item: Destination?, position: Int) {
             with(binding){
-                if (position >= 1) vGap.visibility = View.GONE
+                if (position < 1) vGap.visibility = View.INVISIBLE
+                else vGap.visibility = View.GONE
 
                 if (item?.image?.size!! >= 2) {
                     ivImage1.load(item.image[0]) {

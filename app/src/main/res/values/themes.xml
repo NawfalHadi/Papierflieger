@@ -25,9 +25,14 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/main_blue</item>
+        <item name="android:statusBarColor">@color/sidebar_blue</item>
+        <item name="actionBarStyle">@style/Widget.Custom.ActionBar</item>
         <!-- Customize your theme here. -->
         <item name="android:textColor">@color/text_blue</item>
+    </style>
+
+    <style name="Widget.Custom.ActionBar" parent="Widget.MaterialComponents.ActionBar.Solid">
+        <item name="background">@color/sidebar_blue</item>
     </style>
 
     <style name="Widget.Custom.Button" parent="Widget.MaterialComponents.Button">
@@ -155,15 +160,6 @@
     <style name="circleImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
-    </style>
-
-    <style name="Widget.Custom.NavigationView" parent="Widget.Material3.NavigationView">
-        <item name="itemTextColor">@color/white</item>
-        <item name="itemIconTint">@color/white</item>
-        <item name="android:background">@color/sidebar_blue</item>
-        <item name="android:fitsSystemWindows">true</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:layout_gravity">start</item>
     </style>
 
     <style name="Widget.Custom.SearchView" parent="Widget.AppCompat.SearchView">

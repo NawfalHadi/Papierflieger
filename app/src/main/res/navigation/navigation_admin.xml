@@ -18,8 +18,8 @@
         android:label="fragment_admin_ticket"
         tools:layout="@layout/fragment_admin_ticket" >
         <action
-            android:id="@+id/action_adminTicketFragment_to_addTicketDetailFragment"
-            app:destination="@id/addTicketDetailFragment" />
+            android:id="@+id/action_adminTicketFragment_to_addTicketFlightFragment"
+            app:destination="@id/addTicketFlightFragment" />
     </fragment>
 
     <fragment
@@ -90,11 +90,7 @@
         android:id="@+id/addTicketDetailFragment"
         android:name="com.papierflieger.presentation.ui.admin.ticket.AddTicketDetailFragment"
         android:label="fragment_add_ticket_detail"
-        tools:layout="@layout/fragment_add_ticket_detail">
-        <action
-            android:id="@+id/action_addTicketDetailFragment_to_addTicketFlightFragment"
-            app:destination="@id/addTicketFlightFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_add_ticket_detail"/>
     <fragment
         android:id="@+id/addTicketFlightFragment"
         android:name="com.papierflieger.presentation.ui.admin.ticket.AddTicketFlightFragment"
@@ -103,12 +99,19 @@
         <action
             android:id="@+id/action_addTicketFlightFragment_to_addTicketTransitFragment"
             app:destination="@id/addTicketTransitFragment" />
+        <action
+            android:id="@+id/action_addTicketFlightFragment_to_addTicketDetailFragment"
+            app:destination="@id/addTicketDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/addTicketTransitFragment"
         android:name="com.papierflieger.presentation.ui.admin.ticket.AddTicketTransitFragment"
         android:label="fragment_add_ticket_transit"
-        tools:layout="@layout/fragment_add_ticket_transit"/>
+        tools:layout="@layout/fragment_add_ticket_transit">
+        <action
+            android:id="@+id/action_addTicketTransitFragment_to_addTicketDetailFragment"
+            app:destination="@id/addTicketDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addDestinationFragment"
         android:name="com.papierflieger.presentation.ui.admin.destination.AddDestinationFragment"

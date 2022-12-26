@@ -50,11 +50,12 @@ class AdminAirportAdapter : RecyclerView.Adapter<AdminAirportAdapter.AirportView
 
         fun bindingItem(item: Airport?, position: Int) {
             with(binding){
-                if (position >= 1) vGap.visibility = View.GONE
+                if (position < 1) vGap.visibility = View.INVISIBLE
+                else vGap.visibility = View.GONE
 
                 tvAirportNameValue.text = item?.airportName
                 tvCityValue.text = item?.city
-                tvCityCode.text = item?.cityCode
+                tvCityCodeValue.text = item?.cityCode
 
                 if (item?.id != null) {
                     btnEdit.setOnClickListener { onAdminAirportItem.itemEditClicked(item.id) }
