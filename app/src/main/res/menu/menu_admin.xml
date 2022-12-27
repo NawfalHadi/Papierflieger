@@ -26,11 +26,6 @@
             app:showAsAction="ifRoom"
             android:title="@string/text_airport"/>
         <item
-            android:id="@+id/adminPaymentFragment"
-            android:icon="@drawable/ic_payment"
-            app:showAsAction="ifRoom"
-            android:title="@string/text_payment"/>
-        <item
             android:id="@+id/adminDestinationFragment"
             android:icon="@drawable/ic_destination"
             app:showAsAction="ifRoom"

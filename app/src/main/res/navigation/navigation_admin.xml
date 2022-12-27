@@ -43,16 +43,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/adminPaymentFragment"
-        android:name="com.papierflieger.presentation.ui.admin.payment.AdminPaymentFragment"
-        android:label="fragment_admin_payment"
-        tools:layout="@layout/fragment_admin_payment" >
-        <action
-            android:id="@+id/action_adminPaymentFragment_to_addPaymentFragment"
-            app:destination="@id/addPaymentFragment" />
-    </fragment>
-
-    <fragment
         android:id="@+id/adminDestinationFragment"
         android:name="com.papierflieger.presentation.ui.admin.destination.AdminDestinationFragment"
         android:label="fragment_admin_destination"
@@ -117,9 +107,4 @@
         android:name="com.papierflieger.presentation.ui.admin.destination.AddDestinationFragment"
         android:label="fragment_add_destination"
         tools:layout="@layout/fragment_add_destination"/>
-    <fragment
-        android:id="@+id/addPaymentFragment"
-        android:name="com.papierflieger.presentation.ui.admin.payment.AddPaymentFragment"
-        android:label="fragment_add_payment"
-        tools:layout="@layout/fragment_add_payment"/>
 </navigation>

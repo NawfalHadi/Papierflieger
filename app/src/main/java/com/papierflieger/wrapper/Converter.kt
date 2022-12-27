@@ -68,7 +68,7 @@ fun convertDateFormatUpload(date: String): String {
 
 fun convertDateFormat(date: String): String {
     val inputDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).parse(date)
-    return SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(inputDate!!)
+    return SimpleDateFormat("EEE, dd MMM yyyy", Locale.getDefault()).format(inputDate!!)
 }
 
 fun convertTimeFormat(time: String): String {

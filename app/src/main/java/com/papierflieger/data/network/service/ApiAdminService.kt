@@ -145,8 +145,8 @@ interface ApiAdminService {
     ) : Call<CreateTicketResponse>
 
     @FormUrlEncoded
-    @POST("api/tickets/{idTicket}")
-    fun updateAdminTicketTransit(
+    @PUT("api/tickets/{idTicket}")
+    fun updateAdminTicket(
         @Path("idTicket") idTicket: Int,
         @Header("Authorization") token: String,
         @Field("ticketNumber") ticketNumber: Int,
@@ -158,31 +158,13 @@ interface ApiAdminService {
         @Field("flightTo") flightTo: Int,
         @Field("airplaneId") airplaneId: Int,
         @Field("price") price: Int,
-        @Field("totalTransit") totalTransit: Int,
-        @Field("transitPoint") transitPoint: Int,
-        @Field("transitDuration") transitDuration: String,
+        @Field("totalTransit") totalTransit: Int?,
+        @Field("transitPoint") transitPoint: Int?,
+        @Field("transitDuration") transitDuration: String?,
         @Field("ticketType") ticketType: String,
         @Field("flightDuration") flightDuration: String,
-        @Field("arrivalTimeAtTransit") arrivalTimeAtTransit: String,
-        @Field("departureTimeFromTransit") departureTimeFromTransit: String,
-    ) : Call<ChangeDataResponse>
-
-    @FormUrlEncoded
-    @POST("api/tickets/{idTicket}")
-    fun updateAdminTicketDirect(
-        @Path("idTicket") idTicket: Int,
-        @Header("Authorization") token: String,
-        @Field("ticketNumber") ticketNumber: Int,
-        @Field("departureDate") departureDate: String,
-        @Field("departureTime") departureTime: String,
-        @Field("arrivalDate") arrivalDate: String,
-        @Field("arrivalTime") arrivalTime: String,
-        @Field("flightFrom") flightFrom: Int,
-        @Field("flightTo") flightTo: Int,
-        @Field("airplaneId") airplaneId: Int,
-        @Field("price") price: Int,
-        @Field("ticketType") ticketType: String,
-        @Field("flightDuration") flightDuration: String,
+        @Field("arrivalTimeAtTransit") arrivalTimeAtTransit: String?,
+        @Field("departureTimeFromTransit") departureTimeFromTransit: String?,
     ) : Call<ChangeDataResponse>
 
     @DELETE("api/tickets/{idTickets}")

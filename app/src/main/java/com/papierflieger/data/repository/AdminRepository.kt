@@ -363,7 +363,7 @@ class AdminRepository(
         return createTicketResponse
     }
 
-    fun updateTicketTransit(
+    fun updateTicket(
         idTicket: Int,
         token: String,
         ticketNumber: Int,
@@ -375,15 +375,15 @@ class AdminRepository(
         flightTo: Int,
         airplaneId: Int,
         price: Int,
-        totalTransit: Int,
-        transitPoint: Int,
-        transitDuration: String,
+        totalTransit: Int?,
+        transitPoint: Int?,
+        transitDuration: String?,
         ticketType: String,
         flightDuration: String,
-        arrivalTimeAtTransit: String,
-        departureTimeFromTransit: String,
+        arrivalTimeAtTransit: String?,
+        departureTimeFromTransit: String?,
     ) : LiveData<Resource<ChangeDataResponse>> {
-        apiAdminService.updateAdminTicketTransit(
+        apiAdminService.updateAdminTicket(
             idTicket,
             token,
             ticketNumber,
@@ -402,51 +402,6 @@ class AdminRepository(
             flightDuration,
             arrivalTimeAtTransit,
             departureTimeFromTransit
-        ).enqueue(
-            object : Callback<ChangeDataResponse>{
-                override fun onResponse(
-                    call: Call<ChangeDataResponse>,
-                    response: Response<ChangeDataResponse>
-                ) {
-                    updateTicketResponse.postValue(Resource.Success(response.body()!!))
-                }
-                override fun onFailure(call: Call<ChangeDataResponse>, t: Throwable) {
-                    updateTicketResponse.postValue(Resource.Error(t))
-                }
-            }
-        )
-        return updateTicketResponse
-    }
-
-    fun updateTicketDirect(
-        idTicket: Int,
-        token: String,
-        ticketNumber: Int,
-        departureDate: String,
-        departureTime: String,
-        arrivalDate: String,
-        arrivalTime: String,
-        flightFrom: Int,
-        flightTo: Int,
-        airplaneId: Int,
-        price: Int,
-        ticketType: String,
-        flightDuration: String,
-    ) : LiveData<Resource<ChangeDataResponse>> {
-        apiAdminService.updateAdminTicketDirect(
-            idTicket,
-            token,
-            ticketNumber,
-            departureDate,
-            departureTime,
-            arrivalDate,
-            arrivalTime,
-            flightFrom,
-            flightTo,
-            airplaneId,
-            price,
-            ticketType,
-            flightDuration
         ).enqueue(
             object : Callback<ChangeDataResponse>{
                 override fun onResponse(

@@ -133,7 +133,7 @@ class AddDestinationFragment : Fragment() {
                 checkingPermissions()
             }
             btnSave.setOnClickListener {
-                saveData()
+//                saveData()
             }
             acAirport.setOnItemClickListener { parent, _, position, _ ->
                 val selectedItem = parent.getItemAtPosition(position) as Airport

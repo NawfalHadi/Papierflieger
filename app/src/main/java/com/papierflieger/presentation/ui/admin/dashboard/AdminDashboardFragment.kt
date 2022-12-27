@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import coil.load
-import coil.transform.CircleCropTransformation
 import com.papierflieger.R
 import com.papierflieger.databinding.FragmentAdminDashboardBinding
 import com.papierflieger.presentation.bussiness.AuthViewModel
@@ -31,28 +29,10 @@ class AdminDashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bindingSession()
         bindingTitle()
     }
 
     private fun bindingTitle() {
         requireActivity().setTitle(R.string.text_dashboard)
-    }
-
-    private fun bindingSession() {
-        authViewModel.getNames().observe(viewLifecycleOwner){
-            binding.tvName.text = it
-        }
-
-        authViewModel.getEmail().observe(viewLifecycleOwner){
-            binding.tvEmail.text = it
-        }
-
-        authViewModel.getAvatar().observe(viewLifecycleOwner){
-            binding.ivAvatar.load(it){
-                transformations(CircleCropTransformation())
-                placeholder(R.drawable.ic_person_circle)
-            }
-        }
     }
 }

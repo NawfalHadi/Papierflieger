@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -150,10 +149,65 @@ class AddTicketDetailFragment : Fragment() {
                 sessionViewModel.getToken().observe(viewLifecycleOwner) { token ->
                     if (idTicket != null && idTicket!! >= 0) {
                         if (idTransit != null && idTransit >= 0) {
-//                            adminViewModel.updateTicket()
-                        }
-                        else {
-//                            adminViewModel.updateTicket()
+                            adminViewModel.updateTicket(
+                                idTicket!!,
+                                token,
+                                ticketNumber.toInt(),
+                                departureDate!!,
+                                departureTime!!,
+                                arrivalDate!!,
+                                arrivalTime!!,
+                                idFlightFrom!!,
+                                idFlightTo!!,
+                                airplaneId!!,
+                                price.toInt(),
+                                1,
+                                idTransit,
+                                transitDuration!!,
+                                ticketType,
+                                flightDuration,
+                                transitArrivalTime!!,
+                                transitDepartureTime!!
+                            ).observe(viewLifecycleOwner) {
+                                when (it) {
+                                    is Resource.Empty -> {}
+                                    is Resource.Error -> {}
+                                    is Resource.Loading -> {}
+                                    is Resource.Success -> {
+                                        findNavController().navigate(R.id.adminTicketFragment)
+                                    }
+                                }
+                            }
+                        } else {
+                            adminViewModel.updateTicket(
+                                idTicket!!,
+                                token,
+                                ticketNumber.toInt(),
+                                departureDate!!,
+                                departureTime!!,
+                                arrivalDate!!,
+                                arrivalTime!!,
+                                idFlightFrom!!,
+                                idFlightTo!!,
+                                airplaneId!!,
+                                price.toInt(),
+                                null,
+                                null,
+                                null,
+                                ticketType,
+                                flightDuration,
+                                null,
+                                null
+                            ).observe(viewLifecycleOwner) {
+                                when (it) {
+                                    is Resource.Empty -> {}
+                                    is Resource.Error -> {}
+                                    is Resource.Loading -> {}
+                                    is Resource.Success -> {
+                                        findNavController().navigate(R.id.adminTicketFragment)
+                                    }
+                                }
+                            }
                         }
                     } else {
                         if (idTransit != null && idTransit >= 0) {
@@ -179,12 +233,7 @@ class AddTicketDetailFragment : Fragment() {
                                 when (it) {
                                     is Resource.Empty -> {}
                                     is Resource.Error -> {}
-                                    is Resource.Loading -> {
-                                        binding.apply {
-                                            pbLoading.visibility = View.VISIBLE
-                                            pbLoading.isVisible = true
-                                        }
-                                    }
+                                    is Resource.Loading -> {}
                                     is Resource.Success -> {
                                         findNavController().navigate(R.id.adminTicketFragment)
                                     }
@@ -208,12 +257,7 @@ class AddTicketDetailFragment : Fragment() {
                                 when (it) {
                                     is Resource.Empty -> {}
                                     is Resource.Error -> {}
-                                    is Resource.Loading -> {
-                                        binding.apply {
-                                            pbLoading.visibility = View.VISIBLE
-                                            pbLoading.isVisible = true
-                                        }
-                                    }
+                                    is Resource.Loading -> {}
                                     is Resource.Success -> {
                                         findNavController().navigate(R.id.adminTicketFragment)
                                     }
@@ -221,7 +265,6 @@ class AddTicketDetailFragment : Fragment() {
                             }
                         }
                     }
-                    findNavController().navigate(R.id.adminDashboardFragment)
                 }
             }
         }

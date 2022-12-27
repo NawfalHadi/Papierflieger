@@ -33,7 +33,6 @@
         app:itemIconTint="@color/white"
         android:background="@color/sidebar_blue"
         app:menu="@menu/menu_admin"
-        app:headerLayout="@layout/item_header_navigation_drawer"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"/>
 
