@@ -119,8 +119,10 @@ class ListFlightFragment : Fragment() {
                                 TicketPreviewBottomSheet(ticketsPreview,
                                     object : TicketPreviewBottomSheet.OnTicketPreviewListener{
                                         override fun continueClicked(previews: ArrayList<DataTicket>) {
-                                            val action = ListFlightFragmentDirections.actionListFlightFragmentToPassengerActivity(previews.toTypedArray())
-                                            findNavController().navigate(action)
+                                            val mBundle = Bundle()
+                                            mBundle.putParcelableArrayList(SearchActivity.TICKETS_KEY, ticketsPreview)
+                                            mBundle.putInt(SearchActivity.PASSENGER_COUNTER_KEY, passengerCounter)
+                                            findNavController().navigate(R.id.action_listFlightFragment_to_passengerFragment, mBundle)
                                         }
                                     }
                                 ).show(

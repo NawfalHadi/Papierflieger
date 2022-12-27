@@ -2,9 +2,39 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation_passenger"
-    app:startDestination="@id/passengerFragment">
+    android:id="@+id/navigation_search"
+    app:startDestination="@id/searchFragment">
 
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.papierflieger.presentation.ui.home.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_listFlightFragment"
+            app:destination="@id/listFlightFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listFlightFragment"
+        android:name="com.papierflieger.presentation.ui.home.search.flights.ListFlightFragment"
+        android:label="ListFlightFragment"
+        tools:layout="@layout/fragment_list_flight">
+        <action
+            android:id="@+id/action_listFlightFragment_to_listReturnFragment"
+            app:destination="@id/listReturnFragment" />
+        <action
+            android:id="@+id/action_listFlightFragment_to_passengerFragment"
+            app:destination="@id/passengerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/listReturnFragment"
+        android:name="com.papierflieger.presentation.ui.home.search.flights.ListReturnFragment"
+        android:label="ListReturnFragment"
+        tools:layout="@layout/fragment_list_flight_return">
+        <action
+            android:id="@+id/action_listReturnFragment_to_passengerFragment"
+            app:destination="@id/passengerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/passengerFragment"
         android:name="com.papierflieger.presentation.ui.home.passenger.PassengerFragment"
@@ -16,18 +46,23 @@
         <action
             android:id="@+id/action_passengerFragment_to_internationFormFragment"
             app:destination="@id/internationFormFragment" />
-        <argument
-            android:name="passengerCounter"
-            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/nationalFormFragment"
         android:name="com.papierflieger.presentation.ui.home.passenger.national.NationalFormFragment"
         android:label="NationalFormFragment"
-        tools:layout="@layout/fragment_traveler_detail"/>
+        tools:layout="@layout/fragment_traveler_detail">
+        <action
+            android:id="@+id/action_nationalFormFragment_to_passengerFragment"
+            app:destination="@id/passengerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/internationFormFragment"
         android:name="com.papierflieger.presentation.ui.home.passenger.international.InternationFormFragment"
         android:label="InternationFormFragment"
-        tools:layout="@layout/fragment_traveler_detail_international"/>
+        tools:layout="@layout/fragment_traveler_detail_international">
+        <action
+            android:id="@+id/action_internationFormFragment_to_passengerFragment"
+            app:destination="@id/passengerFragment" />
+    </fragment>
 </navigation>

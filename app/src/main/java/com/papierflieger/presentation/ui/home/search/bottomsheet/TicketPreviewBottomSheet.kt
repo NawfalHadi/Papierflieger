@@ -23,7 +23,7 @@ class TicketPreviewBottomSheet(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = BottomSheetTicketPreviewBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -33,6 +33,7 @@ class TicketPreviewBottomSheet(
 
         binding.btnContinue.setOnClickListener {
             listener.continueClicked(tickets)
+            dismiss()
         }
         showsTickets()
     }

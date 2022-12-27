@@ -14,23 +14,29 @@ import com.papierflieger.data.network.response.ticket.DataTicket
 import com.papierflieger.databinding.FragmentTransactionFlightBinding
 import com.papierflieger.presentation.bussiness.SessionViewModel
 import com.papierflieger.presentation.ui.adapter.passenger.TravelerAdapter
+import com.papierflieger.presentation.ui.adapter.tickets.TicketsAdapter
+import com.papierflieger.presentation.ui.home.search.SearchActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class PassengerFragment : Fragment(){
+    private var passengerCounter : Int = 1
+    private var ticketsPreview : ArrayList<DataTicket> = arrayListOf()
+
     private val sessionViewModel : SessionViewModel by viewModels()
 
     private lateinit var binding : FragmentTransactionFlightBinding
-    private lateinit var ticketsPreview : ArrayList<DataTicket>
 
+    private val ticketAdapter : TicketsAdapter by lazy { TicketsAdapter() }
     private val travelerAdapter : TravelerAdapter by lazy { TravelerAdapter() }
+
     private val listOfPassenger : ArrayList<String> = arrayListOf()
     private val listObjectInformation : ArrayList<TravelerModel> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentTransactionFlightBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -38,6 +44,7 @@ class PassengerFragment : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupData()
         setupPassengerItem()
         showsRecycler()
         sessionViewModel.getToken().observe(viewLifecycleOwner){
@@ -49,7 +56,21 @@ class PassengerFragment : Fragment(){
         }
     }
 
+    private fun setupData() {
+        ticketsPreview = arguments?.getParcelableArrayList(SearchActivity.TICKETS_KEY)!!
+        passengerCounter = arguments?.getInt(SearchActivity.PASSENGER_COUNTER_KEY, 1) ?: 1
+    }
+
     private fun showsRecycler() {
+        with(binding.rvProduct){
+            ticketAdapter.setItem(ticketsPreview)
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(
+                context, LinearLayoutManager.HORIZONTAL, false
+            )
+            adapter = ticketAdapter
+        }
+
         with(binding.rvTraveler){
             travelerAdapter.setItem(listOfPassenger)
             setHasFixedSize(true)
@@ -62,7 +83,7 @@ class PassengerFragment : Fragment(){
         travelerAdapter.listener(object : TravelerAdapter.OnTravelCardListener {
             override fun gotoForm(position: Int) {
                 val mBundle = Bundle()
-                mBundle.putInt(PassengerActivity.PASSENGER_KEY, position)
+                mBundle.putInt(SearchActivity.PASSENGER_COUNTER_KEY, position)
                 findNavController().navigate(R.id.action_passengerFragment_to_nationalFormFragment, mBundle)
             }
         })
@@ -72,7 +93,7 @@ class PassengerFragment : Fragment(){
         listOfPassenger.clear()
         listObjectInformation.clear()
 
-        for (i in 1..TEMP_PASSENGER_COUNTER){
+        for (i in 1..passengerCounter){
             listOfPassenger.add("Passenger $i")
             listObjectInformation.add(TravelerModel("", 0))
         }
@@ -98,9 +119,5 @@ class PassengerFragment : Fragment(){
             visibility = View.VISIBLE
             isClickable = false
         }
-    }
-
-    companion object {
-        const val TEMP_PASSENGER_COUNTER = 3
     }
 }
