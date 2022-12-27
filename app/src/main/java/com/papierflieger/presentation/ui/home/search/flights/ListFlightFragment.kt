@@ -22,6 +22,7 @@ import com.papierflieger.presentation.ui.home.search.bottomsheet.TicketPreviewBo
 import com.papierflieger.wrapper.Resource
 import com.papierflieger.wrapper.toDataTicket
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.StringBuilder
 
 @AndroidEntryPoint
 class ListFlightFragment : Fragment() {
@@ -36,11 +37,13 @@ class ListFlightFragment : Fragment() {
     private val ticketsPreview : ArrayList<DataTicket> = arrayListOf()
 
     // Data that will be used for hitting API
-
     private lateinit var airportFrom : AirportEntity
     private lateinit var airportTo : AirportEntity
     private lateinit var dateDeparture : String
     private var dateReturn : String? = null
+
+    // Data that needed to bringing until finish
+    private var passengerCounter : Int = 1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,6 +59,14 @@ class ListFlightFragment : Fragment() {
 
         dataInit()
         searchTicket()
+
+        bindingHeader()
+    }
+
+    private fun bindingHeader() {
+        with(binding){
+            tvPassenger.text = StringBuilder(passengerCounter.toString()).append(" ${getString(R.string.text_passenger)}")
+        }
     }
 
     private fun dataInit() {
@@ -64,6 +75,7 @@ class ListFlightFragment : Fragment() {
         dateDeparture = arguments?.getString(SearchActivity.DATE_DEPARTURE_KEY).toString()
         dateReturn = arguments?.getString(SearchActivity.DATE_RETURN_KEY).toString()
 
+        passengerCounter = arguments?.getInt(SearchActivity.PASSENGER_COUNTER_KEY, 1) ?: 1
     }
 
     private fun searchTicket() {
@@ -104,7 +116,14 @@ class ListFlightFragment : Fragment() {
                         if (responsed.tiketPulang.isNullOrEmpty()){
                             val currentDialog = parentFragmentManager.findFragmentByTag(TicketPreviewBottomSheet::class.java.simpleName)
                             if (currentDialog == null){
-                                TicketPreviewBottomSheet(ticketsPreview).show(
+                                TicketPreviewBottomSheet(ticketsPreview,
+                                    object : TicketPreviewBottomSheet.OnTicketPreviewListener{
+                                        override fun continueClicked(previews: ArrayList<DataTicket>) {
+                                            val action = ListFlightFragmentDirections.actionListFlightFragmentToPassengerActivity(previews.toTypedArray())
+                                            findNavController().navigate(action)
+                                        }
+                                    }
+                                ).show(
                                     parentFragmentManager, TicketPreviewBottomSheet::class.java.simpleName
                                 )
                             }
@@ -113,6 +132,7 @@ class ListFlightFragment : Fragment() {
                             mBundle.putParcelableArrayList(SearchActivity.TICKETS_KEY, ticketsPreview)
                             mBundle.putParcelable(SearchActivity.DEPARTURE_TICKET_KEY, departureChoose)
                             mBundle.putParcelable(SearchActivity.RETURN_TICKETS_KEY, responsed)
+                            mBundle.putInt(SearchActivity.PASSENGER_COUNTER_KEY, passengerCounter)
                             findNavController().navigate(R.id.action_listFlightFragment_to_listReturnFragment, mBundle)
                         }
                     }

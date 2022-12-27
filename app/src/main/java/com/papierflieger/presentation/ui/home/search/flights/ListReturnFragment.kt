@@ -6,17 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.papierflieger.R
 import com.papierflieger.data.network.response.ticket.DataTicket
 import com.papierflieger.data.network.response.ticket.SearchTicketResponse
 import com.papierflieger.data.network.response.ticket.TiketBerangkat
 import com.papierflieger.data.network.response.ticket.TiketPulang
 import com.papierflieger.databinding.FragmentListFlightReturnBinding
 import com.papierflieger.presentation.ui.adapter.tickets.ArrivalAdapter
+import com.papierflieger.presentation.ui.home.passenger.PassengerActivityArgs
 import com.papierflieger.presentation.ui.home.search.SearchActivity
 import com.papierflieger.presentation.ui.home.search.bottomsheet.TicketPreviewBottomSheet
 import com.papierflieger.wrapper.toDataTicket
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.StringBuilder
 
 @AndroidEntryPoint
 class ListReturnFragment : Fragment() {
@@ -27,7 +31,9 @@ class ListReturnFragment : Fragment() {
     private lateinit var departureChoosed : TiketBerangkat
     private var listTicket : ArrayList<DataTicket> = arrayListOf()
 
+    // data that will passed to passenger data page
     private var ticketsPreview : ArrayList<DataTicket> = arrayListOf()
+    private var passengerCouter : Int = 1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,9 +52,17 @@ class ListReturnFragment : Fragment() {
         departureChoosed = arguments?.getParcelable(SearchActivity.DEPARTURE_TICKET_KEY)!!
         listTicket = arguments?.getParcelableArrayList(SearchActivity.TICKETS_KEY)!!
 
-        Log.e("Departure : ", departureChoosed.toString())
+        passengerCouter = arguments?.getInt(SearchActivity.PASSENGER_COUNTER_KEY, 1) ?: 1
+
+        bindingHeader()
         bindingDepartureData(departureChoosed)
         showsRecycler(responsed?.tiketPulang)
+    }
+
+    private fun bindingHeader() {
+        with(binding){
+            tvPassenger.text = StringBuilder(passengerCouter.toString()).append(" ${getString(R.string.text_passenger)}")
+        }
     }
 
     private fun bindingDepartureData(ticket: TiketBerangkat) {
@@ -80,7 +94,15 @@ class ListReturnFragment : Fragment() {
 
                 val currentDialog = parentFragmentManager.findFragmentByTag(TicketPreviewBottomSheet::class.java.simpleName)
                 if (currentDialog == null){
-                    TicketPreviewBottomSheet(ticketsPreview).show(
+                    TicketPreviewBottomSheet(ticketsPreview,
+                        object : TicketPreviewBottomSheet.OnTicketPreviewListener{
+                            override fun continueClicked(previews: ArrayList<DataTicket>) {
+                                val action = ListReturnFragmentDirections.actionListReturnFragmentToPassengerActivity(previews.toTypedArray())
+                                findNavController().navigate(action)
+                            }
+
+                        }
+                    ).show(
                         parentFragmentManager, TicketPreviewBottomSheet::class.java.simpleName
                     )
                 }

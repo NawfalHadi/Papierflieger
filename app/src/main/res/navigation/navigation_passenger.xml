@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_passengerFragment_to_internationFormFragment"
             app:destination="@id/internationFormFragment" />
+        <argument
+            android:name="passengerCounter"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/nationalFormFragment"

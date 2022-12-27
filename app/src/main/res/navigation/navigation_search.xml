@@ -22,10 +22,26 @@
         <action
             android:id="@+id/action_listFlightFragment_to_listReturnFragment"
             app:destination="@id/listReturnFragment" />
+        <action
+            android:id="@+id/action_listFlightFragment_to_passengerActivity"
+            app:destination="@id/passengerActivity" />
     </fragment>
     <fragment
         android:id="@+id/listReturnFragment"
         android:name="com.papierflieger.presentation.ui.home.search.flights.ListReturnFragment"
         android:label="ListReturnFragment"
-        tools:layout="@layout/fragment_list_flight_return"/>
+        tools:layout="@layout/fragment_list_flight_return">
+        <action
+            android:id="@+id/action_listReturnFragment_to_passengerActivity"
+            app:destination="@id/passengerActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/passengerActivity"
+        android:name="com.papierflieger.presentation.ui.home.passenger.PassengerActivity"
+        android:label="activity_passenger"
+        tools:layout="@layout/activity_passenger" >
+        <argument
+            android:name="previews"
+            app:argType="com.papierflieger.data.network.response.ticket.DataTicket[]" />
+    </activity>
 </navigation>

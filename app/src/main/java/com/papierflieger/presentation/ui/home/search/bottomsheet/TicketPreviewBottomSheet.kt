@@ -11,7 +11,8 @@ import com.papierflieger.databinding.BottomSheetTicketPreviewBinding
 import com.papierflieger.presentation.ui.adapter.tickets.TicketsAdapter
 
 class TicketPreviewBottomSheet(
-    private val tickets : ArrayList<DataTicket>
+    private val tickets : ArrayList<DataTicket>,
+    private val listener : OnTicketPreviewListener
 ) : BottomSheetDialogFragment() {
 
     private lateinit var binding : BottomSheetTicketPreviewBinding
@@ -31,7 +32,7 @@ class TicketPreviewBottomSheet(
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnContinue.setOnClickListener {
-            TODO()
+            listener.continueClicked(tickets)
         }
         showsTickets()
     }
@@ -45,7 +46,10 @@ class TicketPreviewBottomSheet(
             )
 
             adapter = ticketAdapter
-
         }
+    }
+
+    interface OnTicketPreviewListener {
+        fun continueClicked(previews: ArrayList<DataTicket>)
     }
 }
