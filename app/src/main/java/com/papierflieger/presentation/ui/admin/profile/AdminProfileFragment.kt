@@ -13,7 +13,6 @@ import com.papierflieger.R
 import com.papierflieger.databinding.FragmentAdminProfileBinding
 import com.papierflieger.presentation.bussiness.AuthViewModel
 import com.papierflieger.presentation.bussiness.SessionViewModel
-import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

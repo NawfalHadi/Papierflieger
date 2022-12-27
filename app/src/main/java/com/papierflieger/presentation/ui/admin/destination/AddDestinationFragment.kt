@@ -48,6 +48,7 @@ class AddDestinationFragment : Fragment() {
     private var uploadPhoto : String? = null
     private var airportId : Int = -1
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -100,6 +101,9 @@ class AddDestinationFragment : Fragment() {
 //                } else {
 //                    MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, result)
 //                }
+
+                Toast.makeText(context, result.toString(), Toast.LENGTH_SHORT).show()
+
                 uploadPhoto = result.toString()
                 binding.apply {
                     cvImageEmpty.visibility = View.VISIBLE
