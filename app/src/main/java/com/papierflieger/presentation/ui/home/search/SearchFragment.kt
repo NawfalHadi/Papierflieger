@@ -18,6 +18,7 @@ import com.papierflieger.data.local.room.entity.AirportEntity
 import com.papierflieger.databinding.FragmentSearchBinding
 import com.papierflieger.presentation.bussiness.AirportsViewModel
 import com.papierflieger.presentation.bussiness.DatasyncViewModel
+import com.papierflieger.presentation.ui.home.search.bottomsheet.PassengerBottomSheet
 import com.papierflieger.presentation.ui.home.search.bottomsheet.SearchAirportBottomSheet
 import com.papierflieger.wrapper.Resource
 import com.papierflieger.wrapper.toDate
@@ -33,6 +34,7 @@ class SearchFragment : Fragment() {
     private val datasyncViewModel : DatasyncViewModel by viewModels()
 
     // Data that i would bring to ticket list
+    private var passengerCounter : Int = 1
     private var airportFrom : AirportEntity? = null
     private var airportTo : AirportEntity? = null
 
@@ -103,6 +105,17 @@ class SearchFragment : Fragment() {
     }
 
     private fun clickListener() {
+        binding.cardPerson.setOnClickListener{
+            val currentDialog = parentFragmentManager.findFragmentByTag(PassengerBottomSheet::class.java.simpleName)
+            if (currentDialog == null){
+                PassengerBottomSheet(passengerCounter, object : PassengerBottomSheet.OnPassengerCounted{
+                    override fun passengerCounted(count: Int) {
+                        passengerCounter = count
+                    }
+                }).show(parentFragmentManager, PassengerBottomSheet::class.java.simpleName)
+            }
+        }
+
         binding.tvFrom.setOnClickListener {
             val currentDialog = parentFragmentManager.findFragmentByTag(SearchAirportBottomSheet::class.java.simpleName)
             if (currentDialog == null) {
@@ -201,6 +214,7 @@ class SearchFragment : Fragment() {
             mBundle.putParcelable(SearchActivity.AIRPORT_TO_KEY, airportTo)
             mBundle.putString(SearchActivity.DATE_DEPARTURE_KEY, dateDeparture)
             mBundle.putString(SearchActivity.DATE_RETURN_KEY, dateReturn)
+            mBundle.putInt(SearchActivity.PASSENGER_COUNTER_KEY, passengerCounter)
             findNavController().navigate(R.id.action_searchFragment_to_listFlightFragment, mBundle)
         }
     }

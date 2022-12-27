@@ -3,7 +3,7 @@ package com.papierflieger.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.papierflieger.data.network.response.ChangeDataResponse
-import com.papierflieger.data.network.response.CreateDestinationResponse
+import com.papierflieger.data.network.response.destination.CreateDestinationResponse
 import com.papierflieger.data.network.response.airplane.CreateAirplaneResponse
 import com.papierflieger.data.network.response.airport.CreateAirportResponse
 import com.papierflieger.data.network.response.ticket.CreateTicketResponse
