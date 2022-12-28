@@ -1,6 +1,7 @@
 package com.papierflieger.presentation.ui.home.passenger
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +44,9 @@ class PassengerFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val test = findNavController().currentBackStackEntry?.savedStateHandle?.get<TravelerModel>("TEST")
+        Log.e("Travel", test.toString())
 
         setupData()
         setupPassengerItem()

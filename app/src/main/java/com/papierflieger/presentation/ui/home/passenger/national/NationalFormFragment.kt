@@ -6,8 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.papierflieger.R
+import com.papierflieger.data.local.model.TravelerModel
 import com.papierflieger.databinding.FragmentTravelerDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NationalFormFragment : Fragment() {
 
     private lateinit var binding : FragmentTravelerDetailBinding
@@ -16,7 +20,7 @@ class NationalFormFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentTravelerDetailBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -30,10 +34,12 @@ class NationalFormFragment : Fragment() {
             }
 
             btnSave.setOnClickListener {
-
+                findNavController().previousBackStackEntry?.savedStateHandle?.set("TEST", TravelerModel(
+                    "test", 21
+                ))
+                findNavController().popBackStack()
             }
         }
     }
-
 
 }
