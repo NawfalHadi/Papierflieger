@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_white"
     tools:ignore="ContentDescription"
-    tools:context=".presentation.ui.home.history.HistoryFragment">
+    tools:context=".presentation.ui.home.wishlist.WishlistFragment">
 
     <TextView
-        android:id="@+id/text_history"
+        android:id="@+id/tv_wishlist"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/text_history_transaction"
+        android:text="@string/text_wishlist"
         android:textAlignment="center"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -26,32 +26,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
-        android:layout_marginBottom="16dp"
         android:background="@drawable/ic_not_found"
-        app:layout_constraintBottom_toTopOf="@+id/tv_not_found"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tv_not_found" />
 
     <TextView
         android:id="@+id/tv_not_found"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_transaction_not_found"
+        android:text="@string/text_wishlist_not_found"
         android:textColor="@color/gray"
         android:textSize="18sp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_history" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_wishlist" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_history_transaction"
+        android:id="@+id/rv_wishlist"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_history"
-        tools:listitem="@layout/item_transaction_history" />
+        app:layout_constraintTop_toBottomOf="@id/tv_wishlist"
+        tools:listitem="@layout/item_wishlist" />
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/pb_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_wishlist" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

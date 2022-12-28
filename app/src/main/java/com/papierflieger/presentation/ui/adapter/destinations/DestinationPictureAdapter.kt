@@ -6,12 +6,13 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.papierflieger.R
 import com.papierflieger.databinding.ItemAddDestinationPictureBinding
 
-class AdminDestinationPictureAdapter : RecyclerView.Adapter<AdminDestinationPictureAdapter.DestinationPictureViewHolder>() {
+class DestinationPictureAdapter : RecyclerView.Adapter<DestinationPictureAdapter.DestinationPictureViewHolder>() {
 
     private var list : ArrayList<String?> = arrayListOf()
 
@@ -47,6 +48,9 @@ class AdminDestinationPictureAdapter : RecyclerView.Adapter<AdminDestinationPict
             with(binding){
                 if (position < 1) vGap.visibility = View.INVISIBLE
                 else vGap.visibility = View.GONE
+
+                cvCancel.visibility = View.GONE
+                cvCancel.isVisible = false
 
                 ivImage.load(item) {
                     placeholder(R.color.background_gray)

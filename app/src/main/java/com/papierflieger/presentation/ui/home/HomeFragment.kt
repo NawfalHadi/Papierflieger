@@ -16,6 +16,7 @@ import com.papierflieger.presentation.bussiness.AuthViewModel
 import com.papierflieger.presentation.bussiness.DestinationViewModel
 import com.papierflieger.presentation.bussiness.SessionViewModel
 import com.papierflieger.presentation.ui.adapter.destinations.DestinationAdapter
+import com.papierflieger.presentation.ui.adapter.wishlist.WishlistAdapter
 import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -62,6 +63,18 @@ class HomeFragment : Fragment() {
             )
             adapter = favDestinationAdapter
         }
+
+        favDestinationAdapter.actionClick(object : DestinationAdapter.OnDestinationFavItem {
+            override fun itemClicked(id: Int) {
+                findNavController().navigate(
+                    R.id.action_homeFragment_to_detailDestinationActivity
+                    ,Bundle().apply {
+                        putInt("id", id)
+                    }
+                )
+            }
+        })
+
     }
 
     private fun bindingSession() {

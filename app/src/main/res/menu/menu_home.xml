@@ -15,14 +15,15 @@
         android:title="@string/text_transaction" />
 
     <item
-        android:icon="@drawable/ic_card"
-        app:showAsAction="always"
-        android:title="@string/text_payment" />
+        android:id="@+id/wishlistFragment"
+        android:icon="@drawable/ic_favorite"
+        app:showAsAction="ifRoom"
+        android:title="@string/text_favorite" />
 
     <item
         android:id="@+id/profileUserFragment"
         android:icon="@drawable/ic_setting"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         android:title="@string/text_setting" />
 
 </menu>

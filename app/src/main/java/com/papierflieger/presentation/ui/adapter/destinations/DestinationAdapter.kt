@@ -11,7 +11,7 @@ import com.papierflieger.R
 import com.papierflieger.data.network.response.destination.Destination
 import com.papierflieger.databinding.ItemFavoriteDestinationBinding
 
-class DestinationAdapter : RecyclerView.Adapter<DestinationAdapter.DestionationViewHolder>() {
+class DestinationAdapter : RecyclerView.Adapter<DestinationAdapter.DestinationViewHolder>() {
 
     private var diffCallback = object : DiffUtil.ItemCallback<Destination>(){
         override fun areItemsTheSame(oldItem: Destination, newItem: Destination): Boolean {
@@ -23,24 +23,30 @@ class DestinationAdapter : RecyclerView.Adapter<DestinationAdapter.DestionationV
         }
     }
 
+    private lateinit var onDestinationFavItem: OnDestinationFavItem
+
     private val differ = AsyncListDiffer(this, diffCallback)
     fun setItem(value : List<Destination?>) = differ.submitList(value)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DestionationViewHolder {
+    fun actionClick(onDestinationFavItem: OnDestinationFavItem){
+        this.onDestinationFavItem = onDestinationFavItem
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DestinationViewHolder {
         val binding = ItemFavoriteDestinationBinding.inflate(LayoutInflater.from(
             parent.context), parent, false
         )
-        return DestionationViewHolder(binding)
+        return DestinationViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: DestionationViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DestinationViewHolder, position: Int) {
         val item = differ.currentList[position]
         holder.bindingItem(item, position)
     }
 
     override fun getItemCount(): Int = differ.currentList.size
 
-    class DestionationViewHolder(
+    inner class DestinationViewHolder(
         private val binding : ItemFavoriteDestinationBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
@@ -55,9 +61,13 @@ class DestinationAdapter : RecyclerView.Adapter<DestinationAdapter.DestionationV
                     }
                 }
 
-                itemTvDestinationName.text = item?.name
-                itemTvDestinationLocation.text = item?.location
-                itemTvDestinationInformation.text = ""
+                tvDestinationName.text = item?.name
+                tvLocation.text = item?.location
+                tvDescription.text = item?.description
+
+                binding.root.setOnClickListener {
+                    item?.id?.let { id -> onDestinationFavItem.itemClicked(id) }
+                }
             }
         }
     }

@@ -1,4 +1,5 @@
 package com.papierflieger.data.network.service
+import com.papierflieger.data.network.response.ChangeDataResponse
 import com.papierflieger.data.network.response.airplane.AirplaneResponse
 import com.papierflieger.data.network.response.airplane.AirplanesResponse
 import com.papierflieger.data.network.response.airport.AirportResponse
@@ -12,6 +13,8 @@ import com.papierflieger.data.network.response.ticket.SearchTicketResponse
 import com.papierflieger.data.network.response.ticket.TicketResponse
 import com.papierflieger.data.network.response.user.UpdateUserResponse
 import com.papierflieger.data.network.response.user.UserResponse
+import com.papierflieger.data.network.response.wishlist.CreateWishlistResponse
+import com.papierflieger.data.network.response.wishlist.WishlistResponse
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -65,6 +68,28 @@ interface ApiService {
         @Field("province") province: String,
         @Field("regency") regency: String,
     ) : Call<UpdateUserResponse>
+
+    /***
+     * Wishlist
+     */
+
+    @GET("api/wishlist")
+    fun getWishlist(
+        @Header("Authorization") token: String,
+    ) : Call<WishlistResponse>
+
+    @FormUrlEncoded
+    @POST("api/wishlist")
+    fun createWishlist(
+        @Header("Authorization") token: String,
+        @Field("destinationId") destinationId: Int,
+    ) : Call<CreateWishlistResponse>
+
+    @DELETE("api/wishlist/{destinationId}")
+    fun deleteWishlist(
+        @Header("Authorization") token: String,
+        @Path("destinationId") destinationId: Int,
+    ) : Call<ChangeDataResponse>
 
     /***
      * Destination

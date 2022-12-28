@@ -78,6 +78,9 @@ class SearchFragment : Fragment() {
                         }
                         datasyncViewModel.airportSynced()
                     }
+                    is Resource.Empty -> {}
+                    is Resource.Error -> {}
+                    is Resource.Loading -> {}
                 }
             }
         }

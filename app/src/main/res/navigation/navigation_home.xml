@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_homeFragment_to_searchActivity"
             app:destination="@id/searchActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailDestinationActivity"
+            app:destination="@id/detailDestinationActivity" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
@@ -54,4 +57,18 @@
         android:name="com.papierflieger.presentation.ui.home.search.SearchActivity"
         android:label="activity_search"
         tools:layout="@layout/activity_search" />
+    <fragment
+        android:id="@+id/wishlistFragment"
+        android:name="com.papierflieger.presentation.ui.home.wishlist.WishlistFragment"
+        android:label="fragment_wishlist"
+        tools:layout="@layout/fragment_wishlist" >
+        <action
+            android:id="@+id/action_wishlistFragment_to_detailDestinationActivity"
+            app:destination="@id/detailDestinationActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/detailDestinationActivity"
+        android:name="com.papierflieger.presentation.ui.home.destination.DetailDestinationActivity"
+        android:label="activity_detail_destination"
+        tools:layout="@layout/activity_detail_destination" />
 </navigation>

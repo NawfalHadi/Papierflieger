@@ -18,6 +18,12 @@
         android:theme="@style/Theme.Papierflieger"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.ui.home.destination.DetailDestinationActivity"
+            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".presentation.ui.home.passenger.PassengerActivity"-->
+<!--            android:exported="false" />-->
+        <activity
             android:name=".presentation.ui.admin.AdminActivity"
             android:exported="false"
             android:theme="@style/Theme.Papierflieger.ActionBar" />

@@ -46,6 +46,9 @@ class SearchAirportBottomSheet(
                 is Resource.Success -> {
                     showsRecycler(it.payload)
                 }
+                is Resource.Empty -> {}
+                is Resource.Error -> {}
+                is Resource.Loading -> {}
             }
         }
     }

@@ -83,4 +83,14 @@ object RepositoryModule {
             apiService
         )
     }
+
+    @Provides
+    @Singleton
+    fun providesWishlistRepo(
+        apiService: ApiService
+    ) : WishlistRepository {
+        return WishlistRepository(
+            apiService
+        )
+    }
 }
