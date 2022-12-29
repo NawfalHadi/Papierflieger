@@ -60,43 +60,15 @@
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/text_title"
-        android:textSize="14sp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv_warning" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_title"
-        style="@style/Widget.Custom.TextInputLayout.ExposedDropdownMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title">
-
-        <AutoCompleteTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
         android:id="@+id/tv_full_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_fullname"
         android:textSize="14sp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_title" />
+        app:layout_constraintTop_toBottomOf="@+id/cv_warning"  />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_full_name"
@@ -139,6 +111,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_date_birth">
 
         <AutoCompleteTextView
+            android:id="@+id/et_date_birth"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="date" />
@@ -171,6 +144,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="number"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tv_nationality"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_nationality"
+        android:textSize="14sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_identity_card"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_nationality"
+        style="@style/Widget.Custom.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_nationality">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_nationality"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

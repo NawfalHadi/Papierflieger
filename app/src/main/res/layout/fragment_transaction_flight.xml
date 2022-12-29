@@ -292,6 +292,7 @@
         </androidx.cardview.widget.CardView>
 
         <Button
+            android:id="@+id/btn_pay"
             style="@style/Widget.Custom.Button.Mini"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -51,18 +51,10 @@
         android:id="@+id/nationalFormFragment"
         android:name="com.papierflieger.presentation.ui.home.passenger.national.NationalFormFragment"
         android:label="NationalFormFragment"
-        tools:layout="@layout/fragment_traveler_detail">
-        <action
-            android:id="@+id/action_nationalFormFragment_to_passengerFragment"
-            app:destination="@id/passengerFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_traveler_detail"/>
     <fragment
         android:id="@+id/internationFormFragment"
         android:name="com.papierflieger.presentation.ui.home.passenger.international.InternationFormFragment"
         android:label="InternationFormFragment"
-        tools:layout="@layout/fragment_traveler_detail_international">
-        <action
-            android:id="@+id/action_internationFormFragment_to_passengerFragment"
-            app:destination="@id/passengerFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_traveler_detail_international"/>
 </navigation>
