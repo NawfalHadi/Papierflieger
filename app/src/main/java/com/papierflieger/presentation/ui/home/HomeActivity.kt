@@ -29,6 +29,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         bindingNavigation()
+        bindingNotification()
     }
 
     override fun onResume() {
@@ -47,8 +48,8 @@ class HomeActivity : AppCompatActivity() {
                         val notification = it.payload?.notifikasi?.count { notification -> !notification.read }
                         if (notification != null && notification > 0) {
                             val badge = binding.bottomNavigation.getOrCreateBadge(R.id.historyFragment)
-                            badge.isVisible = true
                             badge.number = notification
+                            badge.isVisible = true
                         } else {
                             binding.bottomNavigation.removeBadge(R.id.historyFragment)
                         }
