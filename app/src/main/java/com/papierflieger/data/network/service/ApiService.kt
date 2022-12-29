@@ -8,6 +8,8 @@ import com.papierflieger.data.network.response.auth.LoginResponse
 import com.papierflieger.data.network.response.auth.RegisterResponse
 import com.papierflieger.data.network.response.destination.DestinationResponse
 import com.papierflieger.data.network.response.destination.DestinationsResponse
+import com.papierflieger.data.network.response.notification.CreateNotificationResponse
+import com.papierflieger.data.network.response.notification.NotificationsResponse
 import com.papierflieger.data.network.response.ticket.ListTicketResponse
 import com.papierflieger.data.network.response.ticket.SearchTicketResponse
 import com.papierflieger.data.network.response.ticket.TicketResponse
@@ -89,6 +91,28 @@ interface ApiService {
     fun deleteWishlist(
         @Header("Authorization") token: String,
         @Path("destinationId") destinationId: Int,
+    ) : Call<ChangeDataResponse>
+
+    /***
+     * Wishlist
+     */
+
+    @GET("api/notifications")
+    fun getNotifications(
+        @Header("Authorization") token: String,
+    ) : Call<NotificationsResponse>
+
+    @FormUrlEncoded
+    @POST("api/notifications")
+    fun createNotification(
+        @Header("Authorization") token: String,
+        @Field("name") name: String,
+        @Field("message") message: String,
+    ) : Call<CreateNotificationResponse>
+
+    @PUT("api/notifications")
+    fun updateNotification(
+        @Header("Authorization") token: String,
     ) : Call<ChangeDataResponse>
 
     /***

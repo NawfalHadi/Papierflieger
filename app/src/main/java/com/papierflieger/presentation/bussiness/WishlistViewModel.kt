@@ -3,10 +3,8 @@ package com.papierflieger.presentation.bussiness
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.papierflieger.data.network.response.ChangeDataResponse
-import com.papierflieger.data.network.response.user.UpdateUserResponse
 import com.papierflieger.data.network.response.wishlist.CreateWishlistResponse
 import com.papierflieger.data.network.response.wishlist.WishlistResponse
-import com.papierflieger.data.repository.UserRepository
 import com.papierflieger.data.repository.WishlistRepository
 import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel

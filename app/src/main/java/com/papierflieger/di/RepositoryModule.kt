@@ -93,4 +93,14 @@ object RepositoryModule {
             apiService
         )
     }
+
+    @Provides
+    @Singleton
+    fun providesNotificationRepo(
+        apiService: ApiService
+    ) : NotificationRepository {
+        return NotificationRepository(
+            apiService
+        )
+    }
 }

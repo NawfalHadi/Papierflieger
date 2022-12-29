@@ -3,9 +3,9 @@ package com.papierflieger.presentation.bussiness
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.papierflieger.data.network.response.ChangeDataResponse
-import com.papierflieger.data.network.response.destination.CreateDestinationResponse
 import com.papierflieger.data.network.response.airplane.CreateAirplaneResponse
 import com.papierflieger.data.network.response.airport.CreateAirportResponse
+import com.papierflieger.data.network.response.destination.CreateDestinationResponse
 import com.papierflieger.data.network.response.ticket.CreateTicketResponse
 import com.papierflieger.data.repository.AdminRepository
 import com.papierflieger.wrapper.Resource

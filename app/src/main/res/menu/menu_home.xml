@@ -18,7 +18,7 @@
         android:id="@+id/wishlistFragment"
         android:icon="@drawable/ic_favorite"
         app:showAsAction="ifRoom"
-        android:title="@string/text_favorite" />
+        android:title="@string/text_wishlist" />
 
     <item
         android:id="@+id/profileUserFragment"

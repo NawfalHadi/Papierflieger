@@ -1,52 +1,69 @@
 package com.papierflieger.presentation.ui.home
 
-import android.annotation.SuppressLint
-import android.content.pm.ActivityInfo
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.shape.CornerFamily
-import com.google.android.material.shape.MaterialShapeDrawable
 import com.papierflieger.R
 import com.papierflieger.databinding.ActivityHomeBinding
+import com.papierflieger.presentation.bussiness.AuthViewModel
+import com.papierflieger.presentation.bussiness.NotificationViewModel
+import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityHomeBinding
+    private val binding : ActivityHomeBinding by lazy {
+        ActivityHomeBinding.inflate(layoutInflater)
+    }
+
+    private val authViewModel: AuthViewModel by viewModels()
+    private val notificationViewModel: NotificationViewModel by viewModels()
+
     private lateinit var navController: NavController
 
-    @SuppressLint("SourceLockedOrientationActivity")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        bindingNavigation()
+    }
 
-        editBottomNavigationView()
+    override fun onResume() {
+        super.onResume()
+        bindingNotification()
+    }
 
-        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+    private fun bindingNotification() {
+        authViewModel.getToken().observe(this) { token ->
+            notificationViewModel.getNotifications(token).observe(this) {
+                when (it) {
+                    is Resource.Empty -> {}
+                    is Resource.Error -> {}
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        val notification = it.payload?.notifikasi?.count { notification -> !notification.read }
+                        if (notification != null && notification > 0) {
+                            val badge = binding.bottomNavigation.getOrCreateBadge(R.id.historyFragment)
+                            badge.isVisible = true
+                            badge.number = notification
+                        } else {
+                            binding.bottomNavigation.removeBadge(R.id.historyFragment)
+                        }
+                    }
+                }
+            }
+        }
+    }
 
+    private fun bindingNavigation() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.home_navContainer)
                 as NavHostFragment
 
         navController = navHostFragment.navController
         binding.bottomNavigation.setupWithNavController(navController)
-
     }
 
-    private fun editBottomNavigationView() {
-        val radius = resources.getDimension(R.dimen.radius_small)
-        val bottomNavBg = binding.bottomNavigation.background as MaterialShapeDrawable
-
-        bottomNavBg.shapeAppearanceModel = bottomNavBg.shapeAppearanceModel.toBuilder()
-            .setTopLeftCorner(CornerFamily.ROUNDED, radius)
-            .setTopRightCorner(CornerFamily.ROUNDED, radius)
-            .build()
-
-
-    }
 }

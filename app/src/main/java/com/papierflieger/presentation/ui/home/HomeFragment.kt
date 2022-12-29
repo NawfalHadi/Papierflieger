@@ -1,12 +1,9 @@
 package com.papierflieger.presentation.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -16,10 +13,9 @@ import com.papierflieger.R
 import com.papierflieger.databinding.FragmentHomeBinding
 import com.papierflieger.presentation.bussiness.AuthViewModel
 import com.papierflieger.presentation.bussiness.DestinationViewModel
-import com.papierflieger.presentation.bussiness.SessionViewModel
+import com.papierflieger.presentation.bussiness.NotificationViewModel
 import com.papierflieger.presentation.bussiness.WishlistViewModel
 import com.papierflieger.presentation.ui.adapter.destinations.DestinationAdapter
-import com.papierflieger.presentation.ui.adapter.wishlist.WishlistAdapter
 import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,7 +24,6 @@ class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
     private val authViewModel: AuthViewModel by viewModels()
-    private val sessionViewModel : SessionViewModel by viewModels()
     private val destinationViewModel : DestinationViewModel by viewModels()
     private val wishlistViewModel : WishlistViewModel by viewModels()
 

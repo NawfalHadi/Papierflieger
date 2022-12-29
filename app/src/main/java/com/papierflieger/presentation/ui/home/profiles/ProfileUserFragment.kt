@@ -1,22 +1,22 @@
 package com.papierflieger.presentation.ui.home.profiles
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import coil.transform.CircleCropTransformation
 import com.papierflieger.R
 import com.papierflieger.data.local.model.SettingModel
 import com.papierflieger.databinding.FragmentProfileUserBinding
 import com.papierflieger.presentation.bussiness.AuthViewModel
 import com.papierflieger.presentation.bussiness.SessionViewModel
 import com.papierflieger.presentation.ui.adapter.settings.SettingAdapter
-import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +24,7 @@ class ProfileUserFragment : Fragment() {
 
     private lateinit var binding : FragmentProfileUserBinding
     private val authViewModel: AuthViewModel by viewModels()
-    private val sessionViewModel : SessionViewModel by viewModels()
+    private val sessionViewModel: SessionViewModel by viewModels()
 
     private val accountAndSecurity : ArrayList<SettingModel> = arrayListOf(
         SettingModel(R.drawable.ic_person, "Account Information", "", R.id.action_profileUserFragment_to_accountInformationActivity),
@@ -54,33 +54,26 @@ class ProfileUserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        bindingSession()
+        bindingProfile()
+        initList()
     }
 
-    private fun bindingSession() {
-        authViewModel.getToken().observe(viewLifecycleOwner){ token ->
-            bindingViewByToken(token)
-        }
-
-    }
-
-    private fun bindingViewByToken(token: String) {
-        sessionViewModel.getProfileUser(token).observe(viewLifecycleOwner){
-            when(it) {
-                is Resource.Success -> {
-                    binding.tvFullName.text = it.payload?.fullName.toString()
-                }
-                is Resource.Empty -> Log.e("User Information", "Empty")
-                is Resource.Error -> Log.e("User Information", it.message.toString())
-                is Resource.Loading -> {}
+    private fun bindingProfile() {
+        authViewModel.getAvatar().observe(viewLifecycleOwner) {
+            binding.ivProfile.load(it) {
+                placeholder(R.color.background_gray)
+                transformations(CircleCropTransformation())
             }
         }
-
-        recyclerShowByToken()
+        authViewModel.getNames().observe(viewLifecycleOwner) {
+            binding.tvFullName.text = it
+        }
+        authViewModel.getEmail().observe(viewLifecycleOwner) {
+            binding.tvEmail.text = it
+        }
     }
 
-    private fun recyclerShowByToken() {
+    private fun initList() {
         with(binding) {
             with(rvAccountSecurity) {
                 accountAdapter.setItem(accountAndSecurity)
