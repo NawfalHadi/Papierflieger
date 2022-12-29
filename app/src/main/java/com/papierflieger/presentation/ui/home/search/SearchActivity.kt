@@ -37,5 +37,7 @@ class SearchActivity : AppCompatActivity() {
         const val DATE_DEPARTURE_KEY = "DATE_DEPARTURE_KEY"
         const val DATE_RETURN_KEY = "DATE_RETURN_KEY"
         const val PASSENGER_COUNTER_KEY = "PASSENGER_COUNTER_KEY"
+
+        const val PASSENGER_KEY = "PASSENGER_KEY"
     }
 }

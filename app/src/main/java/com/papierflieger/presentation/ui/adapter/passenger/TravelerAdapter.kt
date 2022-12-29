@@ -17,6 +17,7 @@ class TravelerAdapter : RecyclerView.Adapter<TravelerAdapter.TravelerViewHolder>
 
     @SuppressLint("NotifyDataSetChanged")
     fun setItem(cardInformation : ArrayList<String>){
+        list.clear()
         list.addAll(cardInformation)
         notifyDataSetChanged()
     }
@@ -30,7 +31,7 @@ class TravelerAdapter : RecyclerView.Adapter<TravelerAdapter.TravelerViewHolder>
 
     override fun onBindViewHolder(holder: TravelerViewHolder, position: Int) {
         val information = list[position]
-        holder.bindingItem(information, position + 1)
+        holder.bindingItem(information, position)
     }
 
     override fun getItemCount(): Int = list.size
