@@ -71,9 +71,7 @@ class DetailDestinationActivity : AppCompatActivity() {
                     is Resource.Empty -> {}
                     is Resource.Error -> {}
                     is Resource.Loading -> {}
-                    is Resource.Success -> {
-                        Toast.makeText(applicationContext, it.payload.toString(), Toast.LENGTH_SHORT).show()
-                    }
+                    is Resource.Success -> {}
                 }
             }
         }
@@ -86,9 +84,7 @@ class DetailDestinationActivity : AppCompatActivity() {
                     is Resource.Empty -> {}
                     is Resource.Error -> {}
                     is Resource.Loading -> {}
-                    is Resource.Success -> {
-                        Toast.makeText(applicationContext, it.payload.toString(), Toast.LENGTH_SHORT).show()
-                    }
+                    is Resource.Success -> {}
                 }
             }
         }

@@ -20,9 +20,6 @@
         <activity
             android:name=".presentation.ui.home.destination.DetailDestinationActivity"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".presentation.ui.home.passenger.PassengerActivity"-->
-<!--            android:exported="false" />-->
         <activity
             android:name=".presentation.ui.admin.AdminActivity"
             android:exported="false"

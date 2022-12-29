@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -15,6 +17,7 @@ import com.papierflieger.databinding.FragmentHomeBinding
 import com.papierflieger.presentation.bussiness.AuthViewModel
 import com.papierflieger.presentation.bussiness.DestinationViewModel
 import com.papierflieger.presentation.bussiness.SessionViewModel
+import com.papierflieger.presentation.bussiness.WishlistViewModel
 import com.papierflieger.presentation.ui.adapter.destinations.DestinationAdapter
 import com.papierflieger.presentation.ui.adapter.wishlist.WishlistAdapter
 import com.papierflieger.wrapper.Resource
@@ -27,8 +30,13 @@ class HomeFragment : Fragment() {
     private val authViewModel: AuthViewModel by viewModels()
     private val sessionViewModel : SessionViewModel by viewModels()
     private val destinationViewModel : DestinationViewModel by viewModels()
+    private val wishlistViewModel : WishlistViewModel by viewModels()
 
-    private val favDestinationAdapter : DestinationAdapter by lazy { DestinationAdapter() }
+    private val favDestinationAdapter : DestinationAdapter by lazy {
+        DestinationAdapter()
+    }
+
+    private lateinit var idWishlist: List<Int>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,9 +48,30 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         bindingSession()
         showsData()
+        setClickListener()
+        dataWishlist()
+    }
+
+    private fun dataWishlist() {
+        authViewModel.getToken().observe(viewLifecycleOwner) { token ->
+            wishlistViewModel.getWishlist(token).observe(viewLifecycleOwner) {
+                when (it) {
+                    is Resource.Empty -> {}
+                    is Resource.Error -> {}
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        if (it.payload?.wishlist != null) {
+                            idWishlist = it.payload.wishlist.map { wishlist -> wishlist?.destinationId!! }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setClickListener() {
         binding.btnSearch.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_searchActivity)
         }
@@ -66,10 +95,12 @@ class HomeFragment : Fragment() {
 
         favDestinationAdapter.actionClick(object : DestinationAdapter.OnDestinationFavItem {
             override fun itemClicked(id: Int) {
+                val wishlist: Boolean = idWishlist.any { it == id }
                 findNavController().navigate(
                     R.id.action_homeFragment_to_detailDestinationActivity
                     ,Bundle().apply {
                         putInt("id", id)
+                        putBoolean("wishlist", wishlist)
                     }
                 )
             }
@@ -84,7 +115,7 @@ class HomeFragment : Fragment() {
 
         authViewModel.getAvatar().observe(viewLifecycleOwner){
             binding.ivAvatar.load(it){
-                placeholder(R.drawable.ic_person_circle)
+                placeholder(R.color.background_gray)
             }
         }
     }
