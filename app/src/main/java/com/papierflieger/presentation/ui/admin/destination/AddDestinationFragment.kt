@@ -25,7 +25,7 @@ import com.papierflieger.presentation.bussiness.AdminViewModel
 import com.papierflieger.presentation.bussiness.AirportsViewModel
 import com.papierflieger.presentation.bussiness.DestinationViewModel
 import com.papierflieger.presentation.bussiness.SessionViewModel
-import com.papierflieger.presentation.ui.adapter.destinations.AdminDestinationPictureAdapter
+import com.papierflieger.presentation.ui.adapter.admin.AdminDestinationPictureAdapter
 import com.papierflieger.wrapper.CustomAdapter
 import com.papierflieger.wrapper.Resource
 import com.papierflieger.wrapper.convertAirport
