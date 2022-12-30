@@ -11,7 +11,6 @@ import com.papierflieger.R
 import com.papierflieger.databinding.FragmentHistoryBinding
 import com.papierflieger.presentation.bussiness.AuthViewModel
 import com.papierflieger.presentation.bussiness.NotificationViewModel
-import com.papierflieger.presentation.ui.home.HomeActivity
 import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,6 +32,16 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindingNotification()
+        initList()
+        observeData()
+    }
+
+    private fun observeData() {
+
+    }
+
+    private fun initList() {
+
     }
 
     private fun bindingNotification() {

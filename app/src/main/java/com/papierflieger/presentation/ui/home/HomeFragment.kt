@@ -13,7 +13,6 @@ import com.papierflieger.R
 import com.papierflieger.databinding.FragmentHomeBinding
 import com.papierflieger.presentation.bussiness.AuthViewModel
 import com.papierflieger.presentation.bussiness.DestinationViewModel
-import com.papierflieger.presentation.bussiness.NotificationViewModel
 import com.papierflieger.presentation.bussiness.WishlistViewModel
 import com.papierflieger.presentation.ui.adapter.destinations.DestinationAdapter
 import com.papierflieger.wrapper.Resource

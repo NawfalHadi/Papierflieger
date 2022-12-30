@@ -1,8 +1,6 @@
-package com.papierflieger.presentation.ui.adapter.destinations
+package com.papierflieger.presentation.ui.adapter.admin
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

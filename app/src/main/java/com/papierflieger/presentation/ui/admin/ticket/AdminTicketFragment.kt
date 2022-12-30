@@ -16,7 +16,7 @@ import com.papierflieger.databinding.FragmentAdminTicketBinding
 import com.papierflieger.presentation.bussiness.AdminViewModel
 import com.papierflieger.presentation.bussiness.SessionViewModel
 import com.papierflieger.presentation.bussiness.TicketViewModel
-import com.papierflieger.presentation.ui.adapter.destinations.AdminTicketAdapter
+import com.papierflieger.presentation.ui.adapter.admin.AdminTicketAdapter
 import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -10,7 +10,6 @@ import coil.load
 import com.papierflieger.R
 import com.papierflieger.data.network.response.wishlist.Wishlist
 import com.papierflieger.databinding.ItemWishlistBinding
-import com.papierflieger.presentation.ui.adapter.destinations.AdminAirplaneAdapter
 
 class WishlistAdapter : RecyclerView.Adapter<WishlistAdapter.WishlistViewHolder>() {
 
