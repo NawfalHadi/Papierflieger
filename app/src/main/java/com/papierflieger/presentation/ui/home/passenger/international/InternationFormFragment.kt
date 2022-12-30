@@ -6,9 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointForward
+import com.google.android.material.datepicker.MaterialDatePicker
 import com.papierflieger.data.local.model.PassengersModel
 import com.papierflieger.databinding.FragmentTravelerDetailInternationalBinding
 import com.papierflieger.presentation.ui.home.search.SearchActivity
+import com.papierflieger.wrapper.toRequestDate
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,8 +34,9 @@ class InternationFormFragment : Fragment() {
         val customerId = arguments?.getInt(SearchActivity.PASSENGER_COUNTER_KEY)
         val customerInformation = arguments?.getParcelable<PassengersModel>(SearchActivity.PASSENGER_KEY)
 
+        datePicking()
+        dateValueChanging()
         bindingInformation(customerInformation)
-
 
         with(binding){
             btnBack.setOnClickListener {
@@ -40,6 +45,36 @@ class InternationFormFragment : Fragment() {
 
             btnSave.setOnClickListener {
                 setInformation(customerId)
+            }
+        }
+    }
+
+    private fun dateValueChanging() {
+        with(binding){
+            birthdatePicker.addOnPositiveButtonClickListener {
+                etDateBirth.setText(it.toRequestDate())
+            }
+
+            expiredDatePicker.addOnPositiveButtonClickListener {
+                etExpirationDate.setText(it.toRequestDate())
+            }
+        }
+    }
+
+    private fun datePicking() {
+        with(binding){
+            tilDateBirth.setOnClickListener {
+                birthdatePicker.show(
+                    childFragmentManager,
+                    "date_picker"
+                )
+            }
+
+            tilExpirationDate.setOnClickListener {
+                expiredDatePicker.show(
+                    childFragmentManager,
+                    "date_picker"
+                )
             }
         }
     }
@@ -71,5 +106,28 @@ class InternationFormFragment : Fragment() {
             etExpirationDate.setText(customerInformation?.expired)
         }
     }
-
 }
+
+private val birthdatePicker =
+    MaterialDatePicker.Builder.datePicker()
+        .setTitleText("BirthDate")
+        .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+        .setCalendarConstraints(
+            CalendarConstraints.Builder()
+                .setStart(MaterialDatePicker.thisMonthInUtcMilliseconds())
+                .setValidator(DateValidatorPointForward.now())
+                .build()
+        )
+        .build()
+
+private val expiredDatePicker =
+    MaterialDatePicker.Builder.datePicker()
+        .setTitleText("Expired Date")
+        .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+        .setCalendarConstraints(
+            CalendarConstraints.Builder()
+                .setStart(MaterialDatePicker.thisMonthInUtcMilliseconds())
+                .setValidator(DateValidatorPointForward.now())
+                .build()
+        )
+        .build()

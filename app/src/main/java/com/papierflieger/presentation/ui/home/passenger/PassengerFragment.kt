@@ -103,18 +103,12 @@ class PassengerFragment : Fragment(){
             for (passenger in listObjectInformation){
                 listOfInternationalPassengers.add(
                     PassengerInternational(
-//                        passenger.passengerNames,
-//                        passenger.birthDate,
-//                        passenger.nationality,
-//                        passenger.passportNumber,
-//                        passenger.issuingCountry,
-//                        passenger.expired,
-                        "test",
-                        "2002-05-12",
-                        "Indonesia",
-                        "1234124",
-                        "Indonesia",
-                        "2027-05-12",
+                        passenger.passengerNames,
+                        passenger.birthDate,
+                        passenger.nationality,
+                        passenger.passportNumber,
+                        passenger.issuingCountry,
+                        passenger.expired,
                         tickets
                     )
                 )
@@ -125,7 +119,6 @@ class PassengerFragment : Fragment(){
             )).observe(viewLifecycleOwner){
                 when(it){
                     is Resource.Success -> {
-                        Toast.makeText(context, "ALLHAMDULILLAH", Toast.LENGTH_LONG).show()
                         findNavController().navigate(R.id.action_passengerFragment_to_paymentFragment)
                     }
                     is Resource.Empty -> Toast.makeText(context, "Empty :(", Toast.LENGTH_LONG).show()

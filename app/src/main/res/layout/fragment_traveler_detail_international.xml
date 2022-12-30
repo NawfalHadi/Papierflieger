@@ -149,7 +149,7 @@
                 android:id="@+id/et_nationality"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="none" />
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -207,7 +207,7 @@
                 android:id="@+id/et_issuing_country"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="none" />
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
