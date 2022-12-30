@@ -3,12 +3,13 @@ package com.papierflieger.data.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.papierflieger.data.network.response.ChangeDataResponse
-import com.papierflieger.data.network.response.destination.CreateDestinationResponse
 import com.papierflieger.data.network.response.airplane.CreateAirplaneResponse
 import com.papierflieger.data.network.response.airport.CreateAirportResponse
+import com.papierflieger.data.network.response.destination.CreateDestinationResponse
 import com.papierflieger.data.network.response.ticket.CreateTicketResponse
 import com.papierflieger.data.network.service.ApiAdminService
 import com.papierflieger.wrapper.Resource
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -56,7 +57,7 @@ class AdminRepository(
     fun createDestination(
         token: String,
         name: String,
-        images: String,
+        images: List<MultipartBody.Part>,
         location: String,
         description: String,
         airportId: Int

@@ -10,6 +10,7 @@ import com.papierflieger.data.network.response.ticket.CreateTicketResponse
 import com.papierflieger.data.repository.AdminRepository
 import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,7 +25,7 @@ class AdminViewModel @Inject constructor(
     fun createDestination(
         token: String,
         name: String,
-        images: String,
+        images: List<MultipartBody.Part>,
         location: String,
         description: String,
         airportId: Int

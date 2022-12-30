@@ -30,6 +30,10 @@ import com.papierflieger.wrapper.CustomAdapter
 import com.papierflieger.wrapper.Resource
 import com.papierflieger.wrapper.convertAirport
 import dagger.hilt.android.AndroidEntryPoint
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.InputStream
 
 @AndroidEntryPoint
 class AddDestinationFragment : Fragment() {
@@ -47,7 +51,7 @@ class AddDestinationFragment : Fragment() {
     private var idDestination : Int? = null
     private var uploadPhoto : String? = null
     private var airportId : Int = -1
-
+    private val photos = mutableListOf<MultipartBody.Part>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -95,16 +99,10 @@ class AddDestinationFragment : Fragment() {
     private val galleryResult =
         registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
             if (result != null) {
-//                val pickedPhoto: Bitmap = if (Build.VERSION.SDK_INT >= 28) {
-//                    val source = ImageDecoder.createSource(requireActivity().contentResolver, result)
-//                    ImageDecoder.decodeBitmap(source)
-//                } else {
-//                    MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, result)
-//                }
-
-                Toast.makeText(context, result.toString(), Toast.LENGTH_SHORT).show()
-
-                uploadPhoto = result.toString()
+                uploadPhoto = result.path
+                val requestBody = RequestBody.create("image/jpeg".toMediaTypeOrNull(),  uploadPhoto!!)
+                val part = MultipartBody.Part.createFormData("images", uploadPhoto!!)
+                photos.add(part)
                 binding.apply {
                     cvImageEmpty.visibility = View.VISIBLE
                     rvDestinationPicture.visibility = View.INVISIBLE
@@ -112,6 +110,7 @@ class AddDestinationFragment : Fragment() {
                         placeholder(R.color.background_gray)
                     }
                 }
+
             }
         }
 
@@ -156,9 +155,9 @@ class AddDestinationFragment : Fragment() {
             if (validationInput(name, location, description)) {
                 sessionViewModel.getToken().observe(viewLifecycleOwner) { token ->
                     if (idDestination != null) {
-                        adminViewModel.updateDestination(idDestination!!, token, name, uploadPhoto!!, location, description, airportId)
+//                        adminViewModel.updateDestination(idDestination!!, token, name, uploadPhoto!!, location, description, airportId)
                     } else {
-                        adminViewModel.createDestination(token, name, uploadPhoto!!,  location, description, airportId)
+                        adminViewModel.createDestination(token, name, photos,  location, description, airportId)
                     }
                     findNavController().navigate(R.id.adminDashboardFragment)
                 }

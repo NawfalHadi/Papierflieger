@@ -1,12 +1,14 @@
 package com.papierflieger.data.network.service
 
 import com.papierflieger.data.network.response.ChangeDataResponse
-import com.papierflieger.data.network.response.destination.CreateDestinationResponse
 import com.papierflieger.data.network.response.airplane.CreateAirplaneResponse
 import com.papierflieger.data.network.response.airport.CreateAirportResponse
+import com.papierflieger.data.network.response.destination.CreateDestinationResponse
 import com.papierflieger.data.network.response.ticket.CreateTicketResponse
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
+import javax.annotation.Nullable
 
 interface ApiAdminService {
 
@@ -14,15 +16,15 @@ interface ApiAdminService {
      * Destination
      */
 
-    @FormUrlEncoded
+    @Multipart
     @POST("api/destinations")
     fun createAdminDestination(
         @Header("Authorization") token: String,
-        @Field("name") name: String,
-        @Field("images") images: String,
-        @Field("location") location: String,
-        @Field("description") description: String,
-        @Field("airportId") airportId: Int,
+        @Part("name") name: String,
+        @Part images: List<MultipartBody.Part>,
+        @Part("location") location: String,
+        @Part("description") description: String,
+        @Part("airportId") airportId: Int,
     ) : Call<CreateDestinationResponse>
 
     @FormUrlEncoded
