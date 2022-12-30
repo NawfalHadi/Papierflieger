@@ -11,23 +11,29 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.papierflieger.R
+import com.papierflieger.data.local.model.OrderInternational
+import com.papierflieger.data.local.model.PassengerInternational
 import com.papierflieger.data.local.model.PassengersModel
 import com.papierflieger.data.network.response.ticket.DataTicket
 import com.papierflieger.databinding.FragmentTransactionFlightBinding
+import com.papierflieger.presentation.bussiness.OrderViewModel
 import com.papierflieger.presentation.bussiness.SessionViewModel
 import com.papierflieger.presentation.ui.adapter.passenger.TravelerAdapter
 import com.papierflieger.presentation.ui.adapter.tickets.TicketsAdapter
 import com.papierflieger.presentation.ui.home.search.SearchActivity
+import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
 
 @AndroidEntryPoint
 class PassengerFragment : Fragment(){
+    private var sessionToken : String = ""
     private var passengerCounter : Int = 1
     private var listAdded : Boolean = false
     private var ticketsPreview : ArrayList<DataTicket> = arrayListOf()
 
     private val sessionViewModel : SessionViewModel by viewModels()
+    private val orderViewModel : OrderViewModel by viewModels()
 
     private lateinit var binding : FragmentTransactionFlightBinding
 
@@ -36,6 +42,8 @@ class PassengerFragment : Fragment(){
 
     private val listOfPassenger : ArrayList<String> = arrayListOf()
     private val listObjectInformation : ArrayList<PassengersModel> = arrayListOf()
+
+    private val listOfInternationalPassengers : ArrayList<PassengerInternational> = arrayListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,31 +65,79 @@ class PassengerFragment : Fragment(){
         showsRecycler()
 
         binding.btnPay.setOnClickListener {
-            for (position in 1..listObjectInformation.size){
-                try {
-                    if (listObjectInformation[position].passengerNames.isNullOrEmpty()){
-                        Toast.makeText(context, "Passenger $position still not filled", Toast.LENGTH_SHORT).show()
-                    }
-                } catch (e : Exception) {
-
-                }
-
+            if (true){
+                continuePayment()
             }
         }
 
         sessionViewModel.getToken().observe(viewLifecycleOwner){
             if (it!=""){
                 loginAlready()
+                sessionToken = it
             } else {
                 haventLogin()
             }
         }
     }
 
+    private fun checkInformation() : Boolean{
+        var status = false
+        for (position in 0..listObjectInformation.size){
+            status = try {
+                if (listObjectInformation[position].passengerNames.isNullOrEmpty()){
+                    Toast.makeText(context, "Passenger ${position + 1} still not filled", Toast.LENGTH_SHORT).show()
+                }
+                true
+            } catch (e : Exception) {
+                false
+            }
+        }
+        return status
+    }
+
+    private fun continuePayment() {
+            val tickets : ArrayList<Int> = arrayListOf()
+            for (ticket in ticketsPreview){
+                tickets.add(ticket.id!!)
+            }
+            for (passenger in listObjectInformation){
+                listOfInternationalPassengers.add(
+                    PassengerInternational(
+//                        passenger.passengerNames,
+//                        passenger.birthDate,
+//                        passenger.nationality,
+//                        passenger.passportNumber,
+//                        passenger.issuingCountry,
+//                        passenger.expired,
+                        "test",
+                        "2002-05-12",
+                        "Indonesia",
+                        "1234124",
+                        "Indonesia",
+                        "2027-05-12",
+                        tickets
+                    )
+                )
+            }
+
+            orderViewModel.continuePaymentInternational(sessionToken, OrderInternational(
+                listOfInternationalPassengers
+            )).observe(viewLifecycleOwner){
+                when(it){
+                    is Resource.Success -> {
+                        Toast.makeText(context, "ALLHAMDULILLAH", Toast.LENGTH_LONG).show()
+                        findNavController().navigate(R.id.action_passengerFragment_to_paymentFragment)
+                    }
+                    is Resource.Empty -> Toast.makeText(context, "Empty :(", Toast.LENGTH_LONG).show()
+                    is Resource.Error -> Toast.makeText(context, it.payload?.message, Toast.LENGTH_LONG).show()
+                    is Resource.Loading -> TODO()
+                }
+            }
+    }
+
     private fun setCustomerData(customer: PassengersModel?, idCustomer: Int? = 0) {
         Log.e("size", listObjectInformation.size.toString())
         Log.e("data", idCustomer.toString())
-
 
         try {
             listObjectInformation[idCustomer!!] = customer!!
@@ -121,7 +177,12 @@ class PassengerFragment : Fragment(){
                 val mBundle = Bundle()
                 mBundle.putInt(SearchActivity.PASSENGER_COUNTER_KEY, position)
                 mBundle.putParcelable(SearchActivity.PASSENGER_KEY, listObjectInformation[position])
-                findNavController().navigate(R.id.action_passengerFragment_to_nationalFormFragment, mBundle)
+
+                if (ticketsPreview[0].ticketType?.equals("Domestik")!!) {
+                    findNavController().navigate(R.id.action_passengerFragment_to_nationalFormFragment, mBundle)
+                } else {
+                    findNavController().navigate(R.id.action_passengerFragment_to_internationFormFragment, mBundle)
+                }
             }
         })
     }

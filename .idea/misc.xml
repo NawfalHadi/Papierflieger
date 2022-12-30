@@ -96,10 +96,14 @@
         <entry key="app/src/main/res/layout/fragment_history.xml" value="0.17916666666666667" />
         <entry key="app/src/main/res/layout/fragment_list_flight_return.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2391304347826087" />
+        <entry key="app/src/main/res/layout/fragment_payment.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_payment_status.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_personal_address.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_personal_information.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/layout/fragment_profile_user.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.2391304347826087" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.17147922998986828" />
-        <entry key="app/src/main/res/layout/fragment_transaction_flight.xml" value="0.12407407407407407" />
+        <entry key="app/src/main/res/layout/fragment_transaction_flight.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_traveler_detail.xml" value="0.22" />
         <entry key="app/src/main/res/layout/item_favorite_destination.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/item_list_flight.xml" value="0.1" />

@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_passengerFragment_to_internationFormFragment"
             app:destination="@id/internationFormFragment" />
+        <action
+            android:id="@+id/action_passengerFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
     </fragment>
     <fragment
         android:id="@+id/nationalFormFragment"
@@ -57,4 +60,9 @@
         android:name="com.papierflieger.presentation.ui.home.passenger.international.InternationFormFragment"
         android:label="InternationFormFragment"
         tools:layout="@layout/fragment_traveler_detail_international"/>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.papierflieger.presentation.ui.home.payments.PaymentFragment"
+        android:label="PaymentFragment"
+        tools:layout="@layout/fragment_payment"/>
 </navigation>

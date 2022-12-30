@@ -1,4 +1,8 @@
 package com.papierflieger.data.network.service
+import com.papierflieger.data.local.model.OrderDomestic
+import com.papierflieger.data.local.model.OrderInternational
+import com.papierflieger.data.local.model.PassengerDomestic
+import com.papierflieger.data.local.model.PassengerInternational
 import com.papierflieger.data.network.response.ChangeDataResponse
 import com.papierflieger.data.network.response.airplane.AirplaneResponse
 import com.papierflieger.data.network.response.airplane.AirplanesResponse
@@ -10,6 +14,7 @@ import com.papierflieger.data.network.response.destination.DestinationResponse
 import com.papierflieger.data.network.response.destination.DestinationsResponse
 import com.papierflieger.data.network.response.notification.CreateNotificationResponse
 import com.papierflieger.data.network.response.notification.NotificationsResponse
+import com.papierflieger.data.network.response.orders.OrderResponse
 import com.papierflieger.data.network.response.ticket.ListTicketResponse
 import com.papierflieger.data.network.response.ticket.SearchTicketResponse
 import com.papierflieger.data.network.response.ticket.TicketResponse
@@ -170,5 +175,21 @@ interface ApiService {
     fun getAirplaneById(
         @Path("idAirplane") idAirplane: Int
     ) : Call<AirplaneResponse>
+
+    /**
+     * Order API
+     */
+
+    @POST("api/orders")
+    fun continuePaymentDomestic(
+        @Header("Authorization") token: String,
+        @Body orderDomestic: OrderDomestic
+    ) : Call<OrderResponse>
+
+    @POST("api/orders")
+    fun continuePaymentInternational(
+        @Header("Authorization") token: String,
+        @Body orderInternational: OrderInternational
+    ) : Call<OrderResponse>
 
 }

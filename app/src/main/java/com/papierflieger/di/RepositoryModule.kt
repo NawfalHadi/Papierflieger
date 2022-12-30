@@ -86,6 +86,16 @@ object RepositoryModule {
 
     @Provides
     @Singleton
+    fun providesOrderRepo(
+        apiService: ApiService
+    ) : OrderRepository {
+        return OrderRepository(
+            apiService
+        )
+    }
+
+    @Provides
+    @Singleton
     fun providesWishlistRepo(
         apiService: ApiService
     ) : WishlistRepository {

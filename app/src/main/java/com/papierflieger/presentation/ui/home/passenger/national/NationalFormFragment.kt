@@ -41,17 +41,14 @@ class NationalFormFragment : Fragment() {
             btnSave.setOnClickListener {
                 val passengerNames = etFullName.text.toString()
                 val nationality = etNationality.text.toString()
-                var identityCard = etIdentityCard.text.toString().trim()
-                if (identityCard.isEmpty()){
-                    identityCard = 0.toString()
-                }
+                val identityCard = etIdentityCard.text.toString()
                 val birthdate = etDateBirth.text.toString()
 
                 findNavController().previousBackStackEntry?.savedStateHandle?.set(SearchActivity.PASSENGER_COUNTER_KEY, customerId)
                 findNavController().previousBackStackEntry?.savedStateHandle?.set(SearchActivity.PASSENGER_KEY, PassengersModel(
                     passengerNames = passengerNames,
                     nationality = nationality,
-                    nik = identityCard.toInt(),
+                    nik = identityCard,
                     birthDate = birthdate
                 ))
                 findNavController().popBackStack()
