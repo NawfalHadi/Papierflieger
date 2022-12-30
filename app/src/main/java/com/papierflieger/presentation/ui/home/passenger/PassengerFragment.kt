@@ -20,6 +20,7 @@ import com.papierflieger.presentation.bussiness.OrderViewModel
 import com.papierflieger.presentation.bussiness.SessionViewModel
 import com.papierflieger.presentation.ui.adapter.passenger.TravelerAdapter
 import com.papierflieger.presentation.ui.adapter.tickets.TicketsAdapter
+import com.papierflieger.presentation.ui.home.payments.PaymentFragment
 import com.papierflieger.presentation.ui.home.search.SearchActivity
 import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
@@ -65,7 +66,7 @@ class PassengerFragment : Fragment(){
         showsRecycler()
 
         binding.btnPay.setOnClickListener {
-            if (true){
+            if (checkInformation()){
                 continuePayment()
             }
         }
@@ -81,18 +82,16 @@ class PassengerFragment : Fragment(){
     }
 
     private fun checkInformation() : Boolean{
-        var status = false
         for (position in 0..listObjectInformation.size){
-            status = try {
+            try {
                 if (listObjectInformation[position].passengerNames.isNullOrEmpty()){
                     Toast.makeText(context, "Passenger ${position + 1} still not filled", Toast.LENGTH_SHORT).show()
                 }
-                true
             } catch (e : Exception) {
-                false
+                return false
             }
         }
-        return status
+        return true
     }
 
     private fun continuePayment() {
@@ -119,6 +118,8 @@ class PassengerFragment : Fragment(){
             )).observe(viewLifecycleOwner){
                 when(it){
                     is Resource.Success -> {
+                        val mBundle = Bundle()
+                        mBundle.putParcelable(PaymentFragment.ORDER_RESPONSE_KEY, it.payload!!)
                         findNavController().navigate(R.id.action_passengerFragment_to_paymentFragment)
                     }
                     is Resource.Empty -> Toast.makeText(context, "Empty :(", Toast.LENGTH_LONG).show()
