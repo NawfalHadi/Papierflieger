@@ -10,10 +10,10 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.papierflieger.data.network.response.airplane.DataAirplane
 import com.papierflieger.data.network.response.airport.Airport
-import java.text.DecimalFormat
 import com.papierflieger.data.network.response.ticket.DataTicket
 import com.papierflieger.data.network.response.ticket.TiketBerangkat
 import com.papierflieger.data.network.response.ticket.TiketPulang
+import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 

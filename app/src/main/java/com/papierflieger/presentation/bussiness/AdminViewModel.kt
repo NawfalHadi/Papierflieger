@@ -3,10 +3,13 @@ package com.papierflieger.presentation.bussiness
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.papierflieger.data.network.response.ChangeDataResponse
+import com.papierflieger.data.network.response.airplane.AirplanesResponse
 import com.papierflieger.data.network.response.airplane.CreateAirplaneResponse
 import com.papierflieger.data.network.response.airport.CreateAirportResponse
 import com.papierflieger.data.network.response.destination.CreateDestinationResponse
+import com.papierflieger.data.network.response.orders.OrdersResponse
 import com.papierflieger.data.network.response.ticket.CreateTicketResponse
+import com.papierflieger.data.network.response.transaction.TransactionsResponse
 import com.papierflieger.data.repository.AdminRepository
 import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -237,6 +240,36 @@ class AdminViewModel @Inject constructor(
         token: String
     ) : LiveData<Resource<ChangeDataResponse>> {
         return adminRepository.deleteTicket(idTicket, token)
+    }
+
+    /***
+     * Order
+     */
+
+    fun getOrders(token: String) : LiveData<Resource<OrdersResponse>>{
+        return adminRepository.getOrders(token)
+    }
+
+    fun deleteOrder(
+        idOrder: Int,
+        token: String
+    ) : LiveData<Resource<ChangeDataResponse>> {
+        return adminRepository.deleteOrder(idOrder, token)
+    }
+
+    /***
+     * Transaction
+     */
+
+    fun getTransactions(token: String) : LiveData<Resource<TransactionsResponse>>{
+        return adminRepository.getTransactions(token)
+    }
+
+    fun deleteTransaction(
+        idTransaction: Int,
+        token: String
+    ) : LiveData<Resource<ChangeDataResponse>> {
+        return adminRepository.deleteTransaction(idTransaction, token)
     }
 
 }

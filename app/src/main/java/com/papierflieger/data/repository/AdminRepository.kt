@@ -6,7 +6,9 @@ import com.papierflieger.data.network.response.ChangeDataResponse
 import com.papierflieger.data.network.response.airplane.CreateAirplaneResponse
 import com.papierflieger.data.network.response.airport.CreateAirportResponse
 import com.papierflieger.data.network.response.destination.CreateDestinationResponse
+import com.papierflieger.data.network.response.orders.OrdersResponse
 import com.papierflieger.data.network.response.ticket.CreateTicketResponse
+import com.papierflieger.data.network.response.transaction.TransactionsResponse
 import com.papierflieger.data.network.service.ApiAdminService
 import com.papierflieger.wrapper.Resource
 import okhttp3.MultipartBody
@@ -51,6 +53,20 @@ class AdminRepository(
     private var deleteTicketResponse : MutableLiveData<Resource<ChangeDataResponse>> = MutableLiveData()
 
     /***
+     * Order
+     */
+
+    private var ordersResponse : MutableLiveData<Resource<OrdersResponse>> = MutableLiveData()
+    private var deleteOrderResponse : MutableLiveData<Resource<ChangeDataResponse>> = MutableLiveData()
+
+    /***
+     * Transaction
+     */
+
+    private var transactionsResponse : MutableLiveData<Resource<TransactionsResponse>> = MutableLiveData()
+    private var deleteTransactionResponse : MutableLiveData<Resource<ChangeDataResponse>> = MutableLiveData()
+
+    /***
      * Destination
      */
 
@@ -75,7 +91,6 @@ class AdminRepository(
                 }
             }
         )
-
         return createDestinationResponse
     }
 
@@ -101,7 +116,6 @@ class AdminRepository(
                 }
             }
         )
-
         return updateDestinationResponse
     }
 
@@ -147,7 +161,6 @@ class AdminRepository(
                 }
             }
         )
-
         return createAirportResponse
     }
 
@@ -171,7 +184,6 @@ class AdminRepository(
                 }
             }
         )
-
         return updateAirportResponse
     }
 
@@ -217,7 +229,6 @@ class AdminRepository(
                 }
             }
         )
-
         return createAirplaneResponse
     }
 
@@ -241,7 +252,6 @@ class AdminRepository(
                 }
             }
         )
-
         return updateAirplaneResponse
     }
 
@@ -438,4 +448,91 @@ class AdminRepository(
         return deleteTicketResponse
     }
 
+    /***
+     * Order
+     */
+
+    fun getOrders(token: String) : LiveData<Resource<OrdersResponse>> {
+        apiAdminService.getAdminOrders(token).enqueue(
+            object : Callback<OrdersResponse>{
+                override fun onResponse(
+                    call: Call<OrdersResponse>,
+                    response: Response<OrdersResponse>
+                ) {
+                    ordersResponse.postValue(Resource.Success(response.body()!!))
+                }
+
+                override fun onFailure(call: Call<OrdersResponse>, t: Throwable) {
+                    ordersResponse.postValue(Resource.Error(t))
+                }
+
+            }
+        )
+        return ordersResponse
+    }
+
+    fun deleteOrder(idOrder: Int, token: String) : LiveData<Resource<ChangeDataResponse>> {
+        apiAdminService.deleteAdminOrder(idOrder, token).enqueue(
+            object : Callback<ChangeDataResponse>{
+                override fun onResponse(
+                    call: Call<ChangeDataResponse>,
+                    response: Response<ChangeDataResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        deleteOrderResponse.postValue(Resource.Success(response.body()!!))
+                    }
+                }
+
+                override fun onFailure(call: Call<ChangeDataResponse>, t: Throwable) {
+                    deleteOrderResponse.postValue(Resource.Error(t))
+                }
+
+            }
+        )
+        return deleteOrderResponse
+    }
+
+    /***
+     * Transaction
+     */
+
+    fun getTransactions(token: String) : LiveData<Resource<TransactionsResponse>> {
+        apiAdminService.getAdminTransactions(token).enqueue(
+            object : Callback<TransactionsResponse>{
+                override fun onResponse(
+                    call: Call<TransactionsResponse>,
+                    response: Response<TransactionsResponse>
+                ) {
+                    transactionsResponse.postValue(Resource.Success(response.body()!!))
+                }
+
+                override fun onFailure(call: Call<TransactionsResponse>, t: Throwable) {
+                    transactionsResponse.postValue(Resource.Error(t))
+                }
+
+            }
+        )
+        return transactionsResponse
+    }
+
+    fun deleteTransaction(idTransaction: Int, token: String) : LiveData<Resource<ChangeDataResponse>> {
+        apiAdminService.deleteAdminTransaction(idTransaction, token).enqueue(
+            object : Callback<ChangeDataResponse>{
+                override fun onResponse(
+                    call: Call<ChangeDataResponse>,
+                    response: Response<ChangeDataResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        deleteTransactionResponse.postValue(Resource.Success(response.body()!!))
+                    }
+                }
+
+                override fun onFailure(call: Call<ChangeDataResponse>, t: Throwable) {
+                    deleteTransactionResponse.postValue(Resource.Error(t))
+                }
+
+            }
+        )
+        return deleteTransactionResponse
+    }
 }

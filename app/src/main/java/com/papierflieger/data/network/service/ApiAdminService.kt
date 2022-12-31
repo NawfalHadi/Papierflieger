@@ -4,11 +4,12 @@ import com.papierflieger.data.network.response.ChangeDataResponse
 import com.papierflieger.data.network.response.airplane.CreateAirplaneResponse
 import com.papierflieger.data.network.response.airport.CreateAirportResponse
 import com.papierflieger.data.network.response.destination.CreateDestinationResponse
+import com.papierflieger.data.network.response.orders.OrdersResponse
 import com.papierflieger.data.network.response.ticket.CreateTicketResponse
+import com.papierflieger.data.network.response.transaction.TransactionsResponse
 import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
-import javax.annotation.Nullable
 
 interface ApiAdminService {
 
@@ -172,6 +173,36 @@ interface ApiAdminService {
     @DELETE("api/tickets/{idTickets}")
     fun deleteAdminTicket(
         @Path("idTickets") idTickets: Int,
+        @Header("Authorization") token: String,
+    ) : Call<ChangeDataResponse>
+
+    /***
+     * Order
+     */
+
+    @GET("api/orders")
+    fun getAdminOrders(
+        @Header("Authorization") token: String
+    ) : Call<OrdersResponse>
+
+    @DELETE("api/orders/{idOrder}")
+    fun deleteAdminOrder(
+        @Path("idOrder") idOrders: Int,
+        @Header("Authorization") token: String,
+    ) : Call<ChangeDataResponse>
+
+    /***
+     * Transaction
+     */
+
+    @GET("api/transactions")
+    fun getAdminTransactions(
+        @Header("Authorization") token: String
+    ) : Call<TransactionsResponse>
+
+    @DELETE("api/transactions/{idTransaction}")
+    fun deleteAdminTransaction(
+        @Path("idTransaction") idTransaction: Int,
         @Header("Authorization") token: String,
     ) : Call<ChangeDataResponse>
 

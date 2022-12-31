@@ -31,10 +31,21 @@
             app:showAsAction="ifRoom"
             android:title="@string/text_destination"/>
         <item
+            android:id="@+id/adminOrderFragment"
+            android:icon="@drawable/ic_shopping_cart"
+            app:showAsAction="ifRoom"
+            android:title="@string/text_order"/>
+        <item
+            android:id="@+id/adminTransactionFragment"
+            android:icon="@drawable/ic_receipt"
+            app:showAsAction="ifRoom"
+            android:title="@string/text_transaction"/>
+        <item
             android:id="@+id/adminProfileFragment"
             android:icon="@drawable/ic_person"
             app:showAsAction="ifRoom"
             android:title="@string/text_profile"/>
+
     </group>
 
 </menu>
