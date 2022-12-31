@@ -163,7 +163,6 @@
     <string name="text_transit_duration">Transit Duration</string>
     <string name="text_wishlist">Wishlist</string>
     <string name="text_wishlist_not_found">Wishlist Not Found</string>
-    <string name="text_lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ac purus eget purus aliquam aliquam vel in eros. Donec semper porta tempus. Mauris eu metus at massa rutrum convallis. Donec in arcu commodo, bibendum sem vitae, facilisis nibh. Morbi ac nunc vel massa faucibus congue. Praesent ultricies est et ultricies malesuada. Nunc sollicitudin, est in pharetra accumsan, dolor dolor pharetra lorem, non rhoncus nibh nibh ac urna. Integer rutrum turpis sit amet nisl vehicula, non convallis magna pretium. Nullam at dolor vestibulum, ultrices massa elementum, lobortis elit. Aenean quis vehicula elit. Aenean ultricies orci sollicitudin facilisis porttitor.</string>
     <string name="text_order">Order</string>
     <string name="text_passenger_name">Passenger Name</string>
     <string name="text_trip">Trip</string>

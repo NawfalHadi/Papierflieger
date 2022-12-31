@@ -91,7 +91,7 @@
                 android:maxLines="2"
                 android:ellipsize="end"
                 android:textColor="@color/gray"
-                android:text="@string/text_lorem_ipsum"
+                android:text="@string/text_description"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="@+id/tv_location"
                 app:layout_constraintStart_toStartOf="@+id/tv_location"
