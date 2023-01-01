@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.papierflieger.data.network.response.user.Profile
 import com.papierflieger.data.network.response.user.UpdateUserResponse
+import com.papierflieger.data.network.response.user.User
 import com.papierflieger.databinding.FragmentPersonalInformationBinding
 import com.papierflieger.presentation.bussiness.SessionViewModel
 import com.papierflieger.presentation.bussiness.UserViewModel
@@ -37,7 +37,7 @@ class PersonalInformationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val profile = arguments?.getParcelable<Profile>(AccountInformationActivity.PERSONAL_INFORMATION)
+        val profile = arguments?.getParcelable<User>(AccountInformationActivity.PERSONAL_INFORMATION)
         bindingData(profile!!)
 
         with(binding){
@@ -70,7 +70,7 @@ class PersonalInformationFragment : Fragment() {
         }
     }
 
-    private fun bindingData(profile: Profile) {
+    private fun bindingData(profile: User) {
         with(binding){
             etTitle.setText(profile.title)
             etFullName.setText(profile.fullName)

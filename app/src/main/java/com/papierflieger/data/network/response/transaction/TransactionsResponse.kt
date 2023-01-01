@@ -1,6 +1,7 @@
 package com.papierflieger.data.network.response.transaction
 
 import com.google.gson.annotations.SerializedName
+import com.papierflieger.data.network.response.user.User
 
 data class TransactionsResponse(
     @SerializedName("transaksi")
@@ -47,41 +48,4 @@ data class Payment(
     val id: Int,
     @SerializedName("updatedAt")
     val updatedAt: String
-)
-
-data class User(
-    @SerializedName("avatar")
-    val avatar: String?,
-    @SerializedName("birthdate")
-    val birthdate: String?,
-    @SerializedName("country")
-    val country: String?,
-    @SerializedName("createdAt")
-    val createdAt: String,
-    @SerializedName("email")
-    val email: String,
-    @SerializedName("fullName")
-    val fullName: String,
-    @SerializedName("id")
-    val id: Int,
-    @SerializedName("nationality")
-    val nationality: String?,
-    @SerializedName("password")
-    val password: String,
-    @SerializedName("phone")
-    val phone: String?,
-    @SerializedName("province")
-    val province: String?,
-    @SerializedName("regency")
-    val regency: String?,
-    @SerializedName("role")
-    val role: String,
-    @SerializedName("title")
-    val title: String?,
-    @SerializedName("updatedAt")
-    val updatedAt: String,
-    @SerializedName("username")
-    val username: String,
-    @SerializedName("verified")
-    val verified: Boolean
 )

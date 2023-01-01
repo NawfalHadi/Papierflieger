@@ -9,12 +9,19 @@ import com.papierflieger.data.network.response.destination.CreateDestinationResp
 import com.papierflieger.data.network.response.orders.OrdersResponse
 import com.papierflieger.data.network.response.ticket.CreateTicketResponse
 import com.papierflieger.data.network.response.transaction.TransactionsResponse
+import com.papierflieger.data.network.response.user.UsersResponse
 import com.papierflieger.data.network.service.ApiAdminService
 import com.papierflieger.wrapper.Resource
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 class AdminRepository(
     private val apiAdminService: ApiAdminService
@@ -67,24 +74,52 @@ class AdminRepository(
     private var deleteTransactionResponse : MutableLiveData<Resource<ChangeDataResponse>> = MutableLiveData()
 
     /***
+     * User
+     */
+
+    private var usersResponse : MutableLiveData<Resource<UsersResponse>> = MutableLiveData()
+    private var updateUserResponse : MutableLiveData<Resource<ChangeDataResponse>> = MutableLiveData()
+
+
+    /***
      * Destination
      */
 
     fun createDestination(
         token: String,
         name: String,
-        images: List<MultipartBody.Part>,
+        images: List<File>,
         location: String,
         description: String,
         airportId: Int
     ) : LiveData<Resource<CreateDestinationResponse>> {
-        apiAdminService.createAdminDestination(token, name, images, location, description, airportId).enqueue(
+        val parts = mutableListOf<MultipartBody.Part>()
+        for (file in images) {
+            val part = MultipartBody.Part.createFormData("images", file.name,
+                file.asRequestBody("image/${file.extension}".toMediaTypeOrNull()))
+            parts.add(part)
+        }
+        apiAdminService.createAdminDestination(
+            token,
+            stringToPart(name),
+            parts,
+            stringToPart(location),
+            stringToPart(description),
+            stringToPart(airportId.toString())
+        ).enqueue(
             object : Callback<CreateDestinationResponse>{
                 override fun onResponse(
                     call: Call<CreateDestinationResponse>,
                     response: Response<CreateDestinationResponse>
                 ) {
-                    createDestinationResponse.postValue(Resource.Success(response.body()!!))
+                    val body = response.body()
+                    if (body != null) {
+                        createDestinationResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        createDestinationResponse.value = Resource.Error(Throwable(errorMessage))
+                    }
                 }
                 override fun onFailure(call: Call<CreateDestinationResponse>, t: Throwable) {
                     createDestinationResponse.postValue(Resource.Error(t))
@@ -94,22 +129,47 @@ class AdminRepository(
         return createDestinationResponse
     }
 
+    private fun stringToPart(stringData: String): RequestBody {
+        return stringData.toRequestBody("text/plain".toMediaTypeOrNull())
+    }
+
     fun updateDestination(
         idDestination: Int,
         token: String,
         name: String,
-        images: String,
+        images: List<File>,
         location: String,
         description: String,
         airportId: Int
     ) : LiveData<Resource<ChangeDataResponse>> {
-        apiAdminService.updateAdminDestination(idDestination, token, name, images, location, description, airportId).enqueue(
+        val parts = mutableListOf<MultipartBody.Part>()
+        for (file in images) {
+            val part = MultipartBody.Part.createFormData("images", file.name,
+                file.asRequestBody("image/${file.extension}".toMediaTypeOrNull()))
+            parts.add(part)
+        }
+        apiAdminService.updateAdminDestination(
+            idDestination,
+            token,
+            stringToPart(name),
+            parts,
+            stringToPart(location),
+            stringToPart(description),
+            stringToPart(airportId.toString())
+        ).enqueue(
             object : Callback<ChangeDataResponse>{
                 override fun onResponse(
                     call: Call<ChangeDataResponse>,
                     response: Response<ChangeDataResponse>
                 ) {
-                    updateDestinationResponse.postValue(Resource.Success(response.body()!!))
+                    val body = response.body()
+                    if (body != null) {
+                        updateDestinationResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        updateDestinationResponse.value = Resource.Error(Throwable(errorMessage))
+                    }
                 }
                 override fun onFailure(call: Call<ChangeDataResponse>, t: Throwable) {
                     updateDestinationResponse.postValue(Resource.Error(t))
@@ -126,8 +186,13 @@ class AdminRepository(
                     call: Call<ChangeDataResponse>,
                     response: Response<ChangeDataResponse>
                 ) {
-                    if (response.isSuccessful){
-                        deleteDestinationResponse.postValue(Resource.Success(response.body()!!))
+                    val body = response.body()
+                    if (body != null) {
+                        deleteDestinationResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        deleteDestinationResponse.value = Resource.Error(Throwable(errorMessage))
                     }
                 }
                 override fun onFailure(call: Call<ChangeDataResponse>, t: Throwable) {
@@ -154,7 +219,14 @@ class AdminRepository(
                     call: Call<CreateAirportResponse>,
                     response: Response<CreateAirportResponse>
                 ) {
-                    createAirportResponse.postValue(Resource.Success(response.body()!!))
+                    val body = response.body()
+                    if (body != null) {
+                        createAirportResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        createAirportResponse.value = Resource.Error(Throwable(errorMessage))
+                    }
                 }
                 override fun onFailure(call: Call<CreateAirportResponse>, t: Throwable) {
                     createAirportResponse.postValue(Resource.Error(t))
@@ -177,7 +249,14 @@ class AdminRepository(
                     call: Call<ChangeDataResponse>,
                     response: Response<ChangeDataResponse>
                 ) {
-                    updateAirportResponse.postValue(Resource.Success(response.body()!!))
+                    val body = response.body()
+                    if (body != null) {
+                        updateAirportResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        updateAirportResponse.value = Resource.Error(Throwable(errorMessage))
+                    }
                 }
                 override fun onFailure(call: Call<ChangeDataResponse>, t: Throwable) {
                     updateAirportResponse.postValue(Resource.Error(t))
@@ -194,8 +273,13 @@ class AdminRepository(
                     call: Call<ChangeDataResponse>,
                     response: Response<ChangeDataResponse>
                 ) {
-                    if (response.isSuccessful){
-                        deleteAirportResponse.postValue(Resource.Success(response.body()!!))
+                    val body = response.body()
+                    if (body != null) {
+                        deleteAirportResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        deleteAirportResponse.value = Resource.Error(Throwable(errorMessage))
                     }
                 }
                 override fun onFailure(call: Call<ChangeDataResponse>, t: Throwable) {
@@ -222,7 +306,14 @@ class AdminRepository(
                     call: Call<CreateAirplaneResponse>,
                     response: Response<CreateAirplaneResponse>
                 ) {
-                    createAirplaneResponse.postValue(Resource.Success(response.body()!!))
+                    val body = response.body()
+                    if (body != null) {
+                        createAirplaneResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        createAirplaneResponse.value = Resource.Error(Throwable(errorMessage))
+                    }
                 }
                 override fun onFailure(call: Call<CreateAirplaneResponse>, t: Throwable) {
                     createAirplaneResponse.postValue(Resource.Error(t))
@@ -245,7 +336,14 @@ class AdminRepository(
                     call: Call<ChangeDataResponse>,
                     response: Response<ChangeDataResponse>
                 ) {
-                    updateAirplaneResponse.postValue(Resource.Success(response.body()!!))
+                    val body = response.body()
+                    if (body != null) {
+                        updateAirplaneResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        updateAirplaneResponse.value = Resource.Error(Throwable(errorMessage))
+                    }
                 }
                 override fun onFailure(call: Call<ChangeDataResponse>, t: Throwable) {
                     updateAirplaneResponse.postValue(Resource.Error(t))
@@ -262,8 +360,13 @@ class AdminRepository(
                     call: Call<ChangeDataResponse>,
                     response: Response<ChangeDataResponse>
                 ) {
-                    if (response.isSuccessful){
-                        deleteAirplaneResponse.postValue(Resource.Success(response.body()!!))
+                    val body = response.body()
+                    if (body != null) {
+                        deleteAirplaneResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        deleteAirplaneResponse.value = Resource.Error(Throwable(errorMessage))
                     }
                 }
                 override fun onFailure(call: Call<ChangeDataResponse>, t: Throwable) {
@@ -321,7 +424,14 @@ class AdminRepository(
                     call: Call<CreateTicketResponse>,
                     response: Response<CreateTicketResponse>
                 ) {
-                    createTicketResponse.postValue(Resource.Success(response.body()!!))
+                    val body = response.body()
+                    if (body != null) {
+                        createTicketResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        createTicketResponse.value = Resource.Error(Throwable(errorMessage))
+                    }
                 }
                 override fun onFailure(call: Call<CreateTicketResponse>, t: Throwable) {
                     createTicketResponse.postValue(Resource.Error(t))
@@ -364,7 +474,14 @@ class AdminRepository(
                     call: Call<CreateTicketResponse>,
                     response: Response<CreateTicketResponse>
                 ) {
-                    createTicketResponse.postValue(Resource.Success(response.body()!!))
+                    val body = response.body()
+                    if (body != null) {
+                        createTicketResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        createTicketResponse.value = Resource.Error(Throwable(errorMessage))
+                    }
                 }
                 override fun onFailure(call: Call<CreateTicketResponse>, t: Throwable) {
                     createTicketResponse.postValue(Resource.Error(t))
@@ -419,7 +536,14 @@ class AdminRepository(
                     call: Call<ChangeDataResponse>,
                     response: Response<ChangeDataResponse>
                 ) {
-                    updateTicketResponse.postValue(Resource.Success(response.body()!!))
+                    val body = response.body()
+                    if (body != null) {
+                        updateTicketResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        updateTicketResponse.value = Resource.Error(Throwable(errorMessage))
+                    }
                 }
                 override fun onFailure(call: Call<ChangeDataResponse>, t: Throwable) {
                     updateTicketResponse.postValue(Resource.Error(t))
@@ -436,8 +560,13 @@ class AdminRepository(
                     call: Call<ChangeDataResponse>,
                     response: Response<ChangeDataResponse>
                 ) {
-                    if (response.isSuccessful){
-                        deleteTicketResponse.postValue(Resource.Success(response.body()!!))
+                    val body = response.body()
+                    if (body != null) {
+                        deleteTicketResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        deleteTicketResponse.value = Resource.Error(Throwable(errorMessage))
                     }
                 }
                 override fun onFailure(call: Call<ChangeDataResponse>, t: Throwable) {
@@ -459,7 +588,14 @@ class AdminRepository(
                     call: Call<OrdersResponse>,
                     response: Response<OrdersResponse>
                 ) {
-                    ordersResponse.postValue(Resource.Success(response.body()!!))
+                    val body = response.body()
+                    if (body != null) {
+                        ordersResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        ordersResponse.value = Resource.Error(Throwable(errorMessage))
+                    }
                 }
 
                 override fun onFailure(call: Call<OrdersResponse>, t: Throwable) {
@@ -478,8 +614,13 @@ class AdminRepository(
                     call: Call<ChangeDataResponse>,
                     response: Response<ChangeDataResponse>
                 ) {
-                    if (response.isSuccessful) {
-                        deleteOrderResponse.postValue(Resource.Success(response.body()!!))
+                    val body = response.body()
+                    if (body != null) {
+                        deleteOrderResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        deleteOrderResponse.value = Resource.Error(Throwable(errorMessage))
                     }
                 }
 
@@ -503,7 +644,14 @@ class AdminRepository(
                     call: Call<TransactionsResponse>,
                     response: Response<TransactionsResponse>
                 ) {
-                    transactionsResponse.postValue(Resource.Success(response.body()!!))
+                    val body = response.body()
+                    if (body != null) {
+                        transactionsResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        transactionsResponse.value = Resource.Error(Throwable(errorMessage))
+                    }
                 }
 
                 override fun onFailure(call: Call<TransactionsResponse>, t: Throwable) {
@@ -522,8 +670,13 @@ class AdminRepository(
                     call: Call<ChangeDataResponse>,
                     response: Response<ChangeDataResponse>
                 ) {
-                    if (response.isSuccessful) {
-                        deleteTransactionResponse.postValue(Resource.Success(response.body()!!))
+                    val body = response.body()
+                    if (body != null) {
+                        deleteTransactionResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        deleteTransactionResponse.value = Resource.Error(Throwable(errorMessage))
                     }
                 }
 
@@ -534,5 +687,61 @@ class AdminRepository(
             }
         )
         return deleteTransactionResponse
+    }
+
+    /***
+     * Transaction
+     */
+
+    fun getUsers(token: String) : LiveData<Resource<UsersResponse>> {
+        apiAdminService.getAdminUser(token).enqueue(
+            object : Callback<UsersResponse>{
+                override fun onResponse(
+                    call: Call<UsersResponse>,
+                    response: Response<UsersResponse>
+                ) {
+                    val body = response.body()
+                    if (body != null) {
+                        usersResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        usersResponse.value = Resource.Error(Throwable(errorMessage))
+                    }
+                }
+
+                override fun onFailure(call: Call<UsersResponse>, t: Throwable) {
+                    usersResponse.postValue(Resource.Error(t))
+                }
+
+            }
+        )
+        return usersResponse
+    }
+
+    fun updateUser(idUser: Int, token: String) : LiveData<Resource<ChangeDataResponse>> {
+        apiAdminService.updateAdminUser(idUser, token).enqueue(
+            object : Callback<ChangeDataResponse>{
+                override fun onResponse(
+                    call: Call<ChangeDataResponse>,
+                    response: Response<ChangeDataResponse>
+                ) {
+                    val body = response.body()
+                    if (body != null) {
+                        updateUserResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        updateUserResponse.value = Resource.Error(Throwable(errorMessage))
+                    }
+                }
+
+                override fun onFailure(call: Call<ChangeDataResponse>, t: Throwable) {
+                    updateUserResponse.postValue(Resource.Error(t))
+                }
+
+            }
+        )
+        return updateUserResponse
     }
 }

@@ -41,6 +41,11 @@
             app:showAsAction="ifRoom"
             android:title="@string/text_transaction"/>
         <item
+            android:id="@+id/adminUserFragment"
+            android:icon="@drawable/ic_groups"
+            app:showAsAction="ifRoom"
+            android:title="@string/text_user"/>
+        <item
             android:id="@+id/adminProfileFragment"
             android:icon="@drawable/ic_person"
             app:showAsAction="ifRoom"

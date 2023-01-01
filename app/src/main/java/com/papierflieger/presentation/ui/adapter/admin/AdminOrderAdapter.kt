@@ -1,5 +1,6 @@
 package com.papierflieger.presentation.ui.adapter.admin
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -49,6 +50,7 @@ class AdminOrderAdapter : RecyclerView.Adapter<AdminOrderAdapter.OrderViewHolder
         private val binding : ItemAdminOrderBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bindingItem(item: Order?, position: Int) {
             with(binding){
                 if (position < 1) vGap.visibility = View.INVISIBLE
@@ -61,7 +63,12 @@ class AdminOrderAdapter : RecyclerView.Adapter<AdminOrderAdapter.OrderViewHolder
                 tvPassportNumberValue.text = item?.passportNumber
                 tvExpirationDateValue.text = item?.expired?.let { convertDateFormat(it) }
                 tvIssuingCountryValue.text = item?.issuingCountry
-                tvTicketValue.text = item?.ticketId?.size.toString()
+                if (item?.ticketId?.size != null && item.ticketId.size > 1) {
+                    tvTicketValue.text = "Round Trip"
+                } else {
+                    tvTicketValue.text = "One Way"
+                }
+
 
                 if (item?.id != null) {
                     btnDelete.setOnClickListener { onAdminOrderItem.itemDeleteClicked(item.id) }

@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.papierflieger.R
 import com.papierflieger.data.local.model.TitleValueModel
-import com.papierflieger.data.network.response.user.Profile
+import com.papierflieger.data.network.response.user.User
 import com.papierflieger.databinding.FragmentAccountInformationBinding
 import com.papierflieger.presentation.bussiness.SessionViewModel
 import com.papierflieger.presentation.ui.adapter.settings.AccountInformationAdapter
@@ -58,7 +58,7 @@ class AccountInformationFragment : Fragment() {
         }
     }
 
-    private fun setAccountInformation(user: Profile) {
+    private fun setAccountInformation(user: User) {
         binding.textPersonalChange.setOnClickListener {
             val mBundle = Bundle()
             mBundle.putParcelable(AccountInformationActivity.PERSONAL_INFORMATION, user)

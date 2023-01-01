@@ -1,4 +1,4 @@
-package com.papierflieger.presentation.ui.admin.transaction
+package com.papierflieger.presentation.ui.admin.user
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,29 +11,29 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.papierflieger.R
-import com.papierflieger.databinding.FragmentAdminTransactionBinding
+import com.papierflieger.databinding.FragmentAdminUserBinding
 import com.papierflieger.presentation.bussiness.AdminViewModel
 import com.papierflieger.presentation.bussiness.SessionViewModel
-import com.papierflieger.presentation.ui.adapter.admin.AdminTransactionAdapter
+import com.papierflieger.presentation.ui.adapter.admin.AdminUserAdapter
 import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AdminTransactionFragment : Fragment() {
+class AdminUserFragment : Fragment() {
 
-    private lateinit var binding: FragmentAdminTransactionBinding
+    private lateinit var binding: FragmentAdminUserBinding
     private val sessionViewModel : SessionViewModel by viewModels()
     private val adminViewModel : AdminViewModel by viewModels()
 
-    private val adapterTransaction: AdminTransactionAdapter by lazy {
-        AdminTransactionAdapter()
+    private val adapterUser: AdminUserAdapter by lazy {
+        AdminUserAdapter()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentAdminTransactionBinding.inflate(layoutInflater, container, false)
+        binding = FragmentAdminUserBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -46,7 +46,7 @@ class AdminTransactionFragment : Fragment() {
 
     private fun observeData() {
         sessionViewModel.getToken().observe(viewLifecycleOwner) { token ->
-            adminViewModel.getTransactions(token).observe(viewLifecycleOwner) {
+            adminViewModel.getUsers(token).observe(viewLifecycleOwner) {
                 when(it) {
                     is Resource.Empty -> {}
                     is Resource.Error -> {}
@@ -61,7 +61,7 @@ class AdminTransactionFragment : Fragment() {
                             pbLoading.visibility = View.GONE
                             pbLoading.isVisible = false
                         }
-                        adapterTransaction.setItem(it.payload?.transaksi)
+                        adapterUser.setItem(it.payload?.users)
                     }
                 }
             }
@@ -70,24 +70,24 @@ class AdminTransactionFragment : Fragment() {
     }
 
     private fun initList() {
-        binding.rvTransaction.apply {
+        binding.rvUser.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = adapterTransaction
+            adapter = adapterUser
         }
 
-        adapterTransaction.actionClick(object : AdminTransactionAdapter.OnAdminTransactionItem {
-            override fun itemDeleteClicked(id: Int) {
-                alertDelete(id)
+        adapterUser.actionClick(object : AdminUserAdapter.OnAdminUserItem {
+            override fun itemUpdateClicked(id: Int) {
+                alertUpdate(id)
             }
         })
     }
 
-    private fun alertDelete(id: Int) {
+    private fun alertUpdate(id: Int) {
         AlertDialog.Builder(requireContext())
-            .setMessage(R.string.text_sure_delete)
-            .setPositiveButton(R.string.text_delete) { _, _ ->
+            .setMessage(R.string.text_sure_admin)
+            .setPositiveButton(R.string.text_update) { _, _ ->
                 sessionViewModel.getToken().observe(viewLifecycleOwner) { token ->
-                    adminViewModel.deleteTransaction(id, token)
+                    adminViewModel.updateUser(id, token)
                     findNavController().navigate(R.id.adminDashboardFragment)
                 }
             }
@@ -98,7 +98,7 @@ class AdminTransactionFragment : Fragment() {
     }
 
     private fun bindingTitle() {
-        requireActivity().setTitle(R.string.text_transaction)
+        requireActivity().setTitle(R.string.text_user)
     }
 
 }

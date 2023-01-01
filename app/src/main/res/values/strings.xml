@@ -155,7 +155,7 @@
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="text_delete">Delete</string>
-    <string name="text_sure_delete">Are you sure you want to delete this?</string>
+    <string name="text_sure_delete">Are you sure want to delete this?</string>
     <string name="text_transit">Transit?</string>
     <string name="text_idr">IDR</string>
     <string name="text_flight_type">Flight Type</string>
@@ -166,6 +166,12 @@
     <string name="text_order">Order</string>
     <string name="text_passenger_name">Passenger Name</string>
     <string name="text_trip">Trip</string>
+    <string name="text_role">Role</string>
+    <string name="text_admin">Admin</string>
+    <string name="text_customer">Customer</string>
+    <string name="text_user">User</string>
+    <string name="text_sure_admin">Are you sure want to give role admin to this user?</string>
+    <string name="text_update">Update</string>
     <string-array name="titles">
 
     </string-array>

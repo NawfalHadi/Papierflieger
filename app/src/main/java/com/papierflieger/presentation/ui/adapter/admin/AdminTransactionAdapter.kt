@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.papierflieger.data.network.response.transaction.Transaksi
 import com.papierflieger.databinding.ItemAdminTransactionBinding
+import com.papierflieger.wrapper.convertToRupiah
 
 class AdminTransactionAdapter : RecyclerView.Adapter<AdminTransactionAdapter.TransactionViewHolder>() {
 
@@ -64,7 +65,7 @@ class AdminTransactionAdapter : RecyclerView.Adapter<AdminTransactionAdapter.Tra
                 tvTripValue.text = item?.trip
                 tvFullNameValue.text = item?.user?.fullName
                 tvEmailValue.text = item?.user?.email
-                tvTotalPriceValue.text = item?.totalPrice.toString()
+                tvTotalPriceValue.text = item?.totalPrice?.let { convertToRupiah(it) }
 
                 if (item?.paymentId != null) {
                     tvBankName.visibility = View.VISIBLE
