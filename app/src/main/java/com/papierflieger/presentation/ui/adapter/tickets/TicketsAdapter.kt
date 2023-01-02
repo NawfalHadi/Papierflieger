@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.papierflieger.data.network.response.ticket.DataTicket
 import com.papierflieger.databinding.ItemFlightPassengerChooseBinding
+import com.papierflieger.wrapper.convertDateFormat
+import com.papierflieger.wrapper.convertTimeFormat
 
 class TicketsAdapter : RecyclerView.Adapter<TicketsAdapter.TicketViewHolder>(){
     private var diffCallback = object : DiffUtil.ItemCallback<DataTicket>(){
@@ -45,9 +47,9 @@ class TicketsAdapter : RecyclerView.Adapter<TicketsAdapter.TicketViewHolder>(){
 
         fun bindingData(ticket: DataTicket) {
             with(binding){
-                tvDate.text = ticket.departureDate
-                tvDepartureTime.text = ticket.departureTime
-                tvArrivalTime.text = ticket.arrivalTime
+                tvDate.text = ticket.departureDate?.let { convertDateFormat(it) }
+                tvDepartureTime.text = ticket.departureTime?.let { convertTimeFormat(it) }
+                tvArrivalTime.text = ticket.arrivalTime?.let { convertTimeFormat(it) }
 
                 tvDuration.text = ticket.flightDuration
             }

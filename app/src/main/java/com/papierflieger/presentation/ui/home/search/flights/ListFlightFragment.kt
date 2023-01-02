@@ -19,6 +19,7 @@ import com.papierflieger.presentation.ui.adapter.tickets.DepartureAdapter
 import com.papierflieger.presentation.ui.home.search.SearchActivity
 import com.papierflieger.presentation.ui.home.search.bottomsheet.TicketPreviewBottomSheet
 import com.papierflieger.wrapper.Resource
+import com.papierflieger.wrapper.convertAirport
 import com.papierflieger.wrapper.toDataTicket
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -115,8 +116,8 @@ class ListFlightFragment : Fragment() {
     private fun bindingTitle() {
         binding.apply {
             tvPassenger.text = StringBuilder(passengerCounter.toString()).append(" ${getString(R.string.text_passenger)}")
-            tvDeparture.text = airportFrom.city.substringBefore(",")
-            tvArrival.text = airportTo.city.substringBefore(",")
+            tvDeparture.text = convertAirport(airportFrom.city.substringBefore(","), airportFrom.cityCode)
+            tvArrival.text = convertAirport(airportTo.city.substringBefore(","), airportTo.cityCode)
             tvDateOrder.text = dateDeparture
         }
     }

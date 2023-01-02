@@ -22,18 +22,6 @@
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
-
-        <TextView
-            android:id="@+id/tv_transcationprice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/text_price"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="@id/tv_ordernumber"
-            app:layout_constraintBottom_toBottomOf="@id/tv_ordernumber"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
         <ImageView
             android:id="@+id/ic_airplane"
             android:layout_width="20dp"
@@ -45,26 +33,26 @@
             app:tint="@color/gray" />
 
         <TextView
-            android:id="@+id/tv_fromlocation"
+            android:id="@+id/tv_from_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_departure"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:layout_marginStart="4dp"
             app:layout_constraintStart_toEndOf="@id/ic_airplane"
             app:layout_constraintTop_toTopOf="@id/ic_airplane"
             app:layout_constraintBottom_toBottomOf="@id/ic_airplane"/>
 
         <TextView
-            android:id="@+id/tv_destinationlocation"
+            android:id="@+id/tv_destination_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="2dp"
             android:text="@string/text_arrival"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_fromlocation"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_from_location"
             app:layout_constraintStart_toEndOf="@id/ic_change_arrow"
-            app:layout_constraintTop_toTopOf="@+id/tv_fromlocation" />
+            app:layout_constraintTop_toTopOf="@+id/tv_from_location" />
 
         <ImageView
             android:id="@+id/ic_change_arrow"
@@ -72,9 +60,21 @@
             android:layout_height="16dp"
             android:layout_marginStart="2dp"
             android:src="@drawable/ic_change_arrow"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/ic_airplane"
-            app:layout_constraintStart_toEndOf="@id/tv_fromlocation"
+            app:layout_constraintStart_toEndOf="@id/tv_from_location"
             app:layout_constraintTop_toTopOf="@+id/ic_airplane" />
+
+        <ImageView
+            android:id="@+id/ic_direct"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:visibility="gone"
+            android:src="@drawable/ic_arrow_destination"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_change_arrow"
+            app:layout_constraintEnd_toEndOf="@+id/ic_change_arrow"
+            app:layout_constraintStart_toStartOf="@+id/ic_change_arrow"
+            app:layout_constraintTop_toTopOf="@+id/ic_change_arrow" />
 
         <View
             android:id="@+id/guideline_one"
