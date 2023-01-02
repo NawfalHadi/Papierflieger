@@ -56,11 +56,10 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bindingInformation(history: Transaction, order: Order, ticket: Ticket) {
             with(binding){
-                tvDestinationlocation.text = ticket.to?.city
-                tvFromlocation.text = ticket.from?.city
+                tvDestinationLocation.text = ticket.to?.city
+                tvFromLocation.text = ticket.from?.city
                 tvOrdernumber.text = ticket.ticketNumber.toString()
 
-                tvTranscationprice.text = convertToRupiah(history.totalPrice!!.toInt())
             }
         }
     }

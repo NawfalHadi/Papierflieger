@@ -14,8 +14,7 @@ class DetailHistoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = FragmentDetailHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val data =
+        
 
         bindingInformation()
         binding.icKeyboardArrow.setOnClickListener {
