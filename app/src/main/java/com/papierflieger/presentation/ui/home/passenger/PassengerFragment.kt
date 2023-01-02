@@ -86,6 +86,7 @@ class PassengerFragment : Fragment(){
             try {
                 if (listObjectInformation[position].passengerNames.isNullOrEmpty()){
                     Toast.makeText(context, "Passenger ${position + 1} still not filled", Toast.LENGTH_SHORT).show()
+                    return false
                 }
             } catch (e : Exception) {
                 return false

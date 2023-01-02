@@ -6,6 +6,7 @@ import com.papierflieger.data.local.model.OrderDomestic
 import com.papierflieger.data.local.model.OrderInternational
 import com.papierflieger.data.network.response.orders.OrderDetailResponse
 import com.papierflieger.data.network.response.orders.OrderResponse
+import com.papierflieger.data.network.response.transaction.PaymentMethod
 import com.papierflieger.data.network.response.transaction.TransactionsResponse
 import com.papierflieger.data.repository.OrderRepository
 import com.papierflieger.wrapper.Resource
@@ -35,7 +36,7 @@ class OrderViewModel @Inject constructor(
 
     fun confirmPaymentMethod(
         token: String, bankName: String, accountName: String ,accountNumber: Int, tokenTransaction: String
-    ) : LiveData<Resource<TransactionsResponse>> {
+    ) : LiveData<Resource<PaymentMethod>> {
         return orderRepository.confirmPaymentMethod(
             token, bankName, accountName, accountNumber, tokenTransaction
         )

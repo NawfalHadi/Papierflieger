@@ -6,9 +6,11 @@ import com.papierflieger.data.network.response.user.User
 data class TransactionsResponse(
     @SerializedName("transaksi")
     val transaksi: List<Transaksi>,
+)
+
+data class PaymentMethod(
     @SerializedName("message")
     val message: String
-
 )
 
 data class Transaksi(

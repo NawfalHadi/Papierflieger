@@ -44,16 +44,16 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
 
     override fun onBindViewHolder(holder: HistoryAdapter.ViewHolder, position: Int) {
         val ticket = ticket[position]
-        holder.bindingInformation(ticket, transaction[position], order[position])
+        holder.bindingInformation(ticket)
     }
 
-    override fun getItemCount(): Int = transaction.size
+    override fun getItemCount(): Int = ticket.size
 
     inner class ViewHolder(
         private val binding : ItemTransactionHistoryBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bindingInformation(ticket: Ticket, transaction: Transaction, order: Order) {
+        fun bindingInformation(ticket: Ticket) {
             with(binding){
                 tvOrdernumber.text = "#${ticket.id.toString()}"
                 tvFromLocation.text = convertAirport(
@@ -70,14 +70,14 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
                 tvFromLocation.text = ticket.from?.city
                 tvOrdernumber.text = ticket.ticketNumber.toString()
                 cardHistory.setOnClickListener {
-                    onHistoryCardAction.cardAction(transaction, order, ticket)
+                    onHistoryCardAction.cardAction(ticket)
                 }
             }
         }
     }
 
     interface OnHistoryCardAction {
-        fun cardAction(transaction: Transaction, order: Order, ticket: Ticket)
+        fun cardAction(ticket: Ticket)
     }
 
 }

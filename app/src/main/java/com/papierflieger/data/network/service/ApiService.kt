@@ -20,6 +20,7 @@ import com.papierflieger.data.network.response.ticket.ListTicketResponse
 import com.papierflieger.data.network.response.ticket.SearchTicketResponse
 import com.papierflieger.data.network.response.ticket.TicketResponse
 import com.papierflieger.data.network.response.transaction.HistoriesResponse
+import com.papierflieger.data.network.response.transaction.PaymentMethod
 import com.papierflieger.data.network.response.transaction.TransactionsResponse
 import com.papierflieger.data.network.response.user.UpdateUserResponse
 import com.papierflieger.data.network.response.user.UserResponse
@@ -218,5 +219,5 @@ interface ApiService {
         @Field("accountName") accountName : String,
         @Field("accountNumber") accountNumber : Int,
         @Field("tokenTransaction") tokenTransaction : String
-    ) : Call<TransactionsResponse>
+    ) : Call<PaymentMethod>
 }

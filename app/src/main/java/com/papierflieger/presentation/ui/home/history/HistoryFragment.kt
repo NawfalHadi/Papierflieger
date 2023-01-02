@@ -83,11 +83,9 @@ class HistoryFragment : Fragment() {
         }
 
         historyAdapter.listener(object : HistoryAdapter.OnHistoryCardAction{
-            override fun cardAction(transaction: Transaction, order: Order, ticket: Ticket) {
+            override fun cardAction(ticket: Ticket) {
                 val mBundle = Bundle()
-                mBundle.putParcelable(DetailHistoryActivity.ORDER_LIST_KEY, order)
                 mBundle.putParcelable(DetailHistoryActivity.TICKET_LIST_KEY, ticket)
-                mBundle.putParcelable(DetailHistoryActivity.TRANSACTION_LIST_KEY, transaction)
 
                 val mIntent = Intent(activity, DetailHistoryActivity::class.java)
                 mIntent.putExtras(mBundle)

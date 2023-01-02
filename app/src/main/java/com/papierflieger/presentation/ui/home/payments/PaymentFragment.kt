@@ -63,9 +63,9 @@ class PaymentFragment : Fragment() {
             setOnClickListener {
                 orderViewModel.confirmPaymentMethod(
                     userToken,
-                    "BRI", "Alias",
-                    1321487,
-                    "5870f3a5-77b3-406b-85cc-eb0391fc0a5916726696197940.9959533838694683"
+                    "BankBRI", "Alias",
+                    1321311,
+                    orderResponse.tokenTransaction.toString()
                 ).observe(viewLifecycleOwner){
                     when(it){
                         is Resource.Success -> {
@@ -97,12 +97,17 @@ class PaymentFragment : Fragment() {
 
     private fun bindingInformation(orderResponse: OrderResponse) {
         tiketBerangkat = orderResponse.tiketBerangkat[0]
-        tiketPulang = orderResponse.tiketPulang!![0]
-
         listOfFlight.add(tiketBerangkat.toTickets())
-        listOfFlight.add(tiketPulang.toTickets())
 
-        userToken = sessionViewModel.getToken().toString()
+        try {
+            tiketPulang = orderResponse.tiketPulang!![0]
+            listOfFlight.add(tiketPulang.toTickets())
+        } catch (e : Exception) { }
+
+
+        sessionViewModel.getToken().observe(viewLifecycleOwner){
+            userToken = it
+        }
 
         showsRecycler = true
     }

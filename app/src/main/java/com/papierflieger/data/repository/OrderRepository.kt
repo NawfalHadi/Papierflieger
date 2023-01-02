@@ -6,6 +6,7 @@ import com.papierflieger.data.local.model.OrderDomestic
 import com.papierflieger.data.local.model.OrderInternational
 import com.papierflieger.data.network.response.orders.OrderDetailResponse
 import com.papierflieger.data.network.response.orders.OrderResponse
+import com.papierflieger.data.network.response.transaction.PaymentMethod
 import com.papierflieger.data.network.response.transaction.TransactionsResponse
 import com.papierflieger.data.network.service.ApiService
 import com.papierflieger.wrapper.Resource
@@ -18,7 +19,7 @@ class OrderRepository(
 ) {
     private var orderResponse : MutableLiveData<Resource<OrderResponse>> = MutableLiveData()
     private var orderDetailResponse : MutableLiveData<Resource<OrderDetailResponse>> = MutableLiveData()
-    private var transactionsResponse : MutableLiveData<Resource<TransactionsResponse>> = MutableLiveData()
+    private var paymentMethodResponse : MutableLiveData<Resource<PaymentMethod>> = MutableLiveData()
 
     fun continuePaymentDomestic(
         token: String, orderDomestic: OrderDomestic
@@ -66,26 +67,26 @@ class OrderRepository(
 
     fun confirmPaymentMethod(
         token: String, bankName: String, accountName: String ,accountNumber: Int, tokenTransaction: String
-    ) : LiveData<Resource<TransactionsResponse>> {
+    ) : MutableLiveData<Resource<PaymentMethod>> {
         apiService.confirmPaymentMethod(token, bankName, accountName, accountNumber, tokenTransaction).enqueue(
-            object : Callback<TransactionsResponse>{
+            object : Callback<PaymentMethod>{
                 override fun onResponse(
-                    call: Call<TransactionsResponse>,
-                    response: Response<TransactionsResponse>
+                    call: Call<PaymentMethod>,
+                    response: Response<PaymentMethod>
                 ) {
                     if (response.isSuccessful){
-                        transactionsResponse.postValue(Resource.Success(response.body()!!))
+                        paymentMethodResponse.postValue(Resource.Success(response.body()!!))
                     }
                 }
 
-                override fun onFailure(call: Call<TransactionsResponse>, t: Throwable) {
-                    orderResponse.postValue(Resource.Error(t))
+                override fun onFailure(call: Call<PaymentMethod>, t: Throwable) {
+                    paymentMethodResponse.postValue(Resource.Error(t))
                 }
 
             }
         )
 
-        return transactionsResponse
+        return paymentMethodResponse
     }
 
     fun getDetailOrder(
@@ -97,7 +98,13 @@ class OrderRepository(
                     call: Call<OrderDetailResponse>,
                     response: Response<OrderDetailResponse>
                 ) {
-                    orderDetailResponse.postValue(Resource.Success(response.body()!!))
+                    if (response.isSuccessful){
+                        try {
+                            orderDetailResponse.postValue(Resource.Success(response.body()!!))
+                        } catch (t : Throwable){
+                            orderDetailResponse.postValue(Resource.Error(t))
+                        }
+                    }
                 }
 
                 override fun onFailure(call: Call<OrderDetailResponse>, t: Throwable) {

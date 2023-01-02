@@ -1,14 +1,18 @@
 package com.papierflieger.presentation.ui.home.history
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
-import com.papierflieger.data.network.response.transaction.Order
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.papierflieger.data.network.response.transaction.Ticket
 import com.papierflieger.data.network.response.transaction.Transaction
 import com.papierflieger.databinding.FragmentDetailHistoryBinding
+import com.papierflieger.presentation.bussiness.OrderViewModel
 import com.papierflieger.presentation.bussiness.TicketViewModel
+import com.papierflieger.presentation.ui.adapter.histories.DetailTransactionsAdapter
+import com.papierflieger.wrapper.Resource
 import com.papierflieger.wrapper.convertDateFormat
 import com.papierflieger.wrapper.convertToRupiah
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,6 +22,10 @@ class DetailHistoryActivity : AppCompatActivity() {
     private lateinit var binding : FragmentDetailHistoryBinding
 
     private val ticketViewModel : TicketViewModel by viewModels()
+    private val orderViewModel : OrderViewModel by viewModels()
+
+    private val listOfTicket : ArrayList<Int> = arrayListOf()
+    private val detailTransactionsAdapter : DetailTransactionsAdapter by lazy { DetailTransactionsAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,26 +35,64 @@ class DetailHistoryActivity : AppCompatActivity() {
         val mBundle = intent.extras
 
         val ticket = mBundle?.getParcelable<Ticket>(TICKET_LIST_KEY)
-        val order = mBundle?.getParcelable<Order>(ORDER_LIST_KEY)
-        val transaction = mBundle?.getParcelable<Transaction>(TRANSACTION_LIST_KEY)
 
-        bindingInformation(ticket, order, transaction)
+        bindingInformation(ticket)
         binding.icKeyboardArrow.setOnClickListener {
             pricingDetailsShow()
         }
 
+
     }
 
-    private fun bindingInformation(ticket: Ticket?, order: Order?, transaction: Transaction?) {
+    private fun bindingInformation(ticket: Ticket?) {
         with(binding){
             tvFromlocation.text = ticket?.from?.city.toString()
             tvDestinationlocation.text = ticket?.from?.city.toString()
 
             tvOrdernumber.text = ticket?.ticketNumber.toString()
-            tvPricingdetail.text = convertToRupiah(transaction?.totalPrice)
+            tvPricingdetail.text = convertToRupiah(ticket?.price)
 
-            tvPurchasetime.text = convertDateFormat(transaction?.updatedAt.toString())
+//            tvPurchasetime.text = convertDateFormat(transaction?.updatedAt.toString())
+        }
 
+//        getOrder(transaction?.orderId?.get(0))
+    }
+
+    private fun getOrder(id: Int?) {
+        orderViewModel.getOrderDetail(id!!).observe(this){
+            when(it){
+                is Resource.Success -> {
+                    it.payload?.order?.ticketId?.let { ticket -> listOfTicket.addAll(ticket) }
+                    Log.e("AKH",  listOfTicket.toString())
+                }
+                else -> {}
+            }
+        }
+
+        getTicket(listOfTicket)
+    }
+
+    private fun getTicket(listOfTicket: java.util.ArrayList<Int>) {
+        for (i in listOfTicket){
+            ticketViewModel.getTicketById(i).observe(this){
+                when(it){
+                    is Resource.Success -> {
+                        detailTransactionsAdapter.setItem(it.payload?.ticket!!)
+                        initRecyclers()
+                    }
+                    else -> {}
+                }
+            }
+        }
+    }
+
+    private fun initRecyclers() {
+        with(binding.rvListDetailtransaction){
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(
+                context, LinearLayoutManager.VERTICAL, false
+            )
+            adapter = detailTransactionsAdapter
         }
     }
 
