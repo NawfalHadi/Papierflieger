@@ -53,5 +53,4 @@ class TravelerAdapter : RecyclerView.Adapter<TravelerAdapter.TravelerViewHolder>
     interface OnTravelCardListener {
         fun gotoForm(position: Int)
     }
-
 }

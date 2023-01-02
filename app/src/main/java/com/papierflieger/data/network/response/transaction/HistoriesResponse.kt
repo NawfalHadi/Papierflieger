@@ -9,11 +9,11 @@ import com.papierflieger.data.network.response.orders.Transit
 
 data class HistoriesResponse(
     @SerializedName("order")
-    val order: List<Order?>?,
+    val order: ArrayList<Order>,
     @SerializedName("ticket")
-    val ticket: List<Ticket?>?,
+    val ticket: ArrayList<Ticket>,
     @SerializedName("transaction")
-    val transaction: List<Transaction?>?
+    val transaction: ArrayList<Transaction>
 )
 
 data class Order(

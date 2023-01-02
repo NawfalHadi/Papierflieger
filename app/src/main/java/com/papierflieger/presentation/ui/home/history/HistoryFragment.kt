@@ -49,7 +49,7 @@ class HistoryFragment : Fragment() {
             sessionViewModel.getHistoriesUser(token).observe(viewLifecycleOwner){
                 when(it){
                     is Resource.Success -> {
-                        historyAdapter.setItem(it.payload?.transaction as ArrayList<Transaction>)
+                        historyAdapter.setItem(it.payload!!)
                         initList()
                     }
                     else -> {}
