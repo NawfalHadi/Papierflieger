@@ -172,6 +172,7 @@
     <string name="text_user">User</string>
     <string name="text_sure_admin">Are you sure want to give role admin to this user?</string>
     <string name="text_update">Update</string>
+    <string name="text_login_first">You Have to Login First</string>
     <string-array name="titles">
 
     </string-array>

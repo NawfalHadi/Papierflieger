@@ -23,6 +23,7 @@ import com.papierflieger.data.network.response.user.UserResponse
 import com.papierflieger.data.network.response.wishlist.CreateWishlistResponse
 import com.papierflieger.data.network.response.wishlist.WishlistResponse
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 interface ApiService {
@@ -33,19 +34,19 @@ interface ApiService {
 
     @FormUrlEncoded
     @POST("api/auth/register")
-    suspend fun register(
+    fun register(
         @Field("username") username: String,
         @Field("fullName") fullName: String,
         @Field("email") email: String,
         @Field("password") password: String,
-    ) : RegisterResponse
+    ) : Call<RegisterResponse>
 
     @FormUrlEncoded
     @POST("api/auth/login")
-    suspend fun login(
+    fun login(
         @Field("email") email: String,
         @Field("password") password: String
-    ) : LoginResponse
+    ) : Call<LoginResponse>
 
     /***
      * API Authorization Token Needed

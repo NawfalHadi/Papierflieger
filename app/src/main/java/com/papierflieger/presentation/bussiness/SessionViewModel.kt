@@ -29,6 +29,22 @@ class SessionViewModel @Inject constructor(
         return accountDS.getToken().asLiveData()
     }
 
+    fun getName() : LiveData<String> {
+        return accountDS.getNames().asLiveData()
+    }
+
+    fun getAvatar() : LiveData<String> {
+        return accountDS.getAvatar().asLiveData()
+    }
+
+    fun getEmail() : LiveData<String> {
+        return accountDS.getEmail().asLiveData()
+    }
+
+    fun getRole() : LiveData<String> {
+        return accountDS.getRole().asLiveData()
+    }
+
     fun logout(){
         viewModelScope.launch(Dispatchers.IO) {
             accountDS.logout()

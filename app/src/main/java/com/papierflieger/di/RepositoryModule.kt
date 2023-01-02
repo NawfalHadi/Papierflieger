@@ -33,10 +33,10 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideBasicAuthRepo(
+    fun provideAuthRepo(
         apiService: ApiService
-    ): AuthenticationRepository {
-        return BasicAuthRepoImpl(apiService)
+    ): AuthRepository {
+        return AuthRepository(apiService)
     }
 
     @Provides
@@ -113,4 +113,5 @@ object RepositoryModule {
             apiService
         )
     }
+
 }

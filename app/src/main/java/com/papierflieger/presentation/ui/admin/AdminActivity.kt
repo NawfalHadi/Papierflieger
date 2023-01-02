@@ -15,7 +15,7 @@ import coil.load
 import coil.transform.CircleCropTransformation
 import com.papierflieger.R
 import com.papierflieger.databinding.ActivityAdminBinding
-import com.papierflieger.presentation.bussiness.AuthViewModel
+import com.papierflieger.presentation.bussiness.SessionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,7 +25,7 @@ class AdminActivity : AppCompatActivity() {
     private lateinit var toggle : ActionBarDrawerToggle
     private lateinit var navController: NavController
 
-    private val authViewModel : AuthViewModel by viewModels()
+    private val sessionViewModel : SessionViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,15 +58,15 @@ class AdminActivity : AppCompatActivity() {
         val tvEmail: TextView = header.findViewById(R.id.tv_email)
         val ivAvatar: ImageView = header.findViewById(R.id.iv_avatar)
 
-        authViewModel.getNames().observe(this@AdminActivity) {
+        sessionViewModel.getName().observe(this@AdminActivity) {
             tvName.text = it
         }
 
-        authViewModel.getEmail().observe(this@AdminActivity){
+        sessionViewModel.getEmail().observe(this@AdminActivity){
             tvEmail.text = it
         }
 
-        authViewModel.getAvatar().observe(this@AdminActivity){
+        sessionViewModel.getAvatar().observe(this@AdminActivity){
             ivAvatar.load(it) {
                 transformations(CircleCropTransformation())
                 placeholder(R.drawable.ic_person_circle)

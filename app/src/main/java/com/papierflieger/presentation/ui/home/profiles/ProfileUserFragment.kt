@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -14,7 +15,6 @@ import coil.transform.CircleCropTransformation
 import com.papierflieger.R
 import com.papierflieger.data.local.model.SettingModel
 import com.papierflieger.databinding.FragmentProfileUserBinding
-import com.papierflieger.presentation.bussiness.AuthViewModel
 import com.papierflieger.presentation.bussiness.SessionViewModel
 import com.papierflieger.presentation.ui.adapter.settings.SettingAdapter
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +23,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class ProfileUserFragment : Fragment() {
 
     private lateinit var binding : FragmentProfileUserBinding
-    private val authViewModel: AuthViewModel by viewModels()
     private val sessionViewModel: SessionViewModel by viewModels()
 
     private val accountAndSecurity : ArrayList<SettingModel> = arrayListOf(
@@ -56,21 +55,44 @@ class ProfileUserFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         bindingProfile()
         initList()
+        clickListener()
+    }
+
+    private fun clickListener() {
+        binding.btnSignIn.setOnClickListener {
+            findNavController().navigate(R.id.action_profileUserFragment_to_authActivity)
+        }
     }
 
     private fun bindingProfile() {
-        authViewModel.getAvatar().observe(viewLifecycleOwner) {
-            binding.ivProfile.load(it) {
-                placeholder(R.color.background_gray)
-                transformations(CircleCropTransformation())
+        sessionViewModel.getToken().observe(viewLifecycleOwner) { token ->
+            binding.apply {
+                if (token != "") {
+                    sessionViewModel.getAvatar().observe(viewLifecycleOwner) {
+                        ivProfile.load(it) {
+                            placeholder(R.color.background_gray)
+                            transformations(CircleCropTransformation())
+                        }
+                    }
+                    sessionViewModel.getName().observe(viewLifecycleOwner) {
+                        tvFullName.text = it
+                    }
+                    sessionViewModel.getEmail().observe(viewLifecycleOwner) {
+                        tvEmail.text = it
+                    }
+                } else {
+                    tvFullName.text = ""
+                    tvEmail.text = ""
+
+                    vBg.visibility = View.VISIBLE
+                    vBg.isVisible = true
+
+                    btnSignIn.visibility = View.VISIBLE
+                    btnSignIn.isVisible = true
+                }
             }
         }
-        authViewModel.getNames().observe(viewLifecycleOwner) {
-            binding.tvFullName.text = it
-        }
-        authViewModel.getEmail().observe(viewLifecycleOwner) {
-            binding.tvEmail.text = it
-        }
+
     }
 
     private fun initList() {
@@ -101,7 +123,6 @@ class ProfileUserFragment : Fragment() {
                 if (id == 0) {
                     sessionViewModel.logout()
                     findNavController().navigate(R.id.action_profileUserFragment_to_authActivity)
-                    activity?.finish()
                 } else {
                     findNavController().navigate(id!!)
                 }

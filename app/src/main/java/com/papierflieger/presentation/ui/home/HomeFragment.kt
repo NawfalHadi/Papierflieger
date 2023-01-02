@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.papierflieger.R
 import com.papierflieger.databinding.FragmentHomeBinding
-import com.papierflieger.presentation.bussiness.AuthViewModel
 import com.papierflieger.presentation.bussiness.DestinationViewModel
+import com.papierflieger.presentation.bussiness.SessionViewModel
 import com.papierflieger.presentation.bussiness.WishlistViewModel
 import com.papierflieger.presentation.ui.adapter.destinations.DestinationAdapter
 import com.papierflieger.wrapper.Resource
@@ -22,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
-    private val authViewModel: AuthViewModel by viewModels()
+    private val sessionViewModel: SessionViewModel by viewModels()
     private val destinationViewModel : DestinationViewModel by viewModels()
     private val wishlistViewModel : WishlistViewModel by viewModels()
 
@@ -49,7 +49,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun dataWishlist() {
-        authViewModel.getToken().observe(viewLifecycleOwner) { token ->
+        sessionViewModel.getToken().observe(viewLifecycleOwner) { token ->
             wishlistViewModel.getWishlist(token).observe(viewLifecycleOwner) {
                 when (it) {
                     is Resource.Empty -> {}
@@ -103,13 +103,19 @@ class HomeFragment : Fragment() {
     }
 
     private fun bindingSession() {
-        authViewModel.getNames().observe(viewLifecycleOwner){
-            binding.tvFullname.text = it
+        sessionViewModel.getName().observe(viewLifecycleOwner) {
+            if (it != "") {
+                binding.tvFullname.text = it
+            } else {
+                binding.tvFullname.setText(R.string.text_login_first)
+            }
         }
 
-        authViewModel.getAvatar().observe(viewLifecycleOwner){
-            binding.ivAvatar.load(it){
-                placeholder(R.color.background_gray)
+        sessionViewModel.getAvatar().observe(viewLifecycleOwner) {
+            if (it != "") {
+                binding.ivAvatar.load(it){
+                    placeholder(R.color.background_gray)
+                }
             }
         }
     }

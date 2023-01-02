@@ -19,7 +19,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class AdminProfileFragment : Fragment() {
 
     private lateinit var binding : FragmentAdminProfileBinding
-    private val authViewModel : AuthViewModel by viewModels()
     private val sessionViewModel : SessionViewModel by viewModels()
 
     override fun onCreateView(
@@ -38,16 +37,16 @@ class AdminProfileFragment : Fragment() {
     }
 
     private fun bindingData() {
-        authViewModel.getAvatar().observe(viewLifecycleOwner) {
+        sessionViewModel.getAvatar().observe(viewLifecycleOwner) {
             binding.ivAvatar.load(it) {
                 transformations(CircleCropTransformation())
                 placeholder(R.drawable.ic_person_circle)
             }
         }
-        authViewModel.getNames().observe(viewLifecycleOwner) {
+        sessionViewModel.getName().observe(viewLifecycleOwner) {
             binding.tvName.text = it
         }
-        authViewModel.getEmail().observe(viewLifecycleOwner) {
+        sessionViewModel.getEmail().observe(viewLifecycleOwner) {
             binding.tvEmail.text = it
         }
     }

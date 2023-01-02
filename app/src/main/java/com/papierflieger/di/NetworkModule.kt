@@ -3,8 +3,6 @@ package com.papierflieger.di
 import com.papierflieger.BuildConfig
 import com.papierflieger.data.network.service.ApiAdminService
 import com.papierflieger.data.network.service.ApiService
-import com.papierflieger.data.repository.AuthenticationRepository
-import com.papierflieger.data.repository.BasicAuthRepoImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -8,7 +8,7 @@ import android.os.Looper
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.papierflieger.R
-import com.papierflieger.presentation.bussiness.AuthViewModel
+import com.papierflieger.presentation.bussiness.SessionViewModel
 import com.papierflieger.presentation.ui.admin.AdminActivity
 import com.papierflieger.presentation.ui.auth.AuthActivity
 import com.papierflieger.presentation.ui.home.HomeActivity
@@ -18,19 +18,19 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SplashScreenActivity : AppCompatActivity() {
 
-    private val authViewModel : AuthViewModel by viewModels()
+    private val sessionViewModel : SessionViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            authViewModel.getToken().observe(this){
+            sessionViewModel.getToken().observe(this){
                 if (it.isEmpty()){
-                    startActivity(Intent(this, AuthActivity::class.java))
+                    startActivity(Intent(this, HomeActivity::class.java))
                     finish()
                 } else {
-                    authViewModel.getRole().observe(this) { role ->
+                    sessionViewModel.getRole().observe(this) { role ->
                         if (role == "Customer") {
                             startActivity(Intent(this, HomeActivity::class.java))
                         } else {
@@ -38,15 +38,10 @@ class SplashScreenActivity : AppCompatActivity() {
                         }
                         finish()
                     }
-//                    startActivity(Intent(this, HomeActivity::class.java))
-//                    finish()
                 }
             }
-        }, LOADING_TIME)
+        }, 3000L)
 
     }
 
-    companion object {
-        const val LOADING_TIME = 3000L
-    }
 }

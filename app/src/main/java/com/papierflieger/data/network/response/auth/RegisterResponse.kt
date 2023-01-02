@@ -22,15 +22,15 @@ data class NewUser(
     @SerializedName("createdAt")
     val createdAt: String?,
     @SerializedName("email")
-    val email: String?,
+    val email: String,
     @SerializedName("fullName")
-    val fullName: String?,
+    val fullName: String,
     @SerializedName("id")
-    val id: Int?,
+    val id: Int,
     @SerializedName("nationality")
     val nationality: String?,
     @SerializedName("password")
-    val password: String?,
+    val password: String,
     @SerializedName("phone")
     val phone: String?,
     @SerializedName("province")
@@ -38,13 +38,13 @@ data class NewUser(
     @SerializedName("regency")
     val regency: String?,
     @SerializedName("role")
-    val role: String?,
+    val role: String,
     @SerializedName("title")
     val title: String?,
     @SerializedName("updatedAt")
     val updatedAt: String?,
     @SerializedName("username")
-    val username: String?,
+    val username: String,
     @SerializedName("verified")
-    val verified: Any?
+    val verified: Boolean?
 )

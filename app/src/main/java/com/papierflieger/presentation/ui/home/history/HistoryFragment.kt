@@ -11,6 +11,7 @@ import com.papierflieger.R
 import com.papierflieger.databinding.FragmentHistoryBinding
 import com.papierflieger.presentation.bussiness.AuthViewModel
 import com.papierflieger.presentation.bussiness.NotificationViewModel
+import com.papierflieger.presentation.bussiness.SessionViewModel
 import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,7 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HistoryFragment : Fragment() {
 
     private lateinit var binding: FragmentHistoryBinding
-    private val authViewModel : AuthViewModel by viewModels()
+    private val sessionViewModel : SessionViewModel by viewModels()
     private val notificationViewModel : NotificationViewModel by viewModels()
 
     override fun onCreateView(
@@ -45,7 +46,7 @@ class HistoryFragment : Fragment() {
     }
 
     private fun bindingNotification() {
-        authViewModel.getToken().observe(viewLifecycleOwner) { token ->
+        sessionViewModel.getToken().observe(viewLifecycleOwner) { token ->
             notificationViewModel.getNotifications(token).observe(viewLifecycleOwner) {
                 when (it) {
                     is Resource.Empty -> {}

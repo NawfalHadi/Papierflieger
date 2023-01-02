@@ -40,51 +40,60 @@ class WishlistFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initList()
         observeData()
-//        clickListener()
     }
 
     private fun observeData() {
         sessionViewModel.getToken().observe(viewLifecycleOwner) { token ->
-            wishlistViewModel.getWishlist(token).observe(viewLifecycleOwner) { wishlist ->
-                when (wishlist) {
-                    is Resource.Empty -> {}
-                    is Resource.Error -> {}
-                    is Resource.Loading -> {
-                        binding.apply {
-                            pbLoading.visibility = View.VISIBLE
-                            pbLoading.isVisible = true
-                        }
-                    }
-                    is Resource.Success -> {
-                        binding.apply {
-                            pbLoading.visibility = View.GONE
-                            pbLoading.isVisible = false
-                        }
-                        if (!wishlist.payload?.wishlist.isNullOrEmpty()) {
-                            binding.apply {
-                                ivNotFound.visibility = View.GONE
-                                ivNotFound.isVisible = false
-
-                                tvNotFound.visibility = View.GONE
-                                tvNotFound.isVisible = false
+            binding.apply {
+                if (token != "") {
+                    wishlistViewModel.getWishlist(token).observe(viewLifecycleOwner) { wishlist ->
+                        when (wishlist) {
+                            is Resource.Empty -> {}
+                            is Resource.Error -> {}
+                            is Resource.Loading -> {
+                                pbLoading.visibility = View.VISIBLE
+                                pbLoading.isVisible = true
                             }
+                            is Resource.Success -> {
+                                pbLoading.visibility = View.GONE
+                                pbLoading.isVisible = false
 
-                            wishlist.payload?.let { adapterWishlist.setItem(it.wishlist) }
-                        } else {
-                            binding.apply {
-                                rvWishlist.visibility = View.GONE
-                                rvWishlist.isVisible = false
+                                if (!wishlist.payload?.wishlist.isNullOrEmpty()) {
+                                    ivNotFound.visibility = View.GONE
+                                    ivNotFound.isVisible = false
 
-                                ivNotFound.visibility = View.VISIBLE
-                                ivNotFound.isVisible = true
+                                    tvNotFound.visibility = View.GONE
+                                    tvNotFound.isVisible = false
 
-                                tvNotFound.visibility = View.VISIBLE
-                                tvNotFound.isVisible = true
+                                    wishlist.payload?.let { adapterWishlist.setItem(it.wishlist) }
+                                } else {
+                                    rvWishlist.visibility = View.GONE
+                                    rvWishlist.isVisible = false
+
+                                    ivNotFound.visibility = View.VISIBLE
+                                    ivNotFound.isVisible = true
+
+                                    tvNotFound.visibility = View.VISIBLE
+                                    tvNotFound.isVisible = true
+                                }
                             }
                         }
                     }
+                } else {
+                    rvWishlist.visibility = View.GONE
+                    rvWishlist.isVisible = false
+
+                    pbLoading.visibility = View.GONE
+                    pbLoading.isVisible = false
+
+                    ivNotFound.visibility = View.VISIBLE
+                    ivNotFound.isVisible = true
+
+                    tvNotFound.visibility = View.VISIBLE
+                    tvNotFound.isVisible = true
                 }
             }
+
         }
     }
 

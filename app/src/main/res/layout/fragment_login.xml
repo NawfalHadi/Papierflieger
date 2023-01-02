@@ -76,7 +76,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/btn_signin"
+            android:id="@+id/btn_sign_in"
             style="@style/Widget.Custom.Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,19 +85,19 @@
             app:layout_constraintTop_toBottomOf="@id/til_et_password" />
 
         <TextView
-            android:id="@+id/text_forgotpass"
+            android:id="@+id/text_forgot_pass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_forgot"
             android:textAlignment="textEnd"
             android:textSize="16sp"
             android:layout_marginEnd="4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/link_forgotpass"
-            app:layout_constraintEnd_toStartOf="@id/link_forgotpass"
-            app:layout_constraintTop_toTopOf="@+id/link_forgotpass" />
+            app:layout_constraintBottom_toBottomOf="@+id/link_forgot_pass"
+            app:layout_constraintEnd_toStartOf="@id/link_forgot_pass"
+            app:layout_constraintTop_toTopOf="@+id/link_forgot_pass" />
 
         <TextView
-            android:id="@+id/link_forgotpass"
+            android:id="@+id/link_forgot_pass"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -106,7 +106,7 @@
             android:textColor="@color/dark_blue"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_signin" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_sign_in" />
 
         <TextView
             android:id="@+id/text_third"
@@ -118,7 +118,7 @@
             android:layout_marginTop="32dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/link_forgotpass"/>
+            app:layout_constraintTop_toBottomOf="@id/link_forgot_pass"/>
 
         <View
             android:id="@+id/view2"
@@ -143,7 +143,7 @@
             app:layout_constraintTop_toTopOf="@id/text_third" />
 
         <ImageButton
-            android:id="@+id/btn_signin_facebook"
+            android:id="@+id/btn_sign_in_facebook"
             style="@style/Widget.Custom.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -154,7 +154,7 @@
             app:layout_constraintTop_toBottomOf="@id/text_third" />
 
         <ImageButton
-            android:id="@+id/btn_signin_google"
+            android:id="@+id/btn_sign_in_google"
             style="@style/Widget.Custom.ImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -172,7 +172,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_signin_google">
+            app:layout_constraintTop_toBottomOf="@+id/btn_sign_in_google">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -189,8 +189,6 @@
                 android:textColor="@color/dark_blue"
                 android:textSize="16sp" />
         </LinearLayout>
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
