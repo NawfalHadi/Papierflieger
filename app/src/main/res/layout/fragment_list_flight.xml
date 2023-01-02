@@ -16,17 +16,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <Button
         android:id="@+id/btn_back"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:background="@color/transparant_color"
-        android:src="@drawable/ic_back_arrow"
-        android:layout_marginStart="24dp"
-        android:layout_marginVertical="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+        style="@style/Widget.Material3.Button.IconButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        app:icon="@drawable/ic_back_arrow"
+        app:iconSize="24dp"
+        app:iconTint="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/view_header"
         app:layout_constraintStart_toStartOf="parent"
-        app:tint="@color/white" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_departure"
@@ -34,18 +35,19 @@
         android:layout_height="wrap_content"
         android:text="@string/text_departure"
         android:textColor="@color/white"
-        android:textSize="12sp"
-        android:layout_marginStart="8dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="6dp"
         app:layout_constraintStart_toEndOf="@id/btn_back"
         app:layout_constraintTop_toTopOf="@id/btn_back" />
 
     <ImageView
         android:id="@+id/ic_change_arrow"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
         android:src="@drawable/ic_arrow_destination"
         app:tint="@color/white"
-        android:layout_marginStart="2dp"
+        android:layout_marginStart="4dp"
         app:layout_constraintStart_toEndOf="@id/tv_departure"
         app:layout_constraintTop_toTopOf="@id/tv_departure"
         app:layout_constraintBottom_toBottomOf="@id/tv_departure"/>
@@ -54,24 +56,25 @@
         android:id="@+id/tv_arrival"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
+        android:layout_marginStart="4dp"
         android:text="@string/text_arrival"
         android:textColor="@color/white"
-        android:textSize="12sp"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/tv_departure"
         app:layout_constraintStart_toEndOf="@id/ic_change_arrow"
         app:layout_constraintTop_toTopOf="@+id/tv_departure" />
 
     <TextView
-        android:id="@+id/tv_order_number"
+        android:id="@+id/tv_date_order"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/text_date"
         android:textColor="@color/white"
-        android:textSize="8sp"
+        android:layout_marginBottom="6dp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/btn_back"
-        app:layout_constraintStart_toStartOf="@id/tv_departure"
-        app:layout_constraintTop_toBottomOf="@id/tv_departure" />
+        app:layout_constraintStart_toStartOf="@id/tv_departure" />
 
     <ImageView
         android:id="@+id/iv_circle_dot_1"
@@ -79,10 +82,10 @@
         android:layout_height="4dp"
         android:src="@drawable/ic_circle"
         app:tint="@color/white"
-        android:layout_marginStart="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_order_number"
-        app:layout_constraintStart_toEndOf="@+id/tv_order_number"
-        app:layout_constraintTop_toTopOf="@+id/tv_order_number" />
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_date_order"
+        app:layout_constraintStart_toEndOf="@+id/tv_date_order"
+        app:layout_constraintTop_toTopOf="@+id/tv_date_order" />
 
     <TextView
         android:id="@+id/tv_passenger"
@@ -90,11 +93,11 @@
         android:layout_height="wrap_content"
         android:text="@string/text_passenger"
         android:textColor="@color/white"
-        android:textSize="8sp"
-        android:layout_marginStart="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_order_number"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_date_order"
         app:layout_constraintStart_toEndOf="@+id/iv_circle_dot_1"
-        app:layout_constraintTop_toTopOf="@+id/tv_order_number" />
+        app:layout_constraintTop_toTopOf="@+id/tv_date_order" />
 
     <ImageView
         android:id="@+id/iv_circle_dot_2"
@@ -102,10 +105,10 @@
         android:layout_height="4dp"
         android:src="@drawable/ic_circle"
         app:tint="@color/white"
-        android:layout_marginStart="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_order_number"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_date_order"
         app:layout_constraintStart_toEndOf="@+id/tv_passenger"
-        app:layout_constraintTop_toTopOf="@+id/tv_order_number" />
+        app:layout_constraintTop_toTopOf="@+id/tv_date_order" />
 
     <TextView
         android:id="@+id/tv_category"
@@ -113,19 +116,46 @@
         android:layout_height="wrap_content"
         android:text="@string/text_category_seat"
         android:textColor="@color/white"
-        android:textSize="8sp"
-        android:layout_marginStart="2dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_order_number"
+        android:textSize="12sp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_date_order"
         app:layout_constraintStart_toEndOf="@+id/iv_circle_dot_2"
-        app:layout_constraintTop_toTopOf="@+id/tv_order_number" />
+        app:layout_constraintTop_toTopOf="@+id/tv_date_order" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_ticket"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/view_header"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_list_flight" />
+
+    <ImageView
+        android:id="@+id/iv_not_found"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/ic_not_found"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tv_not_found" />
+
+    <TextView
+        android:id="@+id/tv_not_found"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_ticket_not_found"
+        android:textColor="@color/gray"
+        android:textSize="18sp"
+        android:layout_marginHorizontal="24dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view_header" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

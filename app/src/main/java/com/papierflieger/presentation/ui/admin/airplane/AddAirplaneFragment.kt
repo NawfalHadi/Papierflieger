@@ -45,11 +45,8 @@ class AddAirplaneFragment : Fragment() {
     }
 
     private fun observeData() {
-        binding.apply {
-            val options = arrayOf("Economy", "Business")
-            (acClass as MaterialAutoCompleteTextView).setSimpleItems(options)
-//            acClass.setAdapter(ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, options))
-        }
+        val options = arrayOf("Economy", "Business")
+        (binding.acClass as MaterialAutoCompleteTextView).setSimpleItems(options)
     }
 
     private fun clickListener() {

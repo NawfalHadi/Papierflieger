@@ -13,12 +13,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:paddingVertical="16dp">
 
         <ImageView
             android:id="@+id/ic_logo"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:layout_marginStart="16dp"
             android:src="@drawable/ic_logo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -40,7 +41,7 @@
             android:layout_marginTop="8dp"
             android:text="@string/text_time"
             android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/ic_logo"
             app:layout_constraintTop_toBottomOf="@+id/ic_logo" />
 
         <ImageView
@@ -121,6 +122,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_departure_time">
 
             <TextView
+                android:id="@+id/tv_departure"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SUB"
@@ -140,6 +142,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_arrival_time">
 
             <TextView
+                android:id="@+id/tv_arrival"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="DPS"
@@ -171,7 +174,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/ic_logo"
             app:layout_constraintTop_toBottomOf="@+id/cv_departure">
 
             <LinearLayout
@@ -216,6 +219,7 @@
             android:layout_height="wrap_content"
             android:text="@string/text_person"
             android:textColor="@color/gray"
+            android:layout_marginEnd="16dp"
             android:textSize="8sp"
             app:layout_constraintBottom_toBottomOf="@+id/tv_price"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -226,7 +230,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_person"
             app:layout_constraintTop_toBottomOf="@+id/tv_price">
 
             <TextView
@@ -244,7 +248,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_person"
             app:layout_constraintTop_toBottomOf="@+id/cv_discount">
 
             <TextView
@@ -260,10 +264,9 @@
             android:id="@+id/ic_drop_down"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:src="@drawable/ic_keyboard_arrow"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tv_person"
             app:tint="@color/dark_blue" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -163,6 +163,7 @@
     <string name="text_transit_duration">Transit Duration</string>
     <string name="text_wishlist">Wishlist</string>
     <string name="text_wishlist_not_found">Wishlist Not Found</string>
+    <string name="text_ticket_not_found">Ticket Not Found</string>
     <string name="text_order">Order</string>
     <string name="text_passenger_name">Passenger Name</string>
     <string name="text_trip">Trip</string>

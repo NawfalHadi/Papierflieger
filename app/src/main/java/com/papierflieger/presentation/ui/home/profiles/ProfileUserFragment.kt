@@ -122,9 +122,7 @@ class ProfileUserFragment : Fragment() {
             override fun menuClicked(id: Int?) {
                 if (id == 0) {
                     sessionViewModel.logout()
-                    findNavController().navigate(R.id.action_profileUserFragment_to_authActivity)
-                } else {
-                    findNavController().navigate(id!!)
+                    findNavController().navigate(R.id.profileUserFragment)
                 }
             }
         })

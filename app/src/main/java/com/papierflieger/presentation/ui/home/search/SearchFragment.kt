@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,6 +22,7 @@ import com.papierflieger.presentation.bussiness.DatasyncViewModel
 import com.papierflieger.presentation.ui.home.search.bottomsheet.PassengerBottomSheet
 import com.papierflieger.presentation.ui.home.search.bottomsheet.SearchAirportBottomSheet
 import com.papierflieger.wrapper.Resource
+import com.papierflieger.wrapper.convertDateFormatUpload
 import com.papierflieger.wrapper.toDate
 import com.papierflieger.wrapper.toRequestDate
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,9 +53,7 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         syncingDataToRoom()
-
         allNavigation()
         roundTripCheck()
         switchFlightButton()
@@ -88,78 +88,94 @@ class SearchFragment : Fragment() {
 
     private fun changeValue() {
         val dateToday = MaterialDatePicker.todayInUtcMilliseconds().toDate()
-        binding.tvDateDeparture.text = dateToday
-        binding.tvDateReturn.text = dateToday
+        binding.apply {
+            tvDateDeparture.text = dateToday
+            tvDateReturn.text = dateToday
 
-        dateRangePicker.addOnPositiveButtonClickListener { datePicked ->
-            binding.tvDateDeparture.text = datePicked.first.toDate()
-            binding.tvDateReturn.text = datePicked.second.toDate()
+            dateDeparture = dateToday
+            dateReturn = dateToday
 
-            dateDeparture = datePicked.first.toRequestDate()
-            dateReturn = datePicked.second.toRequestDate()
+            dateRangePicker.addOnPositiveButtonClickListener { datePicked ->
+                tvDateDeparture.text = datePicked.first.toDate()
+                tvDateReturn.text = datePicked.second.toDate()
+
+                dateDeparture = datePicked.first.toRequestDate()
+                dateReturn = datePicked.second.toRequestDate()
+            }
+
+            datePicker.addOnPositiveButtonClickListener { datePicked ->
+                tvDateDeparture.text = datePicked.toDate()
+                tvDateReturn.text = datePicked.toDate()
+
+                dateDeparture = datePicked.toRequestDate()
+            }
         }
 
-        datePicker.addOnPositiveButtonClickListener { datePicked ->
-            binding.tvDateDeparture.text = datePicked.toDate()
-            binding.tvDateReturn.text = datePicked.toDate()
-
-            dateDeparture = datePicked.toRequestDate()
-        }
     }
 
     private fun clickListener() {
-        binding.cardPerson.setOnClickListener{
-            val currentDialog = parentFragmentManager.findFragmentByTag(PassengerBottomSheet::class.java.simpleName)
-            if (currentDialog == null){
-                PassengerBottomSheet(passengerCounter, object : PassengerBottomSheet.OnPassengerCounted{
-                    @SuppressLint("SetTextI18n")
-                    override fun passengerCounted(count: Int) {
-                        passengerCounter = count
-                        binding.tvPassenger.text = "$count Passenger"
-                    }
-                }).show(parentFragmentManager, PassengerBottomSheet::class.java.simpleName)
+        binding.apply {
+
+            cardPerson.setOnClickListener{
+                val currentDialog = parentFragmentManager.findFragmentByTag(PassengerBottomSheet::class.java.simpleName)
+                if (currentDialog == null){
+                    PassengerBottomSheet(passengerCounter, object : PassengerBottomSheet.OnPassengerCounted{
+                        @SuppressLint("SetTextI18n")
+                        override fun passengerCounted(count: Int) {
+                            passengerCounter = count
+                            tvPassenger.text = "$count Passenger"
+                        }
+                    }).show(parentFragmentManager, PassengerBottomSheet::class.java.simpleName)
+                }
             }
-        }
 
-        binding.llFrom.setOnClickListener {
-            val currentDialog = parentFragmentManager.findFragmentByTag(SearchAirportBottomSheet::class.java.simpleName)
-            if (currentDialog == null) {
-                SearchAirportBottomSheet(object : SearchAirportBottomSheet.OnAirportClickListner {
-                    @SuppressLint("SetTextI18n")
-                    override fun itemChoosed(airport: AirportEntity) {
-                        airportFrom = airport
-                        val city = airport.city.split(",")
-                        binding.tvFrom.text = "${city[0]} (${airport.cityCode})"
-                    }
-                }).show(parentFragmentManager, SearchAirportBottomSheet::class.java.simpleName)
+            llFrom.setOnClickListener {
+                val currentDialog = parentFragmentManager.findFragmentByTag(SearchAirportBottomSheet::class.java.simpleName)
+                if (currentDialog == null) {
+                    SearchAirportBottomSheet(object : SearchAirportBottomSheet.OnAirportClickListner {
+                        @SuppressLint("SetTextI18n")
+                        override fun itemChoosed(airport: AirportEntity) {
+                            airportFrom = airport
+                            val city = airport.city.split(",")
+                            tvFrom.text = "${city[0]} (${airport.cityCode})"
+                        }
+                    }).show(parentFragmentManager, SearchAirportBottomSheet::class.java.simpleName)
+                }
             }
-        }
 
-        binding.llDestination.setOnClickListener {
-            val currentDialog = parentFragmentManager.findFragmentByTag(SearchAirportBottomSheet::class.java.simpleName)
-            if (currentDialog == null) {
-                SearchAirportBottomSheet(object : SearchAirportBottomSheet.OnAirportClickListner {
-                    @SuppressLint("SetTextI18n")
-                    override fun itemChoosed(airport: AirportEntity) {
-                        airportTo = airport
-                        val city = airport.city.split(",")
-                        binding.tvDestination.text = "${city[0]} (${airport.cityCode})"
-                    }
-                }).show(parentFragmentManager, SearchAirportBottomSheet::class.java.simpleName)
+            llDestination.setOnClickListener {
+                val currentDialog = parentFragmentManager.findFragmentByTag(SearchAirportBottomSheet::class.java.simpleName)
+                if (currentDialog == null) {
+                    SearchAirportBottomSheet(object : SearchAirportBottomSheet.OnAirportClickListner {
+                        @SuppressLint("SetTextI18n")
+                        override fun itemChoosed(airport: AirportEntity) {
+                            airportTo = airport
+                            val city = airport.city.split(",")
+                            tvDestination.text = "${city[0]} (${airport.cityCode})"
+                        }
+                    }).show(parentFragmentManager, SearchAirportBottomSheet::class.java.simpleName)
+                }
             }
-        }
 
-        binding.switchRoundTrip.setOnClickListener {
-            roundTripCheck()
-        }
+            switchRoundTrip.setOnClickListener {
+                roundTripCheck()
+            }
 
-        binding.llDateDeparture.setOnClickListener {
-            if (!binding.switchRoundTrip.isChecked) {
-                datePicker.show(
-                    childFragmentManager,
-                    "date_picker"
-                )
-            } else {
+            llDateDeparture.setOnClickListener {
+                if (!switchRoundTrip.isChecked) {
+                    datePicker.show(
+                        childFragmentManager,
+                        "date_picker"
+                    )
+                } else {
+                    dateRangePicker.show(
+                        childFragmentManager,
+                        "date_range_picker"
+                    )
+                }
+            }
+
+            llDateReturn.setOnClickListener {
                 dateRangePicker.show(
                     childFragmentManager,
                     "date_range_picker"
@@ -167,12 +183,9 @@ class SearchFragment : Fragment() {
             }
         }
 
-        binding.llDateReturn.setOnClickListener {
-            dateRangePicker.show(
-                childFragmentManager,
-                "date_range_picker"
-            )
-        }
+//        val options = arrayOf("Economy", "Business")
+//        (binding.cvClass as MaterialAutoCompleteTextView).setSimpleItems(options)
+//        binding.cvClass.setAdapter(ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, options))
 
     }
 
@@ -195,13 +208,11 @@ class SearchFragment : Fragment() {
     }
 
     private fun roundTripCheck() {
-        if (!binding.switchRoundTrip.isChecked) {
-            with(binding){
+        binding.apply {
+            if (!switchRoundTrip.isChecked) {
                 guidelineTwo.visibility = View.GONE
                 llDateReturn.visibility = View.GONE
-            }
-        } else {
-            with(binding){
+            } else {
                 guidelineTwo.visibility = View.VISIBLE
                 llDateReturn.visibility = View.VISIBLE
             }
@@ -214,14 +225,49 @@ class SearchFragment : Fragment() {
         }
 
         binding.btnSearch.setOnClickListener {
-            val mBundle = Bundle()
-            mBundle.putParcelable(SearchActivity.AIRPORT_FROM_KEY, airportFrom)
-            mBundle.putParcelable(SearchActivity.AIRPORT_TO_KEY, airportTo)
-            mBundle.putString(SearchActivity.DATE_DEPARTURE_KEY, dateDeparture)
-            mBundle.putString(SearchActivity.DATE_RETURN_KEY, dateReturn)
-            mBundle.putInt(SearchActivity.PASSENGER_COUNTER_KEY, passengerCounter)
-            findNavController().navigate(R.id.action_searchFragment_to_listFlightFragment, mBundle)
+            if (validationInput()) {
+                val bundle = Bundle().apply {
+                    putParcelable(SearchActivity.AIRPORT_FROM_KEY, airportFrom)
+                    putParcelable(SearchActivity.AIRPORT_TO_KEY, airportTo)
+                    putString(SearchActivity.DATE_DEPARTURE_KEY, dateDeparture)
+                    if (binding.switchRoundTrip.isChecked) {
+                        putString(SearchActivity.DATE_RETURN_KEY, dateReturn)
+                    } else {
+                        putString(SearchActivity.DATE_RETURN_KEY, null)
+                    }
+                    putInt(SearchActivity.PASSENGER_COUNTER_KEY, passengerCounter)
+                }
+                findNavController().navigate(R.id.action_searchFragment_to_listFlightFragment, bundle)
+            }
         }
+    }
+
+    private fun validationInput(): Boolean {
+        var isFormValid = true
+        var airport = ""
+        if (airportFrom == null) {
+            airport = "Choose Departure Airport"
+            isFormValid = false
+        }
+
+        if (airportTo == null) {
+            if (airportFrom == null && airportTo == null) {
+                airport += "\n"
+            }
+            airport += "Choose Arrival Airport"
+            isFormValid = false
+        }
+
+        if (airportFrom == airportTo) {
+            airport += "Choose Departure or Arrival Airport"
+            isFormValid = false
+        }
+
+        if (airport != "") {
+            Toast.makeText(context, airport, Toast.LENGTH_SHORT).show()
+        }
+
+        return isFormValid
     }
 
     private val datePicker =

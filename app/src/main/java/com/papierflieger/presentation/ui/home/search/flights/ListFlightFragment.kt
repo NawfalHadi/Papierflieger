@@ -1,7 +1,6 @@
 package com.papierflieger.presentation.ui.home.search.flights
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +21,6 @@ import com.papierflieger.presentation.ui.home.search.bottomsheet.TicketPreviewBo
 import com.papierflieger.wrapper.Resource
 import com.papierflieger.wrapper.toDataTicket
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.StringBuilder
 
 @AndroidEntryPoint
 class ListFlightFragment : Fragment() {
@@ -49,32 +47,85 @@ class ListFlightFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentListFlightBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        dataInit()
+        observeData()
         searchTicket()
-
-        bindingHeader()
+        bindingTitle()
+        initList()
+        clickListener()
     }
 
-    private fun bindingHeader() {
-        with(binding){
-            tvPassenger.text = StringBuilder(passengerCounter.toString()).append(" ${getString(R.string.text_passenger)}")
+    private fun clickListener() {
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
         }
     }
 
-    private fun dataInit() {
+    private fun initList() {
+        binding.rvTicket.apply {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(
+                context, LinearLayoutManager.VERTICAL, false
+            )
+            adapter = ticketAdapter
+        }
+
+        ticketAdapter.itemAction(object : DepartureAdapter.OnTicketActionCallback{
+            override fun ticketClicked(ticket : TiketBerangkat?) {
+                departureChoose = ticket!!
+                ticketsPreview.clear()
+                ticketsPreview.add(ticket.toDataTicket())
+
+                if (responsed.tiketPulang.isNullOrEmpty()) {
+                    val currentDialog = parentFragmentManager.findFragmentByTag(TicketPreviewBottomSheet::class.java.simpleName)
+                    if (currentDialog == null){
+                        TicketPreviewBottomSheet(ticketsPreview,
+                            object : TicketPreviewBottomSheet.OnTicketPreviewListener{
+                                override fun continueClicked(previews: ArrayList<DataTicket>) {
+                                    val mBundle = Bundle()
+                                    mBundle.putParcelableArrayList(SearchActivity.TICKETS_KEY, ticketsPreview)
+                                    mBundle.putInt(SearchActivity.PASSENGER_COUNTER_KEY, passengerCounter)
+                                    findNavController().navigate(R.id.action_listFlightFragment_to_passengerFragment, mBundle)
+                                }
+                            }
+                        ).show(
+                            parentFragmentManager, TicketPreviewBottomSheet::class.java.simpleName
+                        )
+                    }
+                } else {
+                    val mBundle = Bundle()
+                    mBundle.putParcelableArrayList(SearchActivity.TICKETS_KEY, ticketsPreview)
+                    mBundle.putParcelable(SearchActivity.DEPARTURE_TICKET_KEY, departureChoose)
+                    mBundle.putParcelable(SearchActivity.RETURN_TICKETS_KEY, responsed)
+                    mBundle.putInt(SearchActivity.PASSENGER_COUNTER_KEY, passengerCounter)
+                    findNavController().navigate(R.id.action_listFlightFragment_to_listReturnFragment, mBundle)
+                }
+            }
+
+        })
+
+    }
+
+    private fun bindingTitle() {
+        binding.apply {
+            tvPassenger.text = StringBuilder(passengerCounter.toString()).append(" ${getString(R.string.text_passenger)}")
+            tvDeparture.text = airportFrom.city.substringBefore(",")
+            tvArrival.text = airportTo.city.substringBefore(",")
+            tvDateOrder.text = dateDeparture
+        }
+    }
+
+    private fun observeData() {
         airportFrom = arguments?.getParcelable(SearchActivity.AIRPORT_FROM_KEY)!!
         airportTo = arguments?.getParcelable(SearchActivity.AIRPORT_TO_KEY)!!
         dateDeparture = arguments?.getString(SearchActivity.DATE_DEPARTURE_KEY).toString()
-        dateReturn = arguments?.getString(SearchActivity.DATE_RETURN_KEY).toString()
-
+        dateReturn = arguments?.getString(SearchActivity.DATE_RETURN_KEY)
         passengerCounter = arguments?.getInt(SearchActivity.PASSENGER_COUNTER_KEY, 1) ?: 1
     }
 
@@ -84,62 +135,27 @@ class ListFlightFragment : Fragment() {
             airportTo.airportId,
             dateDeparture,
             dateReturn
-        ).observe(viewLifecycleOwner){
+        ).observe(viewLifecycleOwner) {
             when(it){
-                is Resource.Loading -> TODO()
-                is Resource.Empty -> TODO()
-                is Resource.Error -> TODO()
-                is Resource.Success -> {
-                    responsed = it.payload!!
-                    showsRecycler(it.payload.tiketBerangkat)
-                }
-            }
-        }
-    }
-
-    private fun showsRecycler(tickets: List<TiketBerangkat?>?) {
-        with(binding){
-            with(rvTicket){
-                ticketAdapter.setItem(tickets!!)
-                setHasFixedSize(true)
-                layoutManager = LinearLayoutManager(
-                    context, LinearLayoutManager.VERTICAL, false
-                )
-                adapter = ticketAdapter
-
-                ticketAdapter.itemAction(object : DepartureAdapter.OnTicketActionCallback{
-                    override fun ticketClicked(ticket : TiketBerangkat?) {
-                        departureChoose = ticket!!
-                        ticketsPreview.clear()
-                        ticketsPreview.add(ticket.toDataTicket())
-
-                        if (responsed.tiketPulang.isNullOrEmpty()){
-                            val currentDialog = parentFragmentManager.findFragmentByTag(TicketPreviewBottomSheet::class.java.simpleName)
-                            if (currentDialog == null){
-                                TicketPreviewBottomSheet(ticketsPreview,
-                                    object : TicketPreviewBottomSheet.OnTicketPreviewListener{
-                                        override fun continueClicked(previews: ArrayList<DataTicket>) {
-                                            val mBundle = Bundle()
-                                            mBundle.putParcelableArrayList(SearchActivity.TICKETS_KEY, ticketsPreview)
-                                            mBundle.putInt(SearchActivity.PASSENGER_COUNTER_KEY, passengerCounter)
-                                            findNavController().navigate(R.id.action_listFlightFragment_to_passengerFragment, mBundle)
-                                        }
-                                    }
-                                ).show(
-                                    parentFragmentManager, TicketPreviewBottomSheet::class.java.simpleName
-                                )
-                            }
-                        } else {
-                            val mBundle = Bundle()
-                            mBundle.putParcelableArrayList(SearchActivity.TICKETS_KEY, ticketsPreview)
-                            mBundle.putParcelable(SearchActivity.DEPARTURE_TICKET_KEY, departureChoose)
-                            mBundle.putParcelable(SearchActivity.RETURN_TICKETS_KEY, responsed)
-                            mBundle.putInt(SearchActivity.PASSENGER_COUNTER_KEY, passengerCounter)
-                            findNavController().navigate(R.id.action_listFlightFragment_to_listReturnFragment, mBundle)
-                        }
+                is Resource.Loading -> {}
+                is Resource.Empty -> {}
+                is Resource.Error -> {
+                    binding.apply {
+                        tvNotFound.visibility = View.VISIBLE
+                        ivNotFound.visibility = View.VISIBLE
+                        rvTicket.visibility = View.GONE
                     }
-
-                })
+                }
+                is Resource.Success -> {
+                    binding.apply {
+                        tvNotFound.visibility = View.GONE
+                        ivNotFound.visibility = View.GONE
+                        rvTicket.visibility = View.VISIBLE
+                    }
+                    ticketAdapter.setAirport(airportFrom.cityCode, airportTo.cityCode)
+                    it.payload?.tiketBerangkat?.let { ticket -> ticketAdapter.setItem(ticket) }
+                    responsed = it.payload!!
+                }
             }
         }
     }

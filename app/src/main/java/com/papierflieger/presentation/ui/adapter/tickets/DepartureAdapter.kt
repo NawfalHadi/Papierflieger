@@ -5,12 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.papierflieger.R
 import com.papierflieger.data.network.response.ticket.TiketBerangkat
 import com.papierflieger.databinding.ItemListFlightBinding
+import com.papierflieger.wrapper.convertTimeFormat
+import com.papierflieger.wrapper.convertToRupiah
 
 class DepartureAdapter : RecyclerView.Adapter<DepartureAdapter.DepartureViewHolder>(){
 
     private lateinit var onTicketActionCallback: OnTicketActionCallback
+    private var departure : String = ""
+    private var arrival : String = ""
 
     private var diffCallback = object : DiffUtil.ItemCallback<TiketBerangkat>(){
         override fun areItemsTheSame(oldItem: TiketBerangkat, newItem: TiketBerangkat): Boolean {
@@ -27,6 +32,10 @@ class DepartureAdapter : RecyclerView.Adapter<DepartureAdapter.DepartureViewHold
     }
 
     private val differ = AsyncListDiffer(this, diffCallback)
+    fun setAirport(departure: String, arrival: String) {
+        this.departure = departure
+        this.arrival = arrival
+    }
     fun setItem(value : List<TiketBerangkat?>) = differ.submitList(value)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DepartureViewHolder {
@@ -49,14 +58,19 @@ class DepartureAdapter : RecyclerView.Adapter<DepartureAdapter.DepartureViewHold
 
         fun bindingItem(ticket: TiketBerangkat?) {
             with(binding){
-                tvDepartureTime.text = ticket?.departureTime
-                tvArrivalTime.text = ticket?.arrivalTime
+                tvDepartureTime.text = ticket?.departureTime?.let { convertTimeFormat(it) }
+                tvArrivalTime.text = ticket?.arrivalTime?.let { convertTimeFormat(it) }
                 tvDuration.text = ticket?.flightDuration
+                tvPrice.text = ticket?.price?.let { convertToRupiah(it) }
+                tvDeparture.text = departure
+                tvArrival.text = arrival
 
-                tvPrice.text = ticket?.price.toString()
+                if (ticket?.totalTransit != null && ticket.totalTransit >= 1) {
+                    tvFlightStop.setText(R.string.text_transit)
+                }
 
                 cardTicket.setOnClickListener {
-                    onTicketActionCallback.ticketClicked(ticket!!)
+                    onTicketActionCallback.ticketClicked(ticket)
                 }
             }
         }

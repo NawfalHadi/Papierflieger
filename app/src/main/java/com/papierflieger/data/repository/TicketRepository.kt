@@ -7,6 +7,7 @@ import com.papierflieger.data.network.response.ticket.SearchTicketResponse
 import com.papierflieger.data.network.response.ticket.TicketResponse
 import com.papierflieger.data.network.service.ApiService
 import com.papierflieger.wrapper.Resource
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,26 +24,28 @@ class TicketRepository(
         idFrom: Int, idTo: Int, departure: String, arrival: String? = null
     ) : LiveData<Resource<SearchTicketResponse>> {
         apiService.searchTickets(
-            from = idFrom,
-            to = idTo,
-            departureDate = departure,
-            returnDate = arrival
+            idFrom,
+            idTo,
+            departure,
+            arrival
         ).enqueue(object : Callback<SearchTicketResponse>{
             override fun onResponse(
                 call: Call<SearchTicketResponse>,
                 response: Response<SearchTicketResponse>
             ) {
-                if(response.isSuccessful){
-                    searchTicketResponse.postValue(Resource.Success(response.body()!!))
+                val body = response.body()
+                if (body != null) {
+                    searchTicketResponse.value = Resource.Success(body)
+                } else {
+                    val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                    val errorMessage = errorJson?.optString("message")
+                    searchTicketResponse.value = Resource.Error(Throwable(errorMessage))
                 }
             }
-
             override fun onFailure(call: Call<SearchTicketResponse>, t: Throwable) {
                 searchTicketResponse.postValue(Resource.Error(t))
             }
-
         })
-
         return searchTicketResponse
     }
 
