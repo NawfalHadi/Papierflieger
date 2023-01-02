@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.papierflieger.databinding.FragmentPaymentStatusBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PaymentMessageFragment : Fragment() {
     private lateinit var binding : FragmentPaymentStatusBinding
 

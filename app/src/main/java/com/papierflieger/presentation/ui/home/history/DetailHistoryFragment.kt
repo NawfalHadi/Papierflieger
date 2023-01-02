@@ -17,7 +17,7 @@ class DetailHistoryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDetailHistoryBinding.inflate(layoutInflater, container, false)
-        return inflater.inflate(R.layout.fragment_detail_history, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,6 +26,12 @@ class DetailHistoryFragment : Fragment() {
         binding.icKeyboardArrow.setOnClickListener {
             pricingDetailsShow()
         }
+
+        bindingInformation()
+    }
+
+    private fun bindingInformation() {
+        TODO("Not yet implemented")
     }
 
     private fun pricingDetailsShow() {

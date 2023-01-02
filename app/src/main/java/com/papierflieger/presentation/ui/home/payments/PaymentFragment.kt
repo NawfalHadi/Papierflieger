@@ -67,7 +67,7 @@ class PaymentFragment : Fragment() {
                     userToken,
                     "BRI", "Alias",
                     1321487,
-                    orderResponse.tokenTransaction!!.toString()
+                    "5870f3a5-77b3-406b-85cc-eb0391fc0a5916726696197940.9959533838694683"
                 ).observe(viewLifecycleOwner){
                     when(it){
                         is Resource.Success -> {

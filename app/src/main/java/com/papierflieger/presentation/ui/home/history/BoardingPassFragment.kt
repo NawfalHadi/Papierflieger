@@ -6,13 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.papierflieger.R
+import com.papierflieger.databinding.FragmentBoardingPassBinding
 
 class BoardingPassFragment : Fragment() {
+
+    private lateinit var binding : FragmentBoardingPassBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_boarding_pass, container, false)
+        binding = FragmentBoardingPassBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
 }
