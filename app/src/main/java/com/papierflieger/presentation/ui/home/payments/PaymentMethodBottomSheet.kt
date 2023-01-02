@@ -24,11 +24,25 @@ class PaymentMethodBottomSheet(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    
+        with(binding){
+            cvPay.setOnClickListener {
+                if (validForm()){
+                    listener.saveData(etAccountName.text.toString(), etAccountNumber.text.toString())
+                    dismiss()
+                }
+            }
+        }
+        
+    }
 
-
+    private fun validForm(): Boolean {
+        with(binding){
+            return !(etAccountName.text.isNullOrEmpty() || etAccountNumber.text.isNullOrEmpty())
+        }
     }
 
     interface OnSavedInformation {
-        fun saveData()
+        fun saveData(accName: String, accNumber: String)
     }
 }

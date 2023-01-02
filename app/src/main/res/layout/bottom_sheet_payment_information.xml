@@ -35,7 +35,7 @@
             android:id="@+id/et_accountName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"/>
+            android:inputType="text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -59,6 +59,24 @@
             android:id="@+id/et_accountNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"/>
+            android:inputType="number"/>
     </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_pay"
+        style="@style/Widget.Custom.CardView.Pay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_et_accountNumber">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/text_pay"
+            android:textColor="@color/white"
+            android:textSize="16sp"/>
+
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

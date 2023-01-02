@@ -61,18 +61,26 @@ class PaymentFragment : Fragment() {
 
         with(binding.cvPay){
             setOnClickListener {
-                orderViewModel.confirmPaymentMethod(
-                    userToken,
-                    "BankBRI", "Alias",
-                    1321311,
-                    orderResponse.tokenTransaction.toString()
-                ).observe(viewLifecycleOwner){
-                    when(it){
-                        is Resource.Success -> {
-                            findNavController().navigate(R.id.action_paymentFragment_to_paymentMessageFragment)
+                val currentDialog = parentFragmentManager.findFragmentByTag(PaymentMethodBottomSheet::class.java.simpleName)
+                if (currentDialog == null){
+                    PaymentMethodBottomSheet(object : PaymentMethodBottomSheet.OnSavedInformation{
+                        override fun saveData(accName: String, accNumber: String) {
+                            orderViewModel.confirmPaymentMethod(
+                                userToken,
+                                "Bank BRI",
+                                accName,
+                                accNumber.toInt(),
+                                orderResponse.tokenTransaction.toString()
+                            ).observe(viewLifecycleOwner){
+                                when(it){
+                                    is Resource.Success -> {
+                                        findNavController().navigate(R.id.action_paymentFragment_to_paymentMessageFragment)
+                                    }
+                                    else -> {}
+                                }
+                            }
                         }
-                        else -> {}
-                    }
+                    }).show(parentFragmentManager, PaymentMethodBottomSheet::class.java.simpleName)
                 }
             }
         }

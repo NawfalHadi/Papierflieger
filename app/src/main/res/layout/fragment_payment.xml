@@ -168,45 +168,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/ib_down" />
 
-                <TextView
-                    android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_name_payment"
-                    android:textSize="10sp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_bank" />
-
-                <TextView
-                    android:id="@+id/tv_name_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_name_payment"
-                    android:textSize="10sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tv_name" />
-
-                <TextView
-                    android:id="@+id/tv_number_account"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_number_account"
-                    android:textSize="10sp"
-                    android:layout_marginTop="4dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_name" />
-
-                <TextView
-                    android:id="@+id/tv_number_account_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/text_number_account"
-                    android:textSize="10sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_number_account"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tv_number_account" />
 
                 <TextView
                     android:id="@+id/tv_amount_money"
@@ -216,7 +177,7 @@
                     android:textSize="10sp"
                     android:layout_marginTop="4dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_number_account" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_bank" />
 
                 <TextView
                     android:id="@+id/tv_amount_money_detail"
@@ -252,7 +213,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/text_pay"
                         android:textColor="@color/white"
-                        android:textSize="14sp"/>
+                        android:textSize="10sp"/>
 
                 </androidx.cardview.widget.CardView>
 
