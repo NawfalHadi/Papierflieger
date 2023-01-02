@@ -2,7 +2,7 @@ package com.papierflieger.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.papierflieger.data.network.response.user.Profile
+import com.papierflieger.data.network.response.user.User
 import com.papierflieger.data.network.response.user.UserResponse
 import com.papierflieger.data.network.service.ApiService
 import com.papierflieger.wrapper.Resource
@@ -13,9 +13,9 @@ import retrofit2.Response
 class SessionRepository(
     private val apiService: ApiService
 ) {
-    private var profileUserResponse : MutableLiveData<Resource<Profile>> = MutableLiveData()
+    private var profileUserResponse : MutableLiveData<Resource<User>> = MutableLiveData()
 
-    fun getProfileUser(token: String): LiveData<Resource<Profile>> {
+    fun getProfileUser(token: String): LiveData<Resource<User>> {
         apiService.userProfile(token).enqueue(
             object : Callback<UserResponse>{
                 override fun onResponse(

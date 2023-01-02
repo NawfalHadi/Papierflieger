@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="ContentDescription"
+    tools:ignore="ContentDescription, UseCompoundDrawables, HardcodedText"
     android:background="@color/background_white"
     tools:context=".presentation.ui.home.search.SearchFragment">
 
@@ -17,20 +17,20 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="?attr/colorPrimary"
-            app:layout_constraintBottom_toBottomOf="@id/guideline_center_cardview"
+            app:layout_constraintBottom_toBottomOf="@id/guideline_center"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
+        <Button
             android:id="@+id/btn_back"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:background="@color/transparant_color"
-            android:src="@drawable/ic_back_arrow"
-            app:tint="@color/white"
-            android:layout_marginTop="24dp"
-            android:layout_marginStart="24dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_back_arrow"
+            app:iconSize="24dp"
+            android:layout_margin="12dp"
+            app:iconTint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_search"
@@ -46,12 +46,11 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardview_one"
+            android:id="@+id/cv_airport"
+            style="@style/Widget.Custom.CardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            app:cardCornerRadius="12dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_marginTop="32dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -60,61 +59,72 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="16dp">
+                android:padding="8dp">
 
-                <ImageView
-                    android:id="@+id/ic_takeoff"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_takeoff"
-                    app:tint="@color/gray"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
-
-                <TextView
-                    android:id="@+id/tv_from"
+                <LinearLayout
+                    android:id="@+id/ll_from"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:text="@string/text_departure"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@id/ic_takeoff"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toStartOf="@+id/btn_switch_flight"
-                    app:layout_constraintStart_toEndOf="@id/ic_takeoff"
-                    app:layout_constraintTop_toTopOf="@id/ic_takeoff" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_takeoff"
+                        app:tint="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/tv_from"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:text="@string/text_departure"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_destination"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_switch_flight"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/guideline_one">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_land"
+                        app:tint="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/tv_destination"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="8dp"
+                        android:text="@string/text_arrival"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
 
                 <View
                     android:id="@+id/guideline_one"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/gray"
-
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintTop_toBottomOf="@id/ic_takeoff"
-                    app:layout_constraintStart_toStartOf="@id/ic_takeoff"/>
-
-                <ImageView
-                    android:id="@+id/ic_land"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_land"
-                    app:tint="@color/gray"
-
-                    android:layout_marginTop="16dp"
-                    app:layout_constraintStart_toStartOf="@id/guideline_one"
-                    app:layout_constraintTop_toBottomOf="@id/guideline_one"/>
-
-                <TextView
-                    android:id="@+id/tv_destination"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:text="@string/text_arrival"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="@id/ic_land"
-                    app:layout_constraintEnd_toStartOf="@+id/btn_switch_flight"
-                    app:layout_constraintStart_toEndOf="@id/ic_land"
-                    app:layout_constraintTop_toTopOf="@id/ic_land" />
+                    android:layout_marginTop="8dp"
+                    android:layout_marginHorizontal="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/ll_from"
+                    app:layout_constraintStart_toStartOf="parent"/>
 
                 <ImageButton
                     android:id="@+id/btn_switch_flight"
@@ -134,25 +144,24 @@
         </com.google.android.material.card.MaterialCardView>
 
         <View
-            android:id="@+id/guideline_center_cardview"
+            android:id="@+id/guideline_center"
             android:layout_width="1dp"
             android:layout_height="1dp"
-            app:layout_constraintStart_toStartOf="@id/cardview_one"
-            app:layout_constraintEnd_toEndOf="@id/cardview_one"
-            app:layout_constraintTop_toTopOf="@id/cardview_one"
-            app:layout_constraintBottom_toBottomOf="@id/cardview_one"/>
+            app:layout_constraintStart_toStartOf="@id/cv_airport"
+            app:layout_constraintEnd_toEndOf="@id/cv_airport"
+            app:layout_constraintTop_toTopOf="@id/cv_airport"
+            app:layout_constraintBottom_toBottomOf="@id/cv_airport"/>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardview_two"
+            android:id="@+id/cv_date"
+            style="@style/Widget.Custom.CardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            app:cardCornerRadius="12dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardview_one">
+            app:layout_constraintTop_toBottomOf="@id/cv_airport">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -165,7 +174,7 @@
                     android:layout_height="40dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    app:layout_constraintEnd_toStartOf="@+id/text_roundtrip"
+                    app:layout_constraintEnd_toStartOf="@+id/text_round_trip"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -203,7 +212,7 @@
                     android:layout_marginTop="8dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
-                    app:layout_constraintEnd_toStartOf="@+id/text_roundtrip"
+                    app:layout_constraintEnd_toStartOf="@+id/text_round_trip"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/guideline_two">
 
@@ -225,18 +234,18 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/text_roundtrip"
+                    android:id="@+id/text_round_trip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/text_roundtrip"
                     android:textSize="10sp"
                     tools:ignore="SmallSp"
-                    app:layout_constraintTop_toTopOf="@id/switch_roundtrip"
-                    app:layout_constraintBottom_toBottomOf="@id/switch_roundtrip"
-                    app:layout_constraintEnd_toStartOf="@id/switch_roundtrip"/>
+                    app:layout_constraintTop_toTopOf="@id/switch_round_trip"
+                    app:layout_constraintBottom_toBottomOf="@id/switch_round_trip"
+                    app:layout_constraintEnd_toStartOf="@id/switch_round_trip"/>
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
-                    android:id="@+id/switch_roundtrip"
+                    android:id="@+id/switch_round_trip"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     app:thumbTint="@color/dark_blue"
@@ -252,7 +261,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardview_three"
+            android:id="@+id/cv_passenger"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -261,7 +270,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardview_two">
+            app:layout_constraintTop_toBottomOf="@id/cv_date">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/card_person"
@@ -279,14 +288,15 @@
                     app:layout_constraintStart_toStartOf="parent"/>
 
                 <TextView
+                    android:id="@+id/tv_passenger"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="@string/text_passenger"
+                    android:text="1 Passenger"
                     android:textSize="16sp"
+                    android:layout_marginStart="16dp"
                     app:layout_constraintBottom_toBottomOf="@id/ic_person"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/ic_person"
+                    app:layout_constraintStart_toEndOf="@+id/ic_person"
                     app:layout_constraintTop_toTopOf="@id/ic_person" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -300,12 +310,12 @@
             android:layout_height="wrap_content"
             android:text="@string/text_search"
             android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="@id/cardview_three"
-            app:layout_constraintEnd_toEndOf="@id/cardview_three"
-            app:layout_constraintTop_toBottomOf="@id/cardview_three"/>
+            app:layout_constraintStart_toStartOf="@id/cv_passenger"
+            app:layout_constraintEnd_toEndOf="@id/cv_passenger"
+            app:layout_constraintTop_toBottomOf="@id/cv_passenger"/>
 
         <TextView
-            android:id="@+id/text_favdestination"
+            android:id="@+id/text_destination"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/text_promotion"
@@ -321,12 +331,12 @@
             android:text="@string/text_viewall"
             android:textColor="@color/dark_blue"
             android:textSize="14sp"
-            app:layout_constraintTop_toTopOf="@id/text_favdestination"
-            app:layout_constraintBottom_toBottomOf="@id/text_favdestination"
-            app:layout_constraintEnd_toEndOf="@id/cardview_one"/>
+            app:layout_constraintTop_toTopOf="@id/text_destination"
+            app:layout_constraintBottom_toBottomOf="@id/text_destination"
+            app:layout_constraintEnd_toEndOf="@id/cv_airport"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_favdestination"
+            android:id="@+id/rv_destination"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -334,7 +344,7 @@
             tools:listitem="@layout/item_favorite_destination"
             tools:itemCount="3"
             android:layout_marginTop="12dp"
-            app:layout_constraintTop_toBottomOf="@id/text_favdestination"/>
+            app:layout_constraintTop_toBottomOf="@id/text_destination"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

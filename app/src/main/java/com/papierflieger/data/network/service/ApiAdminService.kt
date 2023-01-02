@@ -1,12 +1,18 @@
 package com.papierflieger.data.network.service
 
 import com.papierflieger.data.network.response.ChangeDataResponse
-import com.papierflieger.data.network.response.destination.CreateDestinationResponse
 import com.papierflieger.data.network.response.airplane.CreateAirplaneResponse
 import com.papierflieger.data.network.response.airport.CreateAirportResponse
+import com.papierflieger.data.network.response.destination.CreateDestinationResponse
+import com.papierflieger.data.network.response.orders.OrdersResponse
 import com.papierflieger.data.network.response.ticket.CreateTicketResponse
+import com.papierflieger.data.network.response.transaction.TransactionsResponse
+import com.papierflieger.data.network.response.user.UsersResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
+
 
 interface ApiAdminService {
 
@@ -14,27 +20,27 @@ interface ApiAdminService {
      * Destination
      */
 
-    @FormUrlEncoded
+    @Multipart
     @POST("api/destinations")
     fun createAdminDestination(
         @Header("Authorization") token: String,
-        @Field("name") name: String,
-        @Field("images") images: String,
-        @Field("location") location: String,
-        @Field("description") description: String,
-        @Field("airportId") airportId: Int,
+        @Part("name") name: RequestBody,
+        @Part images: List<MultipartBody.Part>,
+        @Part("location") location: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("airportId") airportId: RequestBody
     ) : Call<CreateDestinationResponse>
 
-    @FormUrlEncoded
+    @Multipart
     @PUT("api/destinations/{idDestination}")
     fun updateAdminDestination(
         @Path("idDestination") idDestination: Int,
         @Header("Authorization") token: String,
-        @Field("name") name: String,
-        @Field("images") images: String,
-        @Field("location") location: String,
-        @Field("description") description: String,
-        @Field("airportId") airportId: Int,
+        @Part("name") name: RequestBody,
+        @Part images: List<MultipartBody.Part>,
+        @Part("location") location: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("airportId") airportId: RequestBody
     ) : Call<ChangeDataResponse>
 
     @DELETE("api/destinations/{idDestination}")
@@ -170,6 +176,51 @@ interface ApiAdminService {
     @DELETE("api/tickets/{idTickets}")
     fun deleteAdminTicket(
         @Path("idTickets") idTickets: Int,
+        @Header("Authorization") token: String,
+    ) : Call<ChangeDataResponse>
+
+    /***
+     * Order
+     */
+
+    @GET("api/orders")
+    fun getAdminOrders(
+        @Header("Authorization") token: String
+    ) : Call<OrdersResponse>
+
+    @DELETE("api/orders/{idOrder}")
+    fun deleteAdminOrder(
+        @Path("idOrder") idOrders: Int,
+        @Header("Authorization") token: String,
+    ) : Call<ChangeDataResponse>
+
+    /***
+     * Transaction
+     */
+
+    @GET("api/transactions")
+    fun getAdminTransactions(
+        @Header("Authorization") token: String
+    ) : Call<TransactionsResponse>
+
+    @DELETE("api/transactions/{idTransaction}")
+    fun deleteAdminTransaction(
+        @Path("idTransaction") idTransaction: Int,
+        @Header("Authorization") token: String,
+    ) : Call<ChangeDataResponse>
+
+    /***
+     * User
+     */
+
+    @GET("api/users")
+    fun getAdminUser(
+        @Header("Authorization") token: String
+    ) : Call<UsersResponse>
+
+    @PUT("api/add-admin/{idUser}")
+    fun updateAdminUser(
+        @Path("idUser") idUser: Int,
         @Header("Authorization") token: String,
     ) : Call<ChangeDataResponse>
 

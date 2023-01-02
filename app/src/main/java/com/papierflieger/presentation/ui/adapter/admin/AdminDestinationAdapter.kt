@@ -10,6 +10,7 @@ import coil.load
 import com.papierflieger.R
 import com.papierflieger.data.network.response.destination.Destination
 import com.papierflieger.databinding.ItemAdminDestinationBinding
+import com.papierflieger.wrapper.convertAirport
 
 class AdminDestinationAdapter : RecyclerView.Adapter<AdminDestinationAdapter.DestinationViewHolder>() {
 
@@ -54,27 +55,36 @@ class AdminDestinationAdapter : RecyclerView.Adapter<AdminDestinationAdapter.Des
                 if (position < 1) vGap.visibility = View.INVISIBLE
                 else vGap.visibility = View.GONE
 
-                if (item?.image?.size!! >= 2) {
-                    ivImage1.load(item.image[0]) {
-                        placeholder(R.color.gray)
-                    }
-                    ivImage2.load(item.image[1]) {
-                        placeholder(R.color.gray)
-                    }
-                } else if (item.image.size == 1) {
-                    ivImage1.load(item.image[0]) {
-                        placeholder(R.color.gray)
-                    }
-                }
+                tvDestinationNameValue.text = item?.name
+                tvAirportValue.text = convertAirport(
+                    item?.airport?.airportName.toString(),
+                    item?.airport?.cityCode.toString())
+                tvLocationValue.text = item?.location
+                tvDescriptionValue.text = item?.description
 
-                tvDestinationNameValue.text = item.name
-                tvAirportValue.text = item.airport?.airportName
-                tvLocationValue.text = item.location
-                tvDescriptionValue.text = item.description
-
-                if (item.id != null) {
+                if (item?.id != null) {
                     btnEdit.setOnClickListener { onAdminDestinationItem.itemEditClicked(item.id) }
                     btnDelete.setOnClickListener { onAdminDestinationItem.itemDeleteClicked(item.id) }
+                }
+
+                if (item?.image.isNullOrEmpty()) {
+                    ivImage1.visibility = View.INVISIBLE
+                    ivImage2.visibility = View.INVISIBLE
+                } else {
+                    if (item?.image?.size!! >= 2) {
+                        ivImage1.load(item.image[0]) {
+                            placeholder(R.color.background_gray)
+                        }
+                        ivImage2.load(item.image[1]) {
+                            placeholder(R.color.background_gray)
+                        }
+                    } else {
+                        ivImage1.load(item.image[0]) {
+                            placeholder(R.color.background_gray)
+                        }
+                        ivImage2.visibility = View.INVISIBLE
+                    }
+
                 }
             }
         }

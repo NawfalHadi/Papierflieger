@@ -50,7 +50,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
+        android:layout_marginStart="8dp"
         android:textSize="14sp"
         android:text="@string/text_passenger"
         app:layout_constraintBottom_toBottomOf="@+id/iv_passenger"
@@ -74,7 +74,7 @@
         android:id="@+id/til_et_passenger"
         style="@style/Widget.Custom.TextInputLayout.OutlinedBox"
         android:layout_width="wrap_content"
-        android:layout_height="36dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="6dp"
         app:boxCornerRadiusTopStart="6dp"
         app:boxCornerRadiusTopEnd="6dp"

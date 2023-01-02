@@ -3,12 +3,15 @@ package com.papierflieger.presentation.ui.admin.destination
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -16,7 +19,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import coil.load
 import com.papierflieger.R
 import com.papierflieger.data.network.response.airport.Airport
 import com.papierflieger.data.network.response.destination.Destination
@@ -30,6 +32,7 @@ import com.papierflieger.wrapper.CustomAdapter
 import com.papierflieger.wrapper.Resource
 import com.papierflieger.wrapper.convertAirport
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 
 @AndroidEntryPoint
 class AddDestinationFragment : Fragment() {
@@ -45,9 +48,8 @@ class AddDestinationFragment : Fragment() {
     }
 
     private var idDestination : Int? = null
-    private var uploadPhoto : String? = null
     private var airportId : Int = -1
-
+    private val imageFile = mutableListOf<File>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -69,18 +71,18 @@ class AddDestinationFragment : Fragment() {
 
     private fun checkingPermissions() {
         if (isGranted(
-                requireActivity(),
-                Manifest.permission.READ_EXTERNAL_STORAGE
+                requireActivity()
             )
         ) {
-            galleryResult.launch("image/*")
+            val intent = Intent(Intent.ACTION_PICK).apply { type = "image/*" }
+            galleryResult.launch(intent)
         }
     }
 
-    private fun isGranted(
-        activity: Activity,
-        permission: String
-    ): Boolean {
+
+
+    private fun isGranted(activity: Activity): Boolean {
+        val permission = Manifest.permission.READ_EXTERNAL_STORAGE
         val permissionCheck = ActivityCompat.checkSelfPermission(activity, permission)
         return if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
@@ -93,23 +95,26 @@ class AddDestinationFragment : Fragment() {
     }
 
     private val galleryResult =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { result ->
-            if (result != null) {
-//                val pickedPhoto: Bitmap = if (Build.VERSION.SDK_INT >= 28) {
-//                    val source = ImageDecoder.createSource(requireActivity().contentResolver, result)
-//                    ImageDecoder.decodeBitmap(source)
-//                } else {
-//                    MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, result)
-//                }
-
-                Toast.makeText(context, result.toString(), Toast.LENGTH_SHORT).show()
-
-                uploadPhoto = result.toString()
-                binding.apply {
-                    cvImageEmpty.visibility = View.VISIBLE
-                    rvDestinationPicture.visibility = View.INVISIBLE
-                    ivEmpty.load(result) {
-                        placeholder(R.color.background_gray)
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val selectedImage = result.data?.data
+                if (selectedImage != null) {
+                    val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+                    val cursor = requireActivity().contentResolver.query(selectedImage, filePathColumn, null, null, null)
+                    cursor?.use {
+                        if (it.moveToFirst()) {
+                            val columnIndex = it.getColumnIndex(filePathColumn[0])
+                            val filePath = it.getString(columnIndex)
+                            imageFile.add(File(filePath))
+                        }
+                    }
+                    if (imageFile.size > 1) adapterDestinationPicture.setItem(selectedImage.toString(), false)
+                    else adapterDestinationPicture.setItem(selectedImage.toString(), true)
+                    binding.apply {
+                        cvImageEmpty.visibility = View.INVISIBLE
+                        rvDestinationPicture.visibility = View.VISIBLE
                     }
                 }
             }
@@ -137,7 +142,7 @@ class AddDestinationFragment : Fragment() {
                 checkingPermissions()
             }
             btnSave.setOnClickListener {
-//                saveData()
+                saveData()
             }
             acAirport.setOnItemClickListener { parent, _, position, _ ->
                 val selectedItem = parent.getItemAtPosition(position) as Airport
@@ -146,7 +151,6 @@ class AddDestinationFragment : Fragment() {
             }
         }
     }
-
     private fun saveData() {
         binding.apply {
             val name = etDestinationName.text.toString().trim()
@@ -156,16 +160,15 @@ class AddDestinationFragment : Fragment() {
             if (validationInput(name, location, description)) {
                 sessionViewModel.getToken().observe(viewLifecycleOwner) { token ->
                     if (idDestination != null) {
-                        adminViewModel.updateDestination(idDestination!!, token, name, uploadPhoto!!, location, description, airportId)
+                        adminViewModel.updateDestination(idDestination!!, token, name, imageFile, location, description, airportId)
                     } else {
-                        adminViewModel.createDestination(token, name, uploadPhoto!!,  location, description, airportId)
+                        adminViewModel.createDestination(token, name, imageFile,  location, description, airportId)
                     }
                     findNavController().navigate(R.id.adminDashboardFragment)
                 }
             }
         }
     }
-
 
     private fun validationInput(name: String, location: String, description: String): Boolean {
         var isFormValid = true
@@ -202,7 +205,7 @@ class AddDestinationFragment : Fragment() {
                 tilEtDescription.isErrorEnabled = false
             }
 
-            if (uploadPhoto.isNullOrEmpty()) {
+            if (imageFile.isEmpty()) {
                 isFormValid = false
                 Toast.makeText(context, "Destination Picture Empty ", Toast.LENGTH_SHORT).show()
             }

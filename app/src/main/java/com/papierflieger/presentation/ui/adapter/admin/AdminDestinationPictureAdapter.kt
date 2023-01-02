@@ -20,6 +20,13 @@ class AdminDestinationPictureAdapter : RecyclerView.Adapter<AdminDestinationPict
         notifyDataSetChanged()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun setItem(data : String, clear : Boolean){
+        if (clear) list.clear()
+        list.add(data)
+        notifyDataSetChanged()
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -41,7 +48,7 @@ class AdminDestinationPictureAdapter : RecyclerView.Adapter<AdminDestinationPict
         private val binding : ItemAddDestinationPictureBinding
     ) : RecyclerView.ViewHolder(binding.root){
 
-        fun bindingView(item: Any?, position: Int) {
+        fun bindingView(item: String?, position: Int) {
             with(binding){
                 if (position < 1) vGap.visibility = View.INVISIBLE
                 else vGap.visibility = View.GONE

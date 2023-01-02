@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:ignore="ContentDescription"
     android:background="@color/background_white"
-    tools:context=".presentation.ui.admin.airplane.AdminAirplaneFragment">
+    tools:context=".presentation.ui.admin.user.AdminUserFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_search"
@@ -24,12 +24,12 @@
             style="@style/Widget.Custom.SearchView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:queryHint="@string/text_airplane" />
+            app:queryHint="@string/text_user" />
 
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_airplane"
+        android:id="@+id/rv_user"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -37,15 +37,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_admin_airport" />
+        tools:listitem="@layout/item_admin_user" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add"
-        style="@style/Widget.Custom.FloatingActionButton"
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        android:id="@+id/pb_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:indeterminate="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

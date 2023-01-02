@@ -112,14 +112,16 @@ class SearchFragment : Fragment() {
             val currentDialog = parentFragmentManager.findFragmentByTag(PassengerBottomSheet::class.java.simpleName)
             if (currentDialog == null){
                 PassengerBottomSheet(passengerCounter, object : PassengerBottomSheet.OnPassengerCounted{
+                    @SuppressLint("SetTextI18n")
                     override fun passengerCounted(count: Int) {
                         passengerCounter = count
+                        binding.tvPassenger.text = "$count Passenger"
                     }
                 }).show(parentFragmentManager, PassengerBottomSheet::class.java.simpleName)
             }
         }
 
-        binding.tvFrom.setOnClickListener {
+        binding.llFrom.setOnClickListener {
             val currentDialog = parentFragmentManager.findFragmentByTag(SearchAirportBottomSheet::class.java.simpleName)
             if (currentDialog == null) {
                 SearchAirportBottomSheet(object : SearchAirportBottomSheet.OnAirportClickListner {
@@ -133,7 +135,7 @@ class SearchFragment : Fragment() {
             }
         }
 
-        binding.tvDestination.setOnClickListener {
+        binding.llDestination.setOnClickListener {
             val currentDialog = parentFragmentManager.findFragmentByTag(SearchAirportBottomSheet::class.java.simpleName)
             if (currentDialog == null) {
                 SearchAirportBottomSheet(object : SearchAirportBottomSheet.OnAirportClickListner {
@@ -147,12 +149,12 @@ class SearchFragment : Fragment() {
             }
         }
 
-        binding.switchRoundtrip.setOnClickListener {
+        binding.switchRoundTrip.setOnClickListener {
             roundTripCheck()
         }
 
         binding.llDateDeparture.setOnClickListener {
-            if (!binding.switchRoundtrip.isChecked) {
+            if (!binding.switchRoundTrip.isChecked) {
                 datePicker.show(
                     childFragmentManager,
                     "date_picker"
@@ -193,7 +195,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun roundTripCheck() {
-        if (!binding.switchRoundtrip.isChecked) {
+        if (!binding.switchRoundTrip.isChecked) {
             with(binding){
                 guidelineTwo.visibility = View.GONE
                 llDateReturn.visibility = View.GONE
