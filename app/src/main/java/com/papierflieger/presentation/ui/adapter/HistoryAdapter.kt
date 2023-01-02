@@ -3,6 +3,7 @@ package com.papierflieger.presentation.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.papierflieger.data.network.response.transaction.HistoriesResponse
 import com.papierflieger.data.network.response.transaction.Transaction
 import com.papierflieger.data.network.response.transaction.Transaksi
 import com.papierflieger.databinding.ItemPaymentFlightDetailBinding
@@ -10,9 +11,9 @@ import com.papierflieger.databinding.ItemTransactionHistoryBinding
 import com.papierflieger.wrapper.convertToRupiah
 
 class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
-    private val list : ArrayList<Transaction> = arrayListOf()
+    private val list : ArrayList<HistoriesResponse> = arrayListOf()
 
-    fun setItem(histories : ArrayList<Transaction>){
+    fun setItem(histories : ArrayList<HistoriesResponse>){
         list.clear()
         list.addAll(histories)
         notifyDataSetChanged()
@@ -35,10 +36,11 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
     inner class ViewHolder(
         private val binding : ItemTransactionHistoryBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bindingInformation(history: Transaction) {
+        fun bindingInformation(history: HistoriesResponse) {
             with(binding){
-                tvOrdernumber.text = history.orderId.toString()
-                tvTranscationprice.text = convertToRupiah(history.totalPrice!!.toInt())
+//                tvOrdernumber.text = history.transaction
+//                tvTranscationprice.text = convertToRupiah(history.totalPrice!!.toInt())
+//                tvFromlocation.text = history.
             }
         }
 
