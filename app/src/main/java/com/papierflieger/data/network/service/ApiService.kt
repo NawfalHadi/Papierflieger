@@ -14,6 +14,7 @@ import com.papierflieger.data.network.response.destination.DestinationResponse
 import com.papierflieger.data.network.response.destination.DestinationsResponse
 import com.papierflieger.data.network.response.notification.CreateNotificationResponse
 import com.papierflieger.data.network.response.notification.NotificationsResponse
+import com.papierflieger.data.network.response.orders.OrderDetailResponse
 import com.papierflieger.data.network.response.orders.OrderResponse
 import com.papierflieger.data.network.response.ticket.ListTicketResponse
 import com.papierflieger.data.network.response.ticket.SearchTicketResponse
@@ -187,6 +188,11 @@ interface ApiService {
     /**
      * Order API
      */
+
+    @GET("api/orders/{idOrder}")
+    fun getOrderById(
+        @Path("idOrder") idOrder: Int
+    ) : Call<OrderDetailResponse>
 
     @POST("api/orders")
     fun continuePaymentDomestic(

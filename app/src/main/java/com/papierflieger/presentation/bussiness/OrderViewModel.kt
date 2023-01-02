@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.papierflieger.data.local.model.OrderDomestic
 import com.papierflieger.data.local.model.OrderInternational
+import com.papierflieger.data.network.response.orders.OrderDetailResponse
 import com.papierflieger.data.network.response.orders.OrderResponse
 import com.papierflieger.data.network.response.transaction.TransactionsResponse
 import com.papierflieger.data.repository.OrderRepository
@@ -38,6 +39,12 @@ class OrderViewModel @Inject constructor(
         return orderRepository.confirmPaymentMethod(
             token, bankName, accountName, accountNumber, tokenTransaction
         )
+    }
+
+    fun getOrderDetail(
+        id: Int
+    ) : LiveData<Resource<OrderDetailResponse>> {
+        return orderRepository.getDetailOrder(id)
     }
 
 

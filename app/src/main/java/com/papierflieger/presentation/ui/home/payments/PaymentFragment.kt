@@ -1,7 +1,6 @@
 package com.papierflieger.presentation.ui.home.payments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.papierflieger.R
 import com.papierflieger.data.network.response.orders.*
-import com.papierflieger.data.network.response.ticket.DataTicket
 import com.papierflieger.data.network.response.ticket.TicketsDetail
 import com.papierflieger.databinding.FragmentPaymentBinding
 import com.papierflieger.presentation.bussiness.OrderViewModel

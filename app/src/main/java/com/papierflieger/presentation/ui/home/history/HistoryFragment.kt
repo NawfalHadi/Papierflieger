@@ -1,15 +1,18 @@
 package com.papierflieger.presentation.ui.home.history
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.papierflieger.R
+import com.papierflieger.data.network.response.transaction.Order
+import com.papierflieger.data.network.response.transaction.Ticket
+import com.papierflieger.data.network.response.transaction.Transaction
 import com.papierflieger.databinding.FragmentHistoryBinding
 import com.papierflieger.presentation.bussiness.NotificationViewModel
 import com.papierflieger.presentation.bussiness.SessionViewModel
@@ -80,12 +83,16 @@ class HistoryFragment : Fragment() {
         }
 
         historyAdapter.listener(object : HistoryAdapter.OnHistoryCardAction{
-            override fun cardAction() {
+            override fun cardAction(transaction: Transaction, order: Order, ticket: Ticket) {
                 val mBundle = Bundle()
-                mBundle.putString("test", "test")
-                findNavController().navigate(R.id.action_historyFragment_to_detailHistoryActivity)
-            }
+                mBundle.putParcelable(DetailHistoryActivity.ORDER_LIST_KEY, order)
+                mBundle.putParcelable(DetailHistoryActivity.TICKET_LIST_KEY, ticket)
+                mBundle.putParcelable(DetailHistoryActivity.TRANSACTION_LIST_KEY, transaction)
 
+                val mIntent = Intent(activity, DetailHistoryActivity::class.java)
+                mIntent.putExtras(mBundle)
+                startActivity(mIntent)
+            }
         })
     }
 

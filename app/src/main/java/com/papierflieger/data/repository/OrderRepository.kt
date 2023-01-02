@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.papierflieger.data.local.model.OrderDomestic
 import com.papierflieger.data.local.model.OrderInternational
+import com.papierflieger.data.network.response.orders.OrderDetailResponse
 import com.papierflieger.data.network.response.orders.OrderResponse
 import com.papierflieger.data.network.response.transaction.TransactionsResponse
 import com.papierflieger.data.network.service.ApiService
@@ -16,6 +17,7 @@ class OrderRepository(
     private val apiService: ApiService
 ) {
     private var orderResponse : MutableLiveData<Resource<OrderResponse>> = MutableLiveData()
+    private var orderDetailResponse : MutableLiveData<Resource<OrderDetailResponse>> = MutableLiveData()
     private var transactionsResponse : MutableLiveData<Resource<TransactionsResponse>> = MutableLiveData()
 
     fun continuePaymentDomestic(
@@ -84,5 +86,26 @@ class OrderRepository(
         )
 
         return transactionsResponse
+    }
+
+    fun getDetailOrder(
+        id : Int
+    ): LiveData<Resource<OrderDetailResponse>> {
+        apiService.getOrderById(id).enqueue(
+            object : Callback<OrderDetailResponse>{
+                override fun onResponse(
+                    call: Call<OrderDetailResponse>,
+                    response: Response<OrderDetailResponse>
+                ) {
+                    orderDetailResponse.postValue(Resource.Success(response.body()!!))
+                }
+
+                override fun onFailure(call: Call<OrderDetailResponse>, t: Throwable) {
+                    orderDetailResponse.postValue(Resource.Error(t))
+                }
+
+            }
+        )
+        return orderDetailResponse
     }
 }

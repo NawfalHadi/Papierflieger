@@ -1,11 +1,13 @@
 package com.papierflieger.data.network.response.transaction
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import com.papierflieger.data.network.response.orders.Airplane
 import com.papierflieger.data.network.response.orders.From
 import com.papierflieger.data.network.response.orders.To
 import com.papierflieger.data.network.response.orders.Transit
+import kotlinx.parcelize.Parcelize
 
 data class HistoriesResponse(
     @SerializedName("order")
@@ -16,6 +18,7 @@ data class HistoriesResponse(
     val transaction: ArrayList<Transaction>
 )
 
+@Parcelize
 data class Order(
     @SerializedName("birthDate")
     val birthDate: String?,
@@ -24,7 +27,7 @@ data class Order(
     @SerializedName("expired")
     val expired: String?,
     @SerializedName("gate")
-    val gate: Any?,
+    val gate: String?,
     @SerializedName("id")
     val id: Int?,
     @SerializedName("issuingCountry")
@@ -38,13 +41,14 @@ data class Order(
     @SerializedName("passportNumber")
     val passportNumber: String?,
     @SerializedName("seat")
-    val seat: Any?,
+    val seat: String?,
     @SerializedName("ticketId")
     val ticketId: List<Int?>?,
     @SerializedName("updatedAt")
     val updatedAt: String?
-)
+) : Parcelable
 
+@Parcelize
 data class Transaction(
     @SerializedName("createdAt")
     val createdAt: String?,
@@ -66,8 +70,9 @@ data class Transaction(
     val updatedAt: String?,
     @SerializedName("userId")
     val userId: Int?
-)
+) : Parcelable
 
+@Parcelize
 data class Ticket(
     @SerializedName("Airplane")
     val airplane: Airplane?,
@@ -115,4 +120,4 @@ data class Ticket(
     val transitPoint: Int?,
     @SerializedName("updatedAt")
     val updatedAt: String?
-)
+) : Parcelable

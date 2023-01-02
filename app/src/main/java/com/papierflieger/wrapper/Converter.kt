@@ -54,7 +54,7 @@ class CustomAdapterAirplane(context: Context, objects: List<DataAirplane?>?)
     }
 }
 
-fun convertToRupiah(amount: Int): String {
+fun convertToRupiah(amount: Int?): String {
     val rupiahFormat = DecimalFormat.getCurrencyInstance(Locale("in", "ID")) as DecimalFormat
     rupiahFormat.applyPattern("¤ #,###")
     return rupiahFormat.format(amount)
