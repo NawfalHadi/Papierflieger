@@ -8,6 +8,7 @@ import com.papierflieger.data.network.response.user.User
 import com.papierflieger.data.network.response.user.UserResponse
 import com.papierflieger.data.network.service.ApiService
 import com.papierflieger.wrapper.Resource
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,8 +51,13 @@ class SessionRepository(
                     call: Call<HistoriesResponse>,
                     response: Response<HistoriesResponse>
                 ) {
-                    if (response.isSuccessful){
-                        historiesResponse.postValue(Resource.Success(response.body()!!))
+                    val body = response.body()
+                    if (body != null) {
+                        historiesResponse.postValue(Resource.Success(body))
+                    } else {
+                        val errorJson = response.errorBody()?.string()?.let { JSONObject(it) }
+                        val errorMessage = errorJson?.optString("message")
+                        historiesResponse.value = Resource.Error(Throwable(errorMessage))
                     }
                 }
                 override fun onFailure(call: Call<HistoriesResponse>, t: Throwable) {

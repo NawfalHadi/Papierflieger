@@ -183,10 +183,6 @@ class SearchFragment : Fragment() {
             }
         }
 
-//        val options = arrayOf("Economy", "Business")
-//        (binding.cvClass as MaterialAutoCompleteTextView).setSimpleItems(options)
-//        binding.cvClass.setAdapter(ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, options))
-
     }
 
     private fun switchFlightButton() {
