@@ -6,12 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.papierflieger.R
+import com.papierflieger.data.network.response.transaction.Transaction
+import com.papierflieger.data.network.response.transaction.Transaksi
 import com.papierflieger.databinding.FragmentHistoryBinding
 import com.papierflieger.presentation.bussiness.AuthViewModel
 import com.papierflieger.presentation.bussiness.NotificationViewModel
 import com.papierflieger.presentation.bussiness.SessionViewModel
+import com.papierflieger.presentation.ui.adapter.HistoryAdapter
 import com.papierflieger.wrapper.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,6 +25,8 @@ class HistoryFragment : Fragment() {
     private lateinit var binding: FragmentHistoryBinding
     private val sessionViewModel : SessionViewModel by viewModels()
     private val notificationViewModel : NotificationViewModel by viewModels()
+
+    private val historyAdapter : HistoryAdapter by lazy { HistoryAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,16 +39,33 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bindingNotification()
-        initList()
         observeData()
     }
 
     private fun observeData() {
-
+        sessionViewModel.getToken().observe(viewLifecycleOwner) {token ->
+            sessionViewModel.getHistoriesUser(token).observe(viewLifecycleOwner){
+                when(it){
+                    is Resource.Success -> {
+                        historyAdapter.setItem(it.payload?.transaction as ArrayList<Transaction>)
+                        initList()
+                    }
+                    else -> {}
+                }
+            }
+        }
     }
 
     private fun initList() {
-
+        binding.ivNotFound.visibility = View.INVISIBLE
+        with(binding.rvHistoryTransaction){
+            visibility = View.VISIBLE
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(
+                context, LinearLayoutManager.VERTICAL, false
+            )
+            adapter = historyAdapter
+        }
     }
 
     private fun bindingNotification() {

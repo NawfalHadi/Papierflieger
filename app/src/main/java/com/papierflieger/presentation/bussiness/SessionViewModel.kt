@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.papierflieger.data.local.datastore.AccountDataStore
+import com.papierflieger.data.network.response.transaction.HistoriesResponse
+import com.papierflieger.data.network.response.transaction.TransactionsResponse
 import com.papierflieger.data.network.response.user.User
 import com.papierflieger.data.repository.SessionRepository
 import com.papierflieger.wrapper.Resource
@@ -21,6 +23,10 @@ class SessionViewModel @Inject constructor(
 
     fun getProfileUser(token : String) : LiveData<Resource<User>>{
         return sessionRepo.getProfileUser(token)
+    }
+
+    fun getHistoriesUser(token: String) : LiveData<Resource<HistoriesResponse>>{
+        return sessionRepo.getHistoryUser(token)
     }
 
     // Data Store

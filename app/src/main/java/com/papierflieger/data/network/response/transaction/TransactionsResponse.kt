@@ -5,7 +5,10 @@ import com.papierflieger.data.network.response.user.User
 
 data class TransactionsResponse(
     @SerializedName("transaksi")
-    val transaksi: List<Transaksi>
+    val transaksi: List<Transaksi>,
+    @SerializedName("message")
+    val message: String
+
 )
 
 data class Transaksi(

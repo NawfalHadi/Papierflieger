@@ -6,13 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.papierflieger.R
 import com.papierflieger.data.network.response.orders.*
 import com.papierflieger.data.network.response.ticket.DataTicket
 import com.papierflieger.data.network.response.ticket.TicketsDetail
 import com.papierflieger.databinding.FragmentPaymentBinding
+import com.papierflieger.presentation.bussiness.OrderViewModel
+import com.papierflieger.presentation.bussiness.SessionViewModel
 import com.papierflieger.presentation.ui.adapter.payments.FlightAdapter
 import com.papierflieger.presentation.ui.adapter.payments.PassengerInformationAdapter
+import com.papierflieger.wrapper.Resource
 import com.papierflieger.wrapper.convertToRupiah
 import com.papierflieger.wrapper.toTickets
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +27,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class PaymentFragment : Fragment() {
 
     private var showsRecycler = false
+    private var userToken = ""
+
+    private val sessionViewModel : SessionViewModel by viewModels()
+    private val orderViewModel : OrderViewModel by viewModels()
 
     private lateinit var binding : FragmentPaymentBinding
     private lateinit var orderResponse: OrderResponse
@@ -50,6 +60,24 @@ class PaymentFragment : Fragment() {
         bindingInformation(orderResponse)
         bindingPricing(orderResponse)
         initRecyclers()
+
+        with(binding.cvPay){
+            setOnClickListener {
+                orderViewModel.confirmPaymentMethod(
+                    userToken,
+                    "BRI", "Alias",
+                    1321487,
+                    orderResponse.tokenTransaction!!.toString()
+                ).observe(viewLifecycleOwner){
+                    when(it){
+                        is Resource.Success -> {
+                            findNavController().navigate(R.id.action_paymentFragment_to_paymentMessageFragment)
+                        }
+                        else -> {}
+                    }
+                }
+            }
+        }
     }
 
     private fun initRecyclers() {
@@ -75,6 +103,8 @@ class PaymentFragment : Fragment() {
 
         listOfFlight.add(tiketBerangkat.toTickets())
         listOfFlight.add(tiketPulang.toTickets())
+
+        userToken = sessionViewModel.getToken().toString()
 
         showsRecycler = true
     }

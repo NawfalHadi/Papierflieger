@@ -18,6 +18,8 @@ import com.papierflieger.data.network.response.orders.OrderResponse
 import com.papierflieger.data.network.response.ticket.ListTicketResponse
 import com.papierflieger.data.network.response.ticket.SearchTicketResponse
 import com.papierflieger.data.network.response.ticket.TicketResponse
+import com.papierflieger.data.network.response.transaction.HistoriesResponse
+import com.papierflieger.data.network.response.transaction.TransactionsResponse
 import com.papierflieger.data.network.response.user.UpdateUserResponse
 import com.papierflieger.data.network.response.user.UserResponse
 import com.papierflieger.data.network.response.wishlist.CreateWishlistResponse
@@ -56,6 +58,11 @@ interface ApiService {
     fun userProfile(
         @Header("Authorization") token: String
     ) : Call<UserResponse>
+
+    @GET("api/histories")
+    fun getHistoriesUser(
+        @Header("Authorization") token: String
+    ) : Call<HistoriesResponse>
 
     @FormUrlEncoded
     @PUT("api/auth/update-profile/")
@@ -193,4 +200,17 @@ interface ApiService {
         @Body orderInternational: OrderInternational
     ) : Call<OrderResponse>
 
+    /**
+     * Transaction API
+     */
+
+    @FormUrlEncoded
+    @PUT("/api/transactions")
+    fun confirmPaymentMethod(
+        @Header("Authorization") token: String,
+        @Field("bankName") bankName : String,
+        @Field("accountName") accountName : String,
+        @Field("accountNumber") accountNumber : Int,
+        @Field("tokenTransaction") tokenTransaction : String
+    ) : Call<TransactionsResponse>
 }

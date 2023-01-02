@@ -64,5 +64,14 @@
         android:id="@+id/paymentFragment"
         android:name="com.papierflieger.presentation.ui.home.payments.PaymentFragment"
         android:label="PaymentFragment"
-        tools:layout="@layout/fragment_payment"/>
+        tools:layout="@layout/fragment_payment">
+        <action
+            android:id="@+id/action_paymentFragment_to_paymentMessageFragment"
+            app:destination="@id/paymentMessageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentMessageFragment"
+        android:name="com.papierflieger.presentation.ui.home.payments.PaymentMessageFragment"
+        android:label="PaymentMessageFragment"
+        tools:layout="@layout/fragment_payment_status"/>
 </navigation>

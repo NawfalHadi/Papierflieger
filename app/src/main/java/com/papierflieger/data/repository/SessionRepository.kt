@@ -2,6 +2,8 @@ package com.papierflieger.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.papierflieger.data.network.response.transaction.HistoriesResponse
+import com.papierflieger.data.network.response.transaction.TransactionsResponse
 import com.papierflieger.data.network.response.user.User
 import com.papierflieger.data.network.response.user.UserResponse
 import com.papierflieger.data.network.service.ApiService
@@ -14,6 +16,7 @@ class SessionRepository(
     private val apiService: ApiService
 ) {
     private var profileUserResponse : MutableLiveData<Resource<User>> = MutableLiveData()
+    private var historiesResponse : MutableLiveData<Resource<HistoriesResponse>> = MutableLiveData()
 
     fun getProfileUser(token: String): LiveData<Resource<User>> {
         apiService.userProfile(token).enqueue(
@@ -35,13 +38,28 @@ class SessionRepository(
                 override fun onFailure(call: Call<UserResponse>, t: Throwable) {
                     profileUserResponse.postValue(Resource.Error(t))
                 }
-
             }
         )
         return profileUserResponse
     }
 
-//    fun getHistoryUser(token: String){
-//
-//    }
+    fun getHistoryUser(token: String) : LiveData<Resource<HistoriesResponse>>{
+        apiService.getHistoriesUser(token).enqueue(
+            object : Callback<HistoriesResponse>{
+                override fun onResponse(
+                    call: Call<HistoriesResponse>,
+                    response: Response<HistoriesResponse>
+                ) {
+                    if (response.isSuccessful){
+                        historiesResponse.postValue(Resource.Success(response.body()!!))
+                    }
+                }
+                override fun onFailure(call: Call<HistoriesResponse>, t: Throwable) {
+                    historiesResponse.postValue(Resource.Error(t))
+                }
+            }
+        )
+
+        return historiesResponse
+    }
 }
