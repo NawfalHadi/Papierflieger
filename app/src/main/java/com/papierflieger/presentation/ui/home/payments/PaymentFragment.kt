@@ -74,7 +74,10 @@ class PaymentFragment : Fragment() {
                             ).observe(viewLifecycleOwner){
                                 when(it){
                                     is Resource.Success -> {
-                                        findNavController().navigate(R.id.action_paymentFragment_to_paymentMessageFragment)
+                                        val mBundle = Bundle()
+                                        mBundle.putParcelableArrayList("FLIGHT_LIST", listOfFlight)
+                                        findNavController().navigate(R.id.action_paymentFragment_to_paymentMessageFragment, mBundle)
+                                        activity?.finish()
                                     }
                                     else -> {}
                                 }

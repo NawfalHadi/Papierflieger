@@ -18,6 +18,9 @@
         android:theme="@style/Theme.Papierflieger"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.ui.home.history.BoardingPassActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.ui.home.history.DetailHistoryActivity"
             android:exported="false" />
         <activity

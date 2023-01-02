@@ -4,16 +4,19 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.papierflieger.data.network.response.ticket.DataTicket
 import com.papierflieger.data.network.response.transaction.Ticket
 import com.papierflieger.databinding.ItemPricingDetailTransactionBinding
-import com.papierflieger.databinding.ItemTransactionHistoryBinding
 
 class DetailTransactionsAdapter : RecyclerView.Adapter<DetailTransactionsAdapter.ViewHolder>(){
-    private val list : ArrayList<DataTicket> = arrayListOf()
+    private lateinit var onBoardingPassShows: OnBoardingPassShows
+    private val list : ArrayList<Ticket> = arrayListOf()
+
+    fun listener (onBoardingPassShows: OnBoardingPassShows){
+        this.onBoardingPassShows = onBoardingPassShows
+    }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setItem(ticket: DataTicket){
+    fun setItem(ticket: Ticket){
         list.add(ticket)
         notifyDataSetChanged()
     }
@@ -38,13 +41,21 @@ class DetailTransactionsAdapter : RecyclerView.Adapter<DetailTransactionsAdapter
     inner class ViewHolder(
         private val binding : ItemPricingDetailTransactionBinding
     ) : RecyclerView.ViewHolder(binding.root){
-        fun bindingInformation(ticket: DataTicket) {
+        fun bindingInformation(ticket: Ticket) {
             with(binding){
                 tvFromlocation.text = ticket.from?.city.toString()
                 tvDestinationlocation.text = ticket.to?.city.toString()
+
+                cardTicket.setOnClickListener {
+                    onBoardingPassShows.checkBoardingPass(ticket)
+                }
             }
         }
 
+    }
+
+    interface OnBoardingPassShows {
+        fun checkBoardingPass(ticket: Ticket)
     }
 
 }

@@ -1,19 +1,19 @@
 package com.papierflieger.presentation.ui.home.history
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.papierflieger.data.network.response.ticket.TicketsDetail
 import com.papierflieger.data.network.response.transaction.Ticket
-import com.papierflieger.data.network.response.transaction.Transaction
 import com.papierflieger.databinding.FragmentDetailHistoryBinding
 import com.papierflieger.presentation.bussiness.OrderViewModel
 import com.papierflieger.presentation.bussiness.TicketViewModel
 import com.papierflieger.presentation.ui.adapter.histories.DetailTransactionsAdapter
 import com.papierflieger.wrapper.Resource
-import com.papierflieger.wrapper.convertDateFormat
 import com.papierflieger.wrapper.convertToRupiah
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,9 +34,15 @@ class DetailHistoryActivity : AppCompatActivity() {
 
         val mBundle = intent.extras
 
-        val ticket = mBundle?.getParcelable<Ticket>(TICKET_LIST_KEY)
+        try {
+            val ticket = mBundle?.getParcelable<Ticket>(TICKET_LIST_KEY)
+            bindingInformation(ticket)
 
-        bindingInformation(ticket)
+            val tickets = mBundle?.getParcelableArrayList<TicketsDetail>("FLIGHT_LIST")
+            bindingInformations(tickets?.get(0))
+        } catch (e : Exception) {}
+
+
         binding.icKeyboardArrow.setOnClickListener {
             pricingDetailsShow()
         }
@@ -44,13 +50,38 @@ class DetailHistoryActivity : AppCompatActivity() {
 
     }
 
-    private fun bindingInformation(ticket: Ticket?) {
+    private fun bindingInformations(ticket: TicketsDetail?) {
         with(binding){
             tvFromlocation.text = ticket?.from?.city.toString()
             tvDestinationlocation.text = ticket?.from?.city.toString()
 
             tvOrdernumber.text = ticket?.ticketNumber.toString()
             tvPricingdetail.text = convertToRupiah(ticket?.price)
+        }
+    }
+
+    private fun bindingInformation(ticket: Ticket?) {
+        with(binding){
+            tvFromlocation.text = ticket?.from?.city
+            tvDestinationlocation.text = ticket?.to?.city
+            tvOrdernumber.text = ticket?.ticketNumber.toString()
+
+            tvPricingdetail.text = convertToRupiah(ticket?.price)
+
+            detailTransactionsAdapter.setItem(ticket!!)
+            detailTransactionsAdapter.listener(object : DetailTransactionsAdapter.OnBoardingPassShows{
+                override fun checkBoardingPass(ticket: Ticket) {
+                    val mBundle = Bundle()
+                    mBundle.putParcelable(TICKET_LIST_KEY, ticket)
+
+                    val mIntent = Intent(applicationContext, BoardingPassActivity::class.java)
+                    mIntent.putExtras(mBundle)
+                    startActivity(mIntent)
+
+                }
+
+            })
+            initRecyclers()
 
 //            tvPurchasetime.text = convertDateFormat(transaction?.updatedAt.toString())
         }
@@ -77,7 +108,7 @@ class DetailHistoryActivity : AppCompatActivity() {
             ticketViewModel.getTicketById(i).observe(this){
                 when(it){
                     is Resource.Success -> {
-                        detailTransactionsAdapter.setItem(it.payload?.ticket!!)
+//                        detailTransactionsAdapter.setItem(it.payload?.ticket!!)
                         initRecyclers()
                     }
                     else -> {}

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_white"
-    tools:ignore="ContentDescription, SmallSp">
+    tools:ignore="ContentDescription, SmallSp"
+    tools:context=".presentation.ui.home.history.BoardingPassActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
