@@ -51,12 +51,11 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
             with(binding){
                 tvDestinationlocation.text = ticket.to?.city
                 tvFromlocation.text = ticket.from?.city
+                tvOrdernumber.text = ticket.ticketNumber.toString()
 
-                tvOrdernumber.text = history.orderId.toString()
                 tvTranscationprice.text = convertToRupiah(history.totalPrice!!.toInt())
             }
         }
-
     }
 
 }
