@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.papierflieger.R
+import com.papierflieger.data.local.room.entity.AirportEntity
 import com.papierflieger.data.network.response.ticket.DataTicket
 import com.papierflieger.data.network.response.ticket.SearchTicketResponse
 import com.papierflieger.data.network.response.ticket.TiketBerangkat
@@ -27,6 +28,9 @@ class ListReturnFragment : Fragment() {
 
     private lateinit var departureChoosed : TiketBerangkat
     private var listTicket : ArrayList<DataTicket> = arrayListOf()
+
+    private lateinit var airportFrom : AirportEntity
+    private lateinit var airportTo : AirportEntity
 
     // data that will passed to passenger data page
     private var ticketsPreview : ArrayList<DataTicket> = arrayListOf()

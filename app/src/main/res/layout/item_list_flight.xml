@@ -224,50 +224,14 @@
             app:layout_constraintBottom_toBottomOf="@+id/tv_price"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_discount"
-            style="@style/Widget.Custom.CardView.Transaction.Danger"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/tv_person"
-            app:layout_constraintTop_toBottomOf="@+id/tv_price">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_discount"
-                android:textColor="@color/text_red"
-                android:textSize="10sp" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_guarantee"
-            style="@style/Widget.Custom.CardView.Transaction.Success"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintEnd_toEndOf="@+id/tv_person"
-            app:layout_constraintTop_toBottomOf="@+id/cv_discount">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_lowest_price"
-                android:textColor="@color/text_green"
-                android:textSize="10sp" />
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <ImageView
-            android:id="@+id/ic_drop_down"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_keyboard_arrow"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/tv_person"
-            app:tint="@color/dark_blue" />
+<!--        <ImageView-->
+<!--            android:id="@+id/ic_drop_down"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:src="@drawable/ic_keyboard_arrow"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="@+id/tv_person"-->
+<!--            app:tint="@color/dark_blue" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
