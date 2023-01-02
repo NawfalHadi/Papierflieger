@@ -10,8 +10,11 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.papierflieger.data.network.response.airplane.DataAirplane
 import com.papierflieger.data.network.response.airport.Airport
+import com.papierflieger.data.network.response.orders.TiketBerangkatDetail
+import com.papierflieger.data.network.response.orders.TiketPulangDetail
 import java.text.DecimalFormat
 import com.papierflieger.data.network.response.ticket.DataTicket
+import com.papierflieger.data.network.response.ticket.TicketsDetail
 import com.papierflieger.data.network.response.ticket.TiketBerangkat
 import com.papierflieger.data.network.response.ticket.TiketPulang
 import java.text.SimpleDateFormat
@@ -157,5 +160,39 @@ fun TiketPulang.toDataTicket(): DataTicket {
         airplane = null,
         to = null,
         transit = null
+    )
+}
+
+fun TiketBerangkatDetail.toTickets(): TicketsDetail {
+    return TicketsDetail(
+        airplane, airplaneId,
+        arrivalDate, arrivalTime,
+        arrivalTimeAtTransit,
+        createdAt,
+        departureDate, departureTime,
+        departureTimeFromTransit,
+        flightDuration, flightFrom,
+        flightTo,
+        from, id, price, ticketNumber,
+        ticketType, to, transit,
+        totalTransit, transitDuration,
+        transitPoint, updatedAt
+    )
+}
+
+fun TiketPulangDetail.toTickets(): TicketsDetail {
+    return TicketsDetail(
+        airplane, airplaneId,
+        arrivalDate, arrivalTime,
+        arrivalTimeAtTransit,
+        createdAt,
+        departureDate, departureTime,
+        departureTimeFromTransit,
+        flightDuration, flightFrom,
+        flightTo,
+        from, id, price, ticketNumber,
+        ticketType, to, transit,
+        totalTransit, transitDuration,
+        transitPoint, updatedAt
     )
 }
