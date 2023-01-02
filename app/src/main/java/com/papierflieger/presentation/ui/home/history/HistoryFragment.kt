@@ -1,7 +1,6 @@
 package com.papierflieger.presentation.ui.home.history
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +10,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.papierflieger.R
-import com.papierflieger.data.network.response.transaction.Order
-import com.papierflieger.data.network.response.transaction.Ticket
-import com.papierflieger.data.network.response.transaction.Transaction
 import com.papierflieger.databinding.FragmentHistoryBinding
 import com.papierflieger.presentation.bussiness.NotificationViewModel
 import com.papierflieger.presentation.bussiness.SessionViewModel
@@ -68,6 +64,15 @@ class HistoryFragment : Fragment() {
             )
             adapter = historyAdapter
         }
+
+        historyAdapter.listener(object : HistoryAdapter.OnHistoryCardAction{
+            override fun cardAction() {
+                val mBundle = Bundle()
+                mBundle.putString("test", "test")
+                findNavController().navigate(R.id.action_historyFragment_to_detailHistoryActivity)
+            }
+
+        })
     }
 
     private fun bindingNotification() {

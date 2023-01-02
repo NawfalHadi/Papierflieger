@@ -10,8 +10,6 @@ import com.papierflieger.R
 import com.papierflieger.databinding.FragmentWelcomeBinding
 
 class WelcomeFragment : Fragment() {
-
-
     private lateinit var binding : FragmentWelcomeBinding
 
     override fun onCreateView(

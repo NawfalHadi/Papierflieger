@@ -21,7 +21,11 @@
         android:id="@+id/historyFragment"
         android:name="com.papierflieger.presentation.ui.home.history.HistoryFragment"
         android:label="fragment_history"
-        tools:layout="@layout/fragment_history" />
+        tools:layout="@layout/fragment_history" >
+        <action
+            android:id="@+id/action_historyFragment_to_detailHistoryActivity"
+            app:destination="@id/detailHistoryActivity2" />
+    </fragment>
     <fragment
         android:id="@+id/profileUserFragment"
         android:name="com.papierflieger.presentation.ui.home.profiles.ProfileUserFragment"
@@ -71,4 +75,9 @@
         android:name="com.papierflieger.presentation.ui.home.destination.DetailDestinationActivity"
         android:label="activity_detail_destination"
         tools:layout="@layout/activity_detail_destination" />
+    <activity
+        android:id="@+id/detailHistoryActivity2"
+        android:name="com.papierflieger.presentation.ui.home.history.DetailHistoryActivity"
+        android:label="fragment_detail_history"
+        tools:layout="@layout/fragment_detail_history" />
 </navigation>

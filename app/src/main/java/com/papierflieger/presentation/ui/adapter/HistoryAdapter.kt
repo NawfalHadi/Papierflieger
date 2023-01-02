@@ -1,5 +1,6 @@
 package com.papierflieger.presentation.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,10 +12,17 @@ import com.papierflieger.databinding.ItemTransactionHistoryBinding
 import com.papierflieger.wrapper.convertToRupiah
 
 class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
+    private lateinit var onHistoryCardAction : OnHistoryCardAction
+
     private val transaction : ArrayList<Transaction> = arrayListOf()
     private val ticket : ArrayList<Ticket> = arrayListOf()
     private val order : ArrayList<Order> = arrayListOf()
 
+    fun listener(onHistoryCardAction: OnHistoryCardAction){
+        this.onHistoryCardAction = onHistoryCardAction
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     fun setItem(histories : HistoriesResponse){
         transaction.clear()
         ticket.clear()
@@ -23,7 +31,6 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
         transaction.addAll(histories.transaction)
         ticket.addAll(histories.ticket)
         order.addAll(histories.order)
-
         notifyDataSetChanged()
     }
 
@@ -56,6 +63,10 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
                 tvTranscationprice.text = convertToRupiah(history.totalPrice!!.toInt())
             }
         }
+    }
+
+    interface OnHistoryCardAction {
+        fun cardAction()
     }
 
 }
