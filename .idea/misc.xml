@@ -108,6 +108,8 @@
         <entry key="app/src/main/res/layout/fragment_traveler_detail_international.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_favorite_destination.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/item_list_flight.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_payment_flight_detail.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_pricing_details_text.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_profile_account.xml" value="0.12407407407407407" />
         <entry key="app/src/main/res/layout/item_ticket_passenger.xml" value="0.17916666666666667" />
       </map>

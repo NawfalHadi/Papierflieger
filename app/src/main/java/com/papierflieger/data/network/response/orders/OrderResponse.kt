@@ -3,7 +3,6 @@ package com.papierflieger.data.network.response.orders
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import com.papierflieger.data.network.response.ticket.TiketBerangkat
 import com.papierflieger.data.network.response.ticket.TiketPulang
 import kotlinx.parcelize.Parcelize
 
@@ -16,9 +15,9 @@ data class OrderResponse(
     @SerializedName("price")
     val price: Int?,
     @SerializedName("tiketBerangkat")
-    val tiketBerangkat: List<TiketBerangkat>?,
+    val tiketBerangkat: List<TiketBerangkatDetail>,
     @SerializedName("tiketPulang")
-    val tiketPulang: List<TiketPulang>?,
+    val tiketPulang: List<TiketPulangDetail>?,
     @SerializedName("tokenTransaction")
     val tokenTransaction: String?,
     @SerializedName("totalPrice")

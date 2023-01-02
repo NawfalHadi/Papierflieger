@@ -1,9 +1,12 @@
 package com.papierflieger.data.network.response.orders
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-data class TiketBerangkat(
+@Parcelize
+data class TiketPulangDetail(
     @SerializedName("Airplane")
     val airplane: Airplane?,
     @SerializedName("airplaneId")
@@ -40,6 +43,8 @@ data class TiketBerangkat(
     val ticketType: String?,
     @SerializedName("to")
     val to: To?,
+    @SerializedName("transit")
+    val transit: Transit?,
     @SerializedName("totalTransit")
     val totalTransit: Int?,
     @SerializedName("transitDuration")
@@ -48,4 +53,4 @@ data class TiketBerangkat(
     val transitPoint: Int?,
     @SerializedName("updatedAt")
     val updatedAt: String?
-)
+) : Parcelable

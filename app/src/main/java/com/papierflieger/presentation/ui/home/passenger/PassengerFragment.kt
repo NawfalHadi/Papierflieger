@@ -82,7 +82,7 @@ class PassengerFragment : Fragment(){
     }
 
     private fun checkInformation() : Boolean{
-        for (position in 0..listObjectInformation.size){
+        for (position in 0 until listObjectInformation.size){
             try {
                 if (listObjectInformation[position].passengerNames.isNullOrEmpty()){
                     Toast.makeText(context, "Passenger ${position + 1} still not filled", Toast.LENGTH_SHORT).show()
@@ -119,8 +119,9 @@ class PassengerFragment : Fragment(){
                 when(it){
                     is Resource.Success -> {
                         val mBundle = Bundle()
-                        mBundle.putParcelable(PaymentFragment.ORDER_RESPONSE_KEY, it.payload!!)
-                        findNavController().navigate(R.id.action_passengerFragment_to_paymentFragment)
+                        mBundle.putParcelable(PaymentFragment.ORDER_RESPONSE_KEY, it.payload)
+                        Log.e("data", it.payload.toString())
+                        findNavController().navigate(R.id.action_passengerFragment_to_paymentFragment, mBundle)
                     }
                     is Resource.Empty -> Toast.makeText(context, "Empty :(", Toast.LENGTH_LONG).show()
                     is Resource.Error -> Toast.makeText(context, it.payload?.message, Toast.LENGTH_LONG).show()
