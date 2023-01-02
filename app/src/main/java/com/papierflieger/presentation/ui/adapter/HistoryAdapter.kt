@@ -2,6 +2,7 @@ package com.papierflieger.presentation.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.papierflieger.data.network.response.transaction.HistoriesResponse
@@ -9,7 +10,7 @@ import com.papierflieger.data.network.response.transaction.Order
 import com.papierflieger.data.network.response.transaction.Ticket
 import com.papierflieger.data.network.response.transaction.Transaction
 import com.papierflieger.databinding.ItemTransactionHistoryBinding
-import com.papierflieger.wrapper.convertToRupiah
+import com.papierflieger.wrapper.convertAirport
 
 class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
     private lateinit var onHistoryCardAction : OnHistoryCardAction
@@ -42,11 +43,8 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
     }
 
     override fun onBindViewHolder(holder: HistoryAdapter.ViewHolder, position: Int) {
-        val transactions = transaction[position]
-        val order = order[position]
         val ticket = ticket[position]
-
-        holder.bindingInformation(transactions, order, ticket)
+        holder.bindingInformation(ticket)
     }
 
     override fun getItemCount(): Int = transaction.size
@@ -54,12 +52,23 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>(){
     inner class ViewHolder(
         private val binding : ItemTransactionHistoryBinding
     ) : RecyclerView.ViewHolder(binding.root) {
-        fun bindingInformation(history: Transaction, order: Order, ticket: Ticket) {
+        @SuppressLint("SetTextI18n")
+        fun bindingInformation(ticket: Ticket) {
             with(binding){
+                tvOrdernumber.text = "#${ticket.id.toString()}"
+                tvFromLocation.text = convertAirport(
+                    ticket.from?.city?.substringBefore(",").toString(),
+                    ticket.from?.cityCode.toString())
+                tvDestinationLocation.text = convertAirport(
+                    ticket.to?.city?.substringBefore(",").toString(),
+                    ticket.to?.cityCode.toString())
+                if (ticket.totalTransit == null) {
+                    icChangeArrow.visibility = View.INVISIBLE
+                    icDirect.visibility = View.VISIBLE
+                }
                 tvDestinationLocation.text = ticket.to?.city
                 tvFromLocation.text = ticket.from?.city
                 tvOrdernumber.text = ticket.ticketNumber.toString()
-
             }
         }
     }

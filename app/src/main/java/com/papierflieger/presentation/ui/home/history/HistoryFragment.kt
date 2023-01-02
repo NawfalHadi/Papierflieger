@@ -45,10 +45,24 @@ class HistoryFragment : Fragment() {
             sessionViewModel.getHistoriesUser(token).observe(viewLifecycleOwner){
                 when(it){
                     is Resource.Success -> {
-                        historyAdapter.setItem(it.payload!!)
-                        initList()
+                        if (it.payload?.ticket.isNullOrEmpty().not()) {
+                            binding.apply {
+                                ivNotFound.visibility = View.GONE
+                                tvNotFound.visibility = View.GONE
+                            }
+                            it.payload?.let { ticket -> historyAdapter.setItem(ticket) }
+                            initList()
+                        } else {
+                            binding.apply {
+                                ivNotFound.visibility = View.VISIBLE
+                                tvNotFound.visibility = View.VISIBLE
+                                rvHistoryTransaction.visibility = View.GONE
+                            }
+                        }
                     }
-                    else -> {}
+                    is Resource.Empty -> {}
+                    is Resource.Error -> {}
+                    is Resource.Loading -> {}
                 }
             }
         }

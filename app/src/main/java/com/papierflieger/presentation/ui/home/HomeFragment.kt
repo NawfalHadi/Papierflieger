@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.papierflieger.R
 import com.papierflieger.databinding.FragmentHomeBinding
 import com.papierflieger.presentation.bussiness.DestinationViewModel
@@ -115,6 +116,7 @@ class HomeFragment : Fragment() {
             if (it != "") {
                 binding.ivAvatar.load(it){
                     placeholder(R.color.background_gray)
+                    transformations(CircleCropTransformation())
                 }
             }
         }
