@@ -1,9 +1,17 @@
 package com.papierflieger.presentation.ui.home.profiles
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,6 +26,7 @@ import com.papierflieger.databinding.FragmentProfileUserBinding
 import com.papierflieger.presentation.bussiness.SessionViewModel
 import com.papierflieger.presentation.ui.adapter.settings.SettingAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
 
 @AndroidEntryPoint
 class ProfileUserFragment : Fragment() {
@@ -36,6 +45,7 @@ class ProfileUserFragment : Fragment() {
 //        SettingModel("Language", "Indonesia", R.id.action_profileUserFragment2_to_accountInformationFragment)
 //    )
 
+    private val imageFile = mutableListOf<File>()
     private val application : ArrayList<SettingModel> = arrayListOf(
         SettingModel(R.drawable.ic_logout, "Sign Out", "", 0)
     )
@@ -61,6 +71,49 @@ class ProfileUserFragment : Fragment() {
     private fun clickListener() {
         binding.btnSignIn.setOnClickListener {
             findNavController().navigate(R.id.action_profileUserFragment_to_authActivity)
+        }
+    }
+
+    private fun checkingPermissions() {
+        if (isGranted(
+                requireActivity()
+            )
+        ) {
+            val intent = Intent(Intent.ACTION_PICK).apply { type = "image/*" }
+            galleryResult.launch(intent)
+        }
+    }
+
+    private val galleryResult =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val selectedImage = result.data?.data
+                if (selectedImage != null) {
+                    val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+                    val cursor = requireActivity().contentResolver.query(selectedImage, filePathColumn, null, null, null)
+                    cursor?.use {
+                        if (it.moveToFirst()) {
+                            val columnIndex = it.getColumnIndex(filePathColumn[0])
+                            val filePath = it.getString(columnIndex)
+                            imageFile.add(File(filePath))
+                        }
+                    }
+                }
+            }
+        }
+
+    private fun isGranted(activity: Activity): Boolean {
+        val permission = Manifest.permission.READ_EXTERNAL_STORAGE
+        val permissionCheck = ActivityCompat.checkSelfPermission(activity, permission)
+        return if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
+                checkingPermissions()
+            }
+            false
+        } else {
+            true
         }
     }
 
@@ -123,6 +176,8 @@ class ProfileUserFragment : Fragment() {
                 if (id == 0) {
                     sessionViewModel.logout()
                     findNavController().navigate(R.id.profileUserFragment)
+                } else {
+                    findNavController().navigate(id!!)
                 }
             }
         })

@@ -87,22 +87,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ic_airplane" />
 
-        <com.google.android.material.card.MaterialCardView
-            style="@style/Widget.Custom.CardView.Transaction.Success"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guideline_one">
+<!--        <com.google.android.material.card.MaterialCardView-->
+<!--            style="@style/Widget.Custom.CardView.Transaction.Success"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/guideline_one">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_transaction_success"
-                android:textColor="@color/text_green"
-                android:textSize="12sp" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/text_transaction_success"-->
+<!--                android:textColor="@color/text_green"-->
+<!--                android:textSize="12sp" />-->
 
-        </com.google.android.material.card.MaterialCardView>
+<!--        </com.google.android.material.card.MaterialCardView>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

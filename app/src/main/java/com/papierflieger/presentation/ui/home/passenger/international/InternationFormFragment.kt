@@ -63,14 +63,14 @@ class InternationFormFragment : Fragment() {
 
     private fun datePicking() {
         with(binding){
-            tilDateBirth.setOnClickListener {
+            etDateBirth.setOnClickListener {
                 birthdatePicker.show(
                     childFragmentManager,
                     "date_picker"
                 )
             }
 
-            tilExpirationDate.setOnClickListener {
+            etExpirationDate.setOnClickListener {
                 expiredDatePicker.show(
                     childFragmentManager,
                     "date_picker"
@@ -112,12 +112,6 @@ private val birthdatePicker =
     MaterialDatePicker.Builder.datePicker()
         .setTitleText("BirthDate")
         .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-        .setCalendarConstraints(
-            CalendarConstraints.Builder()
-                .setStart(MaterialDatePicker.thisMonthInUtcMilliseconds())
-                .setValidator(DateValidatorPointForward.now())
-                .build()
-        )
         .build()
 
 private val expiredDatePicker =

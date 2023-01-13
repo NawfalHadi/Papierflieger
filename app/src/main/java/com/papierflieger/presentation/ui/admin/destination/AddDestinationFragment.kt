@@ -61,7 +61,7 @@ class AddDestinationFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        super.onViewCreated(view, savedInstanceState)   
         allNavigation()
         initList()
         getEditData()

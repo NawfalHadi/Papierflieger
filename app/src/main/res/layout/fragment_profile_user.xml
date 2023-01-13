@@ -125,25 +125,6 @@
             android:layout_marginTop="4dp"
             app:layout_constraintTop_toBottomOf="@id/text_account_security"/>
 
-        <TextView
-            android:id="@+id/text_preference"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="@string/text_preference"
-            android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@+id/cv_profile"
-            app:layout_constraintTop_toBottomOf="@+id/rv_account_security" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_preference"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            tools:listitem="@layout/item_profile_preference"
-            tools:itemCount="3"
-            android:layout_marginTop="4dp"
-            app:layout_constraintTop_toBottomOf="@id/text_preference"/>
 
         <TextView
             android:id="@+id/text_application"
@@ -153,7 +134,7 @@
             android:text="@string/text_application"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/cv_profile"
-            app:layout_constraintTop_toBottomOf="@+id/rv_preference" />
+            app:layout_constraintTop_toBottomOf="@+id/rv_account_security" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_application"

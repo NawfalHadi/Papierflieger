@@ -38,10 +38,14 @@ class BoardingPassActivity : AppCompatActivity() {
             textAirportArrival.text = ticket?.to?.city
             textAirportArrivalDetail.text = ticket?.to?.airportName
 
+            tvPlaneCode.text = ticket?.airplane?.airplaneCode
+
             tvOrdernumber.text = ticket?.ticketNumber.toString()
 
             textTimeDeparture.text = convertTimeFormat(ticket?.departureTime.toString())
             textDateDeparture.text = convertDateFormat(ticket?.departureDate.toString())
+
+            textTime.text = ticket?.flightDuration.toString()
 
             textTimeArrival.text = convertTimeFormat(ticket?.arrivalTime.toString())
             textDateArrival.text = convertDateFormat(ticket?.arrivalDate.toString())

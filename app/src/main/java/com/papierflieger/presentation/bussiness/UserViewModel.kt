@@ -22,10 +22,10 @@ class UserViewModel @Inject constructor(
     }
 
     fun updateAddressInformation(
-        token : String, country: String, province: String, regency: String
+        token : String, username: String, fullname: String, country: String, province: String, regency: String
     ): LiveData<Resource<UpdateUserResponse>> {
         return userRepo.updateAddressInformation(
-            token, country, province, regency
+            token, username, fullname, country, province, regency
         )
     }
 

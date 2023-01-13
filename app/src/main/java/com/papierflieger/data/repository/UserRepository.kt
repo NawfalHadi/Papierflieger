@@ -45,11 +45,13 @@ class UserRepository(
 
     fun updateAddressInformation(
         token : String,
+        username : String,
+        fullname : String,
         country: String,
         province: String,
         regency: String
     ) : LiveData<Resource<UpdateUserResponse>>{
-        apiService.updateAddressProfile(token, country, province, regency).enqueue(
+        apiService.updateAddressProfile(token, username, fullname, country, province, regency).enqueue(
             object : Callback<UpdateUserResponse>{
                 override fun onResponse(
                     call: Call<UpdateUserResponse>,
@@ -65,6 +67,13 @@ class UserRepository(
         )
 
         return updateUserResponse
+    }
+
+
+    fun changePassword(
+        token: String, old: String, new: String
+    ) {
+        apiService.changePassword(token, old, new)
     }
 
 }

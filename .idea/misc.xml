@@ -89,32 +89,42 @@
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/menu/menu_home.xml" value="0.23157894736842105" />
         <entry key="..\:/Develop/Mobile/Android/Papierflieger/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.196" />
         <entry key="app/src/main/res/layout/activity_account_information.xml" value="0.12407407407407407" />
+        <entry key="app/src/main/res/layout/activity_boarding_pass.xml" value="0.23822463768115942" />
         <entry key="app/src/main/res/layout/activity_passenger.xml" value="0.12407407407407407" />
         <entry key="app/src/main/res/layout/activity_search.xml" value="0.1" />
         <entry key="app/src/main/res/layout/bottom_sheet_airport_search.xml" value="0.1" />
         <entry key="app/src/main/res/layout/bottom_sheet_passenger_choose.xml" value="0.35260416666666666" />
         <entry key="app/src/main/res/layout/bottom_sheet_payment_information.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/bottom_sheet_reset_password.xml" value="0.1480978260869565" />
         <entry key="app/src/main/res/layout/bottom_sheet_ticket_preview.xml" value="0.12047101449275362" />
-        <entry key="app/src/main/res/layout/fragment_detail_history.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_account_information.xml" value="0.1480978260869565" />
+        <entry key="app/src/main/res/layout/fragment_add_destination.xml" value="0.1480978260869565" />
+        <entry key="app/src/main/res/layout/fragment_add_ticket_detail.xml" value="0.1480978260869565" />
+        <entry key="app/src/main/res/layout/fragment_boarding_pass.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_detail_history.xml" value="0.18571428571428572" />
         <entry key="app/src/main/res/layout/fragment_history.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_list_flight_return.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_payment.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_password_security.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_payment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_payment_status.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_personal_address.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_personal_information.xml" value="0.17916666666666667" />
-        <entry key="app/src/main/res/layout/fragment_profile_user.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_profile_user.xml" value="0.12" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.2391304347826087" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.17147922998986828" />
         <entry key="app/src/main/res/layout/fragment_transaction_flight.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_traveler_detail.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_traveler_detail_international.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_favorite_destination.xml" value="0.35260416666666666" />
-        <entry key="app/src/main/res/layout/item_list_flight.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_list_flight.xml" value="0.1569767441860465" />
         <entry key="app/src/main/res/layout/item_payment_flight_detail.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_pricing_detail_transaction.xml" value="0.25595238095238093" />
         <entry key="app/src/main/res/layout/item_pricing_details_text.xml" value="0.33" />
         <entry key="app/src/main/res/layout/item_profile_account.xml" value="0.12407407407407407" />
         <entry key="app/src/main/res/layout/item_ticket_passenger.xml" value="0.17916666666666667" />
+        <entry key="app/src/main/res/layout/item_transaction_history.xml" value="0.1526268115942029" />
       </map>
     </option>
   </component>

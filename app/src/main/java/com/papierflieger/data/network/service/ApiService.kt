@@ -81,10 +81,20 @@ interface ApiService {
     @PUT("api/auth/update-profile/")
     fun updateAddressProfile(
         @Header("Authorization") token: String,
+        @Field("username") username: String,
+        @Field("fullName") fullName: String,
         @Field("country") country: String,
         @Field("province") province: String,
         @Field("regency") regency: String,
     ) : Call<UpdateUserResponse>
+
+    @FormUrlEncoded
+    @PUT("api/auth/reset-password")
+    fun changePassword(
+        @Header("Authorization") token: String,
+        @Field("password") old: String,
+        @Field("newPassword") new: String,
+    )
 
     /***
      * Wishlist

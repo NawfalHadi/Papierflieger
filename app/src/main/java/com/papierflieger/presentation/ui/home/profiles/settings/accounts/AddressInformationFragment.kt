@@ -37,7 +37,7 @@ class AddressInformationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val profile = arguments?.getParcelable<User>(AccountInformationActivity.PERSONAL_INFORMATION)
+        val profile = arguments?.getParcelable<User>(AccountInformationActivity.ADDRESS_INFORMATION)
         bindingData(profile!!)
 
         with(binding){
@@ -45,6 +45,8 @@ class AddressInformationFragment : Fragment() {
                 if (isValueValid()) {
                     userViewModel.updateAddressInformation(
                         token,
+                        profile.username,
+                        profile.fullName,
                         etCountry.text.toString(),
                         etProvince.text.toString(),
                         etRegency.text.toString()
